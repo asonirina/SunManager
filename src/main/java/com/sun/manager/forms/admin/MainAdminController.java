@@ -119,8 +119,8 @@ public class MainAdminController extends AnchorPane implements Initializable {
                                 s+=ke.getText();
                                 if (s.equals("5")) {
                                     s+=": qqq";
+                                    cell.updateItem(s, false);
                                 }
-                                cell.setText(s);
 
 
 
