@@ -1,6 +1,8 @@
 package com.sun.manager.forms.admin;
 
 import com.sun.manager.dto.Users;
+import com.sun.manager.dto.VerticalSun;
+import com.sun.manager.forms.EditingCell;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
@@ -27,7 +29,10 @@ public class MainAdminController extends AnchorPane implements Initializable {
 
 
     @FXML
-    TableView<Users> table;
+    TableView<Users> tableVert;
+
+    @FXML
+    TableView<VerticalSun> tableGreen;
 
     @FXML
     TableColumn vertSun;
@@ -48,23 +53,27 @@ public class MainAdminController extends AnchorPane implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        table.setEditable(true);
+        tableVert.setEditable(true);
+        tableGreen.setEditable(true);
 
         setColumnFactory();
         setStyles();
-        //setEditing();
 
         Users user = new Users();
         user.setId("1");
         user.setName("lllll");
 
-        final TextField addUser = new TextField();
         final ObservableList<Users> data = FXCollections.observableArrayList(
                 user, user
         );
+        VerticalSun vs = new VerticalSun();
+        vs.setMinuteCounbt(5L);
+        vs.setTotalPrice(125L);
+        final ObservableList<VerticalSun> data1 = FXCollections.observableArrayList(
+                vs, vs
+        );
 
-        table.setItems(data);
-
+        tableVert.setItems(data);
 
     }
 
@@ -83,47 +92,37 @@ public class MainAdminController extends AnchorPane implements Initializable {
             @Override
             public TableCell<Users, String> call(TableColumn<Users, String> p) {
 
+                  EditingCell cell =  new EditingCell();
+                cell.setStyle("-fx-background-color:DarkSeaGreen ; -fx-border-color: brown;");
 
-                final TextFieldTableCell cell = new TextFieldTableCell<Users, String>() {
+//                final TextFieldTableCell cell = new TextFieldTableCell<Users, String>() {
+//
+//                    @Override
+//                    public void updateItem(String item, boolean empty) {
+//                        super.updateItem(item, empty);
+//                        if (!isEmpty()) {
+//                            this.setStyle("-fx-background-color:DarkSeaGreen ; -fx-border-color: brown;");
+//                            setText(item);
+//                        }
+//                    }
+//
+//
+//
+//                };
+//
+                TextFieldTableCell c = new TextFieldTableCell();
+//                cell.setConverter(new StringConverter() {
+//                    @Override
+//                    public String toString(Object o) {
+//                        return o.toString();
+//                    }
+//
+//                    @Override
+//                    public Object fromString(String s) {
+//                        return s;
+//                    }
+//                });
 
-                    @Override
-                    public void updateItem(String item, boolean empty) {
-                        super.updateItem(item, empty);
-                        if (!isEmpty()) {
-                            this.setStyle("-fx-background-color:DarkSeaGreen ; -fx-border-color: brown;");
-                            setText(item);
-                        }
-                    }
-                };
-
-                cell.setConverter(new StringConverter() {
-                    @Override
-                    public String toString(Object o) {
-                        return o.toString();
-                    }
-
-                    @Override
-                    public Object fromString(String s) {
-                        return s;
-                    }
-                });
-
-                cell.setOnKeyReleased(
-                        new EventHandler<KeyEvent>() {
-                            public void handle(KeyEvent ke) {
-                                System.out.println(ke.getText());
-                                String s = cell.textProperty().getValue();
-                                s+=ke.getText();
-                                if (s.equals("5")) {
-                                    System.out.println( );
-                                    s+=": qqq";
-                                    cell.updateItem(s, false);
-
-                                }
-
-                            }
-                        }
-                );
                 return cell;
             }
         });
