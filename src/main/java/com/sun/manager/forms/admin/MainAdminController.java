@@ -1,7 +1,6 @@
 package com.sun.manager.forms.admin;
 
 import com.sun.manager.dto.Users;
-import com.sun.manager.dto.VerticalSun;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
@@ -17,10 +16,8 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Callback;
 import javafx.util.StringConverter;
-import sun.org.mozilla.javascript.internal.ast.NewExpression;
 
 import java.net.URL;
-import java.util.Date;
 import java.util.ResourceBundle;
 
 /**

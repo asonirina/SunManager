@@ -1,5 +1,6 @@
 package com.sun.manager.forms.login;
 
+import com.sun.manager.connection.SqlServer;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -14,6 +15,7 @@ import java.io.IOException;
 public class LoginPage extends Application {
 
     public static void main(String[] args) {
+        SqlServer.init();
         Application.launch(args);
     }
 
