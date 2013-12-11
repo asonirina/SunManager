@@ -13,6 +13,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Callback;
 import javafx.util.StringConverter;
@@ -86,7 +87,7 @@ public class MainAdminController extends AnchorPane implements Initializable {
             public TableCell<Users, String> call(TableColumn<Users, String> p) {
 
 
-                TextFieldTableCell cell = new TextFieldTableCell<Users, String>() {
+                final TextFieldTableCell cell = new TextFieldTableCell<Users, String>() {
 
                     @Override
                     public void updateItem(String item, boolean empty) {
@@ -106,9 +107,26 @@ public class MainAdminController extends AnchorPane implements Initializable {
 
                     @Override
                     public Object fromString(String s) {
-                        return s;  //To change body of implemented methods use File | Settings | File Templates.
+                        return s;
                     }
                 });
+
+                cell.setOnKeyReleased(
+                        new EventHandler<KeyEvent>() {
+                            public void handle(KeyEvent ke) {
+                                System.out.println(ke.getText());
+                                String s = cell.getText() == null ? "" : cell.getText();
+                                s+=ke.getText();
+                                if (s.equals("5")) {
+                                    s+=": qqq";
+                                }
+                                cell.setText(s);
+
+
+
+                            }
+                        }
+                );
                 return cell;
             }
         });
