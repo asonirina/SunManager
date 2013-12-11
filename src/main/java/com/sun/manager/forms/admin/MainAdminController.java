@@ -115,14 +115,14 @@ public class MainAdminController extends AnchorPane implements Initializable {
                         new EventHandler<KeyEvent>() {
                             public void handle(KeyEvent ke) {
                                 System.out.println(ke.getText());
-                                String s = cell.getText() == null ? "" : cell.getText();
+                                String s = cell.textProperty().getValue();
                                 s+=ke.getText();
                                 if (s.equals("5")) {
+                                    System.out.println( );
                                     s+=": qqq";
                                     cell.updateItem(s, false);
+
                                 }
-
-
 
                             }
                         }
