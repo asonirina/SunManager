@@ -1,7 +1,7 @@
 package com.sun.manager.forms.admin;
 
-import com.sun.manager.dto.Users;
-import com.sun.manager.dto.VerticalSun;
+
+import com.sun.manager.dto.VerticalSunData;
 import com.sun.manager.forms.EditingCell;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -11,13 +11,10 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.control.cell.TextFieldTableCell;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Callback;
-import javafx.util.StringConverter;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -29,10 +26,10 @@ public class MainAdminController extends AnchorPane implements Initializable {
 
 
     @FXML
-    TableView<Users> tableVert;
+    TableView<VerticalSunData> tableVert;
 
     @FXML
-    TableView<VerticalSun> tableGreen;
+    TableView<VerticalSunData> tableGreen;
 
     @FXML
     TableColumn vertSun;
@@ -59,101 +56,83 @@ public class MainAdminController extends AnchorPane implements Initializable {
         setColumnFactory();
         setStyles();
 
-        Users user = new Users();
-        user.setId("1");
-        user.setName("lllll");
-
-        final ObservableList<Users> data = FXCollections.observableArrayList(
-                user, user
-        );
-        VerticalSun vs = new VerticalSun();
-        vs.setMinuteCounbt(5L);
-        vs.setTotalPrice(125L);
-        final ObservableList<VerticalSun> data1 = FXCollections.observableArrayList(
+        VerticalSunData vs = new VerticalSunData();
+        vs.setMinutes(5L);
+        vs.setAbonementNumber("123");
+        vs.generateRes();
+        final ObservableList<VerticalSunData> data1 = FXCollections.observableArrayList(
                 vs, vs
         );
 
-        tableVert.setItems(data);
+        tableVert.setItems(data1);
+        tableGreen.setItems(data1);
 
     }
 
     private void setColumnFactory() {
-        vertSun.setCellValueFactory(new PropertyValueFactory<Users, String>("name"));
-        green.setCellValueFactory(new PropertyValueFactory<Users, String>("name"));
-        blue.setCellValueFactory(new PropertyValueFactory<Users, String>("name"));
-        abon.setCellValueFactory(new PropertyValueFactory<Users, String>("name"));
-        cosm.setCellValueFactory(new PropertyValueFactory<Users, String>("name"));
-
+        green.setCellValueFactory(new PropertyValueFactory<VerticalSunData, String>("res"));
+        vertSun.setCellValueFactory(new PropertyValueFactory<VerticalSunData, String>("res"));
     }
 
     private void setStyles() {
-        green.setCellFactory(new Callback<TableColumn<Users, String>, TableCell<Users, String>>() {
+        green.setCellFactory(new Callback<TableColumn<VerticalSunData, String>, TableCell<VerticalSunData, String>>() {
 
             @Override
-            public TableCell<Users, String> call(TableColumn<Users, String> p) {
-
-                  EditingCell cell =  new EditingCell();
-                cell.setStyle("-fx-background-color:DarkSeaGreen ; -fx-border-color: brown;");
-
-//                final TextFieldTableCell cell = new TextFieldTableCell<Users, String>() {
-//
-//                    @Override
-//                    public void updateItem(String item, boolean empty) {
-//                        super.updateItem(item, empty);
-//                        if (!isEmpty()) {
-//                            this.setStyle("-fx-background-color:DarkSeaGreen ; -fx-border-color: brown;");
-//                            setText(item);
-//                        }
-//                    }
-//
-//
-//
-//                };
-//
-                TextFieldTableCell c = new TextFieldTableCell();
-//                cell.setConverter(new StringConverter() {
-//                    @Override
-//                    public String toString(Object o) {
-//                        return o.toString();
-//                    }
-//
-//                    @Override
-//                    public Object fromString(String s) {
-//                        return s;
-//                    }
-//                });
-
-                return cell;
+            public TableCell<VerticalSunData, String> call(TableColumn<VerticalSunData, String> p) {
+               return new  EditingCell<VerticalSunData>();
             }
         });
 
-        blue.setCellFactory(new Callback<TableColumn<Users, String>, TableCell<Users, String>>() {
+        tableGreen.getStylesheets().add(this.getClass().getResource("styleGreen.css").toExternalForm());
+        vertSun.setCellFactory(new Callback<TableColumn<VerticalSunData, String>, TableCell<VerticalSunData, String>>() {
 
             @Override
-            public TableCell<Users, String> call(TableColumn<Users, String> p) {
-
-
-                return new TextFieldTableCell<Users, String>() {
-
-                    @Override
-                    public void updateItem(String item, boolean empty) {
-                        super.updateItem(item, empty);
-                        if (!isEmpty()) {
-                            this.setStyle("-fx-background-color:LightSkyBlue  ; -fx-border-color: brown;");
-                            setText(item);
-                        }
-                    }
-                };
+            public TableCell<VerticalSunData, String> call(TableColumn<VerticalSunData, String> p) {
+                return new EditingCell<VerticalSunData>();
             }
         });
+
 
         green.setOnEditCommit(
-                new EventHandler<TableColumn.CellEditEvent<Users, String>>() {
+                new EventHandler<TableColumn.CellEditEvent<VerticalSunData, String>>() {
                     @Override
-                    public void handle(TableColumn.CellEditEvent<Users, String> t) {
-                        ((Users) t.getTableView().getItems().get(
-                                t.getTablePosition().getRow())
-                        ).setName(t.getNewValue());
+                    public void handle(TableColumn.CellEditEvent<VerticalSunData, String> t) {
+                        VerticalSunData data =
+                                (VerticalSunData) t.getTableView().getItems().get(t.getTablePosition().getRow());
+                        data.setTotalPrice(null);
+                        data.setAbonementNumber(null);
+                        String input = t.getNewValue();
+                        int index = input.indexOf(":");
+                        data.setMinutes(Long.valueOf(input.substring(0, index)));
+                        if (input.contains("$")) {
+                            data.setTotalPrice(Long.valueOf(input.substring(input.indexOf("$") + 1)));
+                        } else {
+                            data.setAbonementNumber(input.substring(index + 1));
+                        }
+
+                        data.generateRes();
+                    }
+                }
+        );
+
+        vertSun.setOnEditCommit(
+                new EventHandler<TableColumn.CellEditEvent<VerticalSunData, String>>() {
+                    @Override
+                    public void handle(TableColumn.CellEditEvent<VerticalSunData, String> t) {
+                        VerticalSunData data =
+                                (VerticalSunData) t.getTableView().getItems().get(t.getTablePosition().getRow());
+                        data.setTotalPrice(null);
+                        data.setAbonementNumber(null);
+                        String input = t.getNewValue();
+                        int index = input.indexOf(":");
+                        data.setMinutes(Long.valueOf(input.substring(0, index)));
+                        if (input.contains("$")) {
+                            data.setTotalPrice(Long.valueOf(input.substring(input.indexOf("$") + 1)));
+                        } else {
+                            data.setAbonementNumber(input.substring(index + 1));
+                        }
+
+                        data.generateRes();
                     }
                 }
         );

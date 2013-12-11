@@ -1,5 +1,5 @@
 package com.sun.manager.forms;
-import com.sun.manager.dto.Users;
+
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
@@ -8,7 +8,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
-public class EditingCell extends TableCell<Users, String> {
+public class EditingCell<T> extends TableCell<T, String> {
 
     private TextField textField;
 
@@ -18,7 +18,7 @@ public class EditingCell extends TableCell<Users, String> {
     @Override
     public void startEdit() {
         super.startEdit();
-        if( textField == null ) {
+        if (textField == null) {
             createTextField();
         }
         setText(null);
@@ -56,22 +56,21 @@ public class EditingCell extends TableCell<Users, String> {
     private void createTextField() {
         textField = new TextField(getString());
         textField.setMinWidth(this.getWidth() - this.getGraphicTextGap() * 2);
-        textField.focusedProperty().addListener(new ChangeListener<Boolean>() {
-            @Override
-            public void changed(ObservableValue<? extends Boolean> arg0, Boolean arg1, Boolean arg2) {
-                if (!arg2) { commitEdit(textField.getText()); }
-            }
-        });
         textField.setOnKeyReleased(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent t) {
                 if (t.getCode() == KeyCode.ENTER) {
                     String value = textField.getText();
-                    if (value != null) { commitEdit(value); } else { commitEdit(null); }
+                    if (value != null) {
+                        commitEdit(value);
+                    } else {
+                       commitEdit(null);
+                    }
                 } else if (t.getCode() == KeyCode.ESCAPE) {
                     cancelEdit();
-                }  else if (t.getText().equals("$")) {
-                    String value = textField.getText()+": sdf";
+                } else if (t.getText().equals("$")) {
+                    String value = textField.getText() + "123";
+                    textField.setText(value);
                     commitEdit(value);
                 }
             }
