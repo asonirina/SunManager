@@ -56,3 +56,28 @@ CREATE TABLE IF NOT EXISTS gorizontal_green_sun (
       l2                 int,
       one_minute_price   int
 ) ENGINE=INNODB;
+
+
+CREATE TABLE IF NOT EXISTS vertical_sun_data (
+      data_id            int NOT NULL PRIMARY KEY,
+      start_date         date,
+      minutes            INT,
+      total_price        int,
+      abonement_number   VARCHAR(10)
+) ENGINE=INNODB;
+
+CREATE TABLE IF NOT EXISTS gorizontal_blue_sun_data (
+      data_id            int NOT NULL PRIMARY KEY,
+      start_date         date,
+      minutes            INT,
+      total_price        int,
+      abonement_number   VARCHAR(10)
+) ENGINE=INNODB;
+
+CREATE TABLE IF NOT EXISTS gorizontal_green_sun_data (
+      data_id            int NOT NULL PRIMARY KEY,
+      start_date         date,
+      minutes            INT,
+      total_price        int,
+      abonement_number   VARCHAR(10)
+) ENGINE=INNODB;
