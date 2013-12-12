@@ -9,20 +9,19 @@ import java.sql.Types;
 
 public class UsersDAO {
 
-    private static final String CHECK_USER = "{call checkUser(?,?,?)}";
+    private static final String CHECK_USER = "{call checkUser(?,?)}";
 
     private Connection dbConnection = null;
     private CallableStatement callableStatement = null;
 
-    public Boolean checkUser(String login, String pswd) throws SQLException {
+    public Boolean checkUser(String login) throws SQLException {
         dbConnection = SqlServer.getConnection();
         callableStatement = dbConnection.prepareCall(CHECK_USER);
         callableStatement.setString(1, login);
-        callableStatement.setString(2, pswd);
-        callableStatement.registerOutParameter(3, Types.BOOLEAN);
+        callableStatement.registerOutParameter(2, Types.BOOLEAN);
 
         callableStatement.executeUpdate();
 
-        return callableStatement.getBoolean(3);
+        return callableStatement.getBoolean(2);
     }
 }

@@ -2,7 +2,7 @@ CREATE DATABASE IF NOT EXISTS sun_manager;
 
 CREATE TABLE IF NOT EXISTS customers (
       customer_id    INT NOT NULL PRIMARY KEY,
-      mobile         INT,
+      mobile         VARCHAR(11),
       name           VARCHAR(150)
 ) ENGINE=INNODB;
 
@@ -19,9 +19,10 @@ CREATE TABLE IF NOT EXISTS abonements (
 ) ENGINE=INNODB;
 
 CREATE  TABLE IF NOT EXISTS users (
-      user_id        INT NOT NULL PRIMARY KEY,
+      login          VARCHAR(15) NOT NULL UNIQUE PRIMARY KEY,
       name           VARCHAR(150),
-      password       VARCHAR(15)
+      password       VARCHAR(15),
+      role           VARCHAR(15)
 ) ENGINE=INNODB;
 
 CREATE TABLE IF NOT EXISTS cosmetics (
@@ -41,7 +42,7 @@ CREATE TABLE IF NOT EXISTS vertical_sun (
 ) ENGINE=INNODB;
 
 CREATE TABLE IF NOT EXISTS gorizontal_blue_sun (
-      vertical_sun_id    int NOT NULL PRIMARY KEY,
+      gorizontal_blue_sun_id    int NOT NULL PRIMARY KEY,
       start_date         date,
       total_minute       INT,
       total_price        int,
@@ -50,7 +51,7 @@ CREATE TABLE IF NOT EXISTS gorizontal_blue_sun (
 ) ENGINE=INNODB;
 
 CREATE TABLE IF NOT EXISTS gorizontal_green_sun (
-      vertical_sun_id    int NOT NULL PRIMARY KEY,
+      gorizontal_green_sun_id    int NOT NULL PRIMARY KEY,
       start_date         date,
       total_minute       INT,
       total_price        int,

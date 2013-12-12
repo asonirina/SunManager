@@ -23,15 +23,14 @@ END $$
 DROP PROCEDURE IF EXISTS `checkUser` $$
 CREATE PROCEDURE `checkUser`(
         IN LOGIN VARCHAR(15),
-        IN PASSWORD VARCHAR(15),
         OUT EXIST BOOLEAN
         )
 BEGIN
-DECLARE user_name VARCHAR(150);
+DECLARE user_name VARCHAR(15);
 SET EXIST = false;
 
-Select name INTO user_name from users where user_id = LOGIN and password = PASSWORD;
-IF user_name != NULL THEN
+Select role INTO user_name from users where login = LOGIN_U;
+IF user_name IS NOT NULL THEN
    SET EXIST = true;
 END IF;
 END $$

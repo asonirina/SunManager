@@ -3,7 +3,7 @@ package com.sun.manager.dto;
 public class Customers {
 
     private Long customerId;
-    private Long mobile;
+    private String mobile;
     private String name;
 
     public Long getCustomerId() {
@@ -14,11 +14,11 @@ public class Customers {
         this.customerId = customerId;
     }
 
-    public Long getMobile() {
+    public String getMobile() {
         return mobile;
     }
 
-    public void setMobile(Long mobile) {
+    public void setMobile(String mobile) {
         this.mobile = mobile;
     }
 
