@@ -1,0 +1,7 @@
+.table-cell:hover {
+    -fx-background-color: DarkTurquoise   ;
+}
+.table-cell{
+    -fx-background-color:LightBlue ;
+    -fx-border-color: DarkBlue ;
+}
