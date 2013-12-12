@@ -21,8 +21,6 @@ public class SolariumDAO {
 
         callableStatement.executeUpdate();
 
-        Long oneMinutePrice = callableStatement.getLong(2);
-
-        return oneMinutePrice;
+        return callableStatement.getLong(2);
     }
 }

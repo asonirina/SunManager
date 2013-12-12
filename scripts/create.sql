@@ -20,7 +20,8 @@ CREATE TABLE IF NOT EXISTS abonements (
 
 CREATE  TABLE IF NOT EXISTS users (
       user_id        INT NOT NULL PRIMARY KEY,
-      name           VARCHAR(150)
+      name           VARCHAR(150),
+      password       VARCHAR(15)
 ) ENGINE=INNODB;
 
 CREATE TABLE IF NOT EXISTS cosmetics (
