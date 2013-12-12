@@ -4,11 +4,12 @@ import java.util.Date;
 
 public class VerticalSunData {
 
-    private Long   dataId;
-    private Date   startDate;
-    private Long   minutes;
-    private Long   totalPrice;
+    private Long dataId;
+    private Date startDate;
+    private Long minutes;
+    private Long totalPrice;
     private String abonementNumber;
+    private String res;
 
     public Long getDataId() {
         return dataId;
@@ -49,4 +50,15 @@ public class VerticalSunData {
     public void setAbonementNumber(String abonementNumber) {
         this.abonementNumber = abonementNumber;
     }
+
+    public void generateRes() {
+        String s = abonementNumber == null ? "$ " + totalPrice : abonementNumber;
+        res = minutes + " " + s;
+    }
+
+    public String getRes() {
+
+        return res;
+    }
+
 }

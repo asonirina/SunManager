@@ -19,7 +19,8 @@ public class MainAdminPage extends Application{
     @Override
     public void start(Stage stage) throws IOException {
         Pane pane = FXMLLoader.load(MainAdminPage.class.getResource("fxml/admin_main.fxml"));
-        stage.setScene(new Scene(pane));
+        Scene scene = new Scene(pane);
+        stage.setScene(scene);
         stage.setTitle("Login");
         stage.show();
     }
