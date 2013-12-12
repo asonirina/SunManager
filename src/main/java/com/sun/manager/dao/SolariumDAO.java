@@ -8,7 +8,6 @@ import java.sql.SQLException;
 import java.sql.Types;
 
 public class SolariumDAO {
-
     private static final String GET_ONE_MINUTE_PRICE_BY_ID = "{call getOneMinutePriceById(?,?)}";
 
     private Connection dbConnection = null;

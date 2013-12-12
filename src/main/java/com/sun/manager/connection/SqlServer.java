@@ -7,7 +7,6 @@ import java.sql.DriverManager;
 import java.util.Properties;
 
 public class SqlServer {
-
     private static final  String DB_CONFIG   = "src/main/resources/db_config.properties";
     private static final  String DB_DRIVER   = "db_driver";
     private static final  String DB_URL      = "db_url";

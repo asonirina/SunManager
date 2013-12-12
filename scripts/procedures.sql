@@ -1,11 +1,10 @@
-CREATE DEFINER = 'root'@'localhost' PROCEDURE `getOneMinutePriceById`(
+DELIMITER $$
+
+DROP PROCEDURE IF EXISTS `getOneMinutePriceById` $$
+CREATE PROCEDURE `getOneMinutePriceById`(
         IN SOL_ID INTEGER(11),
         OUT PRICE_ONE_MINUTE INTEGER(11)
-    )
-    NOT DETERMINISTIC
-    READS SQL DATA
-    SQL SECURITY DEFINER
-    COMMENT ''
+        )
 BEGIN
 CASE
 WHEN SOL_ID = 1 THEN
@@ -18,4 +17,5 @@ WHEN SOL_ID = 3 THEN
     Select one_minute_price into PRICE_ONE_MINUTE from gorizontal_green_sun
     where start_date = (select MAX(start_date) from gorizontal_green_sun);
 END CASE;
-END;
+END $$
+DELIMITER ;
