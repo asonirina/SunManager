@@ -1,5 +1,6 @@
 package com.sun.manager.forms;
 
+import com.sun.manager.dao.SolariumDAO;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
@@ -8,11 +9,14 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
+import java.sql.SQLException;
+
 public class EditingCell<T> extends TableCell<T, String> {
 
     private TextField textField;
 
     public EditingCell() {
+        this.setPrefHeight(27);
     }
 
     @Override
@@ -55,6 +59,7 @@ public class EditingCell<T> extends TableCell<T, String> {
 
     private void createTextField() {
         textField = new TextField(getString());
+        textField.setPrefHeight(25);
         textField.setMinWidth(this.getWidth() - this.getGraphicTextGap() * 2);
         textField.setOnKeyReleased(new EventHandler<KeyEvent>() {
             @Override
@@ -69,9 +74,14 @@ public class EditingCell<T> extends TableCell<T, String> {
                 } else if (t.getCode() == KeyCode.ESCAPE) {
                     cancelEdit();
                 } else if (t.getText().equals("$")) {
-                    String value = textField.getText() + "123";
+                    try {
+                    SolariumDAO dao = new SolariumDAO();
+                    String value = textField.getText() + dao.getOneMinutePriceById(1L);
                     textField.setText(value);
                     commitEdit(value);
+                    }catch (SQLException ex){
+                       throw new RuntimeException(ex);
+                    }
                 }
             }
         });

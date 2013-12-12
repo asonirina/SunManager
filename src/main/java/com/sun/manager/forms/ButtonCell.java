@@ -10,6 +10,7 @@ public  class ButtonCell<T> extends TableCell<T, String> {
     final Button cellButton = new Button();
 
     public ButtonCell(){
+        this.setPrefHeight(27);
         cellButton.setPrefWidth(190);
         cellButton.setPrefHeight(10);
     }
