@@ -2,17 +2,18 @@ package com.sun.manager.dto;
 
 public class Users {
 
-    //derictor or administrator
-    private String id;
+    private String login;
     private String name;
     private String password;
+    //derictor or administrator
+    private String role;
 
-    public String getId() {
-        return id;
+    public String getRole() {
+        return role;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setRole(String role) {
+        this.role = role;
     }
 
     public String getName() {
@@ -29,5 +30,13 @@ public class Users {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
     }
 }
