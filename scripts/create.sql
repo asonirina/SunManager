@@ -19,7 +19,7 @@ CREATE TABLE IF NOT EXISTS abonements (
 ) ENGINE=INNODB;
 
 CREATE  TABLE IF NOT EXISTS users (
-      login          VARCHAR(15) NOT NULL PRIMARY KEY,
+      login          VARCHAR(15) NOT NULL UNIQUE PRIMARY KEY,
       name           VARCHAR(150),
       password       VARCHAR(15),
       role           VARCHAR(15)
