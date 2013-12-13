@@ -1,7 +1,9 @@
 package com.sun.manager.forms.admin;
 
 
-import com.sun.manager.dto.VerticalSunData;
+import com.sun.manager.dao.SolariumDAO;
+import com.sun.manager.dto.BaseSolariumData;
+import com.sun.manager.dto.BaseSolariumData;
 import com.sun.manager.forms.EditingCell;
 import com.sun.manager.forms.ButtonCell;
 import javafx.collections.FXCollections;
@@ -18,6 +20,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.util.Callback;
 
 import java.net.URL;
+import java.sql.Date;
+import java.util.List;
 import java.util.ResourceBundle;
 
 /**
@@ -27,19 +31,19 @@ public class MainAdminController extends AnchorPane implements Initializable {
 
 
     @FXML
-    TableView<VerticalSunData> tableVert;
+    TableView<BaseSolariumData> tableVert;
 
     @FXML
-    TableView<VerticalSunData> tableGreen;
+    TableView<BaseSolariumData> tableGreen;
 
     @FXML
-    TableView<VerticalSunData> tableBlue;
+    TableView<BaseSolariumData> tableBlue;
 
     @FXML
-    TableView<VerticalSunData> tableCosm;
+    TableView<BaseSolariumData> tableCosm;
 
     @FXML
-    TableView<VerticalSunData> tableAbon;
+    TableView<BaseSolariumData> tableAbon;
 
     @FXML
     TableColumn vertSun;
@@ -56,67 +60,72 @@ public class MainAdminController extends AnchorPane implements Initializable {
     @FXML
     TableColumn abon;
 
+    SolariumDAO dao = new SolariumDAO();
+    List<BaseSolariumData> vertData;
 
     @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-
-//        tableVert.setEditable(true);
-//        tableGreen.setEditable(true);
-//        tableBlue.setEditable(true);
+    public void initialize(URL url, ResourceBundle resourceBundle){
+        try {
+        vertData = dao.getSolariumData(1L, Date.valueOf("2013-12-10"));
+        tableVert.setEditable(true);
+        tableGreen.setEditable(true);
+        tableBlue.setEditable(true);
 
         setColumnFactory();
         setStyles();
 
-        VerticalSunData vs = new VerticalSunData();
-        vs.setMinutes(5L);
-        vs.setAbonementNumber("123");
-        vs.generateRes();
-        final ObservableList<VerticalSunData> data1 = FXCollections.observableArrayList(
-                vs, vs
-        );
-
-        tableVert.setItems(data1);
-        tableGreen.setItems(data1);
-        tableBlue.setItems(data1);
-        tableCosm.setItems(data1);
-        tableAbon.setItems(data1);
+            final ObservableList<BaseSolariumData> data2 = FXCollections.observableArrayList(
+                            vertData
+            );
+                for (BaseSolariumData dat : data2) {
+                    dat.generateRes();
+                }
+        tableVert.setItems(data2);
+        tableGreen.setItems(data2);
+        tableBlue.setItems(data2);
+        tableCosm.setItems(data2);
+        tableAbon.setItems(data2);
+        }
+        catch (Exception ex) {
+            ex.printStackTrace();
+        }
 
     }
 
     private void setColumnFactory() {
-        green.setCellValueFactory(new PropertyValueFactory<VerticalSunData, String>("res"));
-        vertSun.setCellValueFactory(new PropertyValueFactory<VerticalSunData, String>("res"));
-        blue.setCellValueFactory(new PropertyValueFactory<VerticalSunData, String>("res"));
-        cosm.setCellValueFactory(new PropertyValueFactory<VerticalSunData, String>("res"));
-        abon.setCellValueFactory(new PropertyValueFactory<VerticalSunData, String>("res"));
+        green.setCellValueFactory(new PropertyValueFactory<BaseSolariumData, String>("res"));
+        vertSun.setCellValueFactory(new PropertyValueFactory<BaseSolariumData, String>("res"));
+        blue.setCellValueFactory(new PropertyValueFactory<BaseSolariumData, String>("res"));
+        cosm.setCellValueFactory(new PropertyValueFactory<BaseSolariumData, String>("res"));
+        abon.setCellValueFactory(new PropertyValueFactory<BaseSolariumData, String>("res"));
     }
 
     private void setStyles() {
-        green.setCellFactory(new Callback<TableColumn<VerticalSunData, String>, TableCell<VerticalSunData, String>>() {
+        green.setCellFactory(new Callback<TableColumn<BaseSolariumData, String>, TableCell<BaseSolariumData, String>>() {
             @Override
-            public TableCell<VerticalSunData, String> call(TableColumn<VerticalSunData, String> p) {
-               return new  EditingCell<VerticalSunData>();
+            public TableCell<BaseSolariumData, String> call(TableColumn<BaseSolariumData, String> p) {
+               return new  EditingCell<BaseSolariumData>();
             }
         });
 
-        cosm.setCellFactory(new Callback<TableColumn<VerticalSunData, String>, TableCell<VerticalSunData, String>>() {
+        cosm.setCellFactory(new Callback<TableColumn<BaseSolariumData, String>, TableCell<BaseSolariumData, String>>() {
             @Override
-            public TableCell<VerticalSunData, String> call(TableColumn<VerticalSunData, String> p) {
-                return new ButtonCell<VerticalSunData>();
+            public TableCell<BaseSolariumData, String> call(TableColumn<BaseSolariumData, String> p) {
+                return new ButtonCell<BaseSolariumData>();
             }
         });
 
-        abon.setCellFactory(new Callback<TableColumn<VerticalSunData, String>, TableCell<VerticalSunData, String>>() {
+        abon.setCellFactory(new Callback<TableColumn<BaseSolariumData, String>, TableCell<BaseSolariumData, String>>() {
             @Override
-            public TableCell<VerticalSunData, String> call(TableColumn<VerticalSunData, String> p) {
-                return new ButtonCell<VerticalSunData>();
+            public TableCell<BaseSolariumData, String> call(TableColumn<BaseSolariumData, String> p) {
+                return new ButtonCell<BaseSolariumData>();
             }
         });
 
-        blue.setCellFactory(new Callback<TableColumn<VerticalSunData, String>, TableCell<VerticalSunData, String>>() {
+        blue.setCellFactory(new Callback<TableColumn<BaseSolariumData, String>, TableCell<BaseSolariumData, String>>() {
             @Override
-            public TableCell<VerticalSunData, String> call(TableColumn<VerticalSunData, String> p) {
-                return new  EditingCell<VerticalSunData>();
+            public TableCell<BaseSolariumData, String> call(TableColumn<BaseSolariumData, String> p) {
+                return new  EditingCell<BaseSolariumData>();
             }
         });
         tableGreen.getStylesheets().add(this.getClass().getResource("styleGreen.css").toExternalForm());
@@ -124,21 +133,21 @@ public class MainAdminController extends AnchorPane implements Initializable {
         tableVert.getStylesheets().add(this.getClass().getResource("styleNormal.css").toExternalForm());
         tableCosm.getStylesheets().add(this.getClass().getResource("styleNormal.css").toExternalForm());
         tableAbon.getStylesheets().add(this.getClass().getResource("styleNormal.css").toExternalForm());
-        vertSun.setCellFactory(new Callback<TableColumn<VerticalSunData, String>, TableCell<VerticalSunData, String>>() {
+        vertSun.setCellFactory(new Callback<TableColumn<BaseSolariumData, String>, TableCell<BaseSolariumData, String>>() {
 
             @Override
-            public TableCell<VerticalSunData, String> call(TableColumn<VerticalSunData, String> p) {
-                return new EditingCell<VerticalSunData>();
+            public TableCell<BaseSolariumData, String> call(TableColumn<BaseSolariumData, String> p) {
+                return new EditingCell<BaseSolariumData>();
             }
         });
 
 
         green.setOnEditCommit(
-                new EventHandler<TableColumn.CellEditEvent<VerticalSunData, String>>() {
+                new EventHandler<TableColumn.CellEditEvent<BaseSolariumData, String>>() {
                     @Override
-                    public void handle(TableColumn.CellEditEvent<VerticalSunData, String> t) {
-                        VerticalSunData data =
-                                (VerticalSunData) t.getTableView().getItems().get(t.getTablePosition().getRow());
+                    public void handle(TableColumn.CellEditEvent<BaseSolariumData, String> t) {
+                        BaseSolariumData data =
+                                (BaseSolariumData) t.getTableView().getItems().get(t.getTablePosition().getRow());
                         data.setTotalPrice(null);
                         data.setAbonementNumber(null);
                         String input = t.getNewValue();
@@ -156,11 +165,11 @@ public class MainAdminController extends AnchorPane implements Initializable {
         );
 
         blue.setOnEditCommit(
-                new EventHandler<TableColumn.CellEditEvent<VerticalSunData, String>>() {
+                new EventHandler<TableColumn.CellEditEvent<BaseSolariumData, String>>() {
                     @Override
-                    public void handle(TableColumn.CellEditEvent<VerticalSunData, String> t) {
-                        VerticalSunData data =
-                                (VerticalSunData) t.getTableView().getItems().get(t.getTablePosition().getRow());
+                    public void handle(TableColumn.CellEditEvent<BaseSolariumData, String> t) {
+                        BaseSolariumData data =
+                                (BaseSolariumData) t.getTableView().getItems().get(t.getTablePosition().getRow());
                         data.setTotalPrice(null);
                         data.setAbonementNumber(null);
                         String input = t.getNewValue();
@@ -178,11 +187,11 @@ public class MainAdminController extends AnchorPane implements Initializable {
         );
 
         vertSun.setOnEditCommit(
-                new EventHandler<TableColumn.CellEditEvent<VerticalSunData, String>>() {
+                new EventHandler<TableColumn.CellEditEvent<BaseSolariumData, String>>() {
                     @Override
-                    public void handle(TableColumn.CellEditEvent<VerticalSunData, String> t) {
-                        VerticalSunData data =
-                                (VerticalSunData) t.getTableView().getItems().get(t.getTablePosition().getRow());
+                    public void handle(TableColumn.CellEditEvent<BaseSolariumData, String> t) {
+                        BaseSolariumData data =
+                                (BaseSolariumData) t.getTableView().getItems().get(t.getTablePosition().getRow());
                         data.setTotalPrice(null);
                         data.setAbonementNumber(null);
                         String input = t.getNewValue();

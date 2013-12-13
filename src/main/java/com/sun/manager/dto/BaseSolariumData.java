@@ -3,11 +3,15 @@ package com.sun.manager.dto;
 import java.util.Date;
 
 public class BaseSolariumData {
-    private Long dataId;
-    private Date startDate;
-    private Long minutes;
-    private Long totalPrice;
-    private String abonementNumber;
+    protected Long dataId;
+    protected Date startDate;
+    protected Long minutes;
+    protected Long totalPrice;
+    protected String abonementNumber;
+
+    public BaseSolariumData() {
+
+    }
 
     public BaseSolariumData(Long dataId, Date startDate, Long minutes, Long totalPrice, String abonementNumber) {
         this.dataId = dataId;
@@ -56,4 +60,16 @@ public class BaseSolariumData {
     public void setAbonementNumber(String abonementNumber) {
         this.abonementNumber = abonementNumber;
     }
+
+    protected String res;
+
+    public void generateRes() {
+        String s = getAbonementNumber() == null ? "$ " + getTotalPrice() : getAbonementNumber();
+        res = getMinutes() + " " + s;
+    }
+
+    public String getRes() {
+        return res;
+    }
+
 }
