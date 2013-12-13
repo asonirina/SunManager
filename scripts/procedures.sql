@@ -36,4 +36,15 @@ IF user_name IS NOT NULL THEN
 END IF;
 END $$
 
+//----------------------------------------------------------------------------------------
+DROP PROCEDURE IF EXISTS `getCodeBySymbol` $$
+CREATE PROCEDURE `getCodeBySymbol`(
+        IN SYMBOL VARCHAR(12),
+        OUT CODE VARCHAR(12)
+        )
+BEGIN
+SELECT SUBSTRING(abonement_code, 2) INTO CODE from abonements
+where abonement_code like CONCAT(SYMBOL,'%') and is_free = 1;
+END $$
+
 DELIMITER ;
