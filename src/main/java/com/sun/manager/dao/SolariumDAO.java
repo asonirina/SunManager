@@ -9,7 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SolariumDAO {
+
     private static final String GET_ONE_MINUTE_PRICE_BY_ID = "{call getOneMinutePriceById(?,?)}";
+    private static final String GET_CODE_BY_SYMBOL = "{call getCodeBySymbol(?,?)}";
     private static final String VERTICAL_SOLARIUM = "vertical_sun_data";
     private static final String GORIZONTAL_BLUE_SOLARIUM = "gorizontal_blue_sun_data";
     private static final String GORIZONTAL_GREEN_SOLARIUM = "gorizontal_green_sun_data";
@@ -29,7 +31,7 @@ public class SolariumDAO {
 
     public List<BaseSolariumData> getSolariumData(Long solariumId, Date startDate) throws SQLException {
         String solarium = null;
-        List<BaseSolariumData> solariumDataList = new ArrayList();
+        List<BaseSolariumData> solariumDataList = new ArrayList<BaseSolariumData>();
 
         if (solariumId == 1L)
             solarium = VERTICAL_SOLARIUM;
@@ -76,5 +78,13 @@ public class SolariumDAO {
         return cosmeticsList;
     }
 
+    public Long getCodeBySymbol(String symbol) throws SQLException {
+        callableStatement = dbConnection.prepareCall(GET_CODE_BY_SYMBOL);
+        callableStatement.setString(1, symbol);
+        callableStatement.registerOutParameter(2, Types.INTEGER);
 
+        callableStatement.executeUpdate();
+
+        return callableStatement.getLong(2);
+    }
 }
