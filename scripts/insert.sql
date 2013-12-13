@@ -3,11 +3,11 @@ Insert into customers (customer_id, mobile, name) VALUES(2, '80291316547', 'Ira'
 Insert into customers (customer_id, mobile, name) VALUES(3, '80174569871', 'Test');
 
 
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration) VALUES('B999', 20160, 1, '2013-07-04', '2013-10-04', 36, 3);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration) VALUES('C1090', 80160, 2, '2013-01-10', '2013-04-10', 53, 3);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration) VALUES('K901', 120160, 1, '2013-06-04', '2013-12-04', 109, 6);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration) VALUES('B901', 20160, 3, '2013-06-04', '2013-09-04', 40, 3);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration) VALUES('M704', 220160, 3, '2013-02-15', '2013-08-15', 150, 6);
+Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('B999', 20160, 1, '2013-07-04', '2013-10-04', 36, 3, 0);
+Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('C1090', 80160, 2, '2013-01-10', '2013-04-10', 53, 3, 0);
+Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('K901', 120160, 1, '2013-06-04', '2013-12-04', 109, 6, 0);
+Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('B901', 20160, 3, '2013-06-04', '2013-09-04', 40, 3, 1);
+Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('M704', 220160, 3, '2013-02-15', '2013-08-15', 150, 6, 1);
 
 
 Insert into users (login, name, password, role) VALUES('cofee',  'Nastya', 'root', 'derictor');

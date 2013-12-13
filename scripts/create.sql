@@ -14,6 +14,7 @@ CREATE TABLE IF NOT EXISTS abonements (
       end_date       date,
       minutes        int,
       duration       int,
+      is_free         boolean,
 
       FOREIGN KEY (customer_id) REFERENCES customers(customer_id)
 ) ENGINE=INNODB;

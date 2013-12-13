@@ -11,6 +11,7 @@ public class Abonements {
     private Date endDate;
     private Long minutes;
     private Long duration;
+    private Boolean isFree;
 
     public String getAbonementCode() {
         return abonementCode;
@@ -66,5 +67,13 @@ public class Abonements {
 
     public void setDuration(Long duration) {
         this.duration = duration;
+    }
+
+    public Boolean getFree() {
+        return isFree;
+    }
+
+    public void setFree(Boolean free) {
+        isFree = free;
     }
 }
