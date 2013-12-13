@@ -1,5 +1,6 @@
 package com.sun.manager.forms.admin;
 
+import com.sun.manager.connection.SqlServer;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -18,6 +19,7 @@ public class MainAdminPage extends Application{
 
     @Override
     public void start(Stage stage) throws IOException {
+        SqlServer.init(); //todo put it to login page
         Pane pane = FXMLLoader.load(MainAdminPage.class.getResource("fxml/admin_main.fxml"));
         Scene scene = new Scene(pane);
         stage.setScene(scene);
