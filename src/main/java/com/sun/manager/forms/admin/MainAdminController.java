@@ -4,8 +4,10 @@ package com.sun.manager.forms.admin;
 import com.sun.manager.dao.SolariumDAO;
 import com.sun.manager.dto.BaseSolariumData;
 import com.sun.manager.dto.BaseSolariumData;
+import com.sun.manager.events.EventHandlers;
 import com.sun.manager.forms.EditingCell;
 import com.sun.manager.forms.ButtonCell;
+import com.sun.manager.service.SolariumService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
@@ -60,33 +62,31 @@ public class MainAdminController extends AnchorPane implements Initializable {
     @FXML
     TableColumn abon;
 
-    SolariumDAO dao = new SolariumDAO();
-    List<BaseSolariumData> vertData;
+    SolariumService solariumService = new SolariumService();
+    final ObservableList<BaseSolariumData> vertData = FXCollections.observableArrayList(
+            solariumService.getVertSunData(Date.valueOf("2013-12-10")));
+
+    // new Date(Calendar.getInstance().getTime().getTime()); - current date
 
     @Override
-    public void initialize(URL url, ResourceBundle resourceBundle){
+    public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
-        vertData = dao.getSolariumData(1L, Date.valueOf("2013-12-10"));
-        tableVert.setEditable(true);
-        tableGreen.setEditable(true);
-        tableBlue.setEditable(true);
+            tableVert.setEditable(true);
+            tableGreen.setEditable(true);
+            tableBlue.setEditable(true);
 
-        setColumnFactory();
-        setStyles();
+            setColumnFactory();
+            setStyles();
 
-            final ObservableList<BaseSolariumData> data2 = FXCollections.observableArrayList(
-                            vertData
-            );
-                for (BaseSolariumData dat : data2) {
-                    dat.generateRes();
-                }
-        tableVert.setItems(data2);
-        tableGreen.setItems(data2);
-        tableBlue.setItems(data2);
-        tableCosm.setItems(data2);
-        tableAbon.setItems(data2);
-        }
-        catch (Exception ex) {
+            for (BaseSolariumData dat : vertData) {
+                dat.generateRes();
+            }
+            tableVert.setItems(vertData);
+            tableGreen.setItems(vertData);
+            tableBlue.setItems(vertData);
+            tableCosm.setItems(vertData);
+            tableAbon.setItems(vertData);
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
 
@@ -101,112 +101,23 @@ public class MainAdminController extends AnchorPane implements Initializable {
     }
 
     private void setStyles() {
-        green.setCellFactory(new Callback<TableColumn<BaseSolariumData, String>, TableCell<BaseSolariumData, String>>() {
-            @Override
-            public TableCell<BaseSolariumData, String> call(TableColumn<BaseSolariumData, String> p) {
-               return new  EditingCell<BaseSolariumData>();
-            }
-        });
+        vertSun.setCellFactory(EventHandlers.cellFactoryForBaseSolarium());
+        green.setCellFactory(EventHandlers.cellFactoryForBaseSolarium());
+        blue.setCellFactory(EventHandlers.cellFactoryForBaseSolarium());
 
-        cosm.setCellFactory(new Callback<TableColumn<BaseSolariumData, String>, TableCell<BaseSolariumData, String>>() {
-            @Override
-            public TableCell<BaseSolariumData, String> call(TableColumn<BaseSolariumData, String> p) {
-                return new ButtonCell<BaseSolariumData>();
-            }
-        });
+        cosm.setCellFactory(EventHandlers.cellFactoryForCosmAbon());
+        abon.setCellFactory(EventHandlers.cellFactoryForCosmAbon());
 
-        abon.setCellFactory(new Callback<TableColumn<BaseSolariumData, String>, TableCell<BaseSolariumData, String>>() {
-            @Override
-            public TableCell<BaseSolariumData, String> call(TableColumn<BaseSolariumData, String> p) {
-                return new ButtonCell<BaseSolariumData>();
-            }
-        });
-
-        blue.setCellFactory(new Callback<TableColumn<BaseSolariumData, String>, TableCell<BaseSolariumData, String>>() {
-            @Override
-            public TableCell<BaseSolariumData, String> call(TableColumn<BaseSolariumData, String> p) {
-                return new  EditingCell<BaseSolariumData>();
-            }
-        });
         tableGreen.getStylesheets().add(this.getClass().getResource("styleGreen.css").toExternalForm());
         tableBlue.getStylesheets().add(this.getClass().getResource("styleBlue.css").toExternalForm());
         tableVert.getStylesheets().add(this.getClass().getResource("styleNormal.css").toExternalForm());
         tableCosm.getStylesheets().add(this.getClass().getResource("styleNormal.css").toExternalForm());
         tableAbon.getStylesheets().add(this.getClass().getResource("styleNormal.css").toExternalForm());
-        vertSun.setCellFactory(new Callback<TableColumn<BaseSolariumData, String>, TableCell<BaseSolariumData, String>>() {
-
-            @Override
-            public TableCell<BaseSolariumData, String> call(TableColumn<BaseSolariumData, String> p) {
-                return new EditingCell<BaseSolariumData>();
-            }
-        });
 
 
-        green.setOnEditCommit(
-                new EventHandler<TableColumn.CellEditEvent<BaseSolariumData, String>>() {
-                    @Override
-                    public void handle(TableColumn.CellEditEvent<BaseSolariumData, String> t) {
-                        BaseSolariumData data =
-                                (BaseSolariumData) t.getTableView().getItems().get(t.getTablePosition().getRow());
-                        data.setTotalPrice(null);
-                        data.setAbonementNumber(null);
-                        String input = t.getNewValue();
-                        int index = input.indexOf(":");
-                        data.setMinutes(Long.valueOf(input.substring(0, index)));
-                        if (input.contains("$")) {
-                            data.setTotalPrice(Long.valueOf(input.substring(input.indexOf("$") + 1)));
-                        } else {
-                            data.setAbonementNumber(input.substring(index + 1));
-                        }
-
-                        data.generateRes();
-                    }
-                }
-        );
-
-        blue.setOnEditCommit(
-                new EventHandler<TableColumn.CellEditEvent<BaseSolariumData, String>>() {
-                    @Override
-                    public void handle(TableColumn.CellEditEvent<BaseSolariumData, String> t) {
-                        BaseSolariumData data =
-                                (BaseSolariumData) t.getTableView().getItems().get(t.getTablePosition().getRow());
-                        data.setTotalPrice(null);
-                        data.setAbonementNumber(null);
-                        String input = t.getNewValue();
-                        int index = input.indexOf(":");
-                        data.setMinutes(Long.valueOf(input.substring(0, index)));
-                        if (input.contains("$")) {
-                            data.setTotalPrice(Long.valueOf(input.substring(input.indexOf("$") + 1)));
-                        } else {
-                            data.setAbonementNumber(input.substring(index + 1));
-                        }
-
-                        data.generateRes();
-                    }
-                }
-        );
-
-        vertSun.setOnEditCommit(
-                new EventHandler<TableColumn.CellEditEvent<BaseSolariumData, String>>() {
-                    @Override
-                    public void handle(TableColumn.CellEditEvent<BaseSolariumData, String> t) {
-                        BaseSolariumData data =
-                                (BaseSolariumData) t.getTableView().getItems().get(t.getTablePosition().getRow());
-                        data.setTotalPrice(null);
-                        data.setAbonementNumber(null);
-                        String input = t.getNewValue();
-                        int index = input.indexOf(":");
-                        data.setMinutes(Long.valueOf(input.substring(0, index)));
-                        if (input.contains("$")) {
-                            data.setTotalPrice(Long.valueOf(input.substring(input.indexOf("$") + 1)));
-                        } else {
-                            data.setAbonementNumber(input.substring(index + 1));
-                        }
-
-                        data.generateRes();
-                    }
-                }
-        );
+        green.setOnEditCommit(EventHandlers.eventHandlerBaseSolariumEditCommit());
+        blue.setOnEditCommit(EventHandlers.eventHandlerBaseSolariumEditCommit());
+        vertSun.setOnEditCommit(EventHandlers.eventHandlerBaseSolariumEditCommit());
 
 
     }

@@ -65,11 +65,15 @@ public class BaseSolariumData {
 
     public void generateRes() {
         String s = getAbonementNumber() == null ? "$ " + getTotalPrice() : getAbonementNumber();
-        res = getMinutes() + " " + s;
+        res = getMinutes() + " : " + s;
     }
 
     public String getRes() {
         return res;
+    }
+
+    public void setRes(String res) {
+        this.res = res;
     }
 
 }
