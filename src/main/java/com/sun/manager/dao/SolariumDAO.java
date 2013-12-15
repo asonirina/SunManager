@@ -87,4 +87,23 @@ public class SolariumDAO {
 
         return callableStatement.getLong(2);
     }
+
+    public void saveSolariumData(List<BaseSolariumData> baseSolariumDataList, Long solariumId) throws SQLException {
+        String solarium = null;
+
+        if (solariumId == 1L)
+            solarium = VERTICAL_SOLARIUM;
+        else if (solariumId == 2L)
+            solarium = GORIZONTAL_BLUE_SOLARIUM;
+        else if (solariumId == 3L)
+            solarium = GORIZONTAL_GREEN_SOLARIUM;
+        for (BaseSolariumData baseData : baseSolariumDataList) {
+            PreparedStatement ps = dbConnection.prepareStatement("insert into " + solarium + " (start_date, minutes, total_price, abonement_number) values(?,?,?,?)");
+            ps.setDate(1, (Date) baseData.getStartDate());
+            ps.setLong(2, baseData.getMinutes());
+            ps.setLong(3, baseData.getTotalPrice());
+            ps.setString(4, baseData.getAbonementNumber());
+            ps.executeUpdate();
+        }
+    }
 }
