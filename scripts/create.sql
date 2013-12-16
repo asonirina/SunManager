@@ -1,7 +1,7 @@
 CREATE DATABASE IF NOT EXISTS sun_manager;
 
 CREATE TABLE IF NOT EXISTS customers (
-      customer_id    INT NOT NULL PRIMARY KEY,
+      customer_id    INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
       mobile         VARCHAR(11),
       name           VARCHAR(150)
 ) ENGINE=INNODB;
@@ -27,14 +27,14 @@ CREATE  TABLE IF NOT EXISTS users (
 ) ENGINE=INNODB;
 
 CREATE TABLE IF NOT EXISTS cosmetics (
-      cosmetics_id    int NOT NULL PRIMARY KEY,
+      cosmetics_id    int NOT NULL AUTO_INCREMENT PRIMARY KEY,
       name            VARCHAR(150),
       price           INT,
       cosmetics_count int
 ) ENGINE=INNODB;
 
 CREATE TABLE IF NOT EXISTS vertical_sun (
-      vertical_sun_id    int NOT NULL PRIMARY KEY,
+      vertical_sun_id    int NOT NULL AUTO_INCREMENT PRIMARY KEY,
       start_date         date,
       total_minute       INT,
       total_price        int,
@@ -43,7 +43,7 @@ CREATE TABLE IF NOT EXISTS vertical_sun (
 ) ENGINE=INNODB;
 
 CREATE TABLE IF NOT EXISTS gorizontal_blue_sun (
-      gorizontal_blue_sun_id    int NOT NULL PRIMARY KEY,
+      gorizontal_blue_sun_id    int NOT NULL AUTO_INCREMENT PRIMARY KEY,
       start_date         date,
       total_minute       INT,
       total_price        int,
@@ -52,7 +52,7 @@ CREATE TABLE IF NOT EXISTS gorizontal_blue_sun (
 ) ENGINE=INNODB;
 
 CREATE TABLE IF NOT EXISTS gorizontal_green_sun (
-      gorizontal_green_sun_id    int NOT NULL PRIMARY KEY,
+      gorizontal_green_sun_id    int NOT NULL AUTO_INCREMENT PRIMARY KEY,
       start_date         date,
       total_minute       INT,
       total_price        int,
@@ -62,7 +62,7 @@ CREATE TABLE IF NOT EXISTS gorizontal_green_sun (
 
 
 CREATE TABLE IF NOT EXISTS vertical_sun_data (
-      data_id            int NOT NULL PRIMARY KEY,
+      data_id            int NOT NULL AUTO_INCREMENT PRIMARY KEY,
       start_date         date,
       minutes            INT,
       total_price        int,
@@ -70,7 +70,7 @@ CREATE TABLE IF NOT EXISTS vertical_sun_data (
 ) ENGINE=INNODB;
 
 CREATE TABLE IF NOT EXISTS gorizontal_blue_sun_data (
-      data_id            int NOT NULL PRIMARY KEY,
+      data_id            int NOT NULL AUTO_INCREMENT PRIMARY KEY,
       start_date         date,
       minutes            INT,
       total_price        int,
@@ -78,7 +78,7 @@ CREATE TABLE IF NOT EXISTS gorizontal_blue_sun_data (
 ) ENGINE=INNODB;
 
 CREATE TABLE IF NOT EXISTS gorizontal_green_sun_data (
-      data_id            int NOT NULL PRIMARY KEY,
+      data_id            int NOT NULL AUTO_INCREMENT PRIMARY KEY,
       start_date         date,
       minutes            INT,
       total_price        int,
