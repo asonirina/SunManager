@@ -6,7 +6,9 @@ import com.sun.manager.dto.Cosmetics;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class SolariumDAO {
 
@@ -15,6 +17,9 @@ public class SolariumDAO {
     private static final String VERTICAL_SOLARIUM = "vertical_sun_data";
     private static final String GORIZONTAL_BLUE_SOLARIUM = "gorizontal_blue_sun_data";
     private static final String GORIZONTAL_GREEN_SOLARIUM = "gorizontal_green_sun_data";
+    private static final String VERTICAL_SOLARIUM_SUN = "vertical_sun";
+    private static final String GORIZONTAL_BLUE_SOLARIUM_SUN = "gorizontal_blue_sun";
+    private static final String GORIZONTAL_GREEN_SOLARIUM_SUN = "gorizontal_green_sun";
 
     private Connection dbConnection = SqlServer.getConnection();
     private CallableStatement callableStatement = null;
@@ -88,16 +93,40 @@ public class SolariumDAO {
         return callableStatement.getLong(2);
     }
 
-    public void saveSolariumData(List<BaseSolariumData> baseSolariumDataList, Long solariumId) throws SQLException {
+    public Map<String, Long> saveSolariumData(List<BaseSolariumData> baseSolariumDataList, Long solariumId) throws SQLException {
         String solarium = null;
+        String solarium_sun = null;
+        Map<String, Long> totals = new HashMap<String, Long>();
+        Long totalSum = 0L;
+        Long totalMinutes = 0L;
+        Long l2 = 0L;
 
-        if (solariumId == 1L)
+        if (solariumId == 1L) {
             solarium = VERTICAL_SOLARIUM;
-        else if (solariumId == 2L)
+            solarium_sun = VERTICAL_SOLARIUM_SUN;
+        } else if (solariumId == 2L) {
             solarium = GORIZONTAL_BLUE_SOLARIUM;
-        else if (solariumId == 3L)
+            solarium_sun = GORIZONTAL_BLUE_SOLARIUM_SUN;
+        } else if (solariumId == 3L) {
             solarium = GORIZONTAL_GREEN_SOLARIUM;
+            solarium_sun = GORIZONTAL_GREEN_SOLARIUM_SUN;
+        }
         for (BaseSolariumData baseData : baseSolariumDataList) {
+            //Update minutes by abonements
+            if (baseData.getTotalPrice() == 0) {
+                PreparedStatement ps1 = dbConnection.prepareStatement("update abonements set minutes = ? where abonement_code = ?");
+                PreparedStatement ps2 = dbConnection.prepareStatement("select  minutes from abonements where abonement_code = ?");
+                ps2.setString(1, baseData.getAbonementNumber());
+                Long minutes = ps2.executeQuery().getLong("minutes");
+                ps1.setLong(1, minutes - baseData.getMinutes());
+                ps2.setString(2, baseData.getAbonementNumber());
+                ps2.executeUpdate();
+
+                totalMinutes += baseData.getMinutes();
+            } else {
+                totalSum += baseData.getTotalPrice();
+            }
+            //Insert abonementsData
             PreparedStatement ps = dbConnection.prepareStatement("insert into " + solarium + " (start_date, minutes, total_price, abonement_number) values(?,?,?,?)");
             ps.setDate(1, (Date) baseData.getStartDate());
             ps.setLong(2, baseData.getMinutes());
@@ -105,5 +134,11 @@ public class SolariumDAO {
             ps.setString(4, baseData.getAbonementNumber());
             ps.executeUpdate();
         }
+        PreparedStatement ps3 = dbConnection.prepareStatement("select l2 from " + solarium_sun + " where where start_date = (select MAX(start_date) from " + solarium_sun + ");");
+        l2 = ps3.executeQuery().getLong("l2");
+        totals.put("Итоговая сумма", totalSum);
+        totals.put("Итого минут", totalMinutes);
+        totals.put("L2", l2 + totalMinutes);
+        return totals;
     }
 }
