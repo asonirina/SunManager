@@ -20,7 +20,7 @@ public class MainAdminPage extends Application{
     @Override
     public void start(Stage stage) throws IOException {
         SqlServer.init(); //todo put it to login page
-        Pane pane = FXMLLoader.load(MainAdminPage.class.getResource("fxml/admin_main.fxml"));
+        Pane pane = FXMLLoader.load(MainAdminPage.class.getResource("fxml/admin_main1.fxml"));
         Scene scene = new Scene(pane);
         stage.setScene(scene);
         stage.setTitle("Login");

@@ -4,6 +4,7 @@ import com.sun.manager.dao.SolariumDAO;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
+import javafx.geometry.Pos;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
@@ -76,7 +77,7 @@ public class EditingCell<T> extends TableCell<T, String> {
                 } else if (t.getText().equals("$")) {
                     try {
                     SolariumDAO dao = new SolariumDAO();
-                    String value = textField.getText() + dao.getOneMinutePriceById(1L);
+                    String value = textField.getText() +dao.getOneMinutePriceById(1L);
                     textField.setText(value);
                     commitEdit(value);
                     }catch (SQLException ex){

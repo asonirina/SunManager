@@ -1,9 +1,13 @@
 package com.sun.manager.events;
 
 import com.sun.manager.dto.BaseSolariumData;
+import com.sun.manager.dto.NumericData;
+import com.sun.manager.dto.ResData;
 import com.sun.manager.forms.ButtonCell;
 import com.sun.manager.forms.EditingCell;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.event.EventHandler;
+import javafx.geometry.Pos;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.util.Callback;
@@ -35,12 +39,34 @@ public class EventHandlers {
         };
     }
 
-    public static Callback cellFactoryForBaseSolarium () {
+    public static Callback cellFactoryForBaseSolarium() {
         return new Callback<TableColumn<BaseSolariumData, String>, TableCell<BaseSolariumData, String>>() {
             @Override
             public TableCell<BaseSolariumData, String> call(TableColumn<BaseSolariumData, String> p) {
                 return new EditingCell<BaseSolariumData>();
             }
+        };
+    }
+
+    public static Callback cellFactoryNum() {
+        return new Callback<TableColumn<NumericData, String>, TableCell<NumericData, String>>() {
+            @Override
+            public TableCell<NumericData, String> call(TableColumn<NumericData, String> p) {
+
+                return new EditingCell<NumericData>();
+            }
+
+        };
+    }
+
+    public static Callback cellFactoryBaseRes() {
+        return new Callback<TableColumn<ResData, String>, TableCell<ResData, String>>() {
+            @Override
+            public TableCell<ResData, String> call(TableColumn<ResData, String> p) {
+
+                return new EditingCell<ResData>();
+            }
+
         };
     }
 
