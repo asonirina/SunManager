@@ -247,7 +247,7 @@ public class MainAdminController extends AnchorPane implements Initializable {
 
     private void setCosmResData() {
         ResData resData[] = new ResData[3];
-        resData[0] = new ResData("Итого мин:", "шт");
+        resData[0] = new ResData("стикини:", "шт");
         resData[1] = new ResData("к-ка итого:");
         resData[2] = new ResData("к-ка+стикини:");
 

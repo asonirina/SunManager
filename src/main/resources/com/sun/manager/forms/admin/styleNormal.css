@@ -1,11 +1,8 @@
 .table-cell:hover {
-    -fx-background-color: Lavender  ;
+    -fx-background-color: Lavender;
 }
 .table-cell{
-    -fx-background-color:HoneyDew   ;
-    -fx-border-color: DimGray ;
-}
-
-.table-cell:focus {
-    -fx-background-color:red;
+    -fx-background-color:HoneyDew;
+    -fx-border-color: DimGray;
+    -fx-text-fill: black;
 }

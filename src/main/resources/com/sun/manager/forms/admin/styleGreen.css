@@ -1,6 +1,7 @@
 .table-cell{
     -fx-background-color:PaleGreen;
     -fx-border-color: ForestGreen;
+    -fx-text-fill: black;
 }
 
 .table-cell:hover{
