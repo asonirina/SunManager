@@ -11,6 +11,9 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
 import java.sql.SQLException;
+import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class EditingCell<T> extends TableCell<T, String> {
 
@@ -70,18 +73,20 @@ public class EditingCell<T> extends TableCell<T, String> {
                     if (value != null) {
                         commitEdit(value);
                     } else {
-                       commitEdit(null);
+                        commitEdit(null);
                     }
                 } else if (t.getCode() == KeyCode.ESCAPE) {
                     cancelEdit();
                 } else if (t.getText().equals("$")) {
                     try {
-                    SolariumDAO dao = new SolariumDAO();
-                    String value = textField.getText() +dao.getOneMinutePriceById(1L);
-                    textField.setText(value);
-                    commitEdit(value);
-                    }catch (SQLException ex){
-                       throw new RuntimeException(ex);
+                        SolariumDAO dao = new SolariumDAO();
+
+                        Long sum = new Scanner(textField.getText()).useDelimiter("\\D+").nextInt() * dao.getOneMinutePriceById(1L);
+                        String value = textField.getText() + " " + sum;
+                        textField.setText(value);
+                        commitEdit(value);
+                    } catch (SQLException ex) {
+                        throw new RuntimeException(ex);
                     }
                 }
             }

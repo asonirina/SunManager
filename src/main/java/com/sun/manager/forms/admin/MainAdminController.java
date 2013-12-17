@@ -33,7 +33,9 @@ import java.util.ResourceBundle;
  * User: iason
  */
 public class MainAdminController extends AnchorPane implements Initializable {
-
+    //main tables
+    @FXML
+    TableView<NumericData> tableNumber;
 
     @FXML
     TableView<BaseSolariumData> tableVert;
@@ -50,84 +52,86 @@ public class MainAdminController extends AnchorPane implements Initializable {
     @FXML
     TableView<BaseSolariumData> tableAbon;
 
+
+    // main columns
     @FXML
-    TableView<NumericData> tableNumber;
+    TableColumn colNumber;
 
     @FXML
-    TableColumn vertSun;
+    TableColumn colVert;
 
     @FXML
-    TableColumn green;
+    TableColumn colGreen;
 
     @FXML
-    TableColumn blue;
+    TableColumn colBlue;
 
     @FXML
-    TableColumn cosm;
+    TableColumn colCosm;
 
     @FXML
-    TableColumn abon;
+    TableColumn colAbon;
 
+    //// tables with res data
     @FXML
-    TableColumn numData;
-
-    @FXML
-    TableView<ResData> vertRes;
+    TableView<ResData> tableNumRes;
 
     @FXML
     TableColumn colNumRes;
 
     @FXML
-    TableView<ResData> numResTable;
+    TableView<ResData> tableVertRes;
 
     @FXML
-    TableColumn colVert;
+    TableColumn colVertRes;
+
+    @FXML
+    TableView<ResData> tableGreenRes;
+
+    @FXML
+    TableColumn colGreenRes;
+
+    @FXML
+    TableView<ResData> tableBlueRes;
+
+    @FXML
+    TableColumn colBlueRes;
+
+    @FXML
+    TableView<ResData> tableCosmRes;
+
+    @FXML
+    TableColumn colCosmRes;
+
+    @FXML
+    TableView<ResData> tableAbonRes;
+
+    @FXML
+    TableColumn colAbonRes;
 
     SolariumService solariumService = new SolariumService();
     final ObservableList<BaseSolariumData> vertData = FXCollections.observableArrayList(
             solariumService.getVertSunData(Date.valueOf("2013-12-10")));
-
 
     // new Date(Calendar.getInstance().getTime().getTime()); - current date
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
-            NumericData[] numericDatas = new NumericData[30];
-            for (int i = 0; i < 30; i++) {
-                numericDatas[i] = new NumericData(i + 1);
-            }
-            final ObservableList<NumericData> nums = FXCollections.observableArrayList(
-                    numericDatas);
-
-            ResData resDatas[] = new ResData[3];
-            resDatas[0] = new ResData(1000L, "Итого мин: ");
-            resDatas[1] = new ResData(200L, "Итого руб: ");
-            resDatas[2] = new ResData(2300L, "L2= ");
-
-            final ObservableList<ResData> resDatas1 = FXCollections.observableArrayList(resDatas);
-
-            final ObservableList<ResData> resDatas2 = FXCollections.observableArrayList(null, null, null);
-            tableVert.setEditable(true);
-            tableGreen.setEditable(true);
-            tableBlue.setEditable(true);
+            setEditableTables();
 
             setColumnFactory();
+            setCellFactory();
             setStyles();
 
-            for (BaseSolariumData dat : vertData) {
-                dat.generateRes();
-            }
-            tableVert.setItems(vertData);
-            tableGreen.setItems(vertData);
-            tableBlue.setItems(vertData);
-            tableCosm.setItems(vertData);
-            tableAbon.setItems(vertData);
-            tableNumber.setItems(nums);
+            setOnEdit();
 
-            vertRes.setItems(resDatas1);
-
-            numResTable.setItems(resDatas2);
+            setNumbers();
+            setNumResData();
+            setMainData();
+            setSolariumResData();
+            setCosmResData();
+            setAbonResData();
 
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -136,31 +140,43 @@ public class MainAdminController extends AnchorPane implements Initializable {
     }
 
     private void setColumnFactory() {
-        green.setCellValueFactory(new PropertyValueFactory<BaseSolariumData, String>("res"));
-        vertSun.setCellValueFactory(new PropertyValueFactory<BaseSolariumData, String>("res"));
-        blue.setCellValueFactory(new PropertyValueFactory<BaseSolariumData, String>("res"));
-        cosm.setCellValueFactory(new PropertyValueFactory<BaseSolariumData, String>("res"));
-        abon.setCellValueFactory(new PropertyValueFactory<BaseSolariumData, String>("res"));
-        numData.setCellValueFactory(new PropertyValueFactory<NumericData, String>("data"));
-
-        colVert.setCellValueFactory(new PropertyValueFactory<ResData, String>("res"));
+        colGreen.setCellValueFactory(new PropertyValueFactory<BaseSolariumData, String>("res"));
+        colVert.setCellValueFactory(new PropertyValueFactory<BaseSolariumData, String>("res"));
+        colBlue.setCellValueFactory(new PropertyValueFactory<BaseSolariumData, String>("res"));
+        colCosm.setCellValueFactory(new PropertyValueFactory<BaseSolariumData, String>("res"));
+        colAbon.setCellValueFactory(new PropertyValueFactory<BaseSolariumData, String>("res"));
+        colNumber.setCellValueFactory(new PropertyValueFactory<NumericData, String>("data"));
 
         colNumRes.setCellValueFactory(new PropertyValueFactory<ResData, String>("res"));
+        colVertRes.setCellValueFactory(new PropertyValueFactory<ResData, String>("res"));
+        colGreenRes.setCellValueFactory(new PropertyValueFactory<ResData, String>("res"));
+        colBlueRes.setCellValueFactory(new PropertyValueFactory<ResData, String>("res"));
+        colCosmRes.setCellValueFactory(new PropertyValueFactory<ResData, String>("res"));
+        colAbonRes.setCellValueFactory(new PropertyValueFactory<ResData, String>("res"));
+
+
+    }
+
+    private void setCellFactory() {
+
+        colVert.setCellFactory(EventHandlers.cellFactoryForBaseSolarium());
+        colGreen.setCellFactory(EventHandlers.cellFactoryForBaseSolarium());
+        colBlue.setCellFactory(EventHandlers.cellFactoryForBaseSolarium());
+
+        colCosm.setCellFactory(EventHandlers.cellFactoryForCosmAbon());
+        colAbon.setCellFactory(EventHandlers.cellFactoryForCosmAbon());
+
+        colNumber.setCellFactory(EventHandlers.cellFactoryNum());
+
+        colNumRes.setCellFactory(EventHandlers.cellFactoryBaseRes());
+        colVertRes.setCellFactory(EventHandlers.cellFactoryBaseRes());
+        colGreenRes.setCellFactory(EventHandlers.cellFactoryBaseRes());
+        colBlueRes.setCellFactory(EventHandlers.cellFactoryBaseRes());
+        colCosmRes.setCellFactory(EventHandlers.cellFactoryBaseRes());
+        colAbonRes.setCellFactory(EventHandlers.cellFactoryBaseRes());
     }
 
     private void setStyles() {
-        vertSun.setCellFactory(EventHandlers.cellFactoryForBaseSolarium());
-        green.setCellFactory(EventHandlers.cellFactoryForBaseSolarium());
-        blue.setCellFactory(EventHandlers.cellFactoryForBaseSolarium());
-
-        cosm.setCellFactory(EventHandlers.cellFactoryForCosmAbon());
-        abon.setCellFactory(EventHandlers.cellFactoryForCosmAbon());
-
-        numData.setCellFactory(EventHandlers.cellFactoryNum());
-
-        colVert.setCellFactory(EventHandlers.cellFactoryBaseRes());
-        colNumRes.setCellFactory(EventHandlers.cellFactoryBaseRes());
-
         tableGreen.getStylesheets().add(this.getClass().getResource("styleGreen.css").toExternalForm());
         tableBlue.getStylesheets().add(this.getClass().getResource("styleBlue.css").toExternalForm());
         tableVert.getStylesheets().add(this.getClass().getResource("styleNormal.css").toExternalForm());
@@ -168,13 +184,79 @@ public class MainAdminController extends AnchorPane implements Initializable {
         tableAbon.getStylesheets().add(this.getClass().getResource("styleNormal.css").toExternalForm());
         tableNumber.getStylesheets().add(this.getClass().getResource("styleNormal.css").toExternalForm());
 
-        vertRes.getStylesheets().add(this.getClass().getResource("styleNormal.css").toExternalForm());
-        numResTable.getStylesheets().add(this.getClass().getResource("styleNormal.css").toExternalForm());
+        tableNumRes.getStylesheets().add(this.getClass().getResource("styleNormal.css").toExternalForm());
+        tableVertRes.getStylesheets().add(this.getClass().getResource("styleNormal.css").toExternalForm());
+        tableGreenRes.getStylesheets().add(this.getClass().getResource("styleGreen.css").toExternalForm());
+        tableBlueRes.getStylesheets().add(this.getClass().getResource("styleBlue.css").toExternalForm());
+        tableCosmRes.getStylesheets().add(this.getClass().getResource("styleNormal.css").toExternalForm());
+        tableAbonRes.getStylesheets().add(this.getClass().getResource("styleNormal.css").toExternalForm());
 
-        green.setOnEditCommit(EventHandlers.eventHandlerBaseSolariumEditCommit());
-        blue.setOnEditCommit(EventHandlers.eventHandlerBaseSolariumEditCommit());
-        vertSun.setOnEditCommit(EventHandlers.eventHandlerBaseSolariumEditCommit());
+    }
 
+    private void setOnEdit() {
+        colGreen.setOnEditCommit(EventHandlers.eventHandlerBaseSolariumEditCommit());
+        colBlue.setOnEditCommit(EventHandlers.eventHandlerBaseSolariumEditCommit());
+        colVert.setOnEditCommit(EventHandlers.eventHandlerBaseSolariumEditCommit());
+    }
 
+    private void setNumbers() {
+        NumericData[] numericDatas = new NumericData[30];
+        for (int i = 0; i < 30; i++) {
+            numericDatas[i] = new NumericData(i + 1);
+        }
+        final ObservableList<NumericData> nums = FXCollections.observableArrayList(
+                numericDatas);
+        tableNumber.setItems(nums);
+
+    }
+
+    private void setNumResData() {
+        final ObservableList<ResData> resDatas2 = FXCollections.observableArrayList(null, null, null);
+        tableNumRes.setItems(resDatas2);
+    }
+
+    private void setSolariumResData() {
+        ResData resData[] = new ResData[3];
+        resData[0] = new ResData("Итого мин: ");
+        resData[1] = new ResData("Итого руб: ");
+        resData[2] = new ResData("L2= ");
+
+        final ObservableList<ResData> data = FXCollections.observableArrayList(resData);
+        tableVertRes.setItems(data);
+        tableGreenRes.setItems(data);
+        tableBlueRes.setItems(data);
+
+    }
+
+    private void setMainData() {
+        for (BaseSolariumData dat : vertData) {
+            dat.generateRes();
+        }
+        tableVert.setItems(vertData);
+        tableGreen.setItems(vertData);
+        tableBlue.setItems(vertData);
+        tableCosm.setItems(vertData);
+        tableAbon.setItems(vertData);
+    }
+
+    private void setEditableTables() {
+        tableVert.setEditable(true);
+        tableGreen.setEditable(true);
+        tableBlue.setEditable(true);
+    }
+
+    private void setCosmResData() {
+        ResData resData[] = new ResData[3];
+        resData[0] = new ResData("Итого мин:", "шт");
+        resData[1] = new ResData("к-ка итого:");
+        resData[2] = new ResData("к-ка+стикини:");
+
+        final ObservableList<ResData> data = FXCollections.observableArrayList(resData);
+        tableCosmRes.setItems(data);
+    }
+
+    private void setAbonResData () {
+        final ObservableList<ResData> data = FXCollections.observableArrayList(null, new ResData("итого:"), null);
+        tableAbonRes.setItems(data);
     }
 }
