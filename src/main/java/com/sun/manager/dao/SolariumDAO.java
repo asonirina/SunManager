@@ -117,8 +117,8 @@ public class SolariumDAO {
                 ps2.setString(1, baseData.getAbonementNumber());
                 Long minutes = ps2.executeQuery().getLong("minutes");
                 ps1.setLong(1, minutes - baseData.getMinutes());
-                ps2.setString(2, baseData.getAbonementNumber());
-                ps2.executeUpdate();
+                ps1.setString(2, baseData.getAbonementNumber());
+                ps1.executeUpdate();
 
                 totalMinutes += baseData.getMinutes();
             } else {
@@ -156,8 +156,8 @@ public class SolariumDAO {
                 resultData.put(key.getName(), value - cosmeticsCount);
             }
             ps1.setLong(1, cosmeticsCount - value);
-            ps2.setLong(2, key.getId());
-            ps2.executeUpdate();
+            ps1.setLong(2, key.getId());
+            ps1.executeUpdate();
         }
 
         return resultData;
