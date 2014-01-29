@@ -1,5 +1,6 @@
 package com.sun.manager.events;
 
+import com.sun.manager.constants.DataColumnEnum;
 import com.sun.manager.dto.BaseSolariumData;
 import com.sun.manager.dto.NumericData;
 import com.sun.manager.dto.ResData;
@@ -39,32 +40,32 @@ public class EventHandlers {
         };
     }
 
-    public static Callback cellFactoryForBaseSolarium() {
+    public static Callback cellFactoryForBaseSolarium(final DataColumnEnum e) {
         return new Callback<TableColumn<BaseSolariumData, String>, TableCell<BaseSolariumData, String>>() {
             @Override
             public TableCell<BaseSolariumData, String> call(TableColumn<BaseSolariumData, String> p) {
-                return new EditingCell<BaseSolariumData>();
+                return new EditingCell<BaseSolariumData>(e);
             }
         };
     }
 
-    public static Callback cellFactoryNum() {
+    public static Callback cellFactoryNum(final DataColumnEnum e) {
         return new Callback<TableColumn<NumericData, String>, TableCell<NumericData, String>>() {
             @Override
             public TableCell<NumericData, String> call(TableColumn<NumericData, String> p) {
 
-                return new EditingCell<NumericData>();
+                return new EditingCell<NumericData>(e);
             }
 
         };
     }
 
-    public static Callback cellFactoryBaseRes() {
+    public static Callback cellFactoryBaseRes(final DataColumnEnum e) {
         return new Callback<TableColumn<ResData, String>, TableCell<ResData, String>>() {
             @Override
             public TableCell<ResData, String> call(TableColumn<ResData, String> p) {
 
-                return new EditingCell<ResData>();
+                return new EditingCell<ResData>(e);
             }
 
         };

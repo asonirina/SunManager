@@ -1,6 +1,8 @@
 package com.sun.manager.forms.admin;
 
 
+import com.sun.manager.constants.DataColumnEnum;
+import com.sun.manager.constants.SolariumEnum;
 import com.sun.manager.dao.SolariumDAO;
 import com.sun.manager.dto.BaseSolariumData;
 import com.sun.manager.dto.BaseSolariumData;
@@ -111,7 +113,14 @@ public class MainAdminController extends AnchorPane implements Initializable {
 
     SolariumService solariumService = new SolariumService();
     final ObservableList<BaseSolariumData> vertData = FXCollections.observableArrayList(
-            solariumService.getVertSunData(Date.valueOf("2013-12-10")));
+            solariumService.getSunData(Date.valueOf("2013-12-10"), SolariumEnum.Vertical));
+
+    final ObservableList<BaseSolariumData> greenData = FXCollections.observableArrayList(
+            solariumService.getSunData(Date.valueOf("2013-12-11"), SolariumEnum.Green));
+
+    final ObservableList<BaseSolariumData> blueData = FXCollections.observableArrayList(
+            solariumService.getSunData(Date.valueOf("2013-12-11"), SolariumEnum.Blue));
+
 
     // new Date(Calendar.getInstance().getTime().getTime()); - current date
 
@@ -159,21 +168,21 @@ public class MainAdminController extends AnchorPane implements Initializable {
 
     private void setCellFactory() {
 
-        colVert.setCellFactory(EventHandlers.cellFactoryForBaseSolarium());
-        colGreen.setCellFactory(EventHandlers.cellFactoryForBaseSolarium());
-        colBlue.setCellFactory(EventHandlers.cellFactoryForBaseSolarium());
+        colVert.setCellFactory(EventHandlers.cellFactoryForBaseSolarium(DataColumnEnum.VerticalSolarium));
+        colGreen.setCellFactory(EventHandlers.cellFactoryForBaseSolarium(DataColumnEnum.GreenSolarium));
+        colBlue.setCellFactory(EventHandlers.cellFactoryForBaseSolarium(DataColumnEnum.BlueSolarium));
 
         colCosm.setCellFactory(EventHandlers.cellFactoryForCosmAbon());
         colAbon.setCellFactory(EventHandlers.cellFactoryForCosmAbon());
 
-        colNumber.setCellFactory(EventHandlers.cellFactoryNum());
+        colNumber.setCellFactory(EventHandlers.cellFactoryNum(DataColumnEnum.Number));
 
-        colNumRes.setCellFactory(EventHandlers.cellFactoryBaseRes());
-        colVertRes.setCellFactory(EventHandlers.cellFactoryBaseRes());
-        colGreenRes.setCellFactory(EventHandlers.cellFactoryBaseRes());
-        colBlueRes.setCellFactory(EventHandlers.cellFactoryBaseRes());
-        colCosmRes.setCellFactory(EventHandlers.cellFactoryBaseRes());
-        colAbonRes.setCellFactory(EventHandlers.cellFactoryBaseRes());
+        colNumRes.setCellFactory(EventHandlers.cellFactoryBaseRes(DataColumnEnum.Number));
+        colVertRes.setCellFactory(EventHandlers.cellFactoryBaseRes(DataColumnEnum.VerticalSolarium));
+        colGreenRes.setCellFactory(EventHandlers.cellFactoryBaseRes(DataColumnEnum.GreenSolarium));
+        colBlueRes.setCellFactory(EventHandlers.cellFactoryBaseRes(DataColumnEnum.BlueSolarium));
+        colCosmRes.setCellFactory(EventHandlers.cellFactoryBaseRes(DataColumnEnum.Cosmetics));
+        colAbonRes.setCellFactory(EventHandlers.cellFactoryBaseRes(DataColumnEnum.Abonements));
     }
 
     private void setStyles() {
@@ -232,9 +241,15 @@ public class MainAdminController extends AnchorPane implements Initializable {
         for (BaseSolariumData dat : vertData) {
             dat.generateRes();
         }
+        for (BaseSolariumData dat : greenData) {
+            dat.generateRes();
+        }
+        for (BaseSolariumData dat : blueData) {
+            dat.generateRes();
+        }
         tableVert.setItems(vertData);
-        tableGreen.setItems(vertData);
-        tableBlue.setItems(vertData);
+        tableGreen.setItems(greenData);
+        tableBlue.setItems(blueData);
         tableCosm.setItems(vertData);
         tableAbon.setItems(vertData);
     }

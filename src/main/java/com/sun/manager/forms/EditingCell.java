@@ -1,5 +1,6 @@
 package com.sun.manager.forms;
 
+import com.sun.manager.constants.DataColumnEnum;
 import com.sun.manager.dao.SolariumDAO;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -9,6 +10,7 @@ import javafx.scene.control.TableCell;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 
 import java.sql.SQLException;
 import java.util.Scanner;
@@ -19,8 +21,11 @@ public class EditingCell<T> extends TableCell<T, String> {
 
     private TextField textField;
 
-    public EditingCell() {
+    private DataColumnEnum solarium;
+
+    public EditingCell(DataColumnEnum solarium) {
         this.setPrefHeight(27);
+        this.solarium = solarium;
     }
 
     @Override
@@ -70,18 +75,26 @@ public class EditingCell<T> extends TableCell<T, String> {
             public void handle(KeyEvent t) {
                 if (t.getCode() == KeyCode.ENTER) {
                     String value = textField.getText();
-                    if (value != null) {
-                        commitEdit(value);
-                    } else {
-                        commitEdit(null);
+                    if (value.contains("$")) {
+                        try {
+                            SolariumDAO dao = new SolariumDAO();
+                            int minutes = new Scanner(textField.getText()).useDelimiter("\\D+").nextInt();
+                            Long sum =  minutes * dao.getOneMinutePriceById(solarium.getSolariumNo());
+                            value = minutes + " : $ " + sum;
+                            textField.setText(value);
+                        } catch (SQLException ex) {
+                            throw new RuntimeException(ex);
+                        }
+
                     }
+                        commitEdit(value);
                 } else if (t.getCode() == KeyCode.ESCAPE) {
                     cancelEdit();
                 } else if (t.getText().equals("$")) {
                     try {
                         SolariumDAO dao = new SolariumDAO();
 
-                        Long sum = new Scanner(textField.getText()).useDelimiter("\\D+").nextInt() * dao.getOneMinutePriceById(1L);
+                        Long sum = new Scanner(textField.getText()).useDelimiter("\\D+").nextInt() * dao.getOneMinutePriceById(solarium.getSolariumNo());
                         String value = textField.getText() + " " + sum;
                         textField.setText(value);
                         commitEdit(value);

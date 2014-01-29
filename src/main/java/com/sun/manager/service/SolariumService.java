@@ -1,5 +1,6 @@
 package com.sun.manager.service;
 
+import com.sun.manager.constants.SolariumEnum;
 import com.sun.manager.dao.SolariumDAO;
 import com.sun.manager.dto.BaseSolariumData;
 
@@ -13,12 +14,13 @@ import java.util.List;
 public class SolariumService {
     private SolariumDAO dao = new SolariumDAO();
 
-    public List<BaseSolariumData> getVertSunData(Date date) {
+    public List<BaseSolariumData> getSunData(Date date, SolariumEnum e) {
         try {
-            return dao.getSolariumData(1L, date);
+            return dao.getSolariumData(e.getNo(), date);
         } catch (SQLException ex) {
             ex.printStackTrace();
             throw new RuntimeException(ex.getMessage());
         }
     }
+
 }

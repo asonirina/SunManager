@@ -44,4 +44,8 @@ public class ResData {
     private void generateRes() {
         res = Joiner.on(" ").join(array);
     }
+
+    public String toString() {
+        return res;
+    }
 }
