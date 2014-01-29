@@ -115,12 +115,17 @@ public class SolariumDAO {
                 PreparedStatement ps1 = dbConnection.prepareStatement("update abonements set minutes = ? where abonement_code = ?");
                 PreparedStatement ps2 = dbConnection.prepareStatement("select  minutes from abonements where abonement_code = ?");
                 ps2.setString(1, baseData.getAbonementNumber());
-                Long minutes = ps2.executeQuery().getLong("minutes");
-                ps1.setLong(1, minutes - baseData.getMinutes());
-                ps1.setString(2, baseData.getAbonementNumber());
-                ps1.executeUpdate();
 
-                totalMinutes += baseData.getMinutes();
+                ResultSet rs = ps2.executeQuery();
+
+                while (rs.next()) {
+                    Long minutes = rs.getLong("minutes");
+                    ps1.setLong(1, minutes - baseData.getMinutes());
+                    ps1.setString(2, baseData.getAbonementNumber());
+                    ps1.executeUpdate();
+
+                    totalMinutes += baseData.getMinutes();
+                }
             } else {
                 totalSum += baseData.getTotalPrice();
             }
@@ -145,18 +150,26 @@ public class SolariumDAO {
 
         for (Map.Entry<Cosmetics, Long> entry : cosmetics.entrySet()) {
             PreparedStatement ps1 = dbConnection.prepareStatement("update cosmetics set cosmetics_count = ? where cosmetics_id = ?");
+            PreparedStatement ps2 = dbConnection.prepareStatement("select cosmetics_count from cosmetics where cosmetics_id = ?");
+
             Cosmetics key = entry.getKey();
             Long value = entry.getValue();
 
-            Long cosmeticsCount = key.getCount();
-            if (cosmeticsCount < value) {
-                resultData.put(key.getName(), value - cosmeticsCount);
-            }
-            ps1.setLong(1, cosmeticsCount - value);
-            ps1.setLong(2, key.getId());
-            ps1.executeUpdate();
-        }
+            ps2.setLong(1, key.getId());
+            ResultSet rs = ps2.executeQuery();
 
+            while (rs.next()) {
+                Long cosmeticsCount = rs.getLong("cosmetics_count");
+                if (cosmeticsCount < value) {
+                    resultData.put(key.getName(), value - cosmeticsCount);
+                }
+                ps1.setLong(1, cosmeticsCount - value);
+                ps1.setLong(2, key.getId());
+                ps1.executeUpdate();
+            }
+
+
+        }
         return resultData;
     }
 }
