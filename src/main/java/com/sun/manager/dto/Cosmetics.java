@@ -50,5 +50,29 @@ public class Cosmetics {
     public String toString() {
         return name;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Cosmetics)) return false;
+
+        Cosmetics cosmetics = (Cosmetics) o;
+
+        if (count != null ? !count.equals(cosmetics.count) : cosmetics.count != null) return false;
+        if (id != null ? !id.equals(cosmetics.id) : cosmetics.id != null) return false;
+        if (name != null ? !name.equals(cosmetics.name) : cosmetics.name != null) return false;
+        if (price != null ? !price.equals(cosmetics.price) : cosmetics.price != null) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + (price != null ? price.hashCode() : 0);
+        result = 31 * result + (count != null ? count.hashCode() : 0);
+        return result;
+    }
 }
 

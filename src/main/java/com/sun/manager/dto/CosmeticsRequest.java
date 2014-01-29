@@ -33,4 +33,21 @@ public class CosmeticsRequest {
     public String toString() {
         return cosmetics.getName() + " : " + count;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof CosmeticsRequest)) return false;
+
+        CosmeticsRequest that = (CosmeticsRequest) o;
+
+        if (cosmetics != null ? !cosmetics.equals(that.cosmetics) : that.cosmetics != null) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return cosmetics != null ? cosmetics.hashCode() : 0;
+    }
 }

@@ -13,6 +13,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -42,6 +43,12 @@ public class CosmeticsRequestController extends AnchorPane implements Initializa
     @FXML
     Button saveButton;
 
+    @FXML
+    Button deleteButton;
+
+    @FXML
+    TextArea errorArea;
+
     SolariumService service = new SolariumService();
 
 
@@ -49,12 +56,24 @@ public class CosmeticsRequestController extends AnchorPane implements Initializa
     public void initialize(URL url, ResourceBundle resourceBundle) {
         cosmeticsList.setItems(FXCollections.observableArrayList(service.getAllCosmetics()));
 
+        errorArea.setEditable(false);
+
         addCosmButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                Cosmetics c = cosmeticsList.getSelectionModel().getSelectedItem();
-                long count = Long.parseLong(countText.getText());
-                resultList.getItems().add(0, new CosmeticsRequest(count, c));
+                CosmeticsRequest cr = new CosmeticsRequest(Long.parseLong(countText.getText()),
+                        cosmeticsList.getSelectionModel().getSelectedItem());
+                int index = resultList.getItems().indexOf(cr);
+                if (index != -1) {
+                    CosmeticsRequest c = resultList.getItems().get(index);
+                    cr.setCount(c.getCount() + cr.getCount());
+                    resultList.getItems().remove(index);
+                    resultList.getItems().add(index, cr);
+                }    else {
+                    resultList.getItems().add(0, cr);
+                }
+
+
             }
         });
 
@@ -63,16 +82,29 @@ public class CosmeticsRequestController extends AnchorPane implements Initializa
             public void handle(MouseEvent mouseEvent) {
                 ObservableList<CosmeticsRequest> list = resultList.getItems();
                 HashMap<Cosmetics, Long> map = new HashMap<Cosmetics, Long>();
-                for (CosmeticsRequest cr: list) {
-                   map.put(cr.getCosmetics(), cr.getCount());
+                for (CosmeticsRequest cr : list) {
+                    map.put(cr.getCosmetics(), cr.getCount());
                 }
 
-               Map<String, Long> result =  service.saveCosmetics(map);
+                Map<String, Long> result = service.saveCosmetics(map);
                 if (result.isEmpty()) {
-                  Stage stage = (Stage)getScene().getWindow();
+                    Stage stage = (Stage) deleteButton.getScene().getWindow();
                     stage.close();
+                } else {
+                    StringBuilder sb = new StringBuilder("Sorry, there are no some items in stock: \n");
+                    for (Map.Entry<String, Long> entry : result.entrySet()) {
+                        sb.append(entry.getKey() + " : " + entry.getValue() + "\n");
+                    }
 
+                    errorArea.setText(sb.toString());
                 }
+            }
+        });
+
+        deleteButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                resultList.getItems().remove(resultList.getSelectionModel().getSelectedItem());
             }
         });
 
