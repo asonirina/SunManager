@@ -5,10 +5,8 @@ import com.sun.manager.dto.BaseSolariumData;
 import com.sun.manager.dto.Cosmetics;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.sql.Date;
+import java.util.*;
 
 public class SolariumDAO {
 
@@ -140,5 +138,28 @@ public class SolariumDAO {
         totals.put("Итого минут", totalMinutes);
         totals.put("L2", l2 + totalMinutes);
         return totals;
+    }
+
+    public Map<String, Long> saveCosmeticsData(HashMap<Cosmetics, Long> cosmetics) throws SQLException {
+        Map<String, Long> resultData = new HashMap<String, Long>();
+
+        for (Map.Entry<Cosmetics, Long> entry : cosmetics.entrySet()) {
+            PreparedStatement ps1 = dbConnection.prepareStatement("update cosmetics set cosmetics_count = ? where cosmetics_id = ?");
+            PreparedStatement ps2 = dbConnection.prepareStatement("select cosmetics_count from cosmetics where cosmetics_id = ?");
+
+            Cosmetics key = entry.getKey();
+            Long value = entry.getValue();
+
+            ps2.setLong(1, key.getId());
+            Long cosmeticsCount = ps2.executeQuery().getLong("cosmetics_count");
+            if (cosmeticsCount < value) {
+                resultData.put(key.getName(), value - cosmeticsCount);
+            }
+            ps1.setLong(1, cosmeticsCount - value);
+            ps2.setLong(2, key.getId());
+            ps2.executeUpdate();
+        }
+
+        return resultData;
     }
 }
