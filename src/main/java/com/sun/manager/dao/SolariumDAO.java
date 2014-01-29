@@ -145,13 +145,10 @@ public class SolariumDAO {
 
         for (Map.Entry<Cosmetics, Long> entry : cosmetics.entrySet()) {
             PreparedStatement ps1 = dbConnection.prepareStatement("update cosmetics set cosmetics_count = ? where cosmetics_id = ?");
-            PreparedStatement ps2 = dbConnection.prepareStatement("select cosmetics_count from cosmetics where cosmetics_id = ?");
-
             Cosmetics key = entry.getKey();
             Long value = entry.getValue();
 
-            ps2.setLong(1, key.getId());
-            Long cosmeticsCount = ps2.executeQuery().getLong("cosmetics_count");
+            Long cosmeticsCount = key.getCount();
             if (cosmeticsCount < value) {
                 resultData.put(key.getName(), value - cosmeticsCount);
             }
