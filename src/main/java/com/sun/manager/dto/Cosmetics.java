@@ -45,5 +45,10 @@ public class Cosmetics {
     public void setCount(Long count) {
         this.count = count;
     }
+
+    @Override
+    public String toString() {
+        return name;
+    }
 }
 
