@@ -11,6 +11,7 @@ import java.util.*;
 public class SolariumDAO {
 
     private static final String GET_ONE_MINUTE_PRICE_BY_ID = "{call getOneMinutePriceById(?,?)}";
+    private static final String GET_L2_BY_ID = "{call getL2ById(?,?)}";
     private static final String GET_CODE_BY_SYMBOL = "{call getCodeBySymbol(?,?)}";
     private static final String VERTICAL_SOLARIUM = "vertical_sun_data";
     private static final String GORIZONTAL_BLUE_SOLARIUM = "gorizontal_blue_sun_data";
@@ -24,6 +25,16 @@ public class SolariumDAO {
 
     public Long getOneMinutePriceById(Long solariumId) throws SQLException {
         callableStatement = dbConnection.prepareCall(GET_ONE_MINUTE_PRICE_BY_ID);
+        callableStatement.setInt(1, solariumId.intValue());
+        callableStatement.registerOutParameter(2, Types.INTEGER);
+
+        callableStatement.executeUpdate();
+
+        return callableStatement.getLong(2);
+    }
+
+    public Long getL2ById(Long solariumId) throws SQLException {
+        callableStatement = dbConnection.prepareCall(GET_L2_BY_ID);
         callableStatement.setInt(1, solariumId.intValue());
         callableStatement.registerOutParameter(2, Types.INTEGER);
 
@@ -162,10 +173,11 @@ public class SolariumDAO {
                 Long cosmeticsCount = rs.getLong("cosmetics_count");
                 if (cosmeticsCount < value) {
                     resultData.put(key.getName(), value - cosmeticsCount);
+                } else {
+                    ps1.setLong(1, cosmeticsCount - value);
+                    ps1.setLong(2, key.getId());
+                    ps1.executeUpdate();
                 }
-                ps1.setLong(1, cosmeticsCount - value);
-                ps1.setLong(2, key.getId());
-                ps1.executeUpdate();
             }
 
 
