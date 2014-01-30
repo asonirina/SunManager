@@ -80,5 +80,10 @@
         </AnchorPane>
       </content>
     </ScrollPane>
+    <Button fx:id="countVert" layoutX="148.0" layoutY="571.0" mnemonicParsing="false" text="Рассчитать" />
+    <Button fx:id="countGreen" layoutX="353.0" layoutY="571.0" mnemonicParsing="false" text="Рассчитать" />
+    <Button fx:id="countBlue" layoutX="550.0" layoutY="571.0" mnemonicParsing="false" text="Рассчитать" />
+    <Button fx:id="countCosm" layoutX="746.0" layoutY="571.0" mnemonicParsing="false" text="Рассчитать" />
+    <Button fx:id="countAbon" layoutX="953.0" layoutY="571.0" mnemonicParsing="false" text="Рассчитать" />
   </children>
 </AnchorPane>
