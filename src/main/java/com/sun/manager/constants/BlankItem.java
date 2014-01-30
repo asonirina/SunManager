@@ -1,5 +1,6 @@
 package com.sun.manager.constants;
 
+import com.sun.manager.dto.AbonementsRequest;
 import com.sun.manager.dto.BaseSolariumData;
 import com.sun.manager.dto.CosmeticsRequest;
 
@@ -10,6 +11,7 @@ import com.sun.manager.dto.CosmeticsRequest;
 public class BlankItem {
     private static  BaseSolariumData solariumData = new BaseSolariumData(null, null, null, null, null);
     private static CosmeticsRequest cosmeticsRequest = new CosmeticsRequest(null, null);
+    private static AbonementsRequest abonementsRequest = new AbonementsRequest(null, null, null, null);
 
     public static Object generateBlankItem(Long l) {
       if (l ==1L) {
@@ -18,7 +20,7 @@ public class BlankItem {
           return  cosmeticsRequest.clone();
       }
         else {
-          return null;
+         return  abonementsRequest.clone();
       }
     }
 }

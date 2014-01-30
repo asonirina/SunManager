@@ -19,6 +19,7 @@ public class BaseSolariumData implements Cloneable {
         this.minutes = minutes;
         this.totalPrice = totalPrice;
         this.abonementNumber = abonementNumber;
+        generateRes();
     }
 
     public Long getDataId() {

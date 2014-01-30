@@ -11,8 +11,9 @@ import java.io.IOException;
 
 /**
  * User: iason
+ * Date: 30.01.14
  */
-public class CosmeticsRequestPage extends Application{
+public class AbonementsRequestPage extends Application{
     public static void main(String[] args) {
         Application.launch(args);
     }
@@ -20,10 +21,10 @@ public class CosmeticsRequestPage extends Application{
     @Override
     public void start(Stage stage) throws IOException {
         SqlServer.init();
-        Pane pane = FXMLLoader.load(CosmeticsRequestPage.class.getResource("fxml/cosmetics_request.fxml"));
+        Pane pane = FXMLLoader.load(AbonementsRequestPage.class.getResource("fxml/abonement_page.fxml"));
         Scene scene = new Scene(pane);
         stage.setScene(scene);
-        stage.setTitle("Cosmetics Request");
+        stage.setTitle("Abonement Request");
         stage.show();
     }
 }

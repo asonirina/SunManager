@@ -44,4 +44,13 @@ public class SolariumService {
         }
     }
 
+    public String getCodeBySymbol(String symbol) {
+        try {
+            return String.valueOf(dao.getCodeBySymbol(symbol));
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            throw new RuntimeException(ex.getMessage());
+        }
+    }
+
 }

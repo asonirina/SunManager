@@ -10,6 +10,7 @@ import com.sun.manager.dao.SolariumDAO;
 import com.sun.manager.dto.*;
 import com.sun.manager.dto.BaseSolariumData;
 import com.sun.manager.events.EventHandlers;
+import com.sun.manager.events.NewAbonementAddedEvent;
 import com.sun.manager.events.NewCosmeticsAddedEvent;
 import com.sun.manager.forms.EditingCell;
 import com.sun.manager.forms.ButtonCell;
@@ -54,7 +55,7 @@ public class MainAdminController extends AnchorPane implements Initializable {
     TableView<CosmeticsRequest> tableCosm;
 
     @FXML
-    TableView<BaseSolariumData> tableAbon;
+    TableView<AbonementsRequest> tableAbon;
 
 
     // main columns
@@ -115,6 +116,8 @@ public class MainAdminController extends AnchorPane implements Initializable {
 
     int cosmeticsDataSize = 0;
 
+    int abonementsDataSize = 0;
+
     SolariumService solariumService = new SolariumService();
     final ObservableList<BaseSolariumData> vertData = FXCollections.observableArrayList(
             solariumService.getSunData(Date.valueOf("2013-12-10"), SolariumEnum.Vertical));
@@ -126,6 +129,8 @@ public class MainAdminController extends AnchorPane implements Initializable {
             solariumService.getSunData(Date.valueOf("2013-12-11"), SolariumEnum.Blue));
 
     final ObservableList<CosmeticsRequest> cosmeticsData = FXCollections.observableArrayList();
+
+    final ObservableList<AbonementsRequest> abonementsData = FXCollections.observableArrayList();
 
 
     // new Date(Calendar.getInstance().getTime().getTime()); - current date
@@ -163,7 +168,7 @@ public class MainAdminController extends AnchorPane implements Initializable {
         colVert.setCellValueFactory(new PropertyValueFactory<BaseSolariumData, String>("res"));
         colBlue.setCellValueFactory(new PropertyValueFactory<BaseSolariumData, String>("res"));
         colCosm.setCellValueFactory(new PropertyValueFactory<CosmeticsRequest, String>("res"));
-        colAbon.setCellValueFactory(new PropertyValueFactory<BaseSolariumData, String>("res"));
+        colAbon.setCellValueFactory(new PropertyValueFactory<AbonementsRequest, String>("res"));
         colNumber.setCellValueFactory(new PropertyValueFactory<NumericData, String>("data"));
 
         colNumRes.setCellValueFactory(new PropertyValueFactory<ResData, String>("res"));
@@ -182,8 +187,8 @@ public class MainAdminController extends AnchorPane implements Initializable {
         colGreen.setCellFactory(EventHandlers.cellFactoryForBaseSolarium(DataColumnEnum.GreenSolarium));
         colBlue.setCellFactory(EventHandlers.cellFactoryForBaseSolarium(DataColumnEnum.BlueSolarium));
 
-        colCosm.setCellFactory(EventHandlers.cellFactoryForCosmAbon());
-        colAbon.setCellFactory(EventHandlers.cellFactoryForCosmAbon());
+        colCosm.setCellFactory(EventHandlers.cellFactoryForCosmetics());
+        colAbon.setCellFactory(EventHandlers.cellFactoryForAbonements());
 
         colNumber.setCellFactory(EventHandlers.cellFactoryNum(DataColumnEnum.Number));
 
@@ -248,20 +253,11 @@ public class MainAdminController extends AnchorPane implements Initializable {
     }
 
     private void setMainData() {
-        for (BaseSolariumData dat : vertData) {
-            dat.generateRes();
-        }
-        for (BaseSolariumData dat : greenData) {
-            dat.generateRes();
-        }
-        for (BaseSolariumData dat : blueData) {
-            dat.generateRes();
-        }
         tableVert.setItems(vertData);
         tableGreen.setItems(greenData);
         tableBlue.setItems(blueData);
         tableCosm.setItems(cosmeticsData);
-        tableAbon.setItems(vertData);
+        tableAbon.setItems(abonementsData);
     }
 
     private void setEditableTables() {
@@ -305,6 +301,10 @@ public class MainAdminController extends AnchorPane implements Initializable {
         for (int i = 0; i < 30; ++i) {
             cosmeticsData.add((CosmeticsRequest) BlankItem.generateBlankItem(2L));
         }
+
+        for (int i = 0; i < 30; ++i) {
+            abonementsData.add((AbonementsRequest) BlankItem.generateBlankItem(3L));
+        }
     }
 
     @Subscribe
@@ -314,5 +314,11 @@ public class MainAdminController extends AnchorPane implements Initializable {
             cosmeticsData.set(cosmeticsDataSize++, cr);
 
         }
+    }
+
+    @Subscribe
+    public void newAbonementAdded(NewAbonementAddedEvent e) {
+        AbonementsRequest request = e.getRequest();
+        abonementsData.set(abonementsDataSize++, request);
     }
 }

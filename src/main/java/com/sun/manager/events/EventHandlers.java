@@ -1,10 +1,7 @@
 package com.sun.manager.events;
 
 import com.sun.manager.constants.DataColumnEnum;
-import com.sun.manager.dto.BaseSolariumData;
-import com.sun.manager.dto.CosmeticsRequest;
-import com.sun.manager.dto.NumericData;
-import com.sun.manager.dto.ResData;
+import com.sun.manager.dto.*;
 import com.sun.manager.forms.ButtonCell;
 import com.sun.manager.forms.EditingCell;
 import javafx.event.EventHandler;
@@ -74,12 +71,21 @@ public class EventHandlers {
         };
     }
 
-    // TODO temp: need to create factories for cosmetics and abonements when dao will be created
-    public static Callback cellFactoryForCosmAbon() {
+
+    public static Callback cellFactoryForCosmetics() {
         return new Callback<TableColumn<CosmeticsRequest, String>, TableCell<CosmeticsRequest, String>>() {
             @Override
             public TableCell<CosmeticsRequest, String> call(TableColumn<CosmeticsRequest, String> p) {
-                return new ButtonCell<CosmeticsRequest>();
+                return new ButtonCell<CosmeticsRequest>(DataColumnEnum.Cosmetics);
+            }
+        };
+    }
+
+    public static Callback cellFactoryForAbonements() {
+        return new Callback<TableColumn<AbonementsRequest, String>, TableCell<AbonementsRequest, String>>() {
+            @Override
+            public TableCell<AbonementsRequest, String> call(TableColumn<AbonementsRequest, String> p) {
+                return new ButtonCell<AbonementsRequest>(DataColumnEnum.Abonements);
             }
         };
     }

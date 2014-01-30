@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="293.0" prefWidth="404.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.sun.manager.forms.admin.AbonementRequestController">
+  <children>
+    <TextField fx:id="letterField" layoutX="144.0" layoutY="62.0" prefWidth="64.0" />
+    <TextField fx:id="codeField" layoutX="226.0" layoutY="62.0" prefWidth="85.0" />
+    <TextField fx:id="nameField" layoutX="111.0" layoutY="115.0" prefWidth="200.0" />
+    <TextField fx:id="phoneField" layoutX="111.0" layoutY="171.0" prefWidth="200.0" />
+    <Label layoutX="54.0" layoutY="118.0" text="Имя" />
+    <Label layoutX="54.0" layoutY="174.0" text="№ тел" />
+    <Button fx:id="saveButton" layoutX="52.0" layoutY="229.0" mnemonicParsing="false" text="Сохранить" />
+    <Label layoutX="54.0" layoutY="65.0" text="Код" />
+  </children>
+</AnchorPane>
