@@ -1,14 +1,16 @@
 package com.sun.manager.forms.admin;
 
 
+import com.google.common.eventbus.Subscribe;
+import com.sun.manager.App;
+import com.sun.manager.constants.BlankItem;
 import com.sun.manager.constants.DataColumnEnum;
 import com.sun.manager.constants.SolariumEnum;
 import com.sun.manager.dao.SolariumDAO;
+import com.sun.manager.dto.*;
 import com.sun.manager.dto.BaseSolariumData;
-import com.sun.manager.dto.BaseSolariumData;
-import com.sun.manager.dto.NumericData;
-import com.sun.manager.dto.ResData;
 import com.sun.manager.events.EventHandlers;
+import com.sun.manager.events.NewCosmeticsAddedEvent;
 import com.sun.manager.forms.EditingCell;
 import com.sun.manager.forms.ButtonCell;
 import com.sun.manager.service.SolariumService;
@@ -49,7 +51,7 @@ public class MainAdminController extends AnchorPane implements Initializable {
     TableView<BaseSolariumData> tableBlue;
 
     @FXML
-    TableView<BaseSolariumData> tableCosm;
+    TableView<CosmeticsRequest> tableCosm;
 
     @FXML
     TableView<BaseSolariumData> tableAbon;
@@ -111,6 +113,8 @@ public class MainAdminController extends AnchorPane implements Initializable {
     @FXML
     TableColumn colAbonRes;
 
+    int cosmeticsDataSize = 0;
+
     SolariumService solariumService = new SolariumService();
     final ObservableList<BaseSolariumData> vertData = FXCollections.observableArrayList(
             solariumService.getSunData(Date.valueOf("2013-12-10"), SolariumEnum.Vertical));
@@ -121,12 +125,18 @@ public class MainAdminController extends AnchorPane implements Initializable {
     final ObservableList<BaseSolariumData> blueData = FXCollections.observableArrayList(
             solariumService.getSunData(Date.valueOf("2013-12-11"), SolariumEnum.Blue));
 
+    final ObservableList<CosmeticsRequest> cosmeticsData = FXCollections.observableArrayList();
+
 
     // new Date(Calendar.getInstance().getTime().getTime()); - current date
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
+
+            App.getInstance().getEventBus().register(this);
+            addBlankItems();
+
             setEditableTables();
 
             setColumnFactory();
@@ -152,7 +162,7 @@ public class MainAdminController extends AnchorPane implements Initializable {
         colGreen.setCellValueFactory(new PropertyValueFactory<BaseSolariumData, String>("res"));
         colVert.setCellValueFactory(new PropertyValueFactory<BaseSolariumData, String>("res"));
         colBlue.setCellValueFactory(new PropertyValueFactory<BaseSolariumData, String>("res"));
-        colCosm.setCellValueFactory(new PropertyValueFactory<BaseSolariumData, String>("res"));
+        colCosm.setCellValueFactory(new PropertyValueFactory<CosmeticsRequest, String>("res"));
         colAbon.setCellValueFactory(new PropertyValueFactory<BaseSolariumData, String>("res"));
         colNumber.setCellValueFactory(new PropertyValueFactory<NumericData, String>("data"));
 
@@ -250,7 +260,7 @@ public class MainAdminController extends AnchorPane implements Initializable {
         tableVert.setItems(vertData);
         tableGreen.setItems(greenData);
         tableBlue.setItems(blueData);
-        tableCosm.setItems(vertData);
+        tableCosm.setItems(cosmeticsData);
         tableAbon.setItems(vertData);
     }
 
@@ -270,8 +280,39 @@ public class MainAdminController extends AnchorPane implements Initializable {
         tableCosmRes.setItems(data);
     }
 
-    private void setAbonResData () {
+    private void setAbonResData() {
         final ObservableList<ResData> data = FXCollections.observableArrayList(null, new ResData("итого:"), null);
         tableAbonRes.setItems(data);
+    }
+
+    private void addBlankItems() {
+        int size = vertData.size();
+        for (int i = size; i < 30; ++i) {
+            vertData.add((BaseSolariumData) BlankItem.generateBlankItem(1L));
+        }
+
+
+        size = greenData.size();
+        for (int i = size; i < 30; ++i) {
+            greenData.add((BaseSolariumData) BlankItem.generateBlankItem(1L));
+        }
+
+        size = blueData.size();
+        for (int i = size; i < 30; ++i) {
+            blueData.add((BaseSolariumData) BlankItem.generateBlankItem(1L));
+        }
+
+        for (int i = 0; i < 30; ++i) {
+            cosmeticsData.add((CosmeticsRequest) BlankItem.generateBlankItem(2L));
+        }
+    }
+
+    @Subscribe
+    public void newCosmeticsAdded(NewCosmeticsAddedEvent e) {
+        ObservableList<CosmeticsRequest> list = e.getList();
+        for (CosmeticsRequest cr : list) {
+            cosmeticsData.set(cosmeticsDataSize++, cr);
+
+        }
     }
 }

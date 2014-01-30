@@ -8,9 +8,20 @@ public class CosmeticsRequest {
     private Cosmetics cosmetics;
     private Long count;
 
+    private String res;
+
     public CosmeticsRequest(Long count, Cosmetics cosmetics) {
         this.count = count;
         this.cosmetics = cosmetics;
+        generateRes();
+    }
+
+    private void generateRes() {
+        if (cosmetics == null && count == null) {
+            res = "";
+        } else {
+            res = cosmetics.getName() + " - " + count;
+        }
     }
 
     public Cosmetics getCosmetics() {
@@ -19,6 +30,7 @@ public class CosmeticsRequest {
 
     public void setCosmetics(Cosmetics cosmetics) {
         this.cosmetics = cosmetics;
+        generateRes();
     }
 
     public Long getCount() {
@@ -27,10 +39,14 @@ public class CosmeticsRequest {
 
     public void setCount(Long count) {
         this.count = count;
+        generateRes();
     }
 
     @Override
     public String toString() {
+        if (cosmetics == null && count == null) {
+            return "";
+        }
         return cosmetics.getName() + " : " + count;
     }
 
@@ -49,5 +65,17 @@ public class CosmeticsRequest {
     @Override
     public int hashCode() {
         return cosmetics != null ? cosmetics.hashCode() : 0;
+    }
+
+    public CosmeticsRequest clone() {
+        return new CosmeticsRequest(count, cosmetics);
+    }
+
+    public String getRes() {
+        return res;
+    }
+
+    public void setRes(String res) {
+        this.res = res;
     }
 }

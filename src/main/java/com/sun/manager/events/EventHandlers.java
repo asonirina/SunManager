@@ -2,16 +2,16 @@ package com.sun.manager.events;
 
 import com.sun.manager.constants.DataColumnEnum;
 import com.sun.manager.dto.BaseSolariumData;
+import com.sun.manager.dto.CosmeticsRequest;
 import com.sun.manager.dto.NumericData;
 import com.sun.manager.dto.ResData;
 import com.sun.manager.forms.ButtonCell;
 import com.sun.manager.forms.EditingCell;
-import javafx.beans.property.SimpleIntegerProperty;
 import javafx.event.EventHandler;
-import javafx.geometry.Pos;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.util.Callback;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * User: iason
@@ -27,6 +27,9 @@ public class EventHandlers {
                 data.setTotalPrice(null);
                 data.setAbonementNumber(null);
                 String input = t.getNewValue();
+                if (StringUtils.isBlank(input)) {
+                    return;
+                }
                 int index = input.indexOf(":");
                 data.setMinutes(Long.valueOf(input.substring(0, index).trim()));
                 if (input.contains("$")) {
@@ -71,12 +74,12 @@ public class EventHandlers {
         };
     }
 
-    // TODO temp: need to create factories for cosmetics snd abonements when dao will be created
+    // TODO temp: need to create factories for cosmetics and abonements when dao will be created
     public static Callback cellFactoryForCosmAbon() {
-        return new Callback<TableColumn<BaseSolariumData, String>, TableCell<BaseSolariumData, String>>() {
+        return new Callback<TableColumn<CosmeticsRequest, String>, TableCell<CosmeticsRequest, String>>() {
             @Override
-            public TableCell<BaseSolariumData, String> call(TableColumn<BaseSolariumData, String> p) {
-                return new ButtonCell<BaseSolariumData>();
+            public TableCell<CosmeticsRequest, String> call(TableColumn<CosmeticsRequest, String> p) {
+                return new ButtonCell<CosmeticsRequest>();
             }
         };
     }

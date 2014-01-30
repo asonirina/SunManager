@@ -2,7 +2,7 @@ package com.sun.manager.dto;
 
 import java.util.Date;
 
-public class BaseSolariumData {
+public class BaseSolariumData implements Cloneable {
     protected Long dataId;
     protected Date startDate;
     protected Long minutes;
@@ -64,8 +64,12 @@ public class BaseSolariumData {
     protected String res;
 
     public void generateRes() {
-        String s = getAbonementNumber() == null ? "$ " + getTotalPrice() : getAbonementNumber();
-        res = getMinutes() + " : " + s;
+        if (minutes == null && totalPrice == null && abonementNumber == null) {
+            res = "";
+            return;
+        }
+        String s = abonementNumber == null ? "$ " + totalPrice : abonementNumber;
+        res = minutes + " : " + s;
     }
 
     public String getRes() {
@@ -76,4 +80,7 @@ public class BaseSolariumData {
         this.res = res;
     }
 
+    public BaseSolariumData clone() {
+        return new BaseSolariumData(dataId, startDate, minutes, totalPrice, abonementNumber);
+    }
 }

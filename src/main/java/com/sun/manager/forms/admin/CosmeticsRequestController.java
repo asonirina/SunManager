@@ -1,12 +1,11 @@
 package com.sun.manager.forms.admin;
 
-import com.sun.manager.dao.SolariumDAO;
+import com.sun.manager.App;
 import com.sun.manager.dto.Cosmetics;
 import com.sun.manager.dto.CosmeticsRequest;
+import com.sun.manager.events.NewCosmeticsAddedEvent;
 import com.sun.manager.service.SolariumService;
-import javafx.beans.InvalidationListener;
 import javafx.collections.FXCollections;
-import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -69,7 +68,7 @@ public class CosmeticsRequestController extends AnchorPane implements Initializa
                     cr.setCount(c.getCount() + cr.getCount());
                     resultList.getItems().remove(index);
                     resultList.getItems().add(index, cr);
-                }    else {
+                } else {
                     resultList.getItems().add(0, cr);
                 }
 
@@ -90,6 +89,7 @@ public class CosmeticsRequestController extends AnchorPane implements Initializa
                 if (result.isEmpty()) {
                     Stage stage = (Stage) deleteButton.getScene().getWindow();
                     stage.close();
+                    App.getInstance().getEventBus().post(new NewCosmeticsAddedEvent(list));
                 } else {
                     StringBuilder sb = new StringBuilder("Sorry, there are no some items in stock: \n");
                     for (Map.Entry<String, Long> entry : result.entrySet()) {
