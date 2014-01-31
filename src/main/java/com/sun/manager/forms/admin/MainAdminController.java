@@ -9,6 +9,7 @@ import com.sun.manager.constants.SolariumEnum;
 import com.sun.manager.dao.SolariumDAO;
 import com.sun.manager.dto.*;
 import com.sun.manager.dto.BaseSolariumData;
+import com.sun.manager.events.ClosePageEvent;
 import com.sun.manager.events.EventHandlers;
 import com.sun.manager.events.NewAbonementAddedEvent;
 import com.sun.manager.events.NewCosmeticsAddedEvent;
@@ -21,6 +22,7 @@ import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
@@ -29,10 +31,14 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.util.Callback;
 
+
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+import javax.security.auth.Destroyable;
 import java.net.URL;
 import java.sql.Date;
+import java.util.Calendar;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.Scanner;
@@ -138,13 +144,13 @@ public class MainAdminController extends AnchorPane implements Initializable {
 
     SolariumService solariumService = new SolariumService();
     final ObservableList<BaseSolariumData> vertData = FXCollections.observableArrayList(
-            solariumService.getSunData(Date.valueOf("2013-12-10"), SolariumEnum.Vertical));
+            solariumService.getSunData(new Date(Calendar.getInstance().getTime().getTime()), SolariumEnum.Vertical));
 
     final ObservableList<BaseSolariumData> greenData = FXCollections.observableArrayList(
-            solariumService.getSunData(Date.valueOf("2013-12-11"), SolariumEnum.Green));
+            solariumService.getSunData(new Date(Calendar.getInstance().getTime().getTime()), SolariumEnum.Green));
 
     final ObservableList<BaseSolariumData> blueData = FXCollections.observableArrayList(
-            solariumService.getSunData(Date.valueOf("2013-12-11"), SolariumEnum.Blue));
+            solariumService.getSunData(new Date(Calendar.getInstance().getTime().getTime()), SolariumEnum.Blue));
 
     final ObservableList<CosmeticsRequest> cosmeticsData = FXCollections.observableArrayList();
 
@@ -163,6 +169,10 @@ public class MainAdminController extends AnchorPane implements Initializable {
             new ResData("стикини: 0 шт"), new ResData("к-ка итого:"), new ResData("к-ка+стикини:"));
 
     final ObservableList<ResData> abonResData = FXCollections.observableArrayList(null, new ResData("итого:"), null);
+
+    int vertSize = vertData.size();
+    int greenSize = greenData.size();
+    int blueSize = blueData.size();
 
 
     // new Date(Calendar.getInstance().getTime().getTime()); - current date
@@ -415,4 +425,37 @@ public class MainAdminController extends AnchorPane implements Initializable {
         AbonementsRequest request = e.getRequest();
         abonementsData.set(abonementsDataSize++, request);
     }
+
+    @Subscribe
+    public void destroy(ClosePageEvent e) {
+        ObservableList<BaseSolariumData> data = FXCollections.observableArrayList();
+        for (int i = vertSize; i < 30; ++i) {
+            BaseSolariumData d = vertData.get(i);
+            if (d.getMinutes() != null) {
+                data.add(d);
+            }
+        }
+        solariumService.saveSolariumData(data, 1L);
+
+
+        data = FXCollections.observableArrayList();
+        for (int i = greenSize; i < 30; ++i) {
+            BaseSolariumData d = greenData.get(i);
+            if (d.getMinutes() != null) {
+                data.add(d);
+            }
+        }
+        solariumService.saveSolariumData(data, 2L);
+
+
+        data = FXCollections.observableArrayList();
+        for (int i = blueSize; i < 30; ++i) {
+            BaseSolariumData d = blueData.get(i);
+            if (d.getMinutes() != null) {
+                data.add(d);
+            }
+        }
+        solariumService.saveSolariumData(data, 3L);
+    }
+
 }

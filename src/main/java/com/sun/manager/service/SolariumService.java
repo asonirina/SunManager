@@ -4,6 +4,7 @@ import com.sun.manager.constants.SolariumEnum;
 import com.sun.manager.dao.SolariumDAO;
 import com.sun.manager.dto.BaseSolariumData;
 import com.sun.manager.dto.Cosmetics;
+import javafx.collections.ObservableList;
 
 import java.sql.Date;
 import java.sql.SQLException;
@@ -55,7 +56,16 @@ public class SolariumService {
 
     public Long getL2ById(Long id) {
         try {
-        return dao.getL2ById(id);
+            return dao.getL2ById(id);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            throw new RuntimeException(ex.getMessage());
+        }
+    }
+
+    public void saveSolariumData(List<BaseSolariumData> list, Long id) {
+        try {
+            dao.saveSolariumData(list, id);
         } catch (SQLException ex) {
             ex.printStackTrace();
             throw new RuntimeException(ex.getMessage());

@@ -10,6 +10,9 @@ import javafx.scene.control.TableColumn;
 import javafx.util.Callback;
 import org.apache.commons.lang3.StringUtils;
 
+import java.sql.Date;
+import java.util.Calendar;
+
 /**
  * User: iason
  */
@@ -36,6 +39,7 @@ public class EventHandlers {
                 }
 
                 data.setRes(input);
+                data.setStartDate(new Date(Calendar.getInstance().getTime().getTime()));
             }
         };
     }
