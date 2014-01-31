@@ -21,11 +21,13 @@ import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Callback;
 
@@ -33,6 +35,7 @@ import java.net.URL;
 import java.sql.Date;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.Scanner;
 
 /**
  * User: iason
@@ -114,6 +117,21 @@ public class MainAdminController extends AnchorPane implements Initializable {
     @FXML
     TableColumn colAbonRes;
 
+    @FXML
+    Button countVert;
+
+    @FXML
+    Button countGreen;
+
+    @FXML
+    Button countCosm;
+
+    @FXML
+    Button countAbon;
+
+    @FXML
+    Button countBlue;
+
     int cosmeticsDataSize = 0;
 
     int abonementsDataSize = 0;
@@ -133,6 +151,20 @@ public class MainAdminController extends AnchorPane implements Initializable {
     final ObservableList<AbonementsRequest> abonementsData = FXCollections.observableArrayList();
 
 
+    final ObservableList<ResData> vertResData = FXCollections.observableArrayList(
+            new ResData("Итого мин: "), new ResData("Итого руб: "), new ResData("L2= "));
+    final ObservableList<ResData> greenResData = FXCollections.observableArrayList(
+            new ResData("Итого мин: "), new ResData("Итого руб: "), new ResData("L2= "));
+
+    final ObservableList<ResData> blueResData = FXCollections.observableArrayList(
+            new ResData("Итого мин: "), new ResData("Итого руб: "), new ResData("L2= "));
+
+    final ObservableList<ResData> cosmResData = FXCollections.observableArrayList(
+            new ResData("стикини: 0 шт"), new ResData("к-ка итого:"), new ResData("к-ка+стикини:"));
+
+    final ObservableList<ResData> abonResData = FXCollections.observableArrayList(null, new ResData("итого:"), null);
+
+
     // new Date(Calendar.getInstance().getTime().getTime()); - current date
 
     @Override
@@ -140,6 +172,8 @@ public class MainAdminController extends AnchorPane implements Initializable {
         try {
 
             App.getInstance().getEventBus().register(this);
+
+            setOnButtonsClicked();
             addBlankItems();
 
             setEditableTables();
@@ -221,6 +255,8 @@ public class MainAdminController extends AnchorPane implements Initializable {
         colGreen.setOnEditCommit(EventHandlers.eventHandlerBaseSolariumEditCommit());
         colBlue.setOnEditCommit(EventHandlers.eventHandlerBaseSolariumEditCommit());
         colVert.setOnEditCommit(EventHandlers.eventHandlerBaseSolariumEditCommit());
+
+        colCosmRes.setOnEditCommit(EventHandlers.eventHandlerCosmeticsEditCommit());
     }
 
     private void setNumbers() {
@@ -240,15 +276,9 @@ public class MainAdminController extends AnchorPane implements Initializable {
     }
 
     private void setSolariumResData() {
-        ResData resData[] = new ResData[3];
-        resData[0] = new ResData("Итого мин: ");
-        resData[1] = new ResData("Итого руб: ");
-        resData[2] = new ResData("L2= ");
-
-        final ObservableList<ResData> data = FXCollections.observableArrayList(resData);
-        tableVertRes.setItems(data);
-        tableGreenRes.setItems(data);
-        tableBlueRes.setItems(data);
+        tableVertRes.setItems(vertResData);
+        tableGreenRes.setItems(greenResData);
+        tableBlueRes.setItems(blueResData);
 
     }
 
@@ -264,21 +294,16 @@ public class MainAdminController extends AnchorPane implements Initializable {
         tableVert.setEditable(true);
         tableGreen.setEditable(true);
         tableBlue.setEditable(true);
+
+        tableCosmRes.setEditable(true);
     }
 
     private void setCosmResData() {
-        ResData resData[] = new ResData[3];
-        resData[0] = new ResData("стикини:", "шт");
-        resData[1] = new ResData("к-ка итого:");
-        resData[2] = new ResData("к-ка+стикини:");
-
-        final ObservableList<ResData> data = FXCollections.observableArrayList(resData);
-        tableCosmRes.setItems(data);
+        tableCosmRes.setItems(cosmResData);
     }
 
     private void setAbonResData() {
-        final ObservableList<ResData> data = FXCollections.observableArrayList(null, new ResData("итого:"), null);
-        tableAbonRes.setItems(data);
+        tableAbonRes.setItems(abonResData);
     }
 
     private void addBlankItems() {
@@ -305,6 +330,75 @@ public class MainAdminController extends AnchorPane implements Initializable {
         for (int i = 0; i < 30; ++i) {
             abonementsData.add((AbonementsRequest) BlankItem.generateBlankItem(3L));
         }
+    }
+
+    private void setOnButtonsClicked() {
+        countVert.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                countSolariumData(vertData, vertResData);
+            }
+        });
+
+        countGreen.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                countSolariumData(vertData, vertResData);
+            }
+        });
+
+        countBlue.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                countSolariumData(vertData, vertResData);
+            }
+        });
+
+        countCosm.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                Long count = 0L;
+                for (CosmeticsRequest cr : cosmeticsData) {
+                    if (cr.getCount() != null) {
+                        count += cr.getCount();
+                    }
+                }
+
+                cosmResData.set(1, new ResData("к-ка итого: " + count));
+
+                int stikini = new Scanner(cosmResData.get(0).getRes()).useDelimiter("\\D+").nextInt();
+
+                cosmResData.set(2, new ResData("к-ка+стикини: " + (stikini + count)));
+            }
+        });
+
+        countAbon.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                abonResData.set(1, new ResData("итого: " + abonementsDataSize));
+            }
+        });
+
+
+    }
+
+
+    private void countSolariumData(ObservableList<BaseSolariumData> data, ObservableList<ResData> resData) {
+        Long count = 0L;
+        Long sum = 0L;
+        for (BaseSolariumData d : data) {
+            if (d.getMinutes() != null) {
+                count += d.getMinutes();
+            }
+
+            if (d.getTotalPrice() != null) {
+                sum += d.getTotalPrice();
+            }
+        }
+        resData.set(0, new ResData("Итого мин: " + count));
+        resData.set(1, new ResData("Итого руб: " + sum));
+        Long l2 = solariumService.getL2ById(1L) + sum;
+        resData.set(2, new ResData("L2= " + l2));
     }
 
     @Subscribe

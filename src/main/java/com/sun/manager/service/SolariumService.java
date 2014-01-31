@@ -53,4 +53,13 @@ public class SolariumService {
         }
     }
 
+    public Long getL2ById(Long id) {
+        try {
+        return dao.getL2ById(id);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            throw new RuntimeException(ex.getMessage());
+        }
+    }
+
 }

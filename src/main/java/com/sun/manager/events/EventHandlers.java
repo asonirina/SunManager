@@ -40,6 +40,20 @@ public class EventHandlers {
         };
     }
 
+    public static EventHandler eventHandlerCosmeticsEditCommit() {
+        return new EventHandler<TableColumn.CellEditEvent<ResData, String>>() {
+            @Override
+            public void handle(TableColumn.CellEditEvent<ResData, String> t) {
+                ResData data =
+                        (ResData) t.getTableView().getItems().get(t.getTablePosition().getRow());
+                String input = t.getNewValue();
+                data.setRes(input);
+
+                data.setRes(input);
+            }
+        };
+    }
+
     public static Callback cellFactoryForBaseSolarium(final DataColumnEnum e) {
         return new Callback<TableColumn<BaseSolariumData, String>, TableCell<BaseSolariumData, String>>() {
             @Override
