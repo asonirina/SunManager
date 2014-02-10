@@ -213,8 +213,8 @@ public class SolariumDAO {
         return user;
     }
 
-    public CosmeticsRequest getCosmByDate(Date startDate) throws SQLException {
-        CosmeticsRequest cosmeticsRequest = null;
+    public List<CosmeticsRequest> getCosmByDate(Date startDate) throws SQLException {
+        List<CosmeticsRequest> cosmeticsRequestList = new ArrayList<CosmeticsRequest>();
         PreparedStatement ps2 = dbConnection.prepareStatement("select cosm_count, cosm_name, price from cosmetics_data where start_date = ?");
         ps2.setDate(1, startDate);
         ResultSet rs = ps2.executeQuery();
@@ -226,14 +226,15 @@ public class SolariumDAO {
             Cosmetics cosmetics = new Cosmetics();
             cosmetics.setName(cosmName);
             cosmetics.setPrice(price);
-            cosmeticsRequest = new CosmeticsRequest(cosmCount, cosmetics, startDate);
+            CosmeticsRequest cosmeticsRequest = new CosmeticsRequest(cosmCount, cosmetics, startDate);
+            cosmeticsRequestList.add(cosmeticsRequest);
         }
 
-        return cosmeticsRequest;
+        return cosmeticsRequestList;
     }
 
-    public AbonementsRequest getAbonByDate(Date startDate) throws SQLException {
-        AbonementsRequest abonementsRequest = null;
+    public List<AbonementsRequest> getAbonByDate(Date startDate) throws SQLException {
+        List<AbonementsRequest> abonementsRequestList = new ArrayList<AbonementsRequest>();
         PreparedStatement ps2 = dbConnection.prepareStatement("select code, letter, client_name, phone from abonements_data where start_date = ?");
         ps2.setDate(1, startDate);
         ResultSet rs = ps2.executeQuery();
@@ -244,29 +245,34 @@ public class SolariumDAO {
             String clientName = rs.getString("client_name");
             String phone = rs.getString("phone");
 
-            abonementsRequest = new AbonementsRequest(letter, code, clientName, phone, startDate);
+            AbonementsRequest abonementsRequest = new AbonementsRequest(letter, code, clientName, phone, startDate);
+            abonementsRequestList.add(abonementsRequest);
         }
 
-        return abonementsRequest;
+        return abonementsRequestList;
     }
 
 
-    public void saveCosmetics(CosmeticsRequest cosmeticsRequest) throws SQLException {
-        PreparedStatement ps = dbConnection.prepareStatement("insert into cosmetics_data (start_date, cosm_count, cosm_name, price) values(?,?,?,?)");
-        ps.setDate(1, (Date) cosmeticsRequest.getStartDate());
-        ps.setLong(2, cosmeticsRequest.getCount());
-        ps.setString(3, cosmeticsRequest.getCosmetics().getName());
-        ps.setLong(4, cosmeticsRequest.getCosmetics().getPrice());
-        ps.executeUpdate();
+    public void saveCosmetics(List<CosmeticsRequest> cosmeticsRequestList) throws SQLException {
+        for (CosmeticsRequest cosmeticsRequest : cosmeticsRequestList) {
+            PreparedStatement ps = dbConnection.prepareStatement("insert into cosmetics_data (start_date, cosm_count, cosm_name, price) values(?,?,?,?)");
+            ps.setDate(1, (Date) cosmeticsRequest.getStartDate());
+            ps.setLong(2, cosmeticsRequest.getCount());
+            ps.setString(3, cosmeticsRequest.getCosmetics().getName());
+            ps.setLong(4, cosmeticsRequest.getCosmetics().getPrice());
+            ps.executeUpdate();
+        }
     }
 
-    public void saveAbonement(AbonementsRequest abonementsRequest) throws SQLException {
-        PreparedStatement ps = dbConnection.prepareStatement("insert into abonements_data (start_date, code, letter, client_name, phone) values(?,?,?,?,?)");
-        ps.setDate(1, (Date) abonementsRequest.getStartDate());
-        ps.setLong(2, abonementsRequest.getCode());
-        ps.setString(3, abonementsRequest.getLetter());
-        ps.setString(4, abonementsRequest.getName());
-        ps.setString(5, abonementsRequest.getPhone());
-        ps.executeUpdate();
+    public void saveAbonement(List<AbonementsRequest> abonementsRequestList) throws SQLException {
+        for (AbonementsRequest abonementsRequest : abonementsRequestList) {
+            PreparedStatement ps = dbConnection.prepareStatement("insert into abonements_data (start_date, code, letter, client_name, phone) values(?,?,?,?,?)");
+            ps.setDate(1, (Date) abonementsRequest.getStartDate());
+            ps.setLong(2, abonementsRequest.getCode());
+            ps.setString(3, abonementsRequest.getLetter());
+            ps.setString(4, abonementsRequest.getName());
+            ps.setString(5, abonementsRequest.getPhone());
+            ps.executeUpdate();
+        }
     }
 }
