@@ -102,7 +102,7 @@ public class SolariumDAO {
         return callableStatement.getLong(2);
     }
 
-    public Map<String, Long> saveSolariumData(List<BaseSolariumData> baseSolariumDataList, Long solariumId) throws SQLException {
+    public void saveSolariumData(List<BaseSolariumData> baseSolariumDataList, Long solariumId) throws SQLException {
         String solarium = null;
         String solarium_sun = null;
         Map<String, Long> totals = new HashMap<String, Long>();
@@ -122,7 +122,7 @@ public class SolariumDAO {
         }
         for (BaseSolariumData baseData : baseSolariumDataList) {
             //Update minutes by abonements
-            if (baseData.getTotalPrice() == 0) {
+            if (baseData.getTotalPrice() == null) {
                 PreparedStatement ps1 = dbConnection.prepareStatement("update abonements set minutes = ? where abonement_code = ?");
                 PreparedStatement ps2 = dbConnection.prepareStatement("select  minutes from abonements where abonement_code = ?");
                 ps2.setString(1, baseData.getAbonementNumber());
@@ -144,16 +144,14 @@ public class SolariumDAO {
             PreparedStatement ps = dbConnection.prepareStatement("insert into " + solarium + " (start_date, minutes, total_price, abonement_number) values(?,?,?,?)");
             ps.setDate(1, (Date) baseData.getStartDate());
             ps.setLong(2, baseData.getMinutes());
-            ps.setLong(3, baseData.getTotalPrice());
+            if (baseData.getTotalPrice() == null) {
+                ps.setLong(3, 0);
+            } else {
+                ps.setLong(3, baseData.getTotalPrice());
+            }
             ps.setString(4, baseData.getAbonementNumber());
             ps.executeUpdate();
         }
-        PreparedStatement ps3 = dbConnection.prepareStatement("select l2 from " + solarium_sun + " where where start_date = (select MAX(start_date) from " + solarium_sun + ");");
-        l2 = ps3.executeQuery().getLong("l2");
-        totals.put("Итоговая сумма", totalSum);
-        totals.put("Итого минут", totalMinutes);
-        totals.put("L2", l2 + totalMinutes);
-        return totals;
     }
 
     public Map<String, Long> saveCosmeticsData(HashMap<Cosmetics, Long> cosmetics) throws SQLException {
