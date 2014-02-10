@@ -141,9 +141,7 @@ public class MainAdminController extends AnchorPane implements Initializable {
     @FXML
     Button countBlue;
 
-    int cosmeticsDataSize = 0;
 
-    int abonementsDataSize = 0;
 
     SolariumService solariumService = new SolariumService();
     final ObservableList<BaseSolariumData> vertData = FXCollections.observableArrayList(
@@ -155,9 +153,9 @@ public class MainAdminController extends AnchorPane implements Initializable {
     final ObservableList<BaseSolariumData> blueData = FXCollections.observableArrayList(
             solariumService.getSunData(new Date(Calendar.getInstance().getTime().getTime()), SolariumEnum.Blue));
 
-    final ObservableList<CosmeticsRequest> cosmeticsData = FXCollections.observableArrayList();
+    final ObservableList<CosmeticsRequest> cosmeticsData = FXCollections.observableArrayList(solariumService.getCosmByDate(new Date(Calendar.getInstance().getTime().getTime())));
 
-    final ObservableList<AbonementsRequest> abonementsData = FXCollections.observableArrayList();
+    final ObservableList<AbonementsRequest> abonementsData = FXCollections.observableArrayList(solariumService.getAbonByDate(new Date(Calendar.getInstance().getTime().getTime())));
 
 
     final ObservableList<ResData> vertResData = FXCollections.observableArrayList(
@@ -176,6 +174,12 @@ public class MainAdminController extends AnchorPane implements Initializable {
     int vertSize = vertData.size();
     int greenSize = greenData.size();
     int blueSize = blueData.size();
+    int cosmeticsDataSize = cosmeticsData.size();
+    int abonementsDataSize = abonementsData.size();
+
+    int cosmSize = cosmeticsData.size();
+    int abonSize = abonementsData.size();
+
 
 
     // new Date(Calendar.getInstance().getTime().getTime()); - current date
@@ -187,7 +191,7 @@ public class MainAdminController extends AnchorPane implements Initializable {
             App.getInstance().getEventBus().register(this);
 
             dateLabel.setText((new Date(Calendar.getInstance().getTime().getTime()).toString()));
-            usernameLabel.setText("Hello, "+App.getInstance().getUser().getName()+"!");
+            usernameLabel.setText("Hello, " + App.getInstance().getUser().getName() + "!");
             setOnButtonsClicked();
             addBlankItems();
 
@@ -338,11 +342,11 @@ public class MainAdminController extends AnchorPane implements Initializable {
             blueData.add((BaseSolariumData) BlankItem.generateBlankItem(1L));
         }
 
-        for (int i = 0; i < 30; ++i) {
+        for (int i = cosmSize; i < 30; ++i) {
             cosmeticsData.add((CosmeticsRequest) BlankItem.generateBlankItem(2L));
         }
 
-        for (int i = 0; i < 30; ++i) {
+        for (int i = abonSize; i < 30; ++i) {
             abonementsData.add((AbonementsRequest) BlankItem.generateBlankItem(3L));
         }
     }
@@ -420,14 +424,15 @@ public class MainAdminController extends AnchorPane implements Initializable {
     public void newCosmeticsAdded(NewCosmeticsAddedEvent e) {
         ObservableList<CosmeticsRequest> list = e.getList();
         for (CosmeticsRequest cr : list) {
+            cr.setStartDate(new Date(Calendar.getInstance().getTime().getTime()));
             cosmeticsData.set(cosmeticsDataSize++, cr);
-
         }
     }
 
     @Subscribe
     public void newAbonementAdded(NewAbonementAddedEvent e) {
         AbonementsRequest request = e.getRequest();
+        request.setStartDate(new Date(Calendar.getInstance().getTime().getTime()));
         abonementsData.set(abonementsDataSize++, request);
     }
 
@@ -461,6 +466,25 @@ public class MainAdminController extends AnchorPane implements Initializable {
             }
         }
         solariumService.saveSolariumData(data, 3L);
+
+        ObservableList<CosmeticsRequest> cosmeticsRequests = FXCollections.observableArrayList();
+        for (int i = cosmSize; i < 30; ++i) {
+            CosmeticsRequest cr = cosmeticsData.get(i);
+            if (cr.getCosmetics() != null) {
+                cosmeticsRequests.add(cr);
+            }
+        }
+        solariumService.saveCosmetics(cosmeticsRequests);
+
+
+        ObservableList<AbonementsRequest> abonementsRequests = FXCollections.observableArrayList();
+        for (int i = abonSize; i < 30; ++i) {
+            AbonementsRequest abonementRequest = abonementsData.get(i);
+            if (abonementRequest.getLetter() != null) {
+                abonementsRequests.add(abonementRequest);
+            }
+        }
+        solariumService.saveAbonement(abonementsRequests);
     }
 
 }

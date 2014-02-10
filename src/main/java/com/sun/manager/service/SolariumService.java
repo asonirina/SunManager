@@ -2,8 +2,10 @@ package com.sun.manager.service;
 
 import com.sun.manager.constants.SolariumEnum;
 import com.sun.manager.dao.SolariumDAO;
+import com.sun.manager.dto.AbonementsRequest;
 import com.sun.manager.dto.BaseSolariumData;
 import com.sun.manager.dto.Cosmetics;
+import com.sun.manager.dto.CosmeticsRequest;
 import javafx.collections.ObservableList;
 
 import java.sql.Date;
@@ -66,6 +68,43 @@ public class SolariumService {
     public void saveSolariumData(List<BaseSolariumData> list, Long id) {
         try {
             dao.saveSolariumData(list, id);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            throw new RuntimeException(ex.getMessage());
+        }
+    }
+
+    public List<CosmeticsRequest> getCosmByDate(Date startDate) {
+        try {
+            return dao.getCosmByDate(startDate);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            throw new RuntimeException(ex.getMessage());
+        }
+    }
+
+    public List<AbonementsRequest> getAbonByDate(Date startDate)  {
+        try {
+            return dao.getAbonByDate(startDate);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            throw new RuntimeException(ex.getMessage());
+        }
+    }
+
+
+    public void saveCosmetics(List<CosmeticsRequest> cosmeticsRequestList) {
+        try {
+             dao.saveCosmetics(cosmeticsRequestList);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            throw new RuntimeException(ex.getMessage());
+        }
+    }
+
+    public void saveAbonement(List<AbonementsRequest> abonementsRequestList) {
+        try {
+             dao.saveAbonement(abonementsRequestList);
         } catch (SQLException ex) {
             ex.printStackTrace();
             throw new RuntimeException(ex.getMessage());
