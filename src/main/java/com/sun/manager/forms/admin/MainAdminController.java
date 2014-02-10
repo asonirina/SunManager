@@ -23,10 +23,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableCell;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
@@ -47,6 +44,12 @@ import java.util.Scanner;
  * User: iason
  */
 public class MainAdminController extends AnchorPane implements Initializable {
+
+    @FXML
+    Label dateLabel;
+
+    @FXML
+    Label usernameLabel;
     //main tables
     @FXML
     TableView<NumericData> tableNumber;
@@ -183,6 +186,8 @@ public class MainAdminController extends AnchorPane implements Initializable {
 
             App.getInstance().getEventBus().register(this);
 
+            dateLabel.setText((new Date(Calendar.getInstance().getTime().getTime()).toString()));
+            usernameLabel.setText("Hello, "+App.getInstance().getUser().getName()+"!");
             setOnButtonsClicked();
             addBlankItems();
 

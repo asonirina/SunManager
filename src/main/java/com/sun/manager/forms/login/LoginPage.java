@@ -21,6 +21,7 @@ public class LoginPage extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
+        SqlServer.init();
         Pane pane = FXMLLoader.load(LoginPage.class.getResource("fxml/login.fxml"));
         stage.setScene(new Scene(pane));
         stage.setTitle("Login");
