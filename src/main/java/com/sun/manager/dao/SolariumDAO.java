@@ -13,6 +13,7 @@ public class SolariumDAO {
     private static final String GET_ONE_MINUTE_PRICE_BY_ID = "{call getOneMinutePriceById(?,?)}";
     private static final String GET_L2_BY_ID = "{call getL2ById(?,?)}";
     private static final String GET_CODE_BY_SYMBOL = "{call getCodeBySymbol(?,?)}";
+    private static final String CHECK_USER = "{call checkUser(?,?,?)}";
     private static final String VERTICAL_SOLARIUM = "vertical_sun_data";
     private static final String GORIZONTAL_BLUE_SOLARIUM = "gorizontal_blue_sun_data";
     private static final String GORIZONTAL_GREEN_SOLARIUM = "gorizontal_green_sun_data";
@@ -31,6 +32,17 @@ public class SolariumDAO {
         callableStatement.executeUpdate();
 
         return callableStatement.getLong(2);
+    }
+
+    public Long checkUser(String login, String pswd) throws SQLException {
+        callableStatement = dbConnection.prepareCall(CHECK_USER);
+        callableStatement.setString(1, login);
+        callableStatement.setString(2, pswd);
+        callableStatement.registerOutParameter(3, Types.BOOLEAN);
+
+        callableStatement.executeUpdate();
+
+        return callableStatement.getLong(3);
     }
 
     public Long getL2ById(Long solariumId) throws SQLException {
