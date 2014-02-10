@@ -1,5 +1,7 @@
 package com.sun.manager.dto;
 
+import java.util.Date;
+
 /**
  * User: iason
  * Date: 29.01.14
@@ -10,9 +12,18 @@ public class CosmeticsRequest {
 
     private String res;
 
+    private Date startDate;
+
     public CosmeticsRequest(Long count, Cosmetics cosmetics) {
         this.count = count;
         this.cosmetics = cosmetics;
+        generateRes();
+    }
+
+    public CosmeticsRequest(Long count, Cosmetics cosmetics,Date startDate) {
+        this.count = count;
+        this.cosmetics = cosmetics;
+        this.startDate = startDate;
         generateRes();
     }
 
@@ -77,5 +88,13 @@ public class CosmeticsRequest {
 
     public void setRes(String res) {
         this.res = res;
+    }
+
+    public Date getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
     }
 }

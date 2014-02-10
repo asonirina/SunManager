@@ -7,6 +7,8 @@ public class Cosmetics {
     private Long price;
     private Long count;
 
+    public Cosmetics() {}
+
     public Cosmetics(Long id, String name, Long price, Long count) {
         this.id = id;
         this.name = name;

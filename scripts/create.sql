@@ -84,3 +84,20 @@ CREATE TABLE IF NOT EXISTS gorizontal_green_sun_data (
       total_price        int,
       abonement_number   VARCHAR(10)
 ) ENGINE=INNODB;
+
+CREATE TABLE IF NOT EXISTS abonements_data (
+      data_id            int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+      start_date         date,
+      code               int,
+      letter             VARCHAR(100),
+      client_name        VARCHAR(100),
+      phone              VARCHAR(100)
+) ENGINE=INNODB;
+
+CREATE TABLE IF NOT EXISTS cosmetics_data (
+      data_id            int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+      start_date         date,
+      cosm_count         int,
+      cosm_name          VARCHAR(100),
+      price              int
+) ENGINE=INNODB;

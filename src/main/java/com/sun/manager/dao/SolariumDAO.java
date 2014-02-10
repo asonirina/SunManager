@@ -1,9 +1,7 @@
 package com.sun.manager.dao;
 
 import com.sun.manager.connection.SqlServer;
-import com.sun.manager.dto.BaseSolariumData;
-import com.sun.manager.dto.Cosmetics;
-import com.sun.manager.dto.Users;
+import com.sun.manager.dto.*;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -213,5 +211,62 @@ public class SolariumDAO {
             user.setRole(role);
         }
         return user;
+    }
+
+    public CosmeticsRequest getCosmByDate(Date startDate) throws SQLException {
+        CosmeticsRequest cosmeticsRequest = null;
+        PreparedStatement ps2 = dbConnection.prepareStatement("select cosm_count, cosm_name, price from cosmetics_data where start_date = ?");
+        ps2.setDate(1, startDate);
+        ResultSet rs = ps2.executeQuery();
+
+        while (rs.next()) {
+            Long cosmCount = rs.getLong("cosm_count");
+            String cosmName = rs.getString("cosm_name");
+            Long price = rs.getLong("price");
+            Cosmetics cosmetics = new Cosmetics();
+            cosmetics.setName(cosmName);
+            cosmetics.setPrice(price);
+            cosmeticsRequest = new CosmeticsRequest(cosmCount, cosmetics, startDate);
+        }
+
+        return cosmeticsRequest;
+    }
+
+    public AbonementsRequest getAbonByDate(Date startDate) throws SQLException {
+        AbonementsRequest abonementsRequest = null;
+        PreparedStatement ps2 = dbConnection.prepareStatement("select code, letter, client_name, phone from abonements_data where start_date = ?");
+        ps2.setDate(1, startDate);
+        ResultSet rs = ps2.executeQuery();
+
+        while (rs.next()) {
+            Long code = rs.getLong("code");
+            String letter = rs.getString("letter");
+            String clientName = rs.getString("client_name");
+            String phone = rs.getString("phone");
+
+            abonementsRequest = new AbonementsRequest(letter, code, clientName, phone, startDate);
+        }
+
+        return abonementsRequest;
+    }
+
+
+    public void saveCosmetics(CosmeticsRequest cosmeticsRequest) throws SQLException {
+        PreparedStatement ps = dbConnection.prepareStatement("insert into cosmetics_data (start_date, cosm_count, cosm_name, price) values(?,?,?,?)");
+        ps.setDate(1, (Date) cosmeticsRequest.getStartDate());
+        ps.setLong(2, cosmeticsRequest.getCount());
+        ps.setString(3, cosmeticsRequest.getCosmetics().getName());
+        ps.setLong(4, cosmeticsRequest.getCosmetics().getPrice());
+        ps.executeUpdate();
+    }
+
+    public void saveAbonement(AbonementsRequest abonementsRequest) throws SQLException {
+        PreparedStatement ps = dbConnection.prepareStatement("insert into abonements_data (start_date, code, letter, client_name, phone) values(?,?,?,?,?)");
+        ps.setDate(1, (Date) abonementsRequest.getStartDate());
+        ps.setLong(2, abonementsRequest.getCode());
+        ps.setString(3, abonementsRequest.getLetter());
+        ps.setString(4, abonementsRequest.getName());
+        ps.setString(5, abonementsRequest.getPhone());
+        ps.executeUpdate();
     }
 }

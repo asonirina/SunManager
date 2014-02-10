@@ -1,5 +1,7 @@
 package com.sun.manager.dto;
 
+import java.util.Date;
+
 /**
  * User: iason
  * Date: 30.01.14
@@ -12,12 +14,22 @@ public class AbonementsRequest {
 
     private String res;
 
+    private Date startDate;
 
     public AbonementsRequest(String letter, Long code, String name, String phone) {
         this.letter = letter;
         this.code = code;
         this.name = name;
         this.phone = phone;
+        generateRes();
+    }
+
+    public AbonementsRequest(String letter, Long code, String name, String phone, Date startDate) {
+        this.letter = letter;
+        this.code = code;
+        this.name = name;
+        this.phone = phone;
+        this.startDate = startDate;
         generateRes();
     }
 
@@ -64,6 +76,14 @@ public class AbonementsRequest {
 
     public String getRes() {
         return res;
+    }
+
+    public Date getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
     }
 
     public AbonementsRequest clone() {
