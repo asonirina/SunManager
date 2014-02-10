@@ -1,5 +1,9 @@
 package com.sun.manager.forms.login;
 
+import com.sun.manager.App;
+import com.sun.manager.dto.Users;
+import com.sun.manager.forms.admin.MainAdminPage;
+import com.sun.manager.service.UsersService;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -35,6 +39,8 @@ public class LoginController extends AnchorPane implements Initializable {
     @FXML
     Label status;
 
+    UsersService usersService = new UsersService();
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -47,6 +53,17 @@ public class LoginController extends AnchorPane implements Initializable {
                     String username = loginField.getText();
                     String pwd = passwordField.getText();
                     // Account service login method should be here
+                    if (usersService.login(username, pwd)) {
+                        Users user = usersService.getUser(username);
+                        App.getInstance().setUser(user);
+                        if (user.getRole().equals("admin")) {
+                            MainAdminPage page = new MainAdminPage();
+                            ((Stage) loginField.getScene().getWindow()).close();
+                            page.start(new Stage());
+                        }
+                    } else {
+                        status.setText("Invalid credentials!");
+                    }
 
                 } catch (Exception ex) {
                     ex.printStackTrace();
