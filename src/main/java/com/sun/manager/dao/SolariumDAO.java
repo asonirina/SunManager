@@ -3,10 +3,13 @@ package com.sun.manager.dao;
 import com.sun.manager.connection.SqlServer;
 import com.sun.manager.dto.BaseSolariumData;
 import com.sun.manager.dto.Cosmetics;
+import com.sun.manager.dto.Users;
 
 import java.sql.*;
-import java.sql.Date;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class SolariumDAO {
 
@@ -193,5 +196,22 @@ public class SolariumDAO {
 
         }
         return resultData;
+    }
+
+    public Users getUserByLogin(String login) throws SQLException {
+        Users user = new Users();
+        PreparedStatement ps2 = dbConnection.prepareStatement("select name, password, role from users where login = ?");
+        ps2.setString(1, login);
+        ResultSet rs = ps2.executeQuery();
+
+        while (rs.next()) {
+            String name = rs.getString("name");
+            String password = rs.getString("password");
+            String role = rs.getString("role");
+            user.setName(name);
+            user.setPassword(password);
+            user.setRole(role);
+        }
+        return user;
     }
 }
