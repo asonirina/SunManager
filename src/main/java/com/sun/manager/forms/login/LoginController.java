@@ -52,15 +52,15 @@ public class LoginController extends AnchorPane implements Initializable {
                 try {
                     String username = loginField.getText();
                     String pwd = passwordField.getText();
-                    // Account service login method should be here
+
                     if (usersService.login(username, pwd)) {
                         Users user = usersService.getUser(username);
                         App.getInstance().setUser(user);
-                        if (user.getRole().equals("admin")) {
-                            MainAdminPage page = new MainAdminPage();
-                            ((Stage) loginField.getScene().getWindow()).close();
-                            page.start(new Stage());
-                        }
+                        MainAdminPage page = new MainAdminPage();
+
+                        page.start(new Stage());
+
+                        ((Stage) loginField.getScene().getWindow()).close();
                     } else {
                         status.setText("Invalid credentials!");
                     }

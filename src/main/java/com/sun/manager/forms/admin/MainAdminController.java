@@ -6,37 +6,29 @@ import com.sun.manager.App;
 import com.sun.manager.constants.BlankItem;
 import com.sun.manager.constants.DataColumnEnum;
 import com.sun.manager.constants.SolariumEnum;
-import com.sun.manager.dao.SolariumDAO;
 import com.sun.manager.dto.*;
 import com.sun.manager.dto.BaseSolariumData;
 import com.sun.manager.events.ClosePageEvent;
 import com.sun.manager.events.EventHandlers;
 import com.sun.manager.events.NewAbonementAddedEvent;
 import com.sun.manager.events.NewCosmeticsAddedEvent;
-import com.sun.manager.forms.EditingCell;
-import com.sun.manager.forms.ButtonCell;
 import com.sun.manager.service.SolariumService;
-import javafx.beans.property.SimpleIntegerProperty;
+import eu.schudt.javafx.controls.calendar.DatePicker;
+import javafx.beans.InvalidationListener;
+import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
 import javafx.scene.control.*;
 
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-
-
-import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
-import javax.security.auth.Destroyable;
 import java.net.URL;
 import java.sql.Date;
 import java.util.Calendar;
-import java.util.List;
 import java.util.ResourceBundle;
 import java.util.Scanner;
 
@@ -44,12 +36,19 @@ import java.util.Scanner;
  * User: iason
  */
 public class MainAdminController extends AnchorPane implements Initializable {
+    private Date date = new Date(Calendar.getInstance().getTime().getTime());
+
+    @FXML
+    AnchorPane anchorPane;
 
     @FXML
     Label dateLabel;
 
     @FXML
     Label usernameLabel;
+
+
+    DatePicker datePicker = new DatePicker();
     //main tables
     @FXML
     TableView<NumericData> tableNumber;
@@ -142,20 +141,19 @@ public class MainAdminController extends AnchorPane implements Initializable {
     Button countBlue;
 
 
-
     SolariumService solariumService = new SolariumService();
     final ObservableList<BaseSolariumData> vertData = FXCollections.observableArrayList(
-            solariumService.getSunData(new Date(Calendar.getInstance().getTime().getTime()), SolariumEnum.Vertical));
+            solariumService.getSunData(date, SolariumEnum.Vertical));
 
     final ObservableList<BaseSolariumData> greenData = FXCollections.observableArrayList(
-            solariumService.getSunData(new Date(Calendar.getInstance().getTime().getTime()), SolariumEnum.Green));
+            solariumService.getSunData(date, SolariumEnum.Green));
 
     final ObservableList<BaseSolariumData> blueData = FXCollections.observableArrayList(
-            solariumService.getSunData(new Date(Calendar.getInstance().getTime().getTime()), SolariumEnum.Blue));
+            solariumService.getSunData(date, SolariumEnum.Blue));
 
-    final ObservableList<CosmeticsRequest> cosmeticsData = FXCollections.observableArrayList(solariumService.getCosmByDate(new Date(Calendar.getInstance().getTime().getTime())));
+    final ObservableList<CosmeticsRequest> cosmeticsData = FXCollections.observableArrayList(solariumService.getCosmByDate(date));
 
-    final ObservableList<AbonementsRequest> abonementsData = FXCollections.observableArrayList(solariumService.getAbonByDate(new Date(Calendar.getInstance().getTime().getTime())));
+    final ObservableList<AbonementsRequest> abonementsData = FXCollections.observableArrayList(solariumService.getAbonByDate(date));
 
 
     final ObservableList<ResData> vertResData = FXCollections.observableArrayList(
@@ -181,12 +179,30 @@ public class MainAdminController extends AnchorPane implements Initializable {
     int abonSize = abonementsData.size();
 
 
-
-    // new Date(Calendar.getInstance().getTime().getTime()); - current date
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
+            if (App.getInstance().getUser().getRole().equals("derictor")) {
+                datePicker.setLayoutX(49);
+                datePicker.setLayoutY(46);
+
+                datePicker.getStylesheets().add(this.getClass().getResource("datePicker.css").toExternalForm());
+                datePicker.getCalendarView().setShowWeeks(false);
+                datePicker.setSelectedDate(new java.util.Date());
+                datePicker.getCalendarView().todayButtonTextProperty().set("Сегодня");
+                datePicker.selectedDateProperty().addListener(new InvalidationListener() {
+                    @Override
+                    public void invalidated(Observable observable) {
+                        date = new Date(datePicker.getSelectedDate().getTime());
+                              updateInfoByDate();
+
+
+                    }
+                });
+                anchorPane.getChildren().add(datePicker);
+
+                dateLabel.setVisible(false);
+            }
 
             App.getInstance().getEventBus().register(this);
 
@@ -310,11 +326,13 @@ public class MainAdminController extends AnchorPane implements Initializable {
     }
 
     private void setEditableTables() {
-        tableVert.setEditable(true);
-        tableGreen.setEditable(true);
-        tableBlue.setEditable(true);
+        if (App.getInstance().getUser().getRole().equals("derictor")) {
+            tableVert.setEditable(false);
+            tableGreen.setEditable(false);
+            tableBlue.setEditable(false);
 
-        tableCosmRes.setEditable(true);
+            tableCosmRes.setEditable(false);
+        }
     }
 
     private void setCosmResData() {
@@ -362,14 +380,14 @@ public class MainAdminController extends AnchorPane implements Initializable {
         countGreen.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                countSolariumData(vertData, vertResData);
+                countSolariumData(greenData, greenResData);
             }
         });
 
         countBlue.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                countSolariumData(vertData, vertResData);
+                countSolariumData(blueData, blueResData);
             }
         });
 
@@ -438,53 +456,80 @@ public class MainAdminController extends AnchorPane implements Initializable {
 
     @Subscribe
     public void destroy(ClosePageEvent e) {
-        ObservableList<BaseSolariumData> data = FXCollections.observableArrayList();
-        for (int i = vertSize; i < 30; ++i) {
-            BaseSolariumData d = vertData.get(i);
-            if (d.getMinutes() != null) {
-                data.add(d);
+        if (App.getInstance().getUser().getRole().equals("admin")) {
+            ObservableList<BaseSolariumData> data = FXCollections.observableArrayList();
+            for (int i = vertSize; i < 30; ++i) {
+                BaseSolariumData d = vertData.get(i);
+                if (d.getMinutes() != null) {
+                    data.add(d);
+                }
             }
-        }
-        solariumService.saveSolariumData(data, 1L);
+            solariumService.saveSolariumData(data, 1L);
 
 
-        data = FXCollections.observableArrayList();
-        for (int i = greenSize; i < 30; ++i) {
-            BaseSolariumData d = greenData.get(i);
-            if (d.getMinutes() != null) {
-                data.add(d);
+            data = FXCollections.observableArrayList();
+            for (int i = greenSize; i < 30; ++i) {
+                BaseSolariumData d = greenData.get(i);
+                if (d.getMinutes() != null) {
+                    data.add(d);
+                }
             }
-        }
-        solariumService.saveSolariumData(data, 2L);
+            solariumService.saveSolariumData(data, 2L);
 
 
-        data = FXCollections.observableArrayList();
-        for (int i = blueSize; i < 30; ++i) {
-            BaseSolariumData d = blueData.get(i);
-            if (d.getMinutes() != null) {
-                data.add(d);
+            data = FXCollections.observableArrayList();
+            for (int i = blueSize; i < 30; ++i) {
+                BaseSolariumData d = blueData.get(i);
+                if (d.getMinutes() != null) {
+                    data.add(d);
+                }
             }
-        }
-        solariumService.saveSolariumData(data, 3L);
+            solariumService.saveSolariumData(data, 3L);
 
-        ObservableList<CosmeticsRequest> cosmeticsRequests = FXCollections.observableArrayList();
-        for (int i = cosmSize; i < 30; ++i) {
-            CosmeticsRequest cr = cosmeticsData.get(i);
-            if (cr.getCosmetics() != null) {
-                cosmeticsRequests.add(cr);
+            ObservableList<CosmeticsRequest> cosmeticsRequests = FXCollections.observableArrayList();
+            for (int i = cosmSize; i < 30; ++i) {
+                CosmeticsRequest cr = cosmeticsData.get(i);
+                if (cr.getCosmetics() != null) {
+                    cosmeticsRequests.add(cr);
+                }
             }
-        }
-        solariumService.saveCosmetics(cosmeticsRequests);
+            solariumService.saveCosmetics(cosmeticsRequests);
 
 
-        ObservableList<AbonementsRequest> abonementsRequests = FXCollections.observableArrayList();
-        for (int i = abonSize; i < 30; ++i) {
-            AbonementsRequest abonementRequest = abonementsData.get(i);
-            if (abonementRequest.getLetter() != null) {
-                abonementsRequests.add(abonementRequest);
+            ObservableList<AbonementsRequest> abonementsRequests = FXCollections.observableArrayList();
+            for (int i = abonSize; i < 30; ++i) {
+                AbonementsRequest abonementRequest = abonementsData.get(i);
+                if (abonementRequest.getLetter() != null) {
+                    abonementsRequests.add(abonementRequest);
+                }
             }
+            solariumService.saveAbonement(abonementsRequests);
         }
-        solariumService.saveAbonement(abonementsRequests);
+    }
+
+
+    private void updateInfoByDate() {
+        vertData.clear();
+        vertData.addAll(0, solariumService.getSunData(date, SolariumEnum.Vertical));
+        vertSize = vertData.size();
+
+        greenData.clear();
+        greenData.addAll(0, solariumService.getSunData(date, SolariumEnum.Green));
+        greenSize = greenData.size();
+
+        blueData.clear();
+        blueData.addAll(0, solariumService.getSunData(date, SolariumEnum.Blue));
+        blueSize = blueData.size();
+
+        cosmeticsData.clear();
+        cosmeticsData.addAll(0, solariumService.getCosmByDate(date));
+        cosmSize = cosmeticsData.size();
+
+        abonementsData.clear();
+        abonementsData.addAll(0, solariumService.getAbonByDate(date));
+        abonSize = blueData.size();
+
+        addBlankItems();
     }
 
 }

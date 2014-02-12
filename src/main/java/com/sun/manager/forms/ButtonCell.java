@@ -1,5 +1,6 @@
 package com.sun.manager.forms;
 
+import com.sun.manager.App;
 import com.sun.manager.constants.DataColumnEnum;
 import com.sun.manager.dto.AbonementsRequest;
 import com.sun.manager.dto.CosmeticsRequest;
@@ -24,6 +25,9 @@ public class ButtonCell<T> extends TableCell<T, String> {
         cellButton.setPrefWidth(190);
         cellButton.setPrefHeight(10);
 
+        if (App.getInstance().getUser().getRole().equals("derictor")) {
+            cellButton.setDisable(true);
+        }
         cellButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
@@ -48,6 +52,9 @@ public class ButtonCell<T> extends TableCell<T, String> {
     protected void updateItem(String item, boolean empty) {
         super.updateItem(item, empty);
         cellButton.setText(item);
+        if(item != null && !item.equals("")) {
+            cellButton.setDisable(true);
+        }
         if (!empty) {
             setGraphic(cellButton);
         }
