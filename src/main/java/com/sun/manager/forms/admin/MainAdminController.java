@@ -26,6 +26,9 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
+
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
 import java.util.Calendar;
@@ -140,6 +143,12 @@ public class MainAdminController extends AnchorPane implements Initializable {
     @FXML
     Button countBlue;
 
+    @FXML
+    Button addCosm;
+
+    @FXML
+    Button addAbon;
+
 
     SolariumService solariumService = new SolariumService();
     final ObservableList<BaseSolariumData> vertData = FXCollections.observableArrayList(
@@ -194,7 +203,7 @@ public class MainAdminController extends AnchorPane implements Initializable {
                     @Override
                     public void invalidated(Observable observable) {
                         date = new Date(datePicker.getSelectedDate().getTime());
-                              updateInfoByDate();
+                        updateInfoByDate();
 
 
                     }
@@ -415,6 +424,35 @@ public class MainAdminController extends AnchorPane implements Initializable {
                 abonResData.set(1, new ResData("итого: " + abonementsDataSize));
             }
         });
+
+        if (App.getInstance().getUser().getRole().equals("admin")) {
+            addCosm.setVisible(false);
+            addAbon.setVisible(false);
+        } else {
+
+            addCosm.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    AddCosmeticsPage page = new AddCosmeticsPage();
+                    try {
+                        page.start(new Stage());
+                    } catch (IOException ex) {
+                        throw new RuntimeException(ex);
+                    }
+                }
+            });
+            addAbon.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    try {
+                        AddAbonementPage page = new AddAbonementPage();
+                        page.start(new Stage());
+                    } catch (IOException ex) {
+                        throw new RuntimeException(ex);
+                    }
+                }
+            });
+        }
 
 
     }

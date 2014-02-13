@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="234.0" prefWidth="465.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.sun.manager.forms.admin.AddAbonementController">
+  <children>
+    <AnchorPane layoutX="14.0" layoutY="14.0" prefHeight="206.0" prefWidth="437.0">
+      <children>
+        <TextField fx:id="letterField" layoutX="94.0" layoutY="39.0" prefWidth="101.0" />
+        <TextField fx:id="codeField" layoutX="275.0" layoutY="39.0" prefWidth="108.0" />
+        <Label layoutX="32.0" layoutY="42.0" text="Letter:" />
+        <Label layoutX="226.0" layoutY="42.0" text="Code:" />
+        <Button fx:id="okButton" layoutX="228.0" layoutY="141.0" mnemonicParsing="false" prefWidth="75.0" text="OK" />
+        <Button fx:id="cancelButton" layoutX="319.0" layoutY="141.0" mnemonicParsing="false" prefWidth="75.0" text="Cancel" />
+      </children>
+    </AnchorPane>
+  </children>
+</AnchorPane>
