@@ -18,6 +18,7 @@ import org.apache.commons.lang.StringUtils;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.ResourceBundle;
 
 /**
@@ -80,9 +81,9 @@ public class AddCosmeticsController extends AnchorPane implements Initializable 
             public void handle(MouseEvent mouseEvent) {
 
                 String name = nameField.getText();
-                Long price = Long.parseLong(priceField.getText());
+                long price = Long.parseLong(priceField.getText());
                 Cosmetics c = new Cosmetics(null, name, price, 0L);
-                //save cosmetics  in db
+                service.createCosmetic(name, (int)price, 0);
 
                 cosmList.getItems().add(c);
             }
@@ -92,7 +93,11 @@ public class AddCosmeticsController extends AnchorPane implements Initializable 
             @Override
             public void handle(MouseEvent mouseEvent) {
                 ObservableList<CosmeticsRequest> items = resultList.getItems();
-                // save requests
+                HashMap<Cosmetics, Long> map = new HashMap<Cosmetics, Long>();
+                for (CosmeticsRequest cr: items) {
+                    map.put(cr.getCosmetics(), cr.getCount());
+                }
+                service.putCosmeticsToStock(map);
                 ((Stage) okButton.getScene().getWindow()).close();
             }
         });

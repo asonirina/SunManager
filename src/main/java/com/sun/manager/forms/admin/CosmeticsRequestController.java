@@ -85,7 +85,7 @@ public class CosmeticsRequestController extends AnchorPane implements Initializa
                     map.put(cr.getCosmetics(), cr.getCount());
                 }
 
-                Map<String, Long> result = service.saveCosmetics(map);
+                Map<String, Long> result = service.getCosmeticsFromStock(map);
                 if (result.isEmpty()) {
                     Stage stage = (Stage) deleteButton.getScene().getWindow();
                     stage.close();

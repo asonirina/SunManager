@@ -25,6 +25,15 @@ public class AddAbonementController extends AnchorPane implements Initializable 
     TextField codeField;
 
     @FXML
+    TextField minutesField;
+
+    @FXML
+    TextField durationField;
+
+    @FXML
+    TextField priceField;
+
+    @FXML
     Button okButton;
 
     @FXML
@@ -37,9 +46,12 @@ public class AddAbonementController extends AnchorPane implements Initializable 
         okButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                //save abonement
                 String letter = letterField.getText();
                 String code = codeField.getText();
+                int minutes =  Integer.parseInt(minutesField.getText());
+                int duration = Integer.parseInt(durationField.getText());
+                int price = Integer.parseInt(priceField.getText());
+                service.createAbonement(letter, code, minutes, duration, price);
                 Stage stage = (Stage) okButton.getScene().getWindow();
                 stage.close();
             }

@@ -38,9 +38,9 @@ public class SolariumService {
         }
     }
 
-    public Map<String, Long> saveCosmetics(HashMap<Cosmetics, Long> map) {
+    public Map<String, Long> getCosmeticsFromStock(HashMap<Cosmetics, Long> map) {
         try {
-            return dao.saveCosmeticsData(map);
+            return dao.saveCosmeticsData(map, true);
         } catch (SQLException ex) {
             ex.printStackTrace();
             throw new RuntimeException(ex.getMessage());
@@ -111,4 +111,31 @@ public class SolariumService {
         }
     }
 
+    public void createCosmetic(String name, int price, int cosmeticsCount){
+        try {
+            dao.createCosmetic(name, price, cosmeticsCount);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            throw new RuntimeException(ex.getMessage());
+        }
+    }
+
+
+    public Map<String, Long> putCosmeticsToStock(HashMap<Cosmetics, Long> map) {
+        try {
+            return dao.saveCosmeticsData(map, false);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            throw new RuntimeException(ex.getMessage());
+        }
+    }
+
+    public void createAbonement(String letter, String code, int minutes, int duration, int price) {
+        try {
+            dao.createAbonement(letter, code, minutes, duration, price);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            throw new RuntimeException(ex.getMessage());
+        }
+    }
 }
