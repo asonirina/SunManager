@@ -9,12 +9,12 @@ CREATE TABLE IF NOT EXISTS customers (
 CREATE TABLE IF NOT EXISTS abonements (
       abonement_code VARCHAR(10) NOT NULL PRIMARY KEY,
       price          INT,
-      customer_id    INT NOT NULL,
+      customer_id    INT,
       buy_date       date,
       end_date       date,
       minutes        int,
       duration       int,
-      is_free         boolean,
+      is_free        boolean,
 
       FOREIGN KEY (customer_id) REFERENCES customers(customer_id)
 ) ENGINE=INNODB;

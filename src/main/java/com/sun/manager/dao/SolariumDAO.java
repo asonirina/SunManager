@@ -167,7 +167,7 @@ public class SolariumDAO {
         }
     }
 
-    public Map<String, Long> saveCosmeticsData(HashMap<Cosmetics, Long> cosmetics) throws SQLException {
+    public Map<String, Long> saveCosmeticsData(HashMap<Cosmetics, Long> cosmetics, boolean isMinus) throws SQLException {
         Map<String, Long> resultData = new HashMap<String, Long>();
 
         for (Map.Entry<Cosmetics, Long> entry : cosmetics.entrySet()) {
@@ -182,19 +182,24 @@ public class SolariumDAO {
 
             while (rs.next()) {
                 Long cosmeticsCount = rs.getLong("cosmetics_count");
-                if (cosmeticsCount < value) {
-                    resultData.put(key.getName(), value - cosmeticsCount);
+                if (isMinus) {
+                    if (cosmeticsCount < value || cosmeticsCount == 0) {
+                        resultData.put(key.getName(), value - cosmeticsCount);
+                    } else {
+                        ps1.setLong(1, cosmeticsCount - value);
+                        ps1.setLong(2, key.getId());
+                        ps1.executeUpdate();
+                    }
                 } else {
-                    ps1.setLong(1, cosmeticsCount - value);
+                    ps1.setLong(1, cosmeticsCount + value);
                     ps1.setLong(2, key.getId());
                     ps1.executeUpdate();
                 }
             }
-
-
         }
-        return resultData;
-    }
+
+    return resultData;
+}
 
     public Users getUserByLogin(String login) throws SQLException {
         Users user = new Users();
@@ -274,5 +279,23 @@ public class SolariumDAO {
             ps.setString(5, abonementsRequest.getPhone());
             ps.executeUpdate();
         }
+    }
+
+    public void createAbonement(String letter, String code, int minutes, int duration, int price) throws SQLException {
+        String abonementCode = letter + code;
+        PreparedStatement ps = dbConnection.prepareStatement("insert into abonements (abonement_code, price, minutes, duration) values(?,?,?,?)");
+        ps.setString(1, abonementCode);
+        ps.setInt(2, price);
+        ps.setInt(3, minutes);
+        ps.setInt(4, duration);
+        ps.executeUpdate();
+}
+
+    public void createCosmetic(String name, int price, int cosmeticsCount) throws SQLException {
+        PreparedStatement ps = dbConnection.prepareStatement("insert into cosmetics (name, price, cosmetics_count) values(?,?,?)");
+        ps.setString(1, name);
+        ps.setInt(2, price);
+        ps.setInt(3, cosmeticsCount);
+        ps.executeUpdate();
     }
 }
