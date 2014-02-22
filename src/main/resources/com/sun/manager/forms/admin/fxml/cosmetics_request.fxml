@@ -12,10 +12,10 @@
       <children>
         <ListView fx:id="cosmeticsList" layoutX="14.0" layoutY="14.0" prefHeight="146.0" prefWidth="272.0" />
         <TextField fx:id="countText" layoutX="304.0" layoutY="37.0" prefWidth="140.0" />
-        <Button fx:id="addCosmButton" layoutX="339.0" layoutY="87.0" mnemonicParsing="false" prefWidth="70.0" text="+" />
+        <Button fx:id="addCosmButton" layoutX="339.0" layoutY="87.0" mnemonicParsing="false" prefWidth="70.0" text="Добавить" />
         <ListView fx:id="resultList" layoutX="14.0" layoutY="185.0" prefHeight="146.0" prefWidth="272.0" />
-        <Button fx:id="saveButton" layoutX="358.0" layoutY="268.0" mnemonicParsing="false" text="Save" />
-        <Button fx:id="deleteButton" layoutX="353.0" layoutY="214.0" mnemonicParsing="false" text="Delete" />
+        <Button fx:id="saveButton" layoutX="358.0" layoutY="268.0" mnemonicParsing="false" text="Сохранить" />
+        <Button fx:id="deleteButton" layoutX="353.0" layoutY="214.0" mnemonicParsing="false" text="Удалить" />
         <TextArea fx:id="errorArea" layoutX="14.0" layoutY="339.0" prefHeight="133.0" prefWidth="423.0" wrapText="true" />
       </children>
     </AnchorPane>

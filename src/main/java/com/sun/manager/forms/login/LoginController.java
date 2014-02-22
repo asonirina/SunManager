@@ -15,7 +15,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -43,8 +42,6 @@ public class LoginController extends AnchorPane implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
-
         login.setOnAction(new EventHandler<ActionEvent>() {
 
             @Override
@@ -62,12 +59,12 @@ public class LoginController extends AnchorPane implements Initializable {
 
                         ((Stage) loginField.getScene().getWindow()).close();
                     } else {
-                        status.setText("Invalid credentials!");
+                        status.setText("Логин или пароль введены не верно!");
                     }
 
                 } catch (Exception ex) {
                     ex.printStackTrace();
-                    status.setText("Could not load page");
+                    status.setText("Невозможно загрузить приложение!");
                 }
             }
         });

@@ -1,9 +1,9 @@
 .table-cell{
-    -fx-background-color:PaleGreen;
+    -fx-background-color: #74d877;
     -fx-border-color: ForestGreen;
     -fx-text-fill: black;
 }
 
 .table-cell:hover{
-    -fx-background-color: DarkSeaGreen;
+    -fx-background-color: LightSlateGray;
 }

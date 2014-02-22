@@ -10,12 +10,12 @@
   <children>
     <AnchorPane layoutX="14.0" layoutY="14.0" prefHeight="217.0" prefWidth="312.0">
       <children>
-        <Label layoutX="46.0" layoutY="58.0" text="Login: " />
-        <Label layoutX="46.0" layoutY="100.0" text="Password: " />
-        <TextField fx:id="loginField" layoutX="112.0" layoutY="58.0" prefWidth="174.0" />
-        <PasswordField fx:id="passwordField" layoutX="112.0" layoutY="100.0" prefWidth="174.0" />
-        <Button fx:id="login" layoutX="230.0" layoutY="153.0" mnemonicParsing="false" prefHeight="22.000099999997474" text="Login" />
-        <Label fx:id="status" contentDisplay="CENTER" layoutX="120.0" layoutY="195.0" text="" textFill="RED"  />
+        <Label layoutX="46.0" layoutY="58.0" text="Логин: " />
+        <Label layoutX="46.0" layoutY="100.0" text="Пароль: " />
+        <TextField fx:id="loginField" layoutX="116.0" layoutY="58.0" prefWidth="174.0" />
+        <PasswordField fx:id="passwordField" layoutX="116.0" layoutY="100.0" prefWidth="174.0" />
+        <Button fx:id="login" layoutX="230.0" layoutY="153.0" mnemonicParsing="false" prefHeight="22.000099999997474" text="Войти" />
+        <Label fx:id="status" layoutX="50.0" layoutY="195.0" text="" textFill="RED"  />
       </children>
     </AnchorPane>
   </children>

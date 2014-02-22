@@ -23,7 +23,9 @@ public class LoginPage extends Application {
     public void start(Stage stage) throws IOException {
         SqlServer.init();
         Pane pane = FXMLLoader.load(LoginPage.class.getResource("fxml/login.fxml"));
-        stage.setScene(new Scene(pane));
+        Scene scene = new Scene(pane);
+        scene.getStylesheets().add(getClass().getResource("login.css").toExternalForm());
+        stage.setScene(scene);
         stage.setTitle("Login");
         stage.show();
     }

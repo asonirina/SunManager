@@ -1,5 +1,5 @@
 .table-cell:hover {
-    -fx-background-color: LightSlateGray;
+    -fx-background-color: LightSlateGray 	    ;
 }
 .table-cell{
     -fx-background-color:LightBlue;

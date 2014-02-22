@@ -46,27 +46,27 @@
               <children>
                 <TableView fx:id="tableVert" editable="true" focusTraversable="false" layoutX="35.0" layoutY="0.0" prefHeight="838.0" prefWidth="208.0">
                   <columns>
-                    <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="206.0" resizable="false" sortable="false" text="Vertical" fx:id="colVert" />
+                    <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="206.0" resizable="false" sortable="false" text="Вертикальный" fx:id="colVert" />
                   </columns>
                 </TableView>
                 <TableView fx:id="tableBlue" editable="true" focusTraversable="false" layoutX="444.0" layoutY="0.0" prefHeight="838.0" prefWidth="193.0">
                   <columns>
-                    <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="191.0" resizable="false" sortable="false" text="Blue" fx:id="colBlue" />
+                    <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="191.0" resizable="false" sortable="false" text="Гор. Голубой" fx:id="colBlue" />
                   </columns>
                 </TableView>
                 <TableView fx:id="tableCosm" focusTraversable="false" layoutX="637.0" layoutY="0.0" prefHeight="838.0" prefWidth="200.0">
                   <columns>
-                    <TableColumn editable="false" maxWidth="5000.0" minWidth="10.0" prefWidth="198.0" resizable="false" sortable="false" text="Cosmetics" fx:id="colCosm" />
+                    <TableColumn editable="false" maxWidth="5000.0" minWidth="10.0" prefWidth="198.0" resizable="false" sortable="false" text="Косметика" fx:id="colCosm" />
                   </columns>
                 </TableView>
                 <TableView fx:id="tableAbon" focusTraversable="false" layoutX="837.0" layoutY="0.0" prefHeight="838.0" prefWidth="201.0">
                   <columns>
-                    <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="199.0" resizable="false" sortable="false" text="Abonements" fx:id="colAbon" />
+                    <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="199.0" resizable="false" sortable="false" text="Абонементы" fx:id="colAbon" />
                   </columns>
                 </TableView>
                 <TableView fx:id="tableGreen" editable="true" focusTraversable="false" layoutX="243.0" layoutY="0.0" prefHeight="838.0" prefWidth="201.0">
                   <columns>
-                    <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="199.0" resizable="false" sortable="false" style="" text="Green" fx:id="colGreen" />
+                    <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="199.0" resizable="false" sortable="false" style="" text="Гор. Зеленый" fx:id="colGreen" />
                   </columns>
                 </TableView>
                 <TableView fx:id="tableNumber" focusTraversable="false" layoutX="0.0" layoutY="0.0" prefHeight="838.0" prefWidth="35.0">
