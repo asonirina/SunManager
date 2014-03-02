@@ -26,7 +26,7 @@ public class LoginPage extends Application {
         Scene scene = new Scene(pane);
         scene.getStylesheets().add(getClass().getResource("login.css").toExternalForm());
         stage.setScene(scene);
-        stage.setTitle("Login");
+        stage.setTitle("Добро пожаловать!");
         stage.show();
     }
 }

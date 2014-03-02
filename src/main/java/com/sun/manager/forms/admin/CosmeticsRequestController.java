@@ -60,18 +60,20 @@ public class CosmeticsRequestController extends AnchorPane implements Initializa
         addCosmButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                CosmeticsRequest cr = new CosmeticsRequest(Long.parseLong(countText.getText()),
-                        cosmeticsList.getSelectionModel().getSelectedItem());
-                int index = resultList.getItems().indexOf(cr);
-                if (index != -1) {
-                    CosmeticsRequest c = resultList.getItems().get(index);
-                    cr.setCount(c.getCount() + cr.getCount());
-                    resultList.getItems().remove(index);
-                    resultList.getItems().add(index, cr);
-                } else {
-                    resultList.getItems().add(0, cr);
+                Cosmetics cosmetics = cosmeticsList.getSelectionModel().getSelectedItem();
+                if (cosmetics != null) {
+                    CosmeticsRequest cr =
+                            new CosmeticsRequest(Long.parseLong(countText.getText()), cosmetics);
+                    int index = resultList.getItems().indexOf(cr);
+                    if (index != -1) {
+                        CosmeticsRequest c = resultList.getItems().get(index);
+                        cr.setCount(c.getCount() + cr.getCount());
+                        resultList.getItems().remove(index);
+                        resultList.getItems().add(index, cr);
+                    } else {
+                        resultList.getItems().add(0, cr);
+                    }
                 }
-
 
             }
         });
@@ -91,7 +93,7 @@ public class CosmeticsRequestController extends AnchorPane implements Initializa
                     stage.close();
                     App.getInstance().getEventBus().post(new NewCosmeticsAddedEvent(list));
                 } else {
-                    StringBuilder sb = new StringBuilder("Sorry, there are no some items in stock: \n");
+                    StringBuilder sb = new StringBuilder("Следующих товаров нет на складе!: \n");
                     for (Map.Entry<String, Long> entry : result.entrySet()) {
                         sb.append(entry.getKey() + " : " + entry.getValue() + "\n");
                     }

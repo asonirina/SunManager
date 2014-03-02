@@ -149,6 +149,9 @@ public class MainAdminController extends AnchorPane implements Initializable {
     @FXML
     Button addAbon;
 
+    @FXML
+    Button usersButton;
+
 
     SolariumService solariumService = new SolariumService();
     final ObservableList<BaseSolariumData> vertData = FXCollections.observableArrayList(
@@ -216,7 +219,7 @@ public class MainAdminController extends AnchorPane implements Initializable {
             App.getInstance().getEventBus().register(this);
 
             dateLabel.setText((new Date(Calendar.getInstance().getTime().getTime()).toString()));
-            usernameLabel.setText("Hello, " + App.getInstance().getUser().getName() + "!");
+            usernameLabel.setText("Привет, " + App.getInstance().getUser().toString() + "!");
             setOnButtonsClicked();
             addBlankItems();
 
@@ -428,6 +431,7 @@ public class MainAdminController extends AnchorPane implements Initializable {
         if (App.getInstance().getUser().getRole().equals("admin")) {
             addCosm.setVisible(false);
             addAbon.setVisible(false);
+            usersButton.setVisible(false);
         } else {
 
             addCosm.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -446,6 +450,18 @@ public class MainAdminController extends AnchorPane implements Initializable {
                 public void handle(MouseEvent mouseEvent) {
                     try {
                         AddAbonementPage page = new AddAbonementPage();
+                        page.start(new Stage());
+                    } catch (IOException ex) {
+                        throw new RuntimeException(ex);
+                    }
+                }
+            });
+
+            usersButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    try {
+                        UsersPage page = new UsersPage();
                         page.start(new Stage());
                     } catch (IOException ex) {
                         throw new RuntimeException(ex);

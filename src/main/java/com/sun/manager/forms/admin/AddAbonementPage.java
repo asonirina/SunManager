@@ -22,7 +22,7 @@ public class AddAbonementPage extends Application {
         Pane pane = FXMLLoader.load(AddAbonementPage.class.getResource("fxml/add_abonement.fxml"));
         Scene scene = new Scene(pane);
         stage.setScene(scene);
-        stage.setTitle("Add Abonement");
+        stage.setTitle("Добавить абонемент");
         stage.show();
 
         stage.setOnCloseRequest(new EventHandler<WindowEvent>() {

@@ -12,17 +12,17 @@ import javafx.stage.WindowEvent;
 
 import java.io.IOException;
 
-public class AddCosmeticsPage extends Application {
+public class UsersPage extends Application {
     public static void main(String[] args) {
         Application.launch(args);
     }
 
     @Override
     public void start(Stage stage) throws IOException {
-        Pane pane = FXMLLoader.load(AddCosmeticsPage.class.getResource("fxml/add_cosmetics.fxml"));
+        Pane pane = FXMLLoader.load(UsersPage.class.getResource("fxml/users_page.fxml"));
         Scene scene = new Scene(pane);
         stage.setScene(scene);
-        stage.setTitle("Добавить косметику");
+        stage.setTitle("Пользователи");
         stage.show();
 
         stage.setOnCloseRequest(new EventHandler<WindowEvent>() {

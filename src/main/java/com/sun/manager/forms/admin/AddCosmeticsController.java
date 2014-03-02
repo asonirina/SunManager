@@ -67,12 +67,11 @@ public class AddCosmeticsController extends AnchorPane implements Initializable 
             public void handle(MouseEvent mouseEvent) {
 
                 Cosmetics cosm = cosmList.getSelectionModel().getSelectedItem();
-                Long count = Long.parseLong(countField.getText());
-
-                CosmeticsRequest request = new CosmeticsRequest(count, cosm);
-
-                resultList.getItems().add(request);
-                //save cosm request
+                if (cosm != null) {
+                    Long count = Long.parseLong(countField.getText());
+                    CosmeticsRequest request = new CosmeticsRequest(count, cosm);
+                    resultList.getItems().add(request);
+                }
             }
         });
 
@@ -83,7 +82,7 @@ public class AddCosmeticsController extends AnchorPane implements Initializable 
                 String name = nameField.getText();
                 long price = Long.parseLong(priceField.getText());
                 Cosmetics c = new Cosmetics(null, name, price, 0L);
-                service.createCosmetic(name, (int)price, 0);
+                service.createCosmetic(name, (int) price, 0);
 
                 cosmList.getItems().add(c);
             }
@@ -94,7 +93,7 @@ public class AddCosmeticsController extends AnchorPane implements Initializable 
             public void handle(MouseEvent mouseEvent) {
                 ObservableList<CosmeticsRequest> items = resultList.getItems();
                 HashMap<Cosmetics, Long> map = new HashMap<Cosmetics, Long>();
-                for (CosmeticsRequest cr: items) {
+                for (CosmeticsRequest cr : items) {
                     map.put(cr.getCosmetics(), cr.getCount());
                 }
                 service.putCosmeticsToStock(map);

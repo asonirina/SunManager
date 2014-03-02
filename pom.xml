@@ -24,6 +24,14 @@
       </dependency>
 
       <dependency>
+          <groupId>eu.schudt</groupId>
+          <artifactId>javafx-datepicker</artifactId>
+          <scope>system</scope>
+          <version>1.0</version>
+          <systemPath>C:/Users/iason/SunManager/lib/schudt-javafx-datepicker-0.0.2.jar</systemPath>
+      </dependency>
+
+      <dependency>
           <groupId>mysql</groupId>
           <artifactId>mysql-connector-java</artifactId>
           <version>5.0.8</version>

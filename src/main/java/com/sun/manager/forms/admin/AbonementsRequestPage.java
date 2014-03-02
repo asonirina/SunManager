@@ -24,7 +24,7 @@ public class AbonementsRequestPage extends Application{
         Pane pane = FXMLLoader.load(AbonementsRequestPage.class.getResource("fxml/abonement_page.fxml"));
         Scene scene = new Scene(pane);
         stage.setScene(scene);
-        stage.setTitle("Abonement Request");
+        stage.setTitle("Запросить абонемент");
         stage.show();
     }
 }

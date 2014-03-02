@@ -212,6 +212,7 @@ public class SolariumDAO {
             String password = rs.getString("password");
             String role = rs.getString("role");
             user.setName(name);
+            user.setLogin(login);
             user.setPassword(password);
             user.setRole(role);
         }

@@ -26,7 +26,7 @@ public class MainAdminPage extends Application {
         Pane pane = FXMLLoader.load(MainAdminPage.class.getResource("fxml/admin_main1.fxml"));
         Scene scene = new Scene(pane);
         stage.setScene(scene);
-        stage.setTitle("Main Page");
+        stage.setTitle("Главная страница");
         stage.show();
 
         stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
