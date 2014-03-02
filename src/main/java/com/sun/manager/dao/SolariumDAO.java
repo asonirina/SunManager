@@ -298,4 +298,41 @@ public class SolariumDAO {
         ps.setInt(3, cosmeticsCount);
         ps.executeUpdate();
     }
+
+    public List<Users> getUsersByRole(String role) throws SQLException {
+        List<Users> usersList = new ArrayList<Users>();
+        PreparedStatement ps2 = dbConnection.prepareStatement("select login, name, password from users where role = ?");
+        ps2.setString(1, role);
+        ResultSet rs = ps2.executeQuery();
+
+        while (rs.next()) {
+            Users user = new Users();
+            String name = rs.getString("name");
+            String password = rs.getString("password");
+            String login = rs.getString("login");
+            user.setName(name);
+            user.setPassword(password);
+            user.setLogin(login);
+
+            usersList.add(user);
+        }
+        return usersList;
+    }
+
+
+    public void addUser(Users user) throws SQLException {
+        PreparedStatement ps = dbConnection.prepareStatement("insert into users (login, name, password, role) values(?,?,?,?)");
+        ps.setString(1, user.getLogin());
+        ps.setString(2, user.getName());
+        ps.setString(3, user.getPassword());
+        ps.setString(4, user.getRole());
+        ps.executeUpdate();
+    }
+
+
+    public void deleteUser(String login) throws SQLException {
+        PreparedStatement ps = dbConnection.prepareStatement("delete from users where login = ?");
+        ps.setString(1, login);
+        ps.executeUpdate();
+    }
 }
