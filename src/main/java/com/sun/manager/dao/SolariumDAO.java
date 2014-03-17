@@ -365,4 +365,18 @@ public class SolariumDAO {
         }
         return customerStatisticList;
     }
+
+    public List<Comment> getCommentsByDate(Date date) throws SQLException {
+        List<Comment> comments = new ArrayList<Comment>();
+        PreparedStatement ps = dbConnection.prepareStatement("select comment  from comments_data where start_date = ?");
+        ResultSet rs = ps.executeQuery();
+
+        while (rs.next()) {
+            String comment = rs.getString("comment");
+
+            Comment commentData = new Comment(date, comment);
+            comments.add(commentData);
+        }
+        return comments;
+    }
 }
