@@ -44,3 +44,9 @@ Insert into gorizontal_blue_sun_data (data_id, start_date, minutes, total_price,
 Insert into gorizontal_green_sun_data (data_id, start_date, minutes, total_price, abonement_number) VALUES(1,  '2013-12-11', 5, 39500, NULL);
 Insert into gorizontal_green_sun_data (data_id, start_date, minutes, total_price, abonement_number) VALUES(2,  '2013-12-11', 7, 54600, NULL);
 Insert into gorizontal_green_sun_data (data_id, start_date, minutes, total_price, abonement_number) VALUES(3,  '2013-12-11', 11, 85800, NULL);
+
+
+Insert into comments_data (comment_id, start_date, comment) VALUES(1,  '2013-12-11', 'dsadsadasdsad');
+Insert into comments_data (comment_id, start_date, comment) VALUES(2,  '2013-12-11', 'v vvvvv');
+Insert into comments_data (comment_id, start_date, comment) VALUES(3,  '2013-12-11', 'efergfgdgfdg');
+

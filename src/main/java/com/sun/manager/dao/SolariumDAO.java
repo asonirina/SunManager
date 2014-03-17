@@ -198,8 +198,8 @@ public class SolariumDAO {
             }
         }
 
-    return resultData;
-}
+        return resultData;
+    }
 
     public Users getUserByLogin(String login) throws SQLException {
         Users user = new Users();
@@ -271,14 +271,22 @@ public class SolariumDAO {
     }
 
     public void saveAbonement(List<AbonementsRequest> abonementsRequestList) throws SQLException {
+        PreparedStatement ps = dbConnection.prepareStatement("select customer_id from abonements_data where client_name = ? and phone = ?");
+
         for (AbonementsRequest abonementsRequest : abonementsRequestList) {
-            PreparedStatement ps = dbConnection.prepareStatement("insert into abonements_data (start_date, code, letter, client_name, phone) values(?,?,?,?,?)");
-            ps.setDate(1, (Date) abonementsRequest.getStartDate());
-            ps.setLong(2, abonementsRequest.getCode());
-            ps.setString(3, abonementsRequest.getLetter());
-            ps.setString(4, abonementsRequest.getName());
-            ps.setString(5, abonementsRequest.getPhone());
-            ps.executeUpdate();
+            ps.setString(1, abonementsRequest.getName());
+            ps.setString(2, abonementsRequest.getPhone());
+            ResultSet rs = ps.executeQuery();
+            //check for unique
+            if (rs.next()) {
+                PreparedStatement ps2 = dbConnection.prepareStatement("insert into abonements_data (start_date, code, letter, client_name, phone) values(?,?,?,?,?)");
+                ps2.setDate(1, (Date) abonementsRequest.getStartDate());
+                ps2.setLong(2, abonementsRequest.getCode());
+                ps2.setString(3, abonementsRequest.getLetter());
+                ps2.setString(4, abonementsRequest.getName());
+                ps2.setString(5, abonementsRequest.getPhone());
+                ps2.executeUpdate();
+            }
         }
     }
 
@@ -290,7 +298,7 @@ public class SolariumDAO {
         ps.setInt(3, minutes);
         ps.setInt(4, duration);
         ps.executeUpdate();
-}
+    }
 
     public void createCosmetic(String name, int price, int cosmeticsCount) throws SQLException {
         PreparedStatement ps = dbConnection.prepareStatement("insert into cosmetics (name, price, cosmetics_count) values(?,?,?)");
@@ -335,5 +343,26 @@ public class SolariumDAO {
         PreparedStatement ps = dbConnection.prepareStatement("delete from users where login = ?");
         ps.setString(1, login);
         ps.executeUpdate();
+    }
+
+    public void addComment(String comment) throws SQLException {
+        PreparedStatement ps = dbConnection.prepareStatement("insert into comments_data (start_date, comment) values(?,?)");
+        ps.setDate(1, new java.sql.Date((new java.util.Date()).getTime()));
+        ps.setString(2, comment);
+        ps.executeUpdate();
+    }
+
+    public List<CustomerStatistic> getBuyersStatistic() throws SQLException {
+        List<CustomerStatistic> customerStatisticList = new ArrayList<CustomerStatistic>();
+        PreparedStatement ps = dbConnection.prepareStatement("select c.name, count(a.customer_id) as count from abonements as a JOIN customers as c on a.customer_id = c.customer_id group by a.customer_id");
+        ResultSet rs = ps.executeQuery();
+
+        while (rs.next()) {
+            String name = rs.getString("name");
+            Long count = rs.getLong("count");
+            CustomerStatistic customerStatistic = new CustomerStatistic(name, count);
+            customerStatisticList.add(customerStatistic);
+        }
+        return customerStatisticList;
     }
 }

@@ -101,3 +101,9 @@ CREATE TABLE IF NOT EXISTS cosmetics_data (
       cosm_name          VARCHAR(100),
       price              int
 ) ENGINE=INNODB;
+
+CREATE TABLE IF NOT EXISTS comments_data (
+      comment_id         int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+      start_date         date,
+      comment            VARCHAR(500)
+) ENGINE=INNODB;
