@@ -48,6 +48,12 @@ public class MainAdminController extends AnchorPane implements Initializable {
     Label dateLabel;
 
     @FXML
+    Button addComment;
+
+    @FXML
+    Button showComments;
+
+    @FXML
     Label usernameLabel;
 
 
@@ -207,6 +213,7 @@ public class MainAdminController extends AnchorPane implements Initializable {
                     public void invalidated(Observable observable) {
                         date = new Date(datePicker.getSelectedDate().getTime());
                         updateInfoByDate();
+                        App.getInstance().setSelectedDate(date);
 
 
                     }
@@ -215,7 +222,7 @@ public class MainAdminController extends AnchorPane implements Initializable {
 
                 dateLabel.setVisible(false);
             }
-
+            App.getInstance().setSelectedDate(date);
             App.getInstance().getEventBus().register(this);
 
             dateLabel.setText((new Date(Calendar.getInstance().getTime().getTime()).toString()));
@@ -432,8 +439,32 @@ public class MainAdminController extends AnchorPane implements Initializable {
             addCosm.setVisible(false);
             addAbon.setVisible(false);
             usersButton.setVisible(false);
+            showComments.setVisible(false);
+            addComment.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    AddCommentPage page = new AddCommentPage();
+                    try {
+                        page.start(new Stage());
+                    } catch (IOException ex) {
+                        throw new RuntimeException(ex);
+                    }
+                }
+            });
         } else {
+            addComment.setVisible(false);
+            showComments.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    ShowCommentPage page = new ShowCommentPage();
+                    try {
 
+                        page.start(new Stage());
+                    } catch (IOException ex) {
+                        throw new RuntimeException(ex);
+                    }
+                }
+            });
             addCosm.setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent mouseEvent) {

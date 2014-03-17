@@ -90,5 +90,7 @@
     <Button fx:id="addCosm" layoutX="721.0" layoutY="52.0" mnemonicParsing="false" text="Добавить косметику" />
     <Button fx:id="addAbon" layoutX="926.0" layoutY="52.0" mnemonicParsing="false" text="Добавить абонемент" />
     <Button fx:id="usersButton" layoutX="542.0" layoutY="54.0" mnemonicParsing="false" text="Пользователи" />
+    <Button fx:id="addComment" layoutX="318.0" layoutY="54.0" mnemonicParsing="false" text="Добавить комментарий" />
+    <Button fx:id="showComments" layoutX="308.0" layoutY="54.0" mnemonicParsing="false" prefWidth="173.0" text="Посмотреть комментарии" />
   </children>
 </AnchorPane>

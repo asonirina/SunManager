@@ -2,10 +2,7 @@ package com.sun.manager.service;
 
 import com.sun.manager.constants.SolariumEnum;
 import com.sun.manager.dao.SolariumDAO;
-import com.sun.manager.dto.AbonementsRequest;
-import com.sun.manager.dto.BaseSolariumData;
-import com.sun.manager.dto.Cosmetics;
-import com.sun.manager.dto.CosmeticsRequest;
+import com.sun.manager.dto.*;
 import javafx.collections.ObservableList;
 
 import java.sql.Date;
@@ -133,6 +130,24 @@ public class SolariumService {
     public void createAbonement(String letter, String code, int minutes, int duration, int price) {
         try {
             dao.createAbonement(letter, code, minutes, duration, price);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            throw new RuntimeException(ex.getMessage());
+        }
+    }
+
+    public void saveComment(Comment comment) {
+        try {
+            dao.addComment(comment);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            throw new RuntimeException(ex.getMessage());
+        }
+    }
+
+    public List<Comment> getComments(Date date) {
+        try {
+            return dao.getCommentsByDate(date);
         } catch (SQLException ex) {
             ex.printStackTrace();
             throw new RuntimeException(ex.getMessage());

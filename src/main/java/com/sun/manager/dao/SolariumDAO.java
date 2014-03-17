@@ -345,10 +345,10 @@ public class SolariumDAO {
         ps.executeUpdate();
     }
 
-    public void addComment(String comment) throws SQLException {
+    public void addComment(Comment comment) throws SQLException {
         PreparedStatement ps = dbConnection.prepareStatement("insert into comments_data (start_date, comment) values(?,?)");
-        ps.setDate(1, new java.sql.Date((new java.util.Date()).getTime()));
-        ps.setString(2, comment);
+        ps.setDate(1, new java.sql.Date((comment.getDate()).getTime()));
+        ps.setString(2, comment.getComment());
         ps.executeUpdate();
     }
 
@@ -369,6 +369,7 @@ public class SolariumDAO {
     public List<Comment> getCommentsByDate(Date date) throws SQLException {
         List<Comment> comments = new ArrayList<Comment>();
         PreparedStatement ps = dbConnection.prepareStatement("select comment  from comments_data where start_date = ?");
+        ps.setDate(1, date);
         ResultSet rs = ps.executeQuery();
 
         while (rs.next()) {
