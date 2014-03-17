@@ -19,7 +19,6 @@ public class CosmeticsRequestPage extends Application{
 
     @Override
     public void start(Stage stage) throws IOException {
-        SqlServer.init();
         Pane pane = FXMLLoader.load(CosmeticsRequestPage.class.getResource("fxml/cosmetics_request.fxml"));
         Scene scene = new Scene(pane);
         stage.setScene(scene);

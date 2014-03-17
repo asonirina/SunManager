@@ -25,17 +25,6 @@ public class UsersPage extends Application {
         stage.setTitle("Пользователи");
         stage.show();
 
-        stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-            @Override
-            public void handle(WindowEvent event) {
-                try {
-                    App.getInstance().getEventBus().post(new ClosePageEvent());
-                    stop();
-                } catch (Exception ex) {
-                    throw new RuntimeException(ex);
-                }
-            }
-        });
     }
 
 }

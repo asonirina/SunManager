@@ -24,18 +24,6 @@ public class AddAbonementPage extends Application {
         stage.setScene(scene);
         stage.setTitle("Добавить абонемент");
         stage.show();
-
-        stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-            @Override
-            public void handle(WindowEvent event) {
-                try {
-                    App.getInstance().getEventBus().post(new ClosePageEvent());
-                    stop();
-                } catch (Exception ex) {
-                    throw new RuntimeException(ex);
-                }
-            }
-        });
     }
 
 }

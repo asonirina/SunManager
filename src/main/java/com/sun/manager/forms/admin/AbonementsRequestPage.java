@@ -20,7 +20,6 @@ public class AbonementsRequestPage extends Application{
 
     @Override
     public void start(Stage stage) throws IOException {
-        SqlServer.init();
         Pane pane = FXMLLoader.load(AbonementsRequestPage.class.getResource("fxml/abonement_page.fxml"));
         Scene scene = new Scene(pane);
         stage.setScene(scene);
