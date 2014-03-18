@@ -54,6 +54,9 @@ public class MainAdminController extends AnchorPane implements Initializable {
     Button showComments;
 
     @FXML
+    Button statButton;
+
+    @FXML
     Label usernameLabel;
 
 
@@ -440,6 +443,7 @@ public class MainAdminController extends AnchorPane implements Initializable {
             addAbon.setVisible(false);
             usersButton.setVisible(false);
             showComments.setVisible(false);
+            statButton.setVisible(false);
             addComment.setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent mouseEvent) {
@@ -497,6 +501,18 @@ public class MainAdminController extends AnchorPane implements Initializable {
                     } catch (IOException ex) {
                         throw new RuntimeException(ex);
                     }
+                }
+            });
+
+            statButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    try{
+                    StatisticsPage page = new StatisticsPage();
+                    page.start(new Stage());
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
                 }
             });
         }

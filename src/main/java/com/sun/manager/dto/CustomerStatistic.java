@@ -2,7 +2,7 @@ package com.sun.manager.dto;
 
 public class CustomerStatistic {
     private String name;
-    private Long   abonementsCount;
+    private Long abonementsCount;
 
     public CustomerStatistic(String name, Long abonementsCount) {
         this.name = name;

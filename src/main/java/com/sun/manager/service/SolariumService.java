@@ -80,7 +80,7 @@ public class SolariumService {
         }
     }
 
-    public List<AbonementsRequest> getAbonByDate(Date startDate)  {
+    public List<AbonementsRequest> getAbonByDate(Date startDate) {
         try {
             return dao.getAbonByDate(startDate);
         } catch (SQLException ex) {
@@ -92,7 +92,7 @@ public class SolariumService {
 
     public void saveCosmetics(List<CosmeticsRequest> cosmeticsRequestList) {
         try {
-             dao.saveCosmetics(cosmeticsRequestList);
+            dao.saveCosmetics(cosmeticsRequestList);
         } catch (SQLException ex) {
             ex.printStackTrace();
             throw new RuntimeException(ex.getMessage());
@@ -101,14 +101,14 @@ public class SolariumService {
 
     public void saveAbonement(List<AbonementsRequest> abonementsRequestList) {
         try {
-             dao.saveAbonement(abonementsRequestList);
+            dao.saveAbonement(abonementsRequestList);
         } catch (SQLException ex) {
             ex.printStackTrace();
             throw new RuntimeException(ex.getMessage());
         }
     }
 
-    public void createCosmetic(String name, int price, int cosmeticsCount){
+    public void createCosmetic(String name, int price, int cosmeticsCount) {
         try {
             dao.createCosmetic(name, price, cosmeticsCount);
         } catch (SQLException ex) {
@@ -148,6 +148,15 @@ public class SolariumService {
     public List<Comment> getComments(Date date) {
         try {
             return dao.getCommentsByDate(date);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            throw new RuntimeException(ex.getMessage());
+        }
+    }
+
+    public List<CustomerStatistic> getStatistics() {
+        try {
+            return dao.getBuyersStatistic();
         } catch (SQLException ex) {
             ex.printStackTrace();
             throw new RuntimeException(ex.getMessage());
