@@ -6,9 +6,9 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.paint.*?>
 
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="514.0" prefWidth="626.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.sun.manager.forms.admin.CosmeticsRequestController">
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="578.0" prefWidth="650.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.sun.manager.forms.admin.CosmeticsRequestController">
   <children>
-    <AnchorPane layoutX="14.0" layoutY="14.0" prefHeight="486.0" prefWidth="598.0">
+    <AnchorPane layoutX="14.0" layoutY="14.0" prefHeight="550.0" prefWidth="622.0">
       <children>
         <ListView fx:id="cosmeticsList" layoutX="14.0" layoutY="14.0" prefHeight="146.0" prefWidth="272.0" />
         <TextField fx:id="countText" layoutX="304.0" layoutY="37.0" prefWidth="140.0" />
@@ -17,6 +17,9 @@
         <Button fx:id="saveButton" layoutX="358.0" layoutY="268.0" mnemonicParsing="false" text="Сохранить" />
         <Button fx:id="deleteButton" layoutX="353.0" layoutY="214.0" mnemonicParsing="false" text="Удалить" />
         <TextArea fx:id="errorArea" layoutX="14.0" layoutY="339.0" prefHeight="133.0" prefWidth="423.0" wrapText="true" />
+        <Label fx:id="errorLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="299.0" layoutY="141.0" prefWidth="167.0" text="Label" textFill="RED" visible="false" />
+        <Button fx:id="okButton" layoutX="405.0" layoutY="507.0" mnemonicParsing="false" prefWidth="78.0" text="OK" />
+        <Button fx:id="cancelButton" layoutX="495.0" layoutY="507.0" mnemonicParsing="false" prefWidth="78.0" text="Отмена" />
       </children>
     </AnchorPane>
   </children>
