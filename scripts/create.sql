@@ -107,3 +107,16 @@ CREATE TABLE IF NOT EXISTS comments_data (
       start_date         date,
       comment            VARCHAR(500)
 ) ENGINE=INNODB;
+
+
+CREATE TABLE IF NOT EXISTS statistic_data (
+      statistic_id         int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+      start_date           date,
+      residue              int,
+      booking_per_day      int,
+      bank                 int,
+      official_salary      int,
+      quenching            int,
+      accumulation         int,
+      users_id             int
+) ENGINE=INNODB;
