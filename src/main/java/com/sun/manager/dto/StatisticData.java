@@ -26,6 +26,10 @@ public class StatisticData {
 
     }
 
+    public StatisticData() {
+
+    }
+
     public Integer getId() {
         return id;
     }

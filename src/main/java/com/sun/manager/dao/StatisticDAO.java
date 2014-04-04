@@ -50,6 +50,9 @@ public class StatisticDAO {
         ps.setDate(1, lastDate);
         ResultSet rs = ps.executeQuery();
 
+        if(!rs.next()) {
+            return 0;
+        }
         Integer residue = rs.getInt("residue");
         Integer bookingPerDay = rs.getInt("booking_per_day");
         Integer bank = rs.getInt("bank");

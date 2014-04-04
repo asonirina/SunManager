@@ -161,6 +161,9 @@ public class MainAdminController extends AnchorPane implements Initializable {
     @FXML
     Button usersButton;
 
+    @FXML
+    Button bankButton;
+
 
     SolariumService solariumService = new SolariumService();
     final ObservableList<BaseSolariumData> vertData = FXCollections.observableArrayList(
@@ -438,6 +441,19 @@ public class MainAdminController extends AnchorPane implements Initializable {
             }
         });
 
+        bankButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                App.getInstance().getEventBus().post(new ClosePageEvent());
+                BankDataPage page = new BankDataPage();
+                try {
+                    page.start(new Stage());
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
+        });
+
         if (App.getInstance().getUser().getRole().equals("admin")) {
             addCosm.setVisible(false);
             addAbon.setVisible(false);
@@ -507,12 +523,12 @@ public class MainAdminController extends AnchorPane implements Initializable {
             statButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent mouseEvent) {
-                    try{
-                    StatisticsPage page = new StatisticsPage();
-                    page.start(new Stage());
-                } catch (IOException ex) {
-                    throw new RuntimeException(ex);
-                }
+                    try {
+                        StatisticsPage page = new StatisticsPage();
+                        page.start(new Stage());
+                    } catch (IOException ex) {
+                        throw new RuntimeException(ex);
+                    }
                 }
             });
         }
