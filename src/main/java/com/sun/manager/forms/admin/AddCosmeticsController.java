@@ -9,6 +9,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
@@ -16,6 +17,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import org.apache.commons.lang.StringUtils;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -53,6 +55,12 @@ public class AddCosmeticsController extends AnchorPane implements Initializable 
     @FXML
     Button cancelButton;
 
+    @FXML
+    Label errorLabel;
+
+    @FXML
+    Label addErrorLabel;
+
     SolariumService service = new SolariumService();
 
     ObservableList<Cosmetics> cosmetics = FXCollections.observableArrayList(service.getAllCosmetics());
@@ -60,18 +68,26 @@ public class AddCosmeticsController extends AnchorPane implements Initializable 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
+        errorLabel.setVisible(false);
         cosmList.setItems(cosmetics);
 
         addButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
 
-                Cosmetics cosm = cosmList.getSelectionModel().getSelectedItem();
-                if (cosm != null) {
-                    Long count = Long.parseLong(countField.getText());
-                    CosmeticsRequest request = new CosmeticsRequest(count, cosm);
-                    resultList.getItems().add(request);
+                if (countField.getText().matches("\\d+")) {
+                    Cosmetics cosm = cosmList.getSelectionModel().getSelectedItem();
+                    if (cosm != null) {
+                        Long count = Long.parseLong(countField.getText());
+                        CosmeticsRequest request = new CosmeticsRequest(count, cosm);
+                        resultList.getItems().add(request);
+                        errorLabel.setVisible(false);
+                    }
+                } else {
+                    errorLabel.setVisible(true);
+                    errorLabel.setText("Введите число!");
                 }
+
             }
         });
 
@@ -79,12 +95,17 @@ public class AddCosmeticsController extends AnchorPane implements Initializable 
             @Override
             public void handle(MouseEvent mouseEvent) {
 
-                String name = nameField.getText();
-                long price = Long.parseLong(priceField.getText());
-                Cosmetics c = new Cosmetics(null, name, price, 0L);
-                service.createCosmetic(name, (int) price, 0);
+                if (validate()) {
+                    String name = nameField.getText();
+                    long price = Long.parseLong(priceField.getText());
+                    Cosmetics c = new Cosmetics(null, name, price, 0L);
+                    service.createCosmetic(name, (int) price, 0);
 
-                cosmList.getItems().add(c);
+                    cosmList.getItems().add(c);
+                    addErrorLabel.setVisible(false);
+
+                }
+
             }
         });
 
@@ -107,5 +128,20 @@ public class AddCosmeticsController extends AnchorPane implements Initializable 
                 ((Stage) cancelButton.getScene().getWindow()).close();
             }
         });
+    }
+
+    private boolean validate() {
+        if (StringUtils.isBlank(nameField.getText()) && StringUtils.isBlank(priceField.getText())) {
+            addErrorLabel.setText("Заполните все поля!");
+            addErrorLabel.setVisible(true);
+            return false;
+        }
+        if (!priceField.getText().matches("\\d+")) {
+            addErrorLabel.setText("Введите число!!");
+            addErrorLabel.setVisible(true);
+            return false;
+        }
+        addErrorLabel.setVisible(false);
+        return true;
     }
 }

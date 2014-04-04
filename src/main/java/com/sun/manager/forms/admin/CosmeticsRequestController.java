@@ -10,10 +10,7 @@ import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -48,6 +45,14 @@ public class CosmeticsRequestController extends AnchorPane implements Initializa
     @FXML
     TextArea errorArea;
 
+    @FXML
+    Label errorLabel;
+
+    @FXML
+    Button okButton;
+
+    @FXML
+    Button cancelButton;
     SolariumService service = new SolariumService();
 
 
@@ -55,24 +60,31 @@ public class CosmeticsRequestController extends AnchorPane implements Initializa
     public void initialize(URL url, ResourceBundle resourceBundle) {
         cosmeticsList.setItems(FXCollections.observableArrayList(service.getAllCosmetics()));
 
+        errorLabel.setVisible(false);
         errorArea.setEditable(false);
 
         addCosmButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                Cosmetics cosmetics = cosmeticsList.getSelectionModel().getSelectedItem();
-                if (cosmetics != null) {
-                    CosmeticsRequest cr =
-                            new CosmeticsRequest(Long.parseLong(countText.getText()), cosmetics);
-                    int index = resultList.getItems().indexOf(cr);
-                    if (index != -1) {
-                        CosmeticsRequest c = resultList.getItems().get(index);
-                        cr.setCount(c.getCount() + cr.getCount());
-                        resultList.getItems().remove(index);
-                        resultList.getItems().add(index, cr);
-                    } else {
-                        resultList.getItems().add(0, cr);
+                if (countText.getText().matches("\\d+")) {
+                    Cosmetics cosmetics = cosmeticsList.getSelectionModel().getSelectedItem();
+                    if (cosmetics != null) {
+                        CosmeticsRequest cr =
+                                new CosmeticsRequest(Long.parseLong(countText.getText()), cosmetics);
+                        int index = resultList.getItems().indexOf(cr);
+                        if (index != -1) {
+                            CosmeticsRequest c = resultList.getItems().get(index);
+                            cr.setCount(c.getCount() + cr.getCount());
+                            resultList.getItems().remove(index);
+                            resultList.getItems().add(index, cr);
+                        } else {
+                            resultList.getItems().add(0, cr);
+                        }
                     }
+                    errorLabel.setVisible(false);
+                } else {
+                    errorLabel.setText("Введите число");
+                    errorLabel.setVisible(true);
                 }
 
             }
@@ -107,6 +119,22 @@ public class CosmeticsRequestController extends AnchorPane implements Initializa
             @Override
             public void handle(MouseEvent mouseEvent) {
                 resultList.getItems().remove(resultList.getSelectionModel().getSelectedItem());
+            }
+        });
+
+        okButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                Stage stage = (Stage) okButton.getScene().getWindow();
+                stage.close();
+            }
+        });
+
+        cancelButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                Stage stage = (Stage) cancelButton.getScene().getWindow();
+                stage.close();
             }
         });
 
