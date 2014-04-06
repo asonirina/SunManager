@@ -579,6 +579,7 @@ public class MainAdminController extends AnchorPane implements Initializable {
                 BaseSolariumData d = vertData.get(i);
                 if (d.getMinutes() != null) {
                     data.add(d);
+                    vertSize++;
                 }
             }
             solariumService.saveSolariumData(data, 1L);
@@ -589,6 +590,7 @@ public class MainAdminController extends AnchorPane implements Initializable {
                 BaseSolariumData d = greenData.get(i);
                 if (d.getMinutes() != null) {
                     data.add(d);
+                    greenSize++;
                 }
             }
             solariumService.saveSolariumData(data, 2L);
@@ -599,6 +601,7 @@ public class MainAdminController extends AnchorPane implements Initializable {
                 BaseSolariumData d = blueData.get(i);
                 if (d.getMinutes() != null) {
                     data.add(d);
+                    blueSize++;
                 }
             }
             solariumService.saveSolariumData(data, 3L);
@@ -608,6 +611,7 @@ public class MainAdminController extends AnchorPane implements Initializable {
                 CosmeticsRequest cr = cosmeticsData.get(i);
                 if (cr.getCosmetics() != null) {
                     cosmeticsRequests.add(cr);
+                    cosmSize++;
                 }
             }
             solariumService.saveCosmetics(cosmeticsRequests);
@@ -618,6 +622,7 @@ public class MainAdminController extends AnchorPane implements Initializable {
                 AbonementsRequest abonementRequest = abonementsData.get(i);
                 if (abonementRequest.getLetter() != null) {
                     abonementsRequests.add(abonementRequest);
+                    abonSize++;
                 }
             }
             solariumService.saveAbonement(abonementsRequests);
