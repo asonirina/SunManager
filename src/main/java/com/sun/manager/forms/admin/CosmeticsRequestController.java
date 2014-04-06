@@ -48,11 +48,6 @@ public class CosmeticsRequestController extends AnchorPane implements Initializa
     @FXML
     Label errorLabel;
 
-    @FXML
-    Button okButton;
-
-    @FXML
-    Button cancelButton;
     SolariumService service = new SolariumService();
 
 
@@ -121,23 +116,6 @@ public class CosmeticsRequestController extends AnchorPane implements Initializa
                 resultList.getItems().remove(resultList.getSelectionModel().getSelectedItem());
             }
         });
-
-        okButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                Stage stage = (Stage) okButton.getScene().getWindow();
-                stage.close();
-            }
-        });
-
-        cancelButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                Stage stage = (Stage) cancelButton.getScene().getWindow();
-                stage.close();
-            }
-        });
-
 
     }
 }
