@@ -271,32 +271,39 @@ public class SolariumDAO {
     }
 
     public void saveAbonement(List<AbonementsRequest> abonementsRequestList) throws SQLException {
-        PreparedStatement ps = dbConnection.prepareStatement("select data_id from abonements_data where client_name = ? and phone = ?");
+//        PreparedStatement ps = dbConnection.prepareStatement("select data_id from abonements_data where client_name = ? and phone = ?");
 
         for (AbonementsRequest abonementsRequest : abonementsRequestList) {
-            ps.setString(1, abonementsRequest.getName());
-            ps.setString(2, abonementsRequest.getPhone());
-            ResultSet rs = ps.executeQuery();
-            //check for unique
-            if (rs.next()) {
-                PreparedStatement ps2 = dbConnection.prepareStatement("insert into abonements_data (start_date, code, letter, client_name, phone) values(?,?,?,?,?)");
-                ps2.setDate(1, (Date) abonementsRequest.getStartDate());
-                ps2.setLong(2, abonementsRequest.getCode());
-                ps2.setString(3, abonementsRequest.getLetter());
-                ps2.setString(4, abonementsRequest.getName());
-                ps2.setString(5, abonementsRequest.getPhone());
-                ps2.executeUpdate();
-            }
+//            ps.setString(1, abonementsRequest.getName());
+//            ps.setString(2, abonementsRequest.getPhone());
+//            ResultSet rs = ps.executeQuery();
+//            //check for unique
+//            if (rs.next()) {
+            PreparedStatement ps2 = dbConnection.prepareStatement("insert into abonements_data (start_date, code, letter, client_name, phone) values(?,?,?,?,?)");
+            PreparedStatement ps1 = dbConnection.prepareStatement("update abonements set is_free = ? where abonement_code = ?");
+            ps1.setBoolean(1, Boolean.FALSE);
+            ps1.setString(2, abonementsRequest.getLetter() + abonementsRequest.getCode());
+            ps1.executeUpdate();
+
+            ps2.setDate(1, (Date) abonementsRequest.getStartDate());
+            ps2.setLong(2, abonementsRequest.getCode());
+            ps2.setString(3, abonementsRequest.getLetter());
+            ps2.setString(4, abonementsRequest.getName());
+            ps2.setString(5, abonementsRequest.getPhone());
+
+            ps2.executeUpdate();
+//            }
         }
     }
 
     public void createAbonement(String letter, String code, int minutes, int duration, int price) throws SQLException {
         String abonementCode = letter + code;
-        PreparedStatement ps = dbConnection.prepareStatement("insert into abonements (abonement_code, price, minutes, duration) values(?,?,?,?)");
+        PreparedStatement ps = dbConnection.prepareStatement("insert into abonements (abonement_code, price, minutes, duration, is_free) values(?,?,?,?,?)");
         ps.setString(1, abonementCode);
         ps.setInt(2, price);
         ps.setInt(3, minutes);
         ps.setInt(4, duration);
+        ps.setBoolean(5, Boolean.TRUE);
         ps.executeUpdate();
     }
 
