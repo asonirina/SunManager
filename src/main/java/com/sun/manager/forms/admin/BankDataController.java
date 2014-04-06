@@ -84,8 +84,7 @@ public class BankDataController extends AnchorPane implements Initializable {
                 statisticData.setOfficialSalary(getValue(officialSalaryField.getText()));
                 statisticData.setQuenching(getValue(quenchingField.getText()));
                 statisticData.setStartDate(date);
-                statisticData.setUserLogin(App.getInstance().getUser().getLogin());
-
+                statisticData.setAccumulation(getValue(accumulationField.getText()));
                 service.saveStatisticData(statisticData);
                 ((Stage) okButton.getScene().getWindow()).close();
             }
