@@ -92,7 +92,8 @@ public class SolariumDAO {
     public List<Cosmetics> getAllCosmetics() throws SQLException {
         List<Cosmetics> cosmeticsList = new ArrayList<Cosmetics>();
 
-        PreparedStatement preStatement = dbConnection.prepareStatement("select * from cosmetics");
+        PreparedStatement preStatement = dbConnection.prepareStatement("select * from cosmetics where name != ?");
+        preStatement.setString(1, "stikini");
         ResultSet rs = preStatement.executeQuery();
         while (rs.next()) {
             Long id = rs.getLong("cosmetics_id");
@@ -104,6 +105,22 @@ public class SolariumDAO {
         }
 
         return cosmeticsList;
+    }
+
+    public Cosmetics getStikini() throws SQLException {
+        PreparedStatement preStatement = dbConnection.prepareStatement("select * from cosmetics where name = ?");
+        preStatement.setString(1, "stikini");
+        ResultSet rs = preStatement.executeQuery();
+        Cosmetics cosmetics = null;
+        while (rs.next()) {
+            Long id = rs.getLong("cosmetics_id");
+            String name = rs.getString("name");
+            Long price = rs.getLong("price");
+            Long cosmeticsCount = rs.getLong("cosmetics_count");
+            cosmetics = new Cosmetics(id, name, price, cosmeticsCount);
+        }
+
+        return cosmetics;
     }
 
     public Long getCodeBySymbol(String symbol) throws SQLException {
