@@ -25,12 +25,6 @@ public class ShowCommentController extends AnchorPane implements Initializable {
     @FXML
     TextArea commentArea;
 
-    @FXML
-    Button okButton;
-
-    @FXML
-    Button cancelButton;
-
     SolariumService service = new SolariumService();
 
     @Override
@@ -41,21 +35,6 @@ public class ShowCommentController extends AnchorPane implements Initializable {
           text+=comment.getComment()+"\n\n";
         }
         commentArea.setText(text);
-        okButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                Stage stage = (Stage) okButton.getScene().getWindow();
-                stage.close();
-            }
-        });
-
-        cancelButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                Stage stage = (Stage) okButton.getScene().getWindow();
-                stage.close();
-            }
-        });
 
     }
 

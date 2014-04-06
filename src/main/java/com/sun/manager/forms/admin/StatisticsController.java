@@ -37,13 +37,6 @@ public class StatisticsController extends AnchorPane implements Initializable {
     @FXML
     TableColumn<CustomerStatistic, Long> countColumn;
 
-
-    @FXML
-    Button okButton;
-
-    @FXML
-    Button cancelButton;
-
     SolariumService service = new SolariumService();
 
     ObservableList<CustomerStatistic> items = FXCollections.observableArrayList(service.getStatistics());
@@ -55,22 +48,6 @@ public class StatisticsController extends AnchorPane implements Initializable {
         countColumn.setCellValueFactory(new PropertyValueFactory<CustomerStatistic, Long>("abonementsCount"));
 
         statTable.setItems(items);
-
-        okButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                Stage stage = (Stage) okButton.getScene().getWindow();
-                stage.close();
-            }
-        });
-
-        cancelButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                Stage stage = (Stage) cancelButton.getScene().getWindow();
-                stage.close();
-            }
-        });
     }
 
 

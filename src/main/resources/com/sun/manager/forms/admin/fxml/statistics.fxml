@@ -6,15 +6,13 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.paint.*?>
 
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="431.0" prefWidth="510.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.sun.manager.forms.admin.StatisticsController">
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="385.0" prefWidth="510.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.sun.manager.forms.admin.StatisticsController">
   <children>
     <TableView fx:id="statTable" focusTraversable="false" layoutX="55.0" layoutY="55.0" prefHeight="268.0" prefWidth="402.0">
       <columns>
-        <TableColumn editable="false" id="nameColumn" maxWidth="5000.0" minWidth="10.0" prefWidth="233.0" resizable="true" styleClass="" text="Имя" fx:id="nameColumn" />
+        <TableColumn editable="false" id="nameColumn" maxWidth="5000.0" minWidth="10.0" prefWidth="233.0" resizable="true" styleClass="null" text="Имя" fx:id="nameColumn" />
         <TableColumn editable="false" maxWidth="5000.0" minWidth="10.0" prefWidth="167.0" resizable="false" text="Количество" fx:id="countColumn" />
       </columns>
     </TableView>
-    <Button fx:id="okButton" layoutX="288.0" layoutY="363.0" mnemonicParsing="false" prefWidth="77.0" text="ОК" />
-    <Button fx:id="cancelButton" layoutX="380.0" layoutY="363.0" mnemonicParsing="false" prefWidth="77.0" text="Отмена" />
   </children>
 </AnchorPane>

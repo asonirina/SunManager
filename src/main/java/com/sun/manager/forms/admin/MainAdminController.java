@@ -614,8 +614,8 @@ public class MainAdminController extends AnchorPane implements Initializable {
                     cosmSize++;
                 }
             }
-//            CosmeticsRequest cr = new CosmeticsRequest(cosmResData.get(0).getCount(), new Cosmetics()) ;
-//                                    solariumService.get
+            CosmeticsRequest cr = new CosmeticsRequest(cosmResData.get(0).getCount(), solariumService.getStikini()) ;
+            cosmeticsRequests.add(cr);
             solariumService.saveCosmetics(cosmeticsRequests);
 
 

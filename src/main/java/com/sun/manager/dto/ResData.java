@@ -11,7 +11,7 @@ import java.util.Scanner;
 public class ResData {
 
     private String res;
-    private int count = 0;
+    private long count = 0L;
 
     public ResData(String res) {
         this.res = res;
@@ -30,7 +30,7 @@ public class ResData {
         this.res = res;
     }
 
-    public int getCount() {
+    public long getCount() {
         return count;
     }
 
