@@ -271,7 +271,7 @@ public class SolariumDAO {
     }
 
     public void saveAbonement(List<AbonementsRequest> abonementsRequestList) throws SQLException {
-        PreparedStatement ps = dbConnection.prepareStatement("select customer_id from abonements_data where client_name = ? and phone = ?");
+        PreparedStatement ps = dbConnection.prepareStatement("select data_id from abonements_data where client_name = ? and phone = ?");
 
         for (AbonementsRequest abonementsRequest : abonementsRequestList) {
             ps.setString(1, abonementsRequest.getName());

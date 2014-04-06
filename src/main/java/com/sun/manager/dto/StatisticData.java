@@ -12,7 +12,7 @@ public class StatisticData {
     private Integer officialSalary;
     private Integer quenching;
     private Integer accumulation;
-    private Integer userId;
+    private String userLogin;
 
     public StatisticData(Integer residue, Integer bank,
                          Integer bookingPerDay, Integer officialSalary,
@@ -94,11 +94,11 @@ public class StatisticData {
         this.bank = bank;
     }
 
-    public Integer getUserId() {
-        return userId;
+    public String getUserLogin() {
+        return userLogin;
     }
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
+    public void setUserLogin(String userLogin) {
+        this.userLogin = userLogin;
     }
 }

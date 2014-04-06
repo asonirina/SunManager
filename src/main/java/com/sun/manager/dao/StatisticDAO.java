@@ -32,7 +32,7 @@ public class StatisticDAO {
     }
 
     public void saveStatisticData(StatisticData statisticData) throws SQLException {
-        PreparedStatement ps = dbConnection.prepareStatement("insert into statistic_data (start_date, residue, booking_per_day, bank, official_salary, quenching, accumulation, users_id) values(?,?,?,?,?,?,?,?)");
+        PreparedStatement ps = dbConnection.prepareStatement("insert into statistic_data (start_date, residue, booking_per_day, bank, official_salary, quenching, accumulation, user_login) values(?,?,?,?,?,?,?,?)");
         ps.setDate(1, (Date) statisticData.getStartDate());
         ps.setInt(2, statisticData.getResidue());
         ps.setInt(3, statisticData.getBookingPerDay());
@@ -40,7 +40,7 @@ public class StatisticDAO {
         ps.setInt(5, statisticData.getOfficialSalary());
         ps.setInt(6, statisticData.getQuenching());
         ps.setInt(7, statisticData.getAccumulation());
-        ps.setInt(8, statisticData.getUserId());
+        ps.setString(8, statisticData.getUserLogin());
         ps.executeUpdate();
     }
 

@@ -3,17 +3,16 @@ package com.sun.manager.forms.admin;
 import com.sun.manager.App;
 import com.sun.manager.constants.SolariumEnum;
 import com.sun.manager.constants.SunConstants;
-import com.sun.manager.dto.*;
+import com.sun.manager.dto.AbonementsRequest;
+import com.sun.manager.dto.BaseSolariumData;
+import com.sun.manager.dto.CosmeticsRequest;
+import com.sun.manager.dto.StatisticData;
 import com.sun.manager.service.SolariumService;
 import com.sun.manager.service.StatisticsService;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -22,7 +21,6 @@ import org.apache.commons.lang.StringUtils;
 
 import java.net.URL;
 import java.sql.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -86,7 +84,8 @@ public class BankDataController extends AnchorPane implements Initializable {
                 statisticData.setOfficialSalary(getValue(officialSalaryField.getText()));
                 statisticData.setQuenching(getValue(quenchingField.getText()));
                 statisticData.setStartDate(date);
-                statisticData.setUserId(0);
+                // Сетать сюда всегда логин текущего пользователя, что сохранил данные
+//                statisticData.setUserLogin(0);
 
                 service.saveStatisticData(statisticData);
                 ((Stage) okButton.getScene().getWindow()).close();

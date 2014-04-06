@@ -118,5 +118,5 @@ CREATE TABLE IF NOT EXISTS statistic_data (
       official_salary      int,
       quenching            int,
       accumulation         int,
-      users_id             int
+      user_login           VARCHAR(15)
 ) ENGINE=INNODB;
