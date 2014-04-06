@@ -1,5 +1,6 @@
 package com.sun.manager.dao;
 
+import com.mysql.jdbc.exceptions.MySQLIntegrityConstraintViolationException;
 import com.sun.manager.connection.SqlServer;
 import com.sun.manager.dto.*;
 
@@ -296,7 +297,7 @@ public class SolariumDAO {
         }
     }
 
-    public void createAbonement(String letter, String code, int minutes, int duration, int price) throws SQLException {
+    public String createAbonement(String letter, String code, int minutes, int duration, int price) throws SQLException {
         String abonementCode = letter + code;
         PreparedStatement ps = dbConnection.prepareStatement("insert into abonements (abonement_code, price, minutes, duration, is_free) values(?,?,?,?,?)");
         ps.setString(1, abonementCode);
@@ -304,7 +305,14 @@ public class SolariumDAO {
         ps.setInt(3, minutes);
         ps.setInt(4, duration);
         ps.setBoolean(5, Boolean.TRUE);
-        ps.executeUpdate();
+
+        try {
+            ps.executeUpdate();
+        } catch (MySQLIntegrityConstraintViolationException ex) {
+               return abonementCode+" уже существует!";
+        }
+        return null;
+
     }
 
     public void createCosmetic(String name, int price, int cosmeticsCount) throws SQLException {

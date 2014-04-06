@@ -127,9 +127,9 @@ public class SolariumService {
         }
     }
 
-    public void createAbonement(String letter, String code, int minutes, int duration, int price) {
+    public String createAbonement(String letter, String code, int minutes, int duration, int price) {
         try {
-            dao.createAbonement(letter, code, minutes, duration, price);
+            return dao.createAbonement(letter, code, minutes, duration, price);
         } catch (SQLException ex) {
             ex.printStackTrace();
             throw new RuntimeException(ex.getMessage());

@@ -67,6 +67,10 @@ public class BankDataController extends AnchorPane implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        if(App.getInstance().getUser().getRole().equals("derictor")) {
+            residueField.setEditable(true);
+            bookPerDayField.setEditable(true);
+        }
         final Integer residue = getValue(service.getResidue(new Date(date.getTime() - SunConstants.MILLIS_IN_DAY)));
         final Integer bookingPerDay = getBookPerDay();
 

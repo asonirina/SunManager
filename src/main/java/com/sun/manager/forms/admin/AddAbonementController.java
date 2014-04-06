@@ -64,9 +64,14 @@ public class AddAbonementController extends AnchorPane implements Initializable 
                     int minutes = Integer.parseInt(minutesField.getText());
                     int duration = Integer.parseInt(durationField.getText());
                     int price = Integer.parseInt(priceField.getText());
-                    service.createAbonement(letter, code, minutes, duration, price);
+                    String error = service.createAbonement(letter, code, minutes, duration, price);
+                    if(error ==null) {
                     Stage stage = (Stage) okButton.getScene().getWindow();
                     stage.close();
+                    } else {
+                        errorLabel.setText(error);
+                        errorLabel.setVisible(true);
+                    }
                 }
             }
         });

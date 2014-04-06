@@ -42,6 +42,9 @@ public class AddCosmeticsController extends AnchorPane implements Initializable 
     TextField countField;
 
     @FXML
+    TextField newCountField;
+
+    @FXML
     TextField priceField;
 
     @FXML
@@ -98,10 +101,11 @@ public class AddCosmeticsController extends AnchorPane implements Initializable 
                 if (validate()) {
                     String name = nameField.getText();
                     long price = Long.parseLong(priceField.getText());
-                    Cosmetics c = new Cosmetics(null, name, price, 0L);
-                    service.createCosmetic(name, (int) price, 0);
+                    long count = Long.parseLong(newCountField.getText());
+                    Cosmetics c = new Cosmetics(null, name, price, count);
+                    service.createCosmetic(name, (int) price, (int)count);
 
-                    cosmList.getItems().add(c);
+                    cosmList.setItems(FXCollections.observableArrayList(service.getAllCosmetics()));
                     addErrorLabel.setVisible(false);
 
                 }
@@ -137,7 +141,12 @@ public class AddCosmeticsController extends AnchorPane implements Initializable 
             return false;
         }
         if (!priceField.getText().matches("\\d+")) {
-            addErrorLabel.setText("Введите число!!");
+            addErrorLabel.setText("Введите число в поле 'Цена'!");
+            addErrorLabel.setVisible(true);
+            return false;
+        }
+        if (!newCountField.getText().matches("\\d+")) {
+            addErrorLabel.setText("Введите число в поле 'Количество'!");
             addErrorLabel.setVisible(true);
             return false;
         }
