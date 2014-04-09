@@ -20,7 +20,7 @@
           <artifactId>javafx-runtime</artifactId>
           <scope>system</scope>
           <version>2.2.3</version>
-          <systemPath>${env.JAVA_HOME}/jre/jfxrt.jar</systemPath>
+          <systemPath>${project.basedir}/all/jfxrt.jar</systemPath>
       </dependency>
 
       <dependency>
@@ -28,7 +28,7 @@
           <artifactId>javafx-datepicker</artifactId>
           <scope>system</scope>
           <version>1.0</version>
-          <systemPath>C:/Users/iason/SunManager/lib/schudt-javafx-datepicker-0.0.2.jar</systemPath>
+          <systemPath>${project.basedir}/lib/schudt-javafx-datepicker-0.0.2.jar</systemPath>
       </dependency>
 
       <dependency>

@@ -5,6 +5,7 @@
     -fx-background-color:LightBlue;
     -fx-border-color: DarkBlue;
     -fx-text-fill: black;
+    -fx-font-size: 12px;
 }
 
 .label {

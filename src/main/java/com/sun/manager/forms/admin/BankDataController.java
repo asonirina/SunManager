@@ -54,7 +54,8 @@ public class BankDataController extends AnchorPane implements Initializable {
     @FXML
     Button cancelButton;
 
-    Date date = App.getInstance().getSelectedDate();
+    Date date = App.getInstance().getUser().getRole().equals("derictor")?App.getInstance().getSelectedDate():
+            new Date(App.getInstance().getSelectedDate().getTime() - SunConstants.MILLIS_IN_DAY);
     StatisticsService service = new StatisticsService();
     SolariumService solariumService = new SolariumService();
 
@@ -71,7 +72,7 @@ public class BankDataController extends AnchorPane implements Initializable {
             residueField.setEditable(true);
             bookPerDayField.setEditable(true);
         }
-        final Integer residue = getValue(service.getResidue(new Date(date.getTime() - SunConstants.MILLIS_IN_DAY)));
+        final Integer residue = getValue(service.getResidue(date));
         final Integer bookingPerDay = getBookPerDay();
 
 
