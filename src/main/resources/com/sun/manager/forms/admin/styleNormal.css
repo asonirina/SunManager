@@ -6,3 +6,7 @@
     -fx-border-color: DimGray;
     -fx-text-fill: black;
 }
+
+.label {
+    -fx-font-size: 12px;
+}

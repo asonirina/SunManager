@@ -1,7 +1,6 @@
 package com.sun.manager.forms.admin;
 
 import com.sun.manager.App;
-import com.sun.manager.connection.SqlServer;
 import com.sun.manager.events.ClosePageEvent;
 import javafx.application.Application;
 import javafx.event.EventHandler;
@@ -25,6 +24,7 @@ public class MainAdminPage extends Application {
     public void start(Stage stage) throws IOException {
         Pane pane = FXMLLoader.load(MainAdminPage.class.getResource("fxml/admin_main1.fxml"));
         Scene scene = new Scene(pane);
+        scene.getStylesheets().add(getClass().getResource("general.css").toExternalForm());
         stage.setScene(scene);
         stage.setTitle("Главная страница");
         stage.show();

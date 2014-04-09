@@ -1,6 +1,5 @@
 package com.sun.manager.forms.admin;
 
-import com.sun.manager.connection.SqlServer;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -22,8 +21,9 @@ public class AbonementsRequestPage extends Application{
     public void start(Stage stage) throws IOException {
         Pane pane = FXMLLoader.load(AbonementsRequestPage.class.getResource("fxml/abonement_page.fxml"));
         Scene scene = new Scene(pane);
+        scene.getStylesheets().add(getClass().getResource("general.css").toExternalForm());
         stage.setScene(scene);
-        stage.setTitle("Запросить абонемент");
+        stage.setTitle("Покупка абонемента");
         stage.show();
     }
 }

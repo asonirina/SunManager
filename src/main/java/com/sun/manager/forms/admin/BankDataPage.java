@@ -17,6 +17,7 @@ public class BankDataPage extends Application {
     public void start(Stage stage) throws IOException {
         Pane pane = FXMLLoader.load(BankDataPage.class.getResource("fxml/bank_data.fxml"));
         Scene scene = new Scene(pane);
+        scene.getStylesheets().add(getClass().getResource("general.css").toExternalForm());
         stage.setScene(scene);
         stage.setTitle("Касса за день");
         stage.show();

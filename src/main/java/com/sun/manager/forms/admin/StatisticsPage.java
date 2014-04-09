@@ -17,8 +17,9 @@ public class StatisticsPage extends Application {
     public void start(Stage stage) throws IOException {
         Pane pane = FXMLLoader.load(StatisticsPage.class.getResource("fxml/statistics.fxml"));
         Scene scene = new Scene(pane);
+        scene.getStylesheets().add(getClass().getResource("general.css").toExternalForm());
         stage.setScene(scene);
-        stage.setTitle("Пользователи");
+        stage.setTitle("Посетители солярия");
         stage.show();
 
     }

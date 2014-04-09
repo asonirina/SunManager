@@ -6,3 +6,7 @@
     -fx-border-color: DarkBlue;
     -fx-text-fill: black;
 }
+
+.label {
+    -fx-font-size: 12px;
+}

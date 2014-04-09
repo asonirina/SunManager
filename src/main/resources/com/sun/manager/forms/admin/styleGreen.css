@@ -7,3 +7,7 @@
 .table-cell:hover{
     -fx-background-color: LightSlateGray;
 }
+
+.label {
+    -fx-font-size: 12px;
+}

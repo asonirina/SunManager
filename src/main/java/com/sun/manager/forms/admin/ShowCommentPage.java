@@ -1,18 +1,12 @@
 package com.sun.manager.forms.admin;
 
-import com.sun.manager.App;
-import com.sun.manager.events.ClosePageEvent;
 import javafx.application.Application;
-import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
 
 import java.io.IOException;
-import java.sql.Date;
 
 /**
  * User: iason
@@ -27,8 +21,9 @@ public class ShowCommentPage extends Application{
     public void start(Stage stage) throws IOException {
         Pane pane = FXMLLoader.load(UsersPage.class.getResource("fxml/show_comments.fxml"));
         Scene scene = new Scene(pane);
+        scene.getStylesheets().add(getClass().getResource("general.css").toExternalForm());
         stage.setScene(scene);
-        stage.setTitle("Комментарии");
+        stage.setTitle("Комментарии за день");
         stage.show();
     }
 }

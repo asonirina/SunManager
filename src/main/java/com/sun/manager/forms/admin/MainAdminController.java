@@ -232,7 +232,7 @@ public class MainAdminController extends AnchorPane implements Initializable {
             App.getInstance().getEventBus().register(this);
 
             dateLabel.setText((new Date(Calendar.getInstance().getTime().getTime()).toString()));
-            usernameLabel.setText("Привет, " + App.getInstance().getUser().toString() + "!");
+            usernameLabel.setText("Добро пожаловать, " + App.getInstance().getUser().toString() + "!");
             setOnButtonsClicked();
             addBlankItems();
 

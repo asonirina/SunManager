@@ -109,3 +109,7 @@
     -fx-font-size: 0.8em;
     -fx-padding: 4px;
 }
+
+.label {
+    -fx-font-size: 12px;
+}

@@ -1,6 +1,5 @@
 package com.sun.manager.forms.admin;
 
-import com.sun.manager.connection.SqlServer;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -21,8 +20,9 @@ public class CosmeticsRequestPage extends Application{
     public void start(Stage stage) throws IOException {
         Pane pane = FXMLLoader.load(CosmeticsRequestPage.class.getResource("fxml/cosmetics_request.fxml"));
         Scene scene = new Scene(pane);
+        scene.getStylesheets().add(getClass().getResource("general.css").toExternalForm());
         stage.setScene(scene);
-        stage.setTitle("Запросить косметику");
+        stage.setTitle("Косметика");
         stage.show();
     }
 }
