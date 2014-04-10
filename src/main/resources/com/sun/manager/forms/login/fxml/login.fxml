@@ -12,9 +12,9 @@
       <children>
         <Label layoutX="46.0" layoutY="58.0" text="Логин: " />
         <Label layoutX="46.0" layoutY="100.0" text="Пароль: " />
-        <TextField fx:id="loginField" layoutX="116.0" layoutY="58.0" prefWidth="174.0" />
-        <PasswordField fx:id="passwordField" layoutX="116.0" layoutY="100.0" prefWidth="174.0" />
-        <Button fx:id="login" layoutX="230.0" layoutY="153.0" mnemonicParsing="false" prefHeight="22.000099999997474" text="Войти" />
+        <TextField fx:id="loginField" layoutX="116.0" layoutY="58.0" prefWidth="174.0" prefHeight="22.0" />
+        <PasswordField fx:id="passwordField" layoutX="116.0" layoutY="100.0" prefWidth="174.0" prefHeight="22.0" />
+        <Button fx:id="login" layoutX="230.0" layoutY="153.0" mnemonicParsing="false" prefHeight="22.0" text="Войти" />
         <Label fx:id="status" layoutX="50.0" layoutY="195.0" text="" textFill="RED"  />
       </children>
     </AnchorPane>

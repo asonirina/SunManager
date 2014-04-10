@@ -14,12 +14,12 @@
     <Label layoutX="43.0" layoutY="169.0" text="Официальная ЗП:" />
     <Label layoutX="43.0" layoutY="210.0" text="Гашение:" />
     <Label layoutX="43.0" layoutY="248.0" text="Накопление:" />
-    <TextField fx:id="residueField"  editable="false" focusTraversable="false" layoutX="158.0" layoutY="40.0" prefWidth="200.0" />
-    <TextField fx:id="bookPerDayField"  editable="false" focusTraversable="false" layoutX="158.0" layoutY="85.0" prefWidth="200.0" />
-    <TextField fx:id="bankField" layoutX="158.0" layoutY="125.0" prefWidth="200.0" />
-    <TextField fx:id="officialSalaryField" layoutX="158.0" layoutY="166.0" prefWidth="200.0" />
-    <TextField fx:id="quenchingField" layoutX="158.0" layoutY="207.0" prefWidth="200.0" />
-    <TextField fx:id="accumulationField" layoutX="158.0" layoutY="245.0" prefWidth="200.0" />
+    <TextField fx:id="residueField"  editable="false" focusTraversable="false" layoutX="158.0" layoutY="40.0" prefWidth="200.0" prefHeight="22.0"/>
+    <TextField fx:id="bookPerDayField"  editable="false" focusTraversable="false" layoutX="158.0" layoutY="85.0" prefWidth="200.0" prefHeight="22.0" />
+    <TextField fx:id="bankField" layoutX="158.0" layoutY="125.0" prefWidth="200.0" prefHeight="22.0" />
+    <TextField fx:id="officialSalaryField" layoutX="158.0" layoutY="166.0" prefWidth="200.0" prefHeight="22.0" />
+    <TextField fx:id="quenchingField" layoutX="158.0" layoutY="207.0" prefWidth="200.0" prefHeight="22.0" />
+    <TextField fx:id="accumulationField" layoutX="158.0" layoutY="245.0" prefWidth="200.0" prefHeight="22.0" />
     <Button fx:id="okButton" layoutX="262.0" layoutY="309.0" mnemonicParsing="false" prefWidth="70.0" text="ОК" />
     <Button fx:id="cancelButton" layoutX="344.0" layoutY="309.0" mnemonicParsing="false" prefWidth="70.0" text="Отмена" />
   </children>
