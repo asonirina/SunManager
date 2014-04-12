@@ -6,6 +6,7 @@ import com.sun.manager.dto.AbonementsRequest;
 import com.sun.manager.dto.CosmeticsRequest;
 import com.sun.manager.forms.admin.AbonementsRequestPage;
 import com.sun.manager.forms.admin.CosmeticsRequestPage;
+import com.sun.manager.forms.alert.AlertDialog;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableCell;
@@ -40,6 +41,7 @@ public class ButtonCell<T> extends TableCell<T, String> {
                         page.start(new Stage());
                     }
                 } catch (IOException ex) {
+                    new AlertDialog("Произошла ошибка!", 1).showAndWait();
                     throw new RuntimeException(ex);
                 }
 

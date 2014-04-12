@@ -42,7 +42,7 @@ import java.util.Scanner;
 /**
  * User: iason
  */
-public class MainAdminController extends AnchorPane implements Initializable {
+public class MainAdminController extends ScrollPane implements Initializable {
     private Date date = new Date(Calendar.getInstance().getTime().getTime());
 
     @FXML
@@ -261,6 +261,7 @@ public class MainAdminController extends AnchorPane implements Initializable {
             setAbonResData();
 
         } catch (Exception ex) {
+            new AlertDialog("Произошла ошибка!", 1).showAndWait();
             ex.printStackTrace();
         }
 
@@ -412,7 +413,8 @@ public class MainAdminController extends AnchorPane implements Initializable {
                     page.start(new Stage());
                     ((Stage) logout.getScene().getWindow()).close();
                 } catch (IOException ex) {
-                    throw new RuntimeException(ex);
+                    new AlertDialog("Произошла ошибка!", 1).showAndWait();
+                    //throw new RuntimeException(ex);
                 }
             }
         });
@@ -470,7 +472,8 @@ public class MainAdminController extends AnchorPane implements Initializable {
                 try {
                     page.start(new Stage());
                 } catch (IOException ex) {
-                    throw new RuntimeException(ex);
+                    new AlertDialog("Произошла ошибка!", 1).showAndWait();
+                    //throw new RuntimeException(ex);
                 }
             }
         });
@@ -488,7 +491,8 @@ public class MainAdminController extends AnchorPane implements Initializable {
                     try {
                         page.start(new Stage());
                     } catch (IOException ex) {
-                        throw new RuntimeException(ex);
+                        new AlertDialog("Произошла ошибка!", 1).showAndWait();
+                       // throw new RuntimeException(ex);
                     }
                 }
             });
@@ -497,7 +501,7 @@ public class MainAdminController extends AnchorPane implements Initializable {
                 public void handle(MouseEvent mouseEvent) {
                     destroy(new ClosePageEvent());
 
-                    new AlertDialog((Stage)saveChanges.getScene().getWindow(), "Изменения успешно сохранены!").showAndWait();
+                    new AlertDialog("Изменения успешно сохранены!", 0).showAndWait();
 
                 }
             });
@@ -512,7 +516,8 @@ public class MainAdminController extends AnchorPane implements Initializable {
 
                         page.start(new Stage());
                     } catch (IOException ex) {
-                        throw new RuntimeException(ex);
+                        new AlertDialog("Произошла ошибка!", 1).showAndWait();
+                        //throw new RuntimeException(ex);
                     }
                 }
             });
@@ -523,7 +528,8 @@ public class MainAdminController extends AnchorPane implements Initializable {
                     try {
                         page.start(new Stage());
                     } catch (IOException ex) {
-                        throw new RuntimeException(ex);
+                        new AlertDialog("Произошла ошибка!", 1).showAndWait();
+                        //throw new RuntimeException(ex);
                     }
                 }
             });
@@ -534,6 +540,7 @@ public class MainAdminController extends AnchorPane implements Initializable {
                         AddAbonementPage page = new AddAbonementPage();
                         page.start(new Stage());
                     } catch (IOException ex) {
+                        new AlertDialog("Произошла ошибка!", 1).showAndWait();
                         throw new RuntimeException(ex);
                     }
                 }
@@ -546,7 +553,8 @@ public class MainAdminController extends AnchorPane implements Initializable {
                         UsersPage page = new UsersPage();
                         page.start(new Stage());
                     } catch (IOException ex) {
-                        throw new RuntimeException(ex);
+                        new AlertDialog("Произошла ошибка!", 1).showAndWait();
+                        //throw new RuntimeException(ex);
                     }
                 }
             });
@@ -558,6 +566,7 @@ public class MainAdminController extends AnchorPane implements Initializable {
                         StatisticsPage page = new StatisticsPage();
                         page.start(new Stage());
                     } catch (IOException ex) {
+                        new AlertDialog("Произошла ошибка!", 1).showAndWait();
                         throw new RuntimeException(ex);
                     }
                 }

@@ -4,9 +4,12 @@ import com.sun.manager.constants.DataColumnEnum;
 import com.sun.manager.dto.*;
 import com.sun.manager.forms.ButtonCell;
 import com.sun.manager.forms.EditingCell;
+import com.sun.manager.forms.alert.AlertDialog;
 import javafx.event.EventHandler;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.util.Callback;
 import org.apache.commons.lang3.StringUtils;
 
@@ -30,6 +33,7 @@ public class EventHandlers {
                 if (StringUtils.isBlank(input)) {
                     return;
                 }
+                try {
                 int index = input.indexOf(":");
                 data.setMinutes(Long.valueOf(input.substring(0, index).trim()));
                 if (input.contains("$")) {
@@ -38,8 +42,13 @@ public class EventHandlers {
                     data.setAbonementNumber(input.substring(index + 1).trim());
                 }
 
+
                 data.setRes(input);
                 data.setStartDate(new Date(Calendar.getInstance().getTime().getTime()));
+                } catch (Exception ex) {
+                    new AlertDialog("Введите значение в правильном формате!", 1).showAndWait();
+                }
+
             }
         };
     }

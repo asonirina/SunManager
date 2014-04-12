@@ -27,7 +27,8 @@ public class AlertDialog extends Stage {
     public static final int ICON_INFO = 0;
     public static final int ICON_ERROR = 1;
 
-    public AlertDialog(Stage owner, String msg) {
+    public AlertDialog(String msg, int type) {
+        centerOnScreen();
         setResizable(false);
         initModality(Modality.APPLICATION_MODAL);
         initStyle(StageStyle.TRANSPARENT);
@@ -35,7 +36,7 @@ public class AlertDialog extends Stage {
         Label label = new Label(msg);
         label.setWrapText(true);
         label.setGraphicTextGap(20);
-        label.setGraphic(new ImageView(getImage()));
+        label.setGraphic(new ImageView(getImage(type)));
 
         Button button = new Button("OK");
         button.setPrefHeight(22.0);
@@ -56,10 +57,9 @@ public class AlertDialog extends Stage {
         hbox2.getChildren().add(button);
         borderPane.setBottom(hbox2);
 
-        // calculate width of string
         final Text text = new Text(msg);
         text.snapshot(null, null);
-        // + 20 because there is padding 10 left and right
+
         int width = (int) text.getLayoutBounds().getWidth() + 80;
 
         if (width == WIDTH_DEFAULT)
@@ -70,13 +70,12 @@ public class AlertDialog extends Stage {
         final Scene scene = new Scene(borderPane, width, height);
         scene.setFill(Color.TRANSPARENT);
         setScene(scene);
-
-        // make sure this stage is centered on top of its owner
-        setX(owner.getX() + (owner.getWidth() / 2 - width / 2));
-        setY(owner.getY() + (owner.getHeight() / 2 - height / 2));
     }
 
-    private Image getImage() {
+    private Image getImage(int type) {
+        if (type == ICON_ERROR)
+            return new Image(getClass().getResourceAsStream("error.png"));
+        else
             return new Image(getClass().getResourceAsStream("info.png"));
     }
 
