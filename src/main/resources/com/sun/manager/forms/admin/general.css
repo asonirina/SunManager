@@ -5,7 +5,7 @@
 #saveButton, #okButton, #cancelButton, #addButton, #addNewCosm,
 #countVert, #countGreen, #countBlue, #countCosm, #countAbon, #addCosm,
 #addCosm, #addAbon, #usersButton, #addComment, #showComments, #statButton, #bankButton,
-#addCosmButton, #deleteButton {
+#addCosmButton, #deleteButton, #saveChanges, #logout {
     -fx-background-color:
         rgba(0,0,0,0.08),
         linear-gradient(#9a9a9a, #909090),

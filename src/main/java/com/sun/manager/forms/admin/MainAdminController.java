@@ -12,6 +12,8 @@ import com.sun.manager.events.ClosePageEvent;
 import com.sun.manager.events.EventHandlers;
 import com.sun.manager.events.NewAbonementAddedEvent;
 import com.sun.manager.events.NewCosmeticsAddedEvent;
+import com.sun.manager.forms.alert.AlertDialog;
+import com.sun.manager.forms.login.LoginPage;
 import com.sun.manager.service.SolariumService;
 import eu.schudt.javafx.controls.calendar.DatePicker;
 import javafx.beans.InvalidationListener;
@@ -21,11 +23,13 @@ import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -41,6 +45,11 @@ import java.util.Scanner;
 public class MainAdminController extends AnchorPane implements Initializable {
     private Date date = new Date(Calendar.getInstance().getTime().getTime());
 
+    @FXML
+    Button saveChanges;
+
+    @FXML
+    Button logout;
     @FXML
     AnchorPane anchorPane;
 
@@ -395,6 +404,18 @@ public class MainAdminController extends AnchorPane implements Initializable {
     }
 
     private void setOnButtonsClicked() {
+        logout.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                LoginPage page = new LoginPage();
+                try {
+                    page.start(new Stage());
+                    ((Stage) logout.getScene().getWindow()).close();
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
+        });
         countVert.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
@@ -471,7 +492,17 @@ public class MainAdminController extends AnchorPane implements Initializable {
                     }
                 }
             });
+            saveChanges.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    destroy(new ClosePageEvent());
+
+                    new AlertDialog((Stage)saveChanges.getScene().getWindow(), "Изменения успешно сохранены!").showAndWait();
+
+                }
+            });
         } else {
+            saveChanges.setVisible(false);
             addComment.setVisible(false);
             showComments.setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
@@ -614,7 +645,7 @@ public class MainAdminController extends AnchorPane implements Initializable {
                     cosmSize++;
                 }
             }
-            CosmeticsRequest cr = new CosmeticsRequest(cosmResData.get(0).getCount(), solariumService.getStikini()) ;
+            CosmeticsRequest cr = new CosmeticsRequest(cosmResData.get(0).getCount(), solariumService.getStikini());
             cosmeticsRequests.add(cr);
             solariumService.saveCosmetics(cosmeticsRequests);
 

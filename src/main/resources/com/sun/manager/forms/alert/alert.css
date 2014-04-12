@@ -1,0 +1,8 @@
+.root {
+    -fx-background-color: DeepSkyBlue;
+    -fx-background-radius: 5;
+    -fx-padding: 10;
+}
+.label {
+    -fx-font-size: 12px;
+}
