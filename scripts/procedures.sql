@@ -44,7 +44,8 @@ CREATE PROCEDURE `getCodeBySymbol`(
         )
 BEGIN
 SELECT SUBSTRING(abonement_code, 2) INTO CODE from abonements
-where abonement_code like CONCAT(SYMBOL,'%') and is_free = 1;
+where abonement_code like CONCAT(SYMBOL,'%') and is_free = 1
+LIMIT 1;
 END $$
 
 //----------------------------------------------------------------------------------------
