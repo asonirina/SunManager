@@ -5,6 +5,7 @@ import com.sun.manager.dao.SolariumDAO;
 import com.sun.manager.dto.AbonementsRequest;
 import com.sun.manager.events.NewAbonementAddedEvent;
 import com.sun.manager.service.SolariumService;
+import javafx.collections.FXCollections;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -19,8 +20,10 @@ import javafx.stage.Stage;
 import org.apache.commons.lang.StringUtils;
 
 import java.net.URL;
+import java.sql.Date;
 import java.sql.SQLException;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.ResourceBundle;
 import java.util.Scanner;
 
@@ -69,6 +72,8 @@ public class AbonementRequestController extends AnchorPane implements Initializa
                 if (validate()) {
                     AbonementsRequest request = new AbonementsRequest(letterField.getText(),
                             Long.parseLong(codeField.getText()), nameField.getText(), phoneField.getText());
+                    request.setStartDate(new Date(Calendar.getInstance().getTime().getTime()));
+                    service.saveAbonement(Arrays.asList(request));
                     Stage stage = (Stage) saveButton.getScene().getWindow();
                     stage.close();
                     App.getInstance().getEventBus().post(new NewAbonementAddedEvent(request));

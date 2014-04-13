@@ -27,7 +27,7 @@ public class AlertDialog extends Stage {
     public static final int ICON_INFO = 0;
     public static final int ICON_ERROR = 1;
 
-    public AlertDialog(String msg, int type) {
+    public AlertDialog(Stage owner, String msg, int type) {
         centerOnScreen();
         setResizable(false);
         initModality(Modality.APPLICATION_MODAL);
@@ -60,7 +60,7 @@ public class AlertDialog extends Stage {
         final Text text = new Text(msg);
         text.snapshot(null, null);
 
-        int width = (int) text.getLayoutBounds().getWidth() + 80;
+        int width = (int) text.getLayoutBounds().getWidth() + 120;
 
         if (width == WIDTH_DEFAULT)
         width = WIDTH_DEFAULT;
@@ -70,6 +70,9 @@ public class AlertDialog extends Stage {
         final Scene scene = new Scene(borderPane, width, height);
         scene.setFill(Color.TRANSPARENT);
         setScene(scene);
+
+        setX(owner.getX() + (owner.getWidth() / 2 - width / 2));
+        setY(owner.getY() + (owner.getHeight() / 2 - height / 2));
     }
 
     private Image getImage(int type) {

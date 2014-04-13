@@ -185,8 +185,8 @@ public class SolariumDAO {
         }
     }
 
-    public Map<String, Long> saveCosmeticsData(HashMap<Cosmetics, Long> cosmetics, boolean isMinus) throws SQLException {
-        Map<String, Long> resultData = new HashMap<String, Long>();
+    public List<CosmeticsRequest> saveCosmeticsData(HashMap<Cosmetics, Long> cosmetics, boolean isMinus) throws SQLException {
+        List<CosmeticsRequest> resultData = new ArrayList<CosmeticsRequest>();
 
         for (Map.Entry<Cosmetics, Long> entry : cosmetics.entrySet()) {
             PreparedStatement ps1 = dbConnection.prepareStatement("update cosmetics set cosmetics_count = ? where cosmetics_id = ?");
@@ -202,7 +202,7 @@ public class SolariumDAO {
                 Long cosmeticsCount = rs.getLong("cosmetics_count");
                 if (isMinus) {
                     if (cosmeticsCount < value || cosmeticsCount == 0) {
-                        resultData.put(key.getName(), value - cosmeticsCount);
+                        resultData.add(new CosmeticsRequest(value - cosmeticsCount, entry.getKey()));
                     } else {
                         ps1.setLong(1, cosmeticsCount - value);
                         ps1.setLong(2, key.getId());

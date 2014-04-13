@@ -3,6 +3,7 @@ package com.sun.manager.forms.login;
 import com.sun.manager.App;
 import com.sun.manager.dto.Users;
 import com.sun.manager.forms.admin.MainAdminPage;
+import com.sun.manager.forms.alert.AlertDialog;
 import com.sun.manager.service.UsersService;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -24,8 +25,6 @@ import java.util.ResourceBundle;
 
 public class LoginController extends AnchorPane implements Initializable {
 
-    private Stage stage;
-
     @FXML
     TextField loginField;
 
@@ -34,9 +33,6 @@ public class LoginController extends AnchorPane implements Initializable {
 
     @FXML
     Button login;
-
-    @FXML
-    Label status;
 
     UsersService usersService = new UsersService();
 
@@ -59,12 +55,12 @@ public class LoginController extends AnchorPane implements Initializable {
 
                         ((Stage) loginField.getScene().getWindow()).close();
                     } else {
-                        status.setText("Логин или пароль введены не верно!");
+                        new AlertDialog((Stage)login.getScene().getWindow(),"Логин или пароль введены не верно!", 1).showAndWait();
                     }
 
                 } catch (Exception ex) {
                     ex.printStackTrace();
-                    status.setText("Невозможно загрузить приложение!");
+                    new AlertDialog((Stage)login.getScene().getWindow(),"Невозможно загрузить приложение!", 1).showAndWait();
                 }
             }
         });

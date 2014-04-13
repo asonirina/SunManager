@@ -4,6 +4,7 @@ import com.sun.manager.App;
 import com.sun.manager.dto.Cosmetics;
 import com.sun.manager.dto.CosmeticsRequest;
 import com.sun.manager.events.NewCosmeticsAddedEvent;
+import com.sun.manager.forms.alert.AlertDialog;
 import com.sun.manager.service.SolariumService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -43,9 +44,6 @@ public class CosmeticsRequestController extends AnchorPane implements Initializa
     Button deleteButton;
 
     @FXML
-    TextArea errorArea;
-
-    @FXML
     Label errorLabel;
 
     SolariumService service = new SolariumService();
@@ -56,8 +54,6 @@ public class CosmeticsRequestController extends AnchorPane implements Initializa
         cosmeticsList.setItems(FXCollections.observableArrayList(service.getAllCosmetics()));
 
         errorLabel.setVisible(false);
-        errorArea.setEditable(false);
-
         addCosmButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
@@ -94,18 +90,18 @@ public class CosmeticsRequestController extends AnchorPane implements Initializa
                     map.put(cr.getCosmetics(), cr.getCount());
                 }
 
-                Map<String, Long> result = service.getCosmeticsFromStock(map);
+                List<CosmeticsRequest> result = service.getCosmeticsFromStock(map);
                 if (result.isEmpty()) {
                     Stage stage = (Stage) deleteButton.getScene().getWindow();
                     stage.close();
                     App.getInstance().getEventBus().post(new NewCosmeticsAddedEvent(list));
                 } else {
                     StringBuilder sb = new StringBuilder("Следующих товаров нет на складе!: \n");
-                    for (Map.Entry<String, Long> entry : result.entrySet()) {
-                        sb.append(entry.getKey() + " : " + entry.getValue() + "\n");
+                    for (CosmeticsRequest cosmeticsRequest: result) {
+                        sb.append(cosmeticsRequest.getCosmetics().getName() + " : " + cosmeticsRequest.getCount() + "\n");
+                        resultList.getItems().remove(cosmeticsRequest);
                     }
-
-                    errorArea.setText(sb.toString());
+                    new AlertDialog((Stage)saveButton.getScene().getWindow(), sb.toString(), 1).showAndWait();
                 }
             }
         });

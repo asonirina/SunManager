@@ -1,5 +1,6 @@
 package com.sun.manager.events;
 
+import com.sun.manager.constants.BlankItem;
 import com.sun.manager.constants.DataColumnEnum;
 import com.sun.manager.dto.*;
 import com.sun.manager.forms.ButtonCell;
@@ -46,7 +47,7 @@ public class EventHandlers {
                 data.setRes(input);
                 data.setStartDate(new Date(Calendar.getInstance().getTime().getTime()));
                 } catch (Exception ex) {
-                    new AlertDialog("Введите значение в правильном формате!", 1).showAndWait();
+                    new AlertDialog(new Stage(), "Введите значение в правильном формате!", 1).showAndWait();
                 }
 
             }

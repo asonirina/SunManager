@@ -261,7 +261,7 @@ public class MainAdminController extends ScrollPane implements Initializable {
             setAbonResData();
 
         } catch (Exception ex) {
-            new AlertDialog("Произошла ошибка!", 1).showAndWait();
+            new AlertDialog((Stage)logout.getScene().getWindow(), "Произошла ошибка!", 1).showAndWait();
             ex.printStackTrace();
         }
 
@@ -413,7 +413,7 @@ public class MainAdminController extends ScrollPane implements Initializable {
                     page.start(new Stage());
                     ((Stage) logout.getScene().getWindow()).close();
                 } catch (IOException ex) {
-                    new AlertDialog("Произошла ошибка!", 1).showAndWait();
+                    new AlertDialog((Stage)logout.getScene().getWindow(),"Произошла ошибка!", 1).showAndWait();
                     //throw new RuntimeException(ex);
                 }
             }
@@ -472,7 +472,7 @@ public class MainAdminController extends ScrollPane implements Initializable {
                 try {
                     page.start(new Stage());
                 } catch (IOException ex) {
-                    new AlertDialog("Произошла ошибка!", 1).showAndWait();
+                    new AlertDialog((Stage)logout.getScene().getWindow(),"Произошла ошибка!", 1).showAndWait();
                     //throw new RuntimeException(ex);
                 }
             }
@@ -491,7 +491,7 @@ public class MainAdminController extends ScrollPane implements Initializable {
                     try {
                         page.start(new Stage());
                     } catch (IOException ex) {
-                        new AlertDialog("Произошла ошибка!", 1).showAndWait();
+                        new AlertDialog((Stage)logout.getScene().getWindow(),"Произошла ошибка!", 1).showAndWait();
                        // throw new RuntimeException(ex);
                     }
                 }
@@ -501,7 +501,7 @@ public class MainAdminController extends ScrollPane implements Initializable {
                 public void handle(MouseEvent mouseEvent) {
                     destroy(new ClosePageEvent());
 
-                    new AlertDialog("Изменения успешно сохранены!", 0).showAndWait();
+                    new AlertDialog((Stage)logout.getScene().getWindow(),"Изменения успешно сохранены!", 0).showAndWait();
 
                 }
             });
@@ -516,7 +516,7 @@ public class MainAdminController extends ScrollPane implements Initializable {
 
                         page.start(new Stage());
                     } catch (IOException ex) {
-                        new AlertDialog("Произошла ошибка!", 1).showAndWait();
+                        new AlertDialog((Stage)logout.getScene().getWindow(),"Произошла ошибка!", 1).showAndWait();
                         //throw new RuntimeException(ex);
                     }
                 }
@@ -528,7 +528,7 @@ public class MainAdminController extends ScrollPane implements Initializable {
                     try {
                         page.start(new Stage());
                     } catch (IOException ex) {
-                        new AlertDialog("Произошла ошибка!", 1).showAndWait();
+                        new AlertDialog((Stage)logout.getScene().getWindow(),"Произошла ошибка!", 1).showAndWait();
                         //throw new RuntimeException(ex);
                     }
                 }
@@ -540,7 +540,7 @@ public class MainAdminController extends ScrollPane implements Initializable {
                         AddAbonementPage page = new AddAbonementPage();
                         page.start(new Stage());
                     } catch (IOException ex) {
-                        new AlertDialog("Произошла ошибка!", 1).showAndWait();
+                        new AlertDialog((Stage)logout.getScene().getWindow(),"Произошла ошибка!", 1).showAndWait();
                         throw new RuntimeException(ex);
                     }
                 }
@@ -553,7 +553,7 @@ public class MainAdminController extends ScrollPane implements Initializable {
                         UsersPage page = new UsersPage();
                         page.start(new Stage());
                     } catch (IOException ex) {
-                        new AlertDialog("Произошла ошибка!", 1).showAndWait();
+                        new AlertDialog((Stage)logout.getScene().getWindow(),"Произошла ошибка!", 1).showAndWait();
                         //throw new RuntimeException(ex);
                     }
                 }
@@ -566,7 +566,7 @@ public class MainAdminController extends ScrollPane implements Initializable {
                         StatisticsPage page = new StatisticsPage();
                         page.start(new Stage());
                     } catch (IOException ex) {
-                        new AlertDialog("Произошла ошибка!", 1).showAndWait();
+                        new AlertDialog((Stage)logout.getScene().getWindow(),"Произошла ошибка!", 1).showAndWait();
                         throw new RuntimeException(ex);
                     }
                 }
@@ -607,7 +607,6 @@ public class MainAdminController extends ScrollPane implements Initializable {
     @Subscribe
     public void newAbonementAdded(NewAbonementAddedEvent e) {
         AbonementsRequest request = e.getRequest();
-        request.setStartDate(new Date(Calendar.getInstance().getTime().getTime()));
         abonementsData.set(abonementsDataSize++, request);
     }
 
@@ -658,16 +657,6 @@ public class MainAdminController extends ScrollPane implements Initializable {
             cosmeticsRequests.add(cr);
             solariumService.saveCosmetics(cosmeticsRequests);
 
-
-            ObservableList<AbonementsRequest> abonementsRequests = FXCollections.observableArrayList();
-            for (int i = abonSize; i < 30; ++i) {
-                AbonementsRequest abonementRequest = abonementsData.get(i);
-                if (abonementRequest.getLetter() != null) {
-                    abonementsRequests.add(abonementRequest);
-                    abonSize++;
-                }
-            }
-            solariumService.saveAbonement(abonementsRequests);
         }
     }
 

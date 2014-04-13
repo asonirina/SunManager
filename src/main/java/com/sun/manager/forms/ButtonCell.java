@@ -41,7 +41,7 @@ public class ButtonCell<T> extends TableCell<T, String> {
                         page.start(new Stage());
                     }
                 } catch (IOException ex) {
-                    new AlertDialog("Произошла ошибка!", 1).showAndWait();
+                    new AlertDialog((Stage)cellButton.getScene().getWindow(), "Произошла ошибка!", 1).showAndWait();
                     throw new RuntimeException(ex);
                 }
 

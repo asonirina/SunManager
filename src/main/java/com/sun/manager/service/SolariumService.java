@@ -7,6 +7,7 @@ import javafx.collections.ObservableList;
 
 import java.sql.Date;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,7 +36,7 @@ public class SolariumService {
         }
     }
 
-    public Map<String, Long> getCosmeticsFromStock(HashMap<Cosmetics, Long> map) {
+    public List<CosmeticsRequest> getCosmeticsFromStock(HashMap<Cosmetics, Long> map) {
         try {
             return dao.saveCosmeticsData(map, true);
         } catch (SQLException ex) {
@@ -118,7 +119,7 @@ public class SolariumService {
     }
 
 
-    public Map<String, Long> putCosmeticsToStock(HashMap<Cosmetics, Long> map) {
+    public List<CosmeticsRequest> putCosmeticsToStock(HashMap<Cosmetics, Long> map) {
         try {
             return dao.saveCosmeticsData(map, false);
         } catch (SQLException ex) {
