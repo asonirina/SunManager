@@ -62,17 +62,18 @@ public class AlertDialog extends Stage {
 
         int width = (int) text.getLayoutBounds().getWidth() + 120;
 
-        if (width == WIDTH_DEFAULT)
-        width = WIDTH_DEFAULT;
+        if (width < WIDTH_DEFAULT)
+            width = WIDTH_DEFAULT;
 
         int height = 100;
 
         final Scene scene = new Scene(borderPane, width, height);
         scene.setFill(Color.TRANSPARENT);
         setScene(scene);
-
-        setX(owner.getX() + (owner.getWidth() / 2 - width / 2));
-        setY(owner.getY() + (owner.getHeight() / 2 - height / 2));
+        if (owner != null) {
+            setX(owner.getX() + (owner.getWidth() / 2 - width / 2));
+            setY(owner.getY() + (owner.getHeight() / 2 - height / 2));
+        }
     }
 
     private Image getImage(int type) {

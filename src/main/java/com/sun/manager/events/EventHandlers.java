@@ -47,7 +47,9 @@ public class EventHandlers {
                 data.setRes(input);
                 data.setStartDate(new Date(Calendar.getInstance().getTime().getTime()));
                 } catch (Exception ex) {
-                    new AlertDialog(new Stage(), "Введите значение в правильном формате!", 1).showAndWait();
+                    Stage stage = new Stage();
+                    stage.centerOnScreen();
+                    new AlertDialog(null, "Введите значение в правильном формате!", 1).showAndWait();
                 }
 
             }
