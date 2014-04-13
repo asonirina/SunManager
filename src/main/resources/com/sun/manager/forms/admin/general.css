@@ -17,7 +17,19 @@
     -fx-font-size: 12px;
 }
 
+#saveButton:hover, #okButton:hover, #cancelButton:hover, #addButton:hover, #addNewCosm:hover,
+#countVert:hover, #countGreen:hover, #countBlue:hover, #countCosm:hover, #countAbon:hover, #addCosm:hover,
+#addCosm:hover, #addAbon:hover, #usersButton:hover, #addComment:hover, #showComments:hover, #statButton:hover, #bankButton:hover,
+#addCosmButton:hover, #deleteButton:hover, #saveChanges:hover, #logout:hover {
+    -fx-background-color: linear-gradient(#f3f3f3, #f2f2f2);
+}
+
 .text-field
 {
     -fx-font-size: 12px;
+
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-text-fill: white;
+    -fx-opacity: 0.6;
+
 }

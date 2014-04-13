@@ -94,7 +94,7 @@
     <Button fx:id="showComments" layoutX="309.0" layoutY="86.0" mnemonicParsing="false" prefWidth="173.0" text="Посмотреть комментарии" />
     <Button fx:id="statButton" layoutX="939.0" layoutY="86.0" mnemonicParsing="false" prefWidth="133.0" text="Статистика" />
     <Button fx:id="bankButton" layoutX="307.0" layoutY="52.0" mnemonicParsing="false" text="Дополнительная информация" />
-    <Button fx:id="saveChanges" layoutX="983.0" layoutY="42.0" mnemonicParsing="false" text="Сохранить" />
-    <Button fx:id="logout" layoutX="1075.0" layoutY="42.0" mnemonicParsing="false" text="Выйти" />
+    <Button fx:id="saveChanges" layoutX="1020.0" layoutY="42.0" mnemonicParsing="false" text="Сохранить данные" />
+    <Button fx:id="logout" layoutX="1150.0" layoutY="42.0" mnemonicParsing="false" text="Выйти" />
   </children>
 </AnchorPane>
