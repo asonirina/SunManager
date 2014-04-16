@@ -14,6 +14,8 @@ public class AbonementsRequest {
 
     private String res;
 
+    private Long price;
+
     private Date startDate;
 
     public AbonementsRequest(String letter, Long code, String name, String phone) {

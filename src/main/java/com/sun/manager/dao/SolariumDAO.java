@@ -123,14 +123,25 @@ public class SolariumDAO {
         return cosmetics;
     }
 
-    public Long getCodeBySymbol(String symbol) throws SQLException {
+    public Map<String,Long> getCodeBySymbol(String symbol) throws SQLException {
+        Map<String,Long> abonementData = new HashMap<String, Long>();
+
         callableStatement = dbConnection.prepareCall(GET_CODE_BY_SYMBOL);
         callableStatement.setString(1, symbol);
         callableStatement.registerOutParameter(2, Types.INTEGER);
 
         callableStatement.executeUpdate();
+        Long code = callableStatement.getLong(2);
+        abonementData.put("code", code);
 
-        return callableStatement.getLong(2);
+        PreparedStatement preStatement = dbConnection.prepareStatement("select price from abonement where abonement_code = ?");
+        preStatement.setString(1, symbol + code);
+        ResultSet rs = preStatement.executeQuery();
+        while (rs.next()) {
+            abonementData.put("price", rs.getLong("price"));
+        }
+
+        return abonementData;
     }
 
     public void saveSolariumData(List<BaseSolariumData> baseSolariumDataList, Long solariumId) throws SQLException {
