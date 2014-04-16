@@ -16,6 +16,6 @@
     <Label layoutX="54.0" layoutY="174.0" text="№ тел" />
     <Button fx:id="saveButton" layoutX="269.0" layoutY="265.0" mnemonicParsing="false" text="Сохранить" />
     <Label layoutX="54.0" layoutY="65.0" text="Код" />
-    <Label fx:id="errorLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="45.0" layoutY="232.0" prefWidth="302.0" text="Label" textFill="RED" visible="false" />
+    <Label fx:id="priceLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="40.0" layoutY="230.0" prefWidth="307.0" text="" textAlignment="JUSTIFY" underline="false" wrapText="false" />
   </children>
 </AnchorPane>

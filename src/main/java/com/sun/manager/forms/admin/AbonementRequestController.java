@@ -4,6 +4,7 @@ import com.sun.manager.App;
 import com.sun.manager.dao.SolariumDAO;
 import com.sun.manager.dto.AbonementsRequest;
 import com.sun.manager.events.NewAbonementAddedEvent;
+import com.sun.manager.forms.alert.AlertDialog;
 import com.sun.manager.service.SolariumService;
 import javafx.collections.FXCollections;
 import javafx.event.EventHandler;
@@ -22,10 +23,7 @@ import org.apache.commons.lang.StringUtils;
 import java.net.URL;
 import java.sql.Date;
 import java.sql.SQLException;
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.ResourceBundle;
-import java.util.Scanner;
+import java.util.*;
 
 /**
  * User: iason
@@ -48,8 +46,9 @@ public class AbonementRequestController extends AnchorPane implements Initializa
     @FXML
     Button saveButton;
 
+
     @FXML
-    Label errorLabel;
+    Label priceLabel;
 
     SolariumService service = new SolariumService();
 
@@ -60,7 +59,11 @@ public class AbonementRequestController extends AnchorPane implements Initializa
             @Override
             public void handle(KeyEvent keyEvent) {
                 if (Arrays.asList(KeyCode.B, KeyCode.C, KeyCode.D, KeyCode.K, KeyCode.M).contains(keyEvent.getCode())) {
-                    codeField.setText(service.getCodeBySymbol(keyEvent.getCode().toString()));
+                    Map<String, Long> abonInfo = service.getCodeAndPriceBySymbol(keyEvent.getCode().toString());
+                    codeField.setText(String.valueOf(abonInfo.get("code")));
+                    if(letterField.getText().startsWith("S")) {
+                        priceLabel.setText("Цена: "+ (long)(0.45*abonInfo.get("price")));
+                    }
 
                 }
             }
@@ -86,23 +89,19 @@ public class AbonementRequestController extends AnchorPane implements Initializa
     private boolean validate() {
         if (StringUtils.isBlank(nameField.getText()) || StringUtils.isBlank(phoneField.getText())
                 || StringUtils.isBlank(letterField.getText()) || StringUtils.isBlank(codeField.getText())) {
-            errorLabel.setText("Заполните все поля!");
-            errorLabel.setVisible(true);
+            new AlertDialog((Stage)nameField.getScene().getWindow(), "Заполните все поля!", 1).showAndWait();
             return false;
         }
 
-        if (!Arrays.asList("B", "C", "D", "K", "M").contains(letterField.getText())) {
-            errorLabel.setText("Введите одну из следующих букв: B, C, D, K, M");
-            errorLabel.setVisible(true);
+        if (!Arrays.asList("B", "C", "D", "K", "M", "SB", "SC", "SD", "SK", "SM").contains(letterField.getText())) {
+            new AlertDialog((Stage)nameField.getScene().getWindow(), "Введите одну из следующих букв: B, C, D, K, M", 1).showAndWait();
             return false;
         }
 
         if (!phoneField.getText().matches("8[-\\t]?0[\\d]{2}[-\\t]?[\\d]{7}")) {
-            errorLabel.setText("Введите номер телефона в формате 8-0xx-xxxxxxx");
-            errorLabel.setVisible(true);
+            new AlertDialog((Stage)nameField.getScene().getWindow(), "Введите номер телефона в формате 8-0xx-xxxxxxx", 1).showAndWait();
             return false;
         }
-        errorLabel.setVisible(false);
         return true;
     }
 }
