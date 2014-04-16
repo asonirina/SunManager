@@ -270,15 +270,16 @@ public class SolariumDAO {
 
     public List<AbonementsRequest> getAbonByDate(Date startDate) throws SQLException {
         List<AbonementsRequest> abonementsRequestList = new ArrayList<AbonementsRequest>();
-        PreparedStatement ps2 = dbConnection.prepareStatement("select code, letter, client_name, phone from abonements_data where start_date = ?");
+        PreparedStatement ps2 = dbConnection.prepareStatement("select ad.code, ad.letter, ad.client_name, ad.phone, a.price from abonements_data ad JOIN abonements a on a.abonements_code = concat(ad.letter,'',ad.code) where start_date = ?");
         ps2.setDate(1, startDate);
         ResultSet rs = ps2.executeQuery();
 
         while (rs.next()) {
-            Long code = rs.getLong("code");
-            String letter = rs.getString("letter");
-            String clientName = rs.getString("client_name");
-            String phone = rs.getString("phone");
+            Long code = rs.getLong("ad.code");
+            String letter = rs.getString("ad.letter");
+            String clientName = rs.getString("ad.client_name");
+            String phone = rs.getString("ad.phone");
+            Long price = (long) rs.getInt("a.price");
 
             AbonementsRequest abonementsRequest = new AbonementsRequest(letter, code, clientName, phone, startDate);
             abonementsRequestList.add(abonementsRequest);
