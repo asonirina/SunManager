@@ -445,7 +445,7 @@ public class MainAdminController extends ScrollPane implements Initializable {
                 Long count = 0L;
                 for (CosmeticsRequest cr : cosmeticsData) {
                     if (cr.getCount() != null) {
-                        count += cr.getCount();
+                        count += cr.getCosmetics().getPrice();
                     }
                 }
 
@@ -460,7 +460,13 @@ public class MainAdminController extends ScrollPane implements Initializable {
         countAbon.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                abonResData.set(1, new ResData("итого: " + abonementsDataSize));
+                Long count = 0L;
+                for (AbonementsRequest ar : abonementsData) {
+                    if (ar.getPrice() != null) {
+                        count += ar.getPrice();
+                    }
+                }
+                abonResData.set(1, new ResData("итого: " + count));
             }
         });
 
@@ -591,7 +597,7 @@ public class MainAdminController extends ScrollPane implements Initializable {
         }
         resData.set(0, new ResData("Итого мин: " + count));
         resData.set(1, new ResData("Итого руб: " + sum));
-        Long l2 = solariumService.getL2ById(1L) + sum;
+        Double l2 = solariumService.getL2ById(1L) + count/60.0;
         resData.set(2, new ResData("L2= " + l2));
     }
 

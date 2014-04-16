@@ -7,30 +7,33 @@ import java.util.Date;
  * Date: 30.01.14
  */
 public class AbonementsRequest {
-    private String letter;
-    private Long code;
-    private String name;
+    private String letter = null;
+    private Long code = null;
+    private String name = null;
     private String phone;
+    private String res = "";
+    private Long price = null;
+    private Date startDate = null;
 
-    private String res;
+    public AbonementsRequest() {
 
-    private Long price;
+    }
 
-    private Date startDate;
-
-    public AbonementsRequest(String letter, Long code, String name, String phone) {
+    public AbonementsRequest(String letter, Long code, String name, String phone, Long price) {
         this.letter = letter;
         this.code = code;
         this.name = name;
         this.phone = phone;
+        this.price = price;
         generateRes();
     }
 
-    public AbonementsRequest(String letter, Long code, String name, String phone, Date startDate) {
+    public AbonementsRequest(String letter, Long code, String name, String phone, Long price, Date startDate) {
         this.letter = letter;
         this.code = code;
         this.name = name;
         this.phone = phone;
+        this.price = price;
         this.startDate = startDate;
         generateRes();
     }
@@ -88,7 +91,11 @@ public class AbonementsRequest {
         this.startDate = startDate;
     }
 
+    public Long getPrice() {
+        return price;
+    }
+
     public AbonementsRequest clone() {
-        return new AbonementsRequest(letter, code, name, phone);
+        return new AbonementsRequest(letter, code, name, phone, price);
     }
 }

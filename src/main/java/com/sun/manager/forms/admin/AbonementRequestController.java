@@ -51,6 +51,7 @@ public class AbonementRequestController extends AnchorPane implements Initializa
     Label priceLabel;
 
     SolariumService service = new SolariumService();
+    Map<String, Long> abonInfo;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -59,10 +60,10 @@ public class AbonementRequestController extends AnchorPane implements Initializa
             @Override
             public void handle(KeyEvent keyEvent) {
                 if (Arrays.asList(KeyCode.B, KeyCode.C, KeyCode.D, KeyCode.K, KeyCode.M).contains(keyEvent.getCode())) {
-                    Map<String, Long> abonInfo = service.getCodeAndPriceBySymbol(keyEvent.getCode().toString());
+                    abonInfo = service.getCodeAndPriceBySymbol(keyEvent.getCode().toString());
                     codeField.setText(String.valueOf(abonInfo.get("code")));
-                    if(letterField.getText().startsWith("S")) {
-                        priceLabel.setText("Цена: "+ (long)(0.45*abonInfo.get("price")));
+                    if (letterField.getText().startsWith("S") && abonInfo.get("price") != null) {
+                        priceLabel.setText("Цена: " + (long) (0.45 * abonInfo.get("price")));
                     }
 
                 }
@@ -74,7 +75,7 @@ public class AbonementRequestController extends AnchorPane implements Initializa
             public void handle(MouseEvent mouseEvent) {
                 if (validate()) {
                     AbonementsRequest request = new AbonementsRequest(letterField.getText(),
-                            Long.parseLong(codeField.getText()), nameField.getText(), phoneField.getText());
+                            Long.parseLong(codeField.getText()), nameField.getText(), phoneField.getText(), Math.round(0.45 * abonInfo.get("price")));
                     request.setStartDate(new Date(Calendar.getInstance().getTime().getTime()));
                     service.saveAbonement(Arrays.asList(request));
                     Stage stage = (Stage) saveButton.getScene().getWindow();
@@ -89,17 +90,17 @@ public class AbonementRequestController extends AnchorPane implements Initializa
     private boolean validate() {
         if (StringUtils.isBlank(nameField.getText()) || StringUtils.isBlank(phoneField.getText())
                 || StringUtils.isBlank(letterField.getText()) || StringUtils.isBlank(codeField.getText())) {
-            new AlertDialog((Stage)nameField.getScene().getWindow(), "Заполните все поля!", 1).showAndWait();
+            new AlertDialog((Stage) nameField.getScene().getWindow(), "Заполните все поля!", 1).showAndWait();
             return false;
         }
 
         if (!Arrays.asList("B", "C", "D", "K", "M", "SB", "SC", "SD", "SK", "SM").contains(letterField.getText())) {
-            new AlertDialog((Stage)nameField.getScene().getWindow(), "Введите одну из следующих букв: B, C, D, K, M", 1).showAndWait();
+            new AlertDialog((Stage) nameField.getScene().getWindow(), "Введите одну из следующих букв: B, C, D, K, M", 1).showAndWait();
             return false;
         }
 
         if (!phoneField.getText().matches("8[-\\t]?0[\\d]{2}[-\\t]?[\\d]{7}")) {
-            new AlertDialog((Stage)nameField.getScene().getWindow(), "Введите номер телефона в формате 8-0xx-xxxxxxx", 1).showAndWait();
+            new AlertDialog((Stage) nameField.getScene().getWindow(), "Введите номер телефона в формате 8-0xx-xxxxxxx", 1).showAndWait();
             return false;
         }
         return true;
