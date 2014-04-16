@@ -300,14 +300,7 @@ public class SolariumDAO {
     }
 
     public void saveAbonement(List<AbonementsRequest> abonementsRequestList) throws SQLException {
-//        PreparedStatement ps = dbConnection.prepareStatement("select data_id from abonements_data where client_name = ? and phone = ?");
-
         for (AbonementsRequest abonementsRequest : abonementsRequestList) {
-//            ps.setString(1, abonementsRequest.getName());
-//            ps.setString(2, abonementsRequest.getPhone());
-//            ResultSet rs = ps.executeQuery();
-//            //check for unique
-//            if (rs.next()) {
             PreparedStatement ps2 = dbConnection.prepareStatement("insert into abonements_data (start_date, code, letter, client_name, phone) values(?,?,?,?,?)");
             PreparedStatement ps1 = dbConnection.prepareStatement("update abonements set is_free = ? where abonement_code = ?");
             ps1.setBoolean(1, Boolean.FALSE);
@@ -321,7 +314,6 @@ public class SolariumDAO {
             ps2.setString(5, abonementsRequest.getPhone());
 
             ps2.executeUpdate();
-//            }
         }
     }
 
@@ -348,6 +340,21 @@ public class SolariumDAO {
         ps.setString(1, name);
         ps.setInt(2, price);
         ps.setInt(3, cosmeticsCount);
+        ps.executeUpdate();
+    }
+
+    public void updateCosmetic(Cosmetics cosmtic) throws SQLException {
+        PreparedStatement ps = dbConnection.prepareStatement("update cosmetics set name = ?, price = ?, cosmetics_count = ? where cosmetics_id = ?");
+        ps.setString(1, cosmtic.getName());
+        ps.setLong(2, cosmtic.getPrice());
+        ps.setLong(3, cosmtic.getCount());
+        ps.setLong(4, cosmtic.getId());
+        ps.executeUpdate();
+    }
+
+    public void deleteCosmetic(Long id) throws SQLException {
+        PreparedStatement ps = dbConnection.prepareStatement("delete from cosmetics where cosmetics_id = ?");
+        ps.setLong(1, id);
         ps.executeUpdate();
     }
 
