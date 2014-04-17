@@ -172,4 +172,13 @@ public class SolariumService {
             throw new RuntimeException(ex.getMessage());
         }
     }
+
+    public void deleteCosmetics(Cosmetics cosmetics) {
+        try {
+             dao.deleteCosmetic(cosmetics.getId());
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            throw new RuntimeException(ex.getMessage());
+        }
+    }
 }

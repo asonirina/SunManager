@@ -2,6 +2,7 @@ package com.sun.manager.forms.admin;
 
 import com.sun.manager.dto.Cosmetics;
 import com.sun.manager.dto.CosmeticsRequest;
+import com.sun.manager.forms.alert.AlertDialog;
 import com.sun.manager.service.SolariumService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -59,10 +60,7 @@ public class AddCosmeticsController extends AnchorPane implements Initializable 
     Button cancelButton;
 
     @FXML
-    Label errorLabel;
-
-    @FXML
-    Label addErrorLabel;
+    Button deleteButton;
 
     SolariumService service = new SolariumService();
 
@@ -71,7 +69,6 @@ public class AddCosmeticsController extends AnchorPane implements Initializable 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        errorLabel.setVisible(false);
         cosmList.setItems(cosmetics);
 
         addButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -84,13 +81,23 @@ public class AddCosmeticsController extends AnchorPane implements Initializable 
                         Long count = Long.parseLong(countField.getText());
                         CosmeticsRequest request = new CosmeticsRequest(count, cosm);
                         resultList.getItems().add(request);
-                        errorLabel.setVisible(false);
                     }
                 } else {
-                    errorLabel.setVisible(true);
-                    errorLabel.setText("Введите число!");
+                    new AlertDialog((Stage) countField.getScene().getWindow(), "Введите число!", 1).showAndWait();
                 }
 
+            }
+        });
+
+        deleteButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                Cosmetics cosm = cosmList.getSelectionModel().getSelectedItem();
+                if (cosm != null) {
+                    cosmList.getItems().remove(cosm);
+                    service.deleteCosmetics(cosm);
+
+                }
             }
         });
 
@@ -103,10 +110,9 @@ public class AddCosmeticsController extends AnchorPane implements Initializable 
                     long price = Long.parseLong(priceField.getText());
                     long count = Long.parseLong(newCountField.getText());
                     Cosmetics c = new Cosmetics(null, name, price, count);
-                    service.createCosmetic(name, (int) price, (int)count);
+                    service.createCosmetic(name, (int) price, (int) count);
 
                     cosmList.setItems(FXCollections.observableArrayList(service.getAllCosmetics()));
-                    addErrorLabel.setVisible(false);
 
                 }
 
@@ -136,21 +142,18 @@ public class AddCosmeticsController extends AnchorPane implements Initializable 
 
     private boolean validate() {
         if (StringUtils.isBlank(nameField.getText()) && StringUtils.isBlank(priceField.getText())) {
-            addErrorLabel.setText("Заполните все поля!");
-            addErrorLabel.setVisible(true);
+
+            new AlertDialog((Stage) nameField.getScene().getWindow(), "Заполните все поля!", 1).showAndWait();
             return false;
         }
         if (!priceField.getText().matches("\\d+")) {
-            addErrorLabel.setText("Введите число в поле 'Цена'!");
-            addErrorLabel.setVisible(true);
+            new AlertDialog((Stage) nameField.getScene().getWindow(), "Введите число в поле 'Цена'!", 1).showAndWait();
             return false;
         }
         if (!newCountField.getText().matches("\\d+")) {
-            addErrorLabel.setText("Введите число в поле 'Количество'!");
-            addErrorLabel.setVisible(true);
+            new AlertDialog((Stage) nameField.getScene().getWindow(), "Введите число в поле 'Количество'!", 1).showAndWait();
             return false;
         }
-        addErrorLabel.setVisible(false);
         return true;
     }
 }
