@@ -103,6 +103,11 @@ public class AbonementRequestController extends AnchorPane implements Initializa
             new AlertDialog((Stage) nameField.getScene().getWindow(), "Введите номер телефона в формате 8-0xx-xxxxxxx", 1).showAndWait();
             return false;
         }
+
+        if(abonInfo.get("price")==null) {
+            new AlertDialog((Stage) nameField.getScene().getWindow(), "Введите другую букву для абонемента!", 1).showAndWait();
+            return false;
+        }
         return true;
     }
 }
