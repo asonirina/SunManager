@@ -82,19 +82,13 @@ public class EditingCell<T1, T2> extends TableCell<T1, T2> {
                 public void handle(KeyEvent t) {
                     if (t.getCode() == KeyCode.ENTER) {
                         String value = textField.getText();
-                        if (value.contains("$")) {
-                            try {
-                                SolariumDAO dao = new SolariumDAO();
-                                int minutes = new Scanner(textField.getText()).useDelimiter("\\D+").nextInt();
-                                Long sum = minutes * dao.getOneMinutePriceById(solarium.getSolariumNo());
-                                value = minutes + " : $ " + sum;
-                                textField.setText(value);
-                            } catch (SQLException ex) {
-                                throw new RuntimeException(ex);
-                            }
-
+                        if (value.replaceAll(" ", "").matches("[\\d]+:[BCDKM]{1}(\\d)+")) {
+                            commitEdit((T2) value);
+                        } else {
+                            new AlertDialog((Stage) textField.getScene().getWindow(), "Заполните ячейку в формате: \n" +
+                                    "Количество: ($)? Номер абонемента", 1).showAndWait();
+                            cancelEdit();
                         }
-                        commitEdit((T2) value);
                     } else if (t.getCode() == KeyCode.ESCAPE) {
                         cancelEdit();
                     } else if (t.getText().equals("$")) {
@@ -120,7 +114,7 @@ public class EditingCell<T1, T2> extends TableCell<T1, T2> {
                             Long value = Long.valueOf(textField.getText());
                             commitEdit((T2) value);
                         } catch (NumberFormatException ex) {
-                            new AlertDialog((Stage)textField.getScene().getWindow(), "Введите число!", 1).showAndWait();
+                            new AlertDialog((Stage) textField.getScene().getWindow(), "Введите число!", 1).showAndWait();
                             cancelEdit();
                         }
                     }

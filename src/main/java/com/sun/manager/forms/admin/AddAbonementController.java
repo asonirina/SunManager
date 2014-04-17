@@ -1,5 +1,6 @@
 package com.sun.manager.forms.admin;
 
+import com.sun.manager.forms.alert.AlertDialog;
 import com.sun.manager.service.SolariumService;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -46,15 +47,12 @@ public class AddAbonementController extends AnchorPane implements Initializable 
     @FXML
     Button cancelButton;
 
-    @FXML
-    Label errorLabel;
 
     SolariumService service = new SolariumService();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        errorLabel.setVisible(false);
         okButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
@@ -69,8 +67,7 @@ public class AddAbonementController extends AnchorPane implements Initializable 
                     Stage stage = (Stage) okButton.getScene().getWindow();
                     stage.close();
                     } else {
-                        errorLabel.setText(error);
-                        errorLabel.setVisible(true);
+                        new AlertDialog((Stage)letterField.getScene().getWindow(), error, 1).showAndWait();;
                     }
                 }
             }
@@ -89,36 +86,30 @@ public class AddAbonementController extends AnchorPane implements Initializable 
         if (StringUtils.isBlank(letterField.getText()) || StringUtils.isBlank(letterField.getText())
                 || StringUtils.isBlank(minutesField.getText()) || StringUtils.isBlank(durationField.getText())
                 || StringUtils.isBlank(priceField.getText())) {
-            errorLabel.setText("Заполните все поля!!");
-            errorLabel.setVisible(true);
+            new AlertDialog((Stage)letterField.getScene().getWindow(),"Заполните все поля!" , 1).showAndWait();
             return false;
         }
 
         if (!Arrays.asList("B", "C", "D", "K", "M").contains(letterField.getText())) {
-            errorLabel.setText("Введите одну из следующих букв: B, C, D, K, M");
-            errorLabel.setVisible(true);
+            new AlertDialog((Stage)letterField.getScene().getWindow(),"Введите одну из следующих букв: B, C, D, K, M\"" , 1).showAndWait();
             return false;
         }
 
         if (!minutesField.getText().matches("\\d+")) {
-            errorLabel.setText("Введите число в поле 'Минуты'!");
-            errorLabel.setVisible(true);
+            new AlertDialog((Stage)letterField.getScene().getWindow(),"Введите число в поле 'Минуты'!" , 1).showAndWait();
             return false;
         }
 
         if (!priceField.getText().matches("\\d+")) {
-            errorLabel.setText("Введите число в поле 'Цена'!");
-            errorLabel.setVisible(true);
+            new AlertDialog((Stage)letterField.getScene().getWindow(), "Введите число в поле 'Цена'!" , 1).showAndWait();
             return false;
         }
 
         if (!durationField.getText().matches("\\d+")) {
-            errorLabel.setText("Введите количество дней в поле 'Срок действия'!");
-            errorLabel.setVisible(true);
+
+            new AlertDialog((Stage)letterField.getScene().getWindow(), "Введите количество дней в поле 'Срок действия'!" , 1).showAndWait();
             return false;
         }
-
-        errorLabel.setVisible(false);
         return true;
     }
 }
