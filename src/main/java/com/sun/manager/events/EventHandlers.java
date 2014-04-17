@@ -6,6 +6,7 @@ import com.sun.manager.dto.*;
 import com.sun.manager.forms.ButtonCell;
 import com.sun.manager.forms.EditingCell;
 import com.sun.manager.forms.alert.AlertDialog;
+import com.sun.manager.service.SolariumService;
 import javafx.event.EventHandler;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
@@ -35,23 +36,35 @@ public class EventHandlers {
                     return;
                 }
                 try {
-                int index = input.indexOf(":");
-                data.setMinutes(Long.valueOf(input.substring(0, index).trim()));
-                if (input.contains("$")) {
-                    data.setTotalPrice(Long.valueOf(input.substring(input.indexOf("$") + 1).trim()));
-                } else {
-                    data.setAbonementNumber(input.substring(index + 1).trim());
-                }
+                    int index = input.indexOf(":");
+                    data.setMinutes(Long.valueOf(input.substring(0, index).trim()));
+                    if (input.contains("$")) {
+                        data.setTotalPrice(Long.valueOf(input.substring(input.indexOf("$") + 1).trim()));
+                    } else {
+                        data.setAbonementNumber(input.substring(index + 1).trim());
+                    }
 
 
-                data.setRes(input);
-                data.setStartDate(new Date(Calendar.getInstance().getTime().getTime()));
+                    data.setRes(input);
+                    data.setStartDate(new Date(Calendar.getInstance().getTime().getTime()));
                 } catch (Exception ex) {
                     Stage stage = new Stage();
                     stage.centerOnScreen();
                     new AlertDialog(null, "Введите значение в правильном формате!", 1).showAndWait();
                 }
 
+            }
+        };
+    }
+
+    public static EventHandler eventHandlerCosmeticsCommit(final SolariumService service) {
+        return new EventHandler<TableColumn.CellEditEvent<Cosmetics, Long>>() {
+            @Override
+            public void handle(TableColumn.CellEditEvent<Cosmetics, Long> t) {
+                Cosmetics data = t.getTableView().getItems().get(t.getTablePosition().getRow());
+                Long count = t.getNewValue();
+                data.setCount(count);
+                service.updateCosmetics(data);
             }
         };
     }
@@ -74,7 +87,7 @@ public class EventHandlers {
         return new Callback<TableColumn<BaseSolariumData, String>, TableCell<BaseSolariumData, String>>() {
             @Override
             public TableCell<BaseSolariumData, String> call(TableColumn<BaseSolariumData, String> p) {
-                return new EditingCell<BaseSolariumData>(e);
+                return new EditingCell<BaseSolariumData, String>(e);
             }
         };
     }
@@ -84,7 +97,7 @@ public class EventHandlers {
             @Override
             public TableCell<NumericData, String> call(TableColumn<NumericData, String> p) {
 
-                return new EditingCell<NumericData>(e);
+                return new EditingCell<NumericData, String>(e);
             }
 
         };
@@ -95,7 +108,7 @@ public class EventHandlers {
             @Override
             public TableCell<ResData, String> call(TableColumn<ResData, String> p) {
 
-                return new EditingCell<ResData>(e);
+                return new EditingCell<ResData, String>(e);
             }
 
         };
@@ -116,6 +129,15 @@ public class EventHandlers {
             @Override
             public TableCell<AbonementsRequest, String> call(TableColumn<AbonementsRequest, String> p) {
                 return new ButtonCell<AbonementsRequest>(DataColumnEnum.Abonements);
+            }
+        };
+    }
+
+    public static Callback cellFactoryForEditCosmetics() {
+        return new Callback<TableColumn<Cosmetics, Long>, TableCell<Cosmetics, Long>>() {
+            @Override
+            public TableCell<Cosmetics, Long> call(TableColumn<Cosmetics, Long> p) {
+                return new EditingCell<Cosmetics, Long>();
             }
         };
     }

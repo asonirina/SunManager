@@ -1,7 +1,9 @@
 package com.sun.manager.forms.admin;
 
+import com.sun.manager.dto.BaseSolariumData;
 import com.sun.manager.dto.Cosmetics;
 import com.sun.manager.dto.CosmeticsRequest;
+import com.sun.manager.events.EventHandlers;
 import com.sun.manager.forms.alert.AlertDialog;
 import com.sun.manager.service.SolariumService;
 import javafx.collections.FXCollections;
@@ -9,10 +11,8 @@ import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -29,18 +29,17 @@ import java.util.ResourceBundle;
  * Date: 13.02.14
  */
 public class AddCosmeticsController extends AnchorPane implements Initializable {
+    @FXML
+    TableView<Cosmetics> cosmTable;
 
     @FXML
-    ListView<Cosmetics> cosmList;
+    TableColumn nameColumn;
 
     @FXML
-    ListView<CosmeticsRequest> resultList;
+    TableColumn countColumn;
 
     @FXML
     TextField nameField;
-
-    @FXML
-    TextField countField;
 
     @FXML
     TextField newCountField;
@@ -52,14 +51,6 @@ public class AddCosmeticsController extends AnchorPane implements Initializable 
     Button addNewButton;
 
     @FXML
-    Button addButton;
-    @FXML
-    Button okButton;
-
-    @FXML
-    Button cancelButton;
-
-    @FXML
     Button deleteButton;
 
     SolariumService service = new SolariumService();
@@ -68,33 +59,20 @@ public class AddCosmeticsController extends AnchorPane implements Initializable 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        nameColumn.setCellValueFactory(new PropertyValueFactory<Cosmetics, String>("name"));
+        countColumn.setCellValueFactory(new PropertyValueFactory<Cosmetics, Long>("count"));
+        countColumn.setCellFactory(EventHandlers.cellFactoryForEditCosmetics());
+//        cosmTable.getStylesheets().add(this.getClass().getResource("styleNormal.css").toExternalForm());
 
-        cosmList.setItems(cosmetics);
-
-        addButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-
-                if (countField.getText().matches("\\d+")) {
-                    Cosmetics cosm = cosmList.getSelectionModel().getSelectedItem();
-                    if (cosm != null) {
-                        Long count = Long.parseLong(countField.getText());
-                        CosmeticsRequest request = new CosmeticsRequest(count, cosm);
-                        resultList.getItems().add(request);
-                    }
-                } else {
-                    new AlertDialog((Stage) countField.getScene().getWindow(), "Введите число!", 1).showAndWait();
-                }
-
-            }
-        });
+        countColumn.setOnEditCommit(EventHandlers.eventHandlerCosmeticsCommit(service));
+        cosmTable.setItems(cosmetics);
 
         deleteButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                Cosmetics cosm = cosmList.getSelectionModel().getSelectedItem();
+                Cosmetics cosm = cosmTable.getSelectionModel().getSelectedItem();
                 if (cosm != null) {
-                    cosmList.getItems().remove(cosm);
+                    cosmTable.getItems().remove(cosm);
                     service.deleteCosmetics(cosm);
 
                 }
@@ -104,38 +82,14 @@ public class AddCosmeticsController extends AnchorPane implements Initializable 
         addNewButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-
                 if (validate()) {
                     String name = nameField.getText();
                     long price = Long.parseLong(priceField.getText());
                     long count = Long.parseLong(newCountField.getText());
                     Cosmetics c = new Cosmetics(null, name, price, count);
                     service.createCosmetic(name, (int) price, (int) count);
-
-                    cosmList.setItems(FXCollections.observableArrayList(service.getAllCosmetics()));
-
+                    cosmTable.setItems(FXCollections.observableArrayList(service.getAllCosmetics()));
                 }
-
-            }
-        });
-
-        okButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                ObservableList<CosmeticsRequest> items = resultList.getItems();
-                HashMap<Cosmetics, Long> map = new HashMap<Cosmetics, Long>();
-                for (CosmeticsRequest cr : items) {
-                    map.put(cr.getCosmetics(), cr.getCount());
-                }
-                service.putCosmeticsToStock(map);
-                ((Stage) okButton.getScene().getWindow()).close();
-            }
-        });
-        cancelButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-
-                ((Stage) cancelButton.getScene().getWindow()).close();
             }
         });
     }

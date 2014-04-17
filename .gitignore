@@ -1,4 +1,12 @@
 #### Idea ###
 .idea
 *.iml
+bin
+launch4j
+lib
+all
+*.exe
+*.xml
+*.log
+*.bmp
 

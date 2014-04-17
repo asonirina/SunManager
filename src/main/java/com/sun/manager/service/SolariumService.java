@@ -181,4 +181,13 @@ public class SolariumService {
             throw new RuntimeException(ex.getMessage());
         }
     }
+
+    public void updateCosmetics(Cosmetics cosmetics) {
+        try {
+            dao.updateCosmetic(cosmetics);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            throw new RuntimeException(ex.getMessage());
+        }
+    }
 }
