@@ -485,4 +485,33 @@ public class SolariumDAO {
         update.setString(3, availableAbonements.getLetter());
         update.executeUpdate();
     }
+
+    public boolean deleteRowFromSolarium(Long dataId, Long solariumId) throws SQLException {
+        String solarium = null;
+        String solarium_sun = null;
+
+        if (solariumId == 1L) {
+            solarium = VERTICAL_SOLARIUM;
+        } else if (solariumId == 2L) {
+            solarium = GORIZONTAL_BLUE_SOLARIUM;
+        } else if (solariumId == 3L) {
+            solarium = GORIZONTAL_GREEN_SOLARIUM;
+        }
+
+        String checkDataInDB = "select * from " + solarium + " where data_id = ?";
+        String deleteRow = "delete from " + solarium + " where data_id = ?";
+
+        PreparedStatement ps = dbConnection.prepareStatement(checkDataInDB);
+        ps.setLong(1, dataId);
+        ResultSet rs = ps.executeQuery();
+
+        if (rs.next()) {
+            ps = dbConnection.prepareStatement(deleteRow);
+            ps.setLong(1, dataId);
+            ps.executeUpdate();
+
+            return true;
+        }
+         return false;
+    }
 }
