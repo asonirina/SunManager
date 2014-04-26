@@ -493,18 +493,33 @@ public class MainAdminController extends ScrollPane implements Initializable {
                 @Override
                 public void handle(MouseEvent mouseEvent) {
                     BaseSolariumData data = tableVert.getSelectionModel().getSelectedItem();
+                    if (data.isSaved()) {
+                        solariumService.deleteSolariumData(data, 1L);
+                    }
+                    vertData.remove(data);
+                    vertData.add((BaseSolariumData)BlankItem.generateBlankItem(1L));
                 }
             });
             del2.setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent mouseEvent) {
                     BaseSolariumData data = tableGreen.getSelectionModel().getSelectedItem();
+                    if (data.isSaved()) {
+                        solariumService.deleteSolariumData(data, 2L);
+                    }
+                    greenData.remove(data);
+                    greenData.add((BaseSolariumData)BlankItem.generateBlankItem(1L));
                 }
             });
-            del2.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            del3.setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent mouseEvent) {
                     BaseSolariumData data = tableBlue.getSelectionModel().getSelectedItem();
+                    if (data.isSaved()) {
+                        solariumService.deleteSolariumData(data, 3L);
+                    }
+                    blueData.remove(data);
+                    blueData.add((BaseSolariumData)BlankItem.generateBlankItem(1L));
                 }
             });
             addCosm.setVisible(false);
@@ -655,7 +670,7 @@ public class MainAdminController extends ScrollPane implements Initializable {
             minutes = 0;
             data = FXCollections.observableArrayList();
             for (BaseSolariumData d : greenData) {
-                if (d.getMinutes() != null&& !d.isSaved()) {
+                if (d.getMinutes() != null && !d.isSaved()) {
                     minutes += d.getMinutes();
                     data.add(d);
                     d.setSaved(true);
