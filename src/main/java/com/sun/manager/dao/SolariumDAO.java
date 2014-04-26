@@ -145,7 +145,7 @@ public class SolariumDAO {
         return abonementData;
     }
 
-    public void saveSolariumData(List<BaseSolariumData> baseSolariumDataList, Long solariumId, Double solariumL2) throws SQLException {
+    public void saveSolariumData(List<BaseSolariumData> baseSolariumDataList, Long solariumId) throws SQLException {
         String solarium = null;
         String solarium_sun = null;
         Map<String, Long> totals = new HashMap<String, Long>();
@@ -185,32 +185,6 @@ public class SolariumDAO {
                 totalSum += baseData.getTotalPrice();
             }
 
-            //Update l2
-            PreparedStatement ps5 = dbConnection.prepareStatement("delete from " + solarium_sun + " where start_date = ?");
-            PreparedStatement ps3 = dbConnection.prepareStatement("insert into " + solarium_sun + " (start_date, total_minute, l2, one_minute_price) values(?,?,?,?)");
-            PreparedStatement ps4 = dbConnection.prepareStatement("select l2,one_minute_price from " + solarium_sun + " where start_date = (select MAX(start_date) from "+ solarium_sun +")");
-            ResultSet rs = ps4.executeQuery();
-
-            while (rs.next()) {
-                l2 = rs.getDouble("l2");
-                oneMinutePrice = rs.getLong("one_minute_price");
-            }
-
-            if(l2 + solariumL2 >= 999.59) {
-               l2 += (l2 + solariumL2 - 999.59);
-            } else {
-                l2 += solariumL2;
-           }
-
-            ps5.setDate(1, (Date) baseData.getStartDate());
-            ps5.executeUpdate();
-
-            ps3.setDate(1, (Date) baseData.getStartDate());
-            ps3.setLong(2, totalMinutes);
-            ps3.setDouble(3, l2);
-            ps3.setLong(4, oneMinutePrice);
-            ps3.executeUpdate();
-
             //Insert abonementsData
             PreparedStatement ps = dbConnection.prepareStatement("insert into " + solarium + " (start_date, minutes, total_price, abonement_number) values(?,?,?,?)");
             ps.setDate(1, (Date) baseData.getStartDate());
@@ -224,6 +198,57 @@ public class SolariumDAO {
             ps.executeUpdate();
         }
     }
+
+    public void saveL2(Long solariumId, Double solariumL2,Date currentDate, Long totalMinutes, Long totalSum) throws SQLException {
+        String solarium_sun = null;
+        Double l2 = 0D;
+        Long oneMinutePrice = 0L;
+        String solarium = null;
+
+        if (solariumId == 1L) {
+            solarium_sun = VERTICAL_SOLARIUM_SUN;
+            solarium = "вертикальный";
+        } else if (solariumId == 2L) {
+            solarium_sun = GORIZONTAL_BLUE_SOLARIUM_SUN;
+            solarium = "горизонтальный голубой";
+        } else if (solariumId == 3L) {
+            solarium_sun = GORIZONTAL_GREEN_SOLARIUM_SUN;
+            solarium = "горизонтальный зеленый";
+        }
+
+//        set comment
+        PreparedStatement psComment = dbConnection.prepareStatement("insert into comments_data (start_date, comment) values(?,?)");
+
+        //Update l2
+            PreparedStatement ps5 = dbConnection.prepareStatement("delete from " + solarium_sun + " where start_date = ?");
+            PreparedStatement ps3 = dbConnection.prepareStatement("insert into " + solarium_sun + " (start_date, total_minute, l2, one_minute_price) values(?,?,?,?)");
+            PreparedStatement ps4 = dbConnection.prepareStatement("select l2,one_minute_price from " + solarium_sun + " where start_date = (select MAX(start_date) from " + solarium_sun + ")");
+            ResultSet rs = ps4.executeQuery();
+
+
+            while (rs.next()) {
+                l2 = rs.getDouble("l2");
+                oneMinutePrice = rs.getLong("one_minute_price");
+            }
+
+            if (l2 + solariumL2 >= 999.59) {
+                l2 += (l2 + solariumL2 - 999.59);
+                psComment.setDate(1, currentDate);
+                psComment.setString(2, "Счетчик для ламп был обнулен для солярия " + solarium + ". Пожалуйста, замените лампы");
+            } else {
+                l2 += solariumL2;
+            }
+
+            ps5.setDate(1, currentDate);
+            ps5.executeUpdate();
+
+            ps3.setDate(1, currentDate);
+            ps3.setLong(2, totalMinutes);
+            ps3.setDouble(3, l2);
+            ps3.setLong(4, oneMinutePrice);
+            ps3.executeUpdate();
+
+        }
 
     public List<CosmeticsRequest> saveCosmeticsData(HashMap<Cosmetics, Long> cosmetics, boolean isMinus) throws SQLException {
         List<CosmeticsRequest> resultData = new ArrayList<CosmeticsRequest>();
@@ -512,6 +537,6 @@ public class SolariumDAO {
 
             return true;
         }
-         return false;
+        return false;
     }
 }
