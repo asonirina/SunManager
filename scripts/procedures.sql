@@ -49,18 +49,18 @@ END $$
 DROP PROCEDURE IF EXISTS `getL2ById` $$
 CREATE PROCEDURE `getL2ById`(
         IN SOL_ID INTEGER(11),
-        OUT L2 INTEGER(11)
+        OUT L_2 DOUBLE()
         )
 BEGIN
 CASE
 WHEN SOL_ID = 1 THEN
-    Select l2 into L2 from vertical_sun
+    Select l2 into L_2 from vertical_sun
     where start_date = (select MAX(start_date) from vertical_sun);
 WHEN SOL_ID = 2 THEN
-    Select l2 into L2 from gorizontal_blue_sun
+    Select l2 into L_2 from gorizontal_blue_sun
     where start_date = (select MAX(start_date) from gorizontal_blue_sun);
 WHEN SOL_ID = 3 THEN
-    Select l2 into L2 from gorizontal_green_sun
+    Select l2 into L_2 from gorizontal_green_sun
     where start_date = (select MAX(start_date) from gorizontal_green_sun);
 END CASE;
 END $$
