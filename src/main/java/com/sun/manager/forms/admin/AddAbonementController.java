@@ -63,11 +63,12 @@ public class AddAbonementController extends AnchorPane implements Initializable 
                     int duration = Integer.parseInt(durationField.getText());
                     int price = Integer.parseInt(priceField.getText());
                     String error = service.createAbonement(letter, code, minutes, duration, price);
-                    if(error ==null) {
-                    Stage stage = (Stage) okButton.getScene().getWindow();
-                    stage.close();
+                    if (error == null) {
+                        Stage stage = (Stage) okButton.getScene().getWindow();
+                        stage.close();
                     } else {
-                        new AlertDialog((Stage)letterField.getScene().getWindow(), error, 1).showAndWait();;
+                        new AlertDialog((Stage) letterField.getScene().getWindow(), error, 1).showAndWait();
+                        ;
                     }
                 }
             }
@@ -86,28 +87,28 @@ public class AddAbonementController extends AnchorPane implements Initializable 
         if (StringUtils.isBlank(letterField.getText()) || StringUtils.isBlank(letterField.getText())
                 || StringUtils.isBlank(minutesField.getText()) || StringUtils.isBlank(durationField.getText())
                 || StringUtils.isBlank(priceField.getText())) {
-            new AlertDialog((Stage)letterField.getScene().getWindow(),"Заполните все поля!" , 1).showAndWait();
+            new AlertDialog((Stage) letterField.getScene().getWindow(), "Заполните все поля!", 1).showAndWait();
             return false;
         }
 
-        if (!Arrays.asList("B", "C", "D", "K", "M").contains(letterField.getText())) {
-            new AlertDialog((Stage)letterField.getScene().getWindow(),"Введите одну из следующих букв: B, C, D, K, M\"" , 1).showAndWait();
+        if (!Arrays.asList("B", "C", "D", "K", "M", "O", "G", "R", "H").contains(letterField.getText())) {
+            new AlertDialog((Stage) letterField.getScene().getWindow(), "Введите одну из следующих букв: B, C, D, K, M, O, G, R, H", 1).showAndWait();
             return false;
         }
 
         if (!minutesField.getText().matches("\\d+")) {
-            new AlertDialog((Stage)letterField.getScene().getWindow(),"Введите число в поле 'Минуты'!" , 1).showAndWait();
+            new AlertDialog((Stage) letterField.getScene().getWindow(), "Введите число в поле 'Минуты'!", 1).showAndWait();
             return false;
         }
 
         if (!priceField.getText().matches("\\d+")) {
-            new AlertDialog((Stage)letterField.getScene().getWindow(), "Введите число в поле 'Цена'!" , 1).showAndWait();
+            new AlertDialog((Stage) letterField.getScene().getWindow(), "Введите число в поле 'Цена'!", 1).showAndWait();
             return false;
         }
 
         if (!durationField.getText().matches("\\d+")) {
 
-            new AlertDialog((Stage)letterField.getScene().getWindow(), "Введите количество дней в поле 'Срок действия'!" , 1).showAndWait();
+            new AlertDialog((Stage) letterField.getScene().getWindow(), "Введите количество дней в поле 'Срок действия'!", 1).showAndWait();
             return false;
         }
         return true;

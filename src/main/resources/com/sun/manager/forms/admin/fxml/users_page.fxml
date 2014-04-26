@@ -21,7 +21,6 @@
             <Button fx:id="addButton" layoutX="247.0" layoutY="179.0" mnemonicParsing="false" text="Добавить" />
             <PasswordField fx:id="passwordField" layoutX="177.0" layoutY="93.0" prefWidth="143.0" prefHeight="22.0" />
             <PasswordField fx:id="repeatField" layoutX="177.0" layoutY="132.0" prefWidth="142.3" prefHeight="22.0" />
-            <Label fx:id="errorLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="37.0" layoutY="211.0" prefWidth="286.0" text="Label" textFill="RED" visible="true" />
           </children>
         </AnchorPane>
       </content>

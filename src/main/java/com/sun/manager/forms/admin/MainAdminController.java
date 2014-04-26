@@ -261,7 +261,7 @@ public class MainAdminController extends ScrollPane implements Initializable {
             setAbonResData();
 
         } catch (Exception ex) {
-            new AlertDialog((Stage)logout.getScene().getWindow(), "Произошла ошибка!", 1).showAndWait();
+            new AlertDialog((Stage) logout.getScene().getWindow(), "Произошла ошибка!", 1).showAndWait();
             ex.printStackTrace();
         }
 
@@ -413,7 +413,7 @@ public class MainAdminController extends ScrollPane implements Initializable {
                     page.start(new Stage());
                     ((Stage) logout.getScene().getWindow()).close();
                 } catch (IOException ex) {
-                    new AlertDialog((Stage)logout.getScene().getWindow(),"Произошла ошибка!", 1).showAndWait();
+                    new AlertDialog((Stage) logout.getScene().getWindow(), "Произошла ошибка!", 1).showAndWait();
                     //throw new RuntimeException(ex);
                 }
             }
@@ -478,7 +478,7 @@ public class MainAdminController extends ScrollPane implements Initializable {
                 try {
                     page.start(new Stage());
                 } catch (IOException ex) {
-                    new AlertDialog((Stage)logout.getScene().getWindow(),"Произошла ошибка!", 1).showAndWait();
+                    new AlertDialog((Stage) logout.getScene().getWindow(), "Произошла ошибка!", 1).showAndWait();
                     //throw new RuntimeException(ex);
                 }
             }
@@ -497,8 +497,8 @@ public class MainAdminController extends ScrollPane implements Initializable {
                     try {
                         page.start(new Stage());
                     } catch (IOException ex) {
-                        new AlertDialog((Stage)logout.getScene().getWindow(),"Произошла ошибка!", 1).showAndWait();
-                       // throw new RuntimeException(ex);
+                        new AlertDialog((Stage) logout.getScene().getWindow(), "Произошла ошибка!", 1).showAndWait();
+                        // throw new RuntimeException(ex);
                     }
                 }
             });
@@ -507,7 +507,7 @@ public class MainAdminController extends ScrollPane implements Initializable {
                 public void handle(MouseEvent mouseEvent) {
                     destroy(new ClosePageEvent());
 
-                    new AlertDialog((Stage)logout.getScene().getWindow(),"Изменения успешно сохранены!", 0).showAndWait();
+                    new AlertDialog((Stage) logout.getScene().getWindow(), "Изменения успешно сохранены!", 0).showAndWait();
 
                 }
             });
@@ -522,7 +522,7 @@ public class MainAdminController extends ScrollPane implements Initializable {
 
                         page.start(new Stage());
                     } catch (IOException ex) {
-                        new AlertDialog((Stage)logout.getScene().getWindow(),"Произошла ошибка!", 1).showAndWait();
+                        new AlertDialog((Stage) logout.getScene().getWindow(), "Произошла ошибка!", 1).showAndWait();
                         //throw new RuntimeException(ex);
                     }
                 }
@@ -534,7 +534,7 @@ public class MainAdminController extends ScrollPane implements Initializable {
                     try {
                         page.start(new Stage());
                     } catch (IOException ex) {
-                        new AlertDialog((Stage)logout.getScene().getWindow(),"Произошла ошибка!", 1).showAndWait();
+                        new AlertDialog((Stage) logout.getScene().getWindow(), "Произошла ошибка!", 1).showAndWait();
                         //throw new RuntimeException(ex);
                     }
                 }
@@ -546,7 +546,7 @@ public class MainAdminController extends ScrollPane implements Initializable {
                         AddAbonementPage page = new AddAbonementPage();
                         page.start(new Stage());
                     } catch (IOException ex) {
-                        new AlertDialog((Stage)logout.getScene().getWindow(),"Произошла ошибка!", 1).showAndWait();
+                        new AlertDialog((Stage) logout.getScene().getWindow(), "Произошла ошибка!", 1).showAndWait();
                         throw new RuntimeException(ex);
                     }
                 }
@@ -559,7 +559,7 @@ public class MainAdminController extends ScrollPane implements Initializable {
                         UsersPage page = new UsersPage();
                         page.start(new Stage());
                     } catch (IOException ex) {
-                        new AlertDialog((Stage)logout.getScene().getWindow(),"Произошла ошибка!", 1).showAndWait();
+                        new AlertDialog((Stage) logout.getScene().getWindow(), "Произошла ошибка!", 1).showAndWait();
                         //throw new RuntimeException(ex);
                     }
                 }
@@ -572,7 +572,7 @@ public class MainAdminController extends ScrollPane implements Initializable {
                         StatisticsPage page = new StatisticsPage();
                         page.start(new Stage());
                     } catch (IOException ex) {
-                        new AlertDialog((Stage)logout.getScene().getWindow(),"Произошла ошибка!", 1).showAndWait();
+                        new AlertDialog((Stage) logout.getScene().getWindow(), "Произошла ошибка!", 1).showAndWait();
                         throw new RuntimeException(ex);
                     }
                 }
@@ -597,7 +597,8 @@ public class MainAdminController extends ScrollPane implements Initializable {
         }
         resData.set(0, new ResData("Итого мин: " + count));
         resData.set(1, new ResData("Итого руб: " + sum));
-        Double l2 = solariumService.getL2ById(1L) + count/60.0;
+        long c = solariumService.getL2ById(1L) + count;
+        String l2 = c / 60 + "." + ((c >= 10) ? "" : "0") + c % 60;
         resData.set(2, new ResData("L2= " + l2));
     }
 

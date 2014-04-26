@@ -14,6 +14,5 @@
     <ListView fx:id="resultList" layoutX="41.0" layoutY="203.0" prefHeight="146.0" prefWidth="272.0" />
     <Button fx:id="saveButton" layoutX="385.0" layoutY="286.0" mnemonicParsing="false" text="Сохранить" />
     <Button fx:id="deleteButton" layoutX="392.0" layoutY="232.0" mnemonicParsing="false" text="Удалить" />
-    <Label fx:id="errorLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="326.0" layoutY="159.0" prefWidth="167.0" text="Label" textFill="RED" visible="false" />
   </children>
 </AnchorPane>

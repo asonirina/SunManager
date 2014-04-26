@@ -1,6 +1,7 @@
 package com.sun.manager.forms.admin;
 
 import com.sun.manager.dto.Comment;
+import com.sun.manager.forms.alert.AlertDialog;
 import com.sun.manager.service.SolariumService;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -32,14 +33,10 @@ public class AddCommentController extends AnchorPane implements Initializable {
     @FXML
     Button cancelButton;
 
-    @FXML
-    Label errorLabel;
-
     SolariumService service = new SolariumService();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        errorLabel.setVisible(false);
         okButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
@@ -66,11 +63,9 @@ public class AddCommentController extends AnchorPane implements Initializable {
 
     private boolean validate() {
         if (StringUtils.isBlank(commentArea.getText())) {
-            errorLabel.setText("Добавьте комментарий!");
-            errorLabel.setVisible(true);
+            new AlertDialog((Stage)commentArea.getScene().getWindow(),"Добавьте комментарий!", 1).showAndWait();
             return false;
         }
-        errorLabel.setVisible(false);
         return true;
     }
 

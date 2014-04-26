@@ -43,9 +43,6 @@ public class CosmeticsRequestController extends AnchorPane implements Initializa
     @FXML
     Button deleteButton;
 
-    @FXML
-    Label errorLabel;
-
     SolariumService service = new SolariumService();
 
 
@@ -53,7 +50,6 @@ public class CosmeticsRequestController extends AnchorPane implements Initializa
     public void initialize(URL url, ResourceBundle resourceBundle) {
         cosmeticsList.setItems(FXCollections.observableArrayList(service.getAllCosmetics()));
 
-        errorLabel.setVisible(false);
         addCosmButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
@@ -72,10 +68,8 @@ public class CosmeticsRequestController extends AnchorPane implements Initializa
                             resultList.getItems().add(0, cr);
                         }
                     }
-                    errorLabel.setVisible(false);
                 } else {
-                    errorLabel.setText("Введите число");
-                    errorLabel.setVisible(true);
+                    new AlertDialog((Stage)countText.getScene().getWindow(),"Введите число", 1).showAndWait();
                 }
 
             }
