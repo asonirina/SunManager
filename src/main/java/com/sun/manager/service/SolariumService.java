@@ -63,9 +63,18 @@ public class SolariumService {
         }
     }
 
-    public void saveSolariumData(List<BaseSolariumData> list, Long id, Double l2) {
+    public void saveSolariumData(List<BaseSolariumData> list, Long id) {
         try {
-            dao.saveSolariumData(list, id, l2);
+            dao.saveSolariumData(list, id);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            throw new RuntimeException(ex.getMessage());
+        }
+    }
+
+    public void saveL2(Long id, Double l2, Date date, Long tm, Long ts) {
+        try {
+            dao.saveL2(id, l2, date, tm, ts);
         } catch (SQLException ex) {
             ex.printStackTrace();
             throw new RuntimeException(ex.getMessage());
@@ -175,7 +184,7 @@ public class SolariumService {
 
     public void deleteCosmetics(Cosmetics cosmetics) {
         try {
-             dao.deleteCosmetic(cosmetics.getId());
+            dao.deleteCosmetic(cosmetics.getId());
         } catch (SQLException ex) {
             ex.printStackTrace();
             throw new RuntimeException(ex.getMessage());
