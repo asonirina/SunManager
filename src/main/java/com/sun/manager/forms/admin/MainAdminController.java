@@ -621,36 +621,40 @@ public class MainAdminController extends ScrollPane implements Initializable {
     public void destroy(ClosePageEvent e) {
         if (App.getInstance().getUser().getRole().equals("admin")) {
             ObservableList<BaseSolariumData> data = FXCollections.observableArrayList();
+            long minutes = 0;
             for (int i = vertSize; i < 30; ++i) {
                 BaseSolariumData d = vertData.get(i);
                 if (d.getMinutes() != null) {
+                    minutes += d.getMinutes();
                     data.add(d);
                     vertSize++;
                 }
             }
-            solariumService.saveSolariumData(data, 1L);
+            solariumService.saveSolariumData(data, 1L, Double.valueOf(minutes / 60 + "."+ ((minutes >= 10) ? "" : "0") + minutes % 60));
 
-
+            minutes = 0;
             data = FXCollections.observableArrayList();
             for (int i = greenSize; i < 30; ++i) {
                 BaseSolariumData d = greenData.get(i);
                 if (d.getMinutes() != null) {
+                    minutes += d.getMinutes();
                     data.add(d);
                     greenSize++;
                 }
             }
-            solariumService.saveSolariumData(data, 2L);
+            solariumService.saveSolariumData(data, 2L, Double.valueOf(minutes / 60 + "."+ ((minutes >= 10) ? "" : "0") + minutes % 60));
 
-
+            minutes = 0;
             data = FXCollections.observableArrayList();
             for (int i = blueSize; i < 30; ++i) {
                 BaseSolariumData d = blueData.get(i);
                 if (d.getMinutes() != null) {
+                    minutes += d.getMinutes();
                     data.add(d);
                     blueSize++;
                 }
             }
-            solariumService.saveSolariumData(data, 3L);
+            solariumService.saveSolariumData(data, 3L, Double.valueOf(minutes / 60 + "."+ ((minutes >= 10) ? "" : "0") + minutes % 60));
 
             ObservableList<CosmeticsRequest> cosmeticsRequests = FXCollections.observableArrayList();
             for (int i = cosmSize; i < 30; ++i) {

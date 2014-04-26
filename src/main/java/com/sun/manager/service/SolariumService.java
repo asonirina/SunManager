@@ -63,9 +63,9 @@ public class SolariumService {
         }
     }
 
-    public void saveSolariumData(List<BaseSolariumData> list, Long id) {
+    public void saveSolariumData(List<BaseSolariumData> list, Long id, Double l2) {
         try {
-            dao.saveSolariumData(list, id);
+            dao.saveSolariumData(list, id, l2);
         } catch (SQLException ex) {
             ex.printStackTrace();
             throw new RuntimeException(ex.getMessage());
