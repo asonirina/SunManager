@@ -173,6 +173,15 @@ public class MainAdminController extends ScrollPane implements Initializable {
     @FXML
     Button bankButton;
 
+    @FXML
+    Button del1;
+
+    @FXML
+    Button del2;
+
+    @FXML
+    Button del3;
+
 
     SolariumService solariumService = new SolariumService();
     final ObservableList<BaseSolariumData> vertData = FXCollections.observableArrayList(
@@ -480,6 +489,24 @@ public class MainAdminController extends ScrollPane implements Initializable {
         });
 
         if (App.getInstance().getUser().getRole().equals("admin")) {
+            del1.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    BaseSolariumData data = tableVert.getSelectionModel().getSelectedItem();
+                }
+            });
+            del2.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    BaseSolariumData data = tableGreen.getSelectionModel().getSelectedItem();
+                }
+            });
+            del2.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    BaseSolariumData data = tableBlue.getSelectionModel().getSelectedItem();
+                }
+            });
             addCosm.setVisible(false);
             addAbon.setVisible(false);
             usersButton.setVisible(false);
@@ -493,7 +520,6 @@ public class MainAdminController extends ScrollPane implements Initializable {
                         page.start(new Stage());
                     } catch (IOException ex) {
                         new AlertDialog((Stage) logout.getScene().getWindow(), "Произошла ошибка!", 1).showAndWait();
-                        // throw new RuntimeException(ex);
                     }
                 }
             });

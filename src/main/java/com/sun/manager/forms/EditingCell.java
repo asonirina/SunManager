@@ -82,12 +82,13 @@ public class EditingCell<T1, T2> extends TableCell<T1, T2> {
                 public void handle(KeyEvent t) {
                     if (t.getCode() == KeyCode.ENTER) {
                         String value = textField.getText();
-                        if (value.replaceAll(" ", "").matches("[\\d]+:[BCDKM]{1}(\\d)+")) {
+                        if (value.replaceAll(" ", "").matches("[\\d]+:S?[BCDKMORGH]{1}(\\d)+")) {
                             commitEdit((T2) value);
                         } else {
                             new AlertDialog((Stage) textField.getScene().getWindow(), "Заполните ячейку в формате: \n" +
                                     "Количество: ($)? Номер абонемента", 1).showAndWait();
                             cancelEdit();
+                            textField.setText("");
                         }
                     } else if (t.getCode() == KeyCode.ESCAPE) {
                         cancelEdit();
