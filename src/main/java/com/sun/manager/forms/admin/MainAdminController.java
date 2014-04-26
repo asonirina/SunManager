@@ -497,7 +497,7 @@ public class MainAdminController extends ScrollPane implements Initializable {
                         solariumService.deleteSolariumData(data, 1L);
                     }
                     vertData.remove(data);
-                    greenData.add((BaseSolariumData)BlankItem.generateBlankItem(1L));
+                    vertData.add((BaseSolariumData)BlankItem.generateBlankItem(1L));
                 }
             });
             del2.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -511,7 +511,7 @@ public class MainAdminController extends ScrollPane implements Initializable {
                     greenData.add((BaseSolariumData)BlankItem.generateBlankItem(1L));
                 }
             });
-            del2.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            del3.setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent mouseEvent) {
                     BaseSolariumData data = tableBlue.getSelectionModel().getSelectedItem();
@@ -519,7 +519,7 @@ public class MainAdminController extends ScrollPane implements Initializable {
                         solariumService.deleteSolariumData(data, 3L);
                     }
                     blueData.remove(data);
-                    greenData.add((BaseSolariumData)BlankItem.generateBlankItem(1L));
+                    blueData.add((BaseSolariumData)BlankItem.generateBlankItem(1L));
                 }
             });
             addCosm.setVisible(false);
