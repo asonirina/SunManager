@@ -150,7 +150,7 @@ public class SolariumDAO {
         Map<String, Long> totals = new HashMap<String, Long>();
         Long totalSum = 0L;
         Long totalMinutes = 0L;
-        Long l2 = 0L;
+        Double l2 = 0D;
         Long oneMinutePrice = 0L;
 
         if (solariumId == 1L) {
@@ -191,7 +191,7 @@ public class SolariumDAO {
             ResultSet rs = ps4.executeQuery();
 
             while (rs.next()) {
-                l2 = rs.getLong("l2");
+                l2 = rs.getDouble("l2");
                 oneMinutePrice = rs.getLong("one_minute_price");
             }
 
@@ -199,14 +199,14 @@ public class SolariumDAO {
                l2 += (l2 + solariumL2 - 999.59);
             } else {
                 l2 += solariumL2;
-            }
+           }
 
             ps5.setDate(1, (Date) baseData.getStartDate());
             ps5.executeUpdate();
 
             ps3.setDate(1, (Date) baseData.getStartDate());
             ps3.setLong(2, totalMinutes);
-            ps3.setLong(3, l2);
+            ps3.setDouble(3, l2);
             ps3.setLong(4, oneMinutePrice);
             ps3.executeUpdate();
 

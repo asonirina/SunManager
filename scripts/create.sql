@@ -122,7 +122,7 @@ CREATE TABLE IF NOT EXISTS statistic_data (
 ) ENGINE=INNODB;
 
 CREATE TABLE IF NOT EXISTS available_abonements (
-      letter               int NOT NULL PRIMARY KEY,
+      letter               VARCHAR(15) NOT NULL PRIMARY KEY,
       price                int,
-      minutes              int,
+      minutes              int
 ) ENGINE=INNODB;
