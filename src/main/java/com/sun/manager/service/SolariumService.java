@@ -190,4 +190,13 @@ public class SolariumService {
             throw new RuntimeException(ex.getMessage());
         }
     }
+
+    public void deleteSolariumData(BaseSolariumData data, Long solariumId) {
+        try {
+            dao.deleteRowFromSolarium(data.getDataId(), solariumId);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            throw new RuntimeException(ex.getMessage());
+        }
+    }
 }
