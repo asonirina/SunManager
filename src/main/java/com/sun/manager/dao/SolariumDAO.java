@@ -84,6 +84,7 @@ public class SolariumDAO {
 
             BaseSolariumData baseSolariumData = new BaseSolariumData(
                     id, startDateData, minutes, totalPrice, abonementCode);
+            baseSolariumData.setSaved(true);
             solariumDataList.add(baseSolariumData);
         }
         return solariumDataList;
@@ -290,6 +291,7 @@ public class SolariumDAO {
             cosmetics.setName(cosmName);
             cosmetics.setPrice(price);
             CosmeticsRequest cosmeticsRequest = new CosmeticsRequest(cosmCount, cosmetics, startDate);
+            cosmeticsRequest.setSaved(true);
             cosmeticsRequestList.add(cosmeticsRequest);
         }
 

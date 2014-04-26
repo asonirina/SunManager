@@ -13,6 +13,7 @@ public class CosmeticsRequest {
     private String res;
 
     private Date startDate;
+    private boolean isSaved;
 
     public CosmeticsRequest(Long count, Cosmetics cosmetics) {
         this.count = count;
@@ -96,5 +97,13 @@ public class CosmeticsRequest {
 
     public void setStartDate(Date startDate) {
         this.startDate = startDate;
+    }
+
+    public boolean isSaved() {
+        return isSaved;
+    }
+
+    public void setSaved(boolean saved) {
+        isSaved = saved;
     }
 }

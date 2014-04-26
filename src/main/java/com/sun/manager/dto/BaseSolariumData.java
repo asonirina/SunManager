@@ -8,6 +8,7 @@ public class BaseSolariumData implements Cloneable {
     protected Long minutes;
     protected Long totalPrice;
     protected String abonementNumber;
+    private boolean isSaved = false;
 
     public BaseSolariumData() {
 
@@ -83,5 +84,13 @@ public class BaseSolariumData implements Cloneable {
 
     public BaseSolariumData clone() {
         return new BaseSolariumData(dataId, startDate, minutes, totalPrice, abonementNumber);
+    }
+
+    public boolean isSaved() {
+        return isSaved;
+    }
+
+    public void setSaved(boolean saved) {
+        isSaved = saved;
     }
 }

@@ -202,15 +202,8 @@ public class MainAdminController extends ScrollPane implements Initializable {
 
     final ObservableList<ResData> abonResData = FXCollections.observableArrayList(null, new ResData("итого:"), null);
 
-    int vertSize = vertData.size();
-    int greenSize = greenData.size();
-    int blueSize = blueData.size();
     int cosmeticsDataSize = cosmeticsData.size();
     int abonementsDataSize = abonementsData.size();
-
-    int cosmSize = cosmeticsData.size();
-    int abonSize = abonementsData.size();
-
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -395,11 +388,13 @@ public class MainAdminController extends ScrollPane implements Initializable {
             blueData.add((BaseSolariumData) BlankItem.generateBlankItem(1L));
         }
 
-        for (int i = cosmSize; i < 30; ++i) {
+        size = cosmeticsData.size();
+        for (int i = size; i < 30; ++i) {
             cosmeticsData.add((CosmeticsRequest) BlankItem.generateBlankItem(2L));
         }
 
-        for (int i = abonSize; i < 30; ++i) {
+        size = abonementsData.size();
+        for (int i = size; i < 30; ++i) {
             abonementsData.add((AbonementsRequest) BlankItem.generateBlankItem(3L));
         }
     }
@@ -622,46 +617,42 @@ public class MainAdminController extends ScrollPane implements Initializable {
         if (App.getInstance().getUser().getRole().equals("admin")) {
             ObservableList<BaseSolariumData> data = FXCollections.observableArrayList();
             long minutes = 0;
-            for (int i = vertSize; i < 30; ++i) {
-                BaseSolariumData d = vertData.get(i);
-                if (d.getMinutes() != null) {
+            for (BaseSolariumData d : vertData) {
+                if (d.getMinutes() != null && !d.isSaved()) {
                     minutes += d.getMinutes();
                     data.add(d);
-                    vertSize++;
+                    d.setSaved(true);
                 }
             }
-            solariumService.saveSolariumData(data, 1L, Double.valueOf(minutes / 60 + "."+ ((minutes >= 10) ? "" : "0") + minutes % 60));
+            solariumService.saveSolariumData(data, 1L, Double.valueOf(minutes / 60 + "." + ((minutes >= 10) ? "" : "0") + minutes % 60));
 
             minutes = 0;
             data = FXCollections.observableArrayList();
-            for (int i = greenSize; i < 30; ++i) {
-                BaseSolariumData d = greenData.get(i);
-                if (d.getMinutes() != null) {
+            for (BaseSolariumData d : greenData) {
+                if (d.getMinutes() != null&& !d.isSaved()) {
                     minutes += d.getMinutes();
                     data.add(d);
-                    greenSize++;
+                    d.setSaved(true);
                 }
             }
-            solariumService.saveSolariumData(data, 2L, Double.valueOf(minutes / 60 + "."+ ((minutes >= 10) ? "" : "0") + minutes % 60));
+            solariumService.saveSolariumData(data, 2L, Double.valueOf(minutes / 60 + "." + ((minutes >= 10) ? "" : "0") + minutes % 60));
 
             minutes = 0;
             data = FXCollections.observableArrayList();
-            for (int i = blueSize; i < 30; ++i) {
-                BaseSolariumData d = blueData.get(i);
-                if (d.getMinutes() != null) {
+            for (BaseSolariumData d : blueData) {
+                if (d.getMinutes() != null && !d.isSaved()) {
                     minutes += d.getMinutes();
                     data.add(d);
-                    blueSize++;
+                    d.setSaved(true);
                 }
             }
-            solariumService.saveSolariumData(data, 3L, Double.valueOf(minutes / 60 + "."+ ((minutes >= 10) ? "" : "0") + minutes % 60));
+            solariumService.saveSolariumData(data, 3L, Double.valueOf(minutes / 60 + "." + ((minutes >= 10) ? "" : "0") + minutes % 60));
 
             ObservableList<CosmeticsRequest> cosmeticsRequests = FXCollections.observableArrayList();
-            for (int i = cosmSize; i < 30; ++i) {
-                CosmeticsRequest cr = cosmeticsData.get(i);
-                if (cr.getCosmetics() != null) {
+            for (CosmeticsRequest cr : cosmeticsData) {
+                if (cr.getCosmetics() != null && !cr.isSaved()) {
                     cosmeticsRequests.add(cr);
-                    cosmSize++;
+                    cr.setSaved(true);
                 }
             }
             CosmeticsRequest cr = new CosmeticsRequest(cosmResData.get(0).getCount(), solariumService.getStikini());
@@ -675,23 +666,18 @@ public class MainAdminController extends ScrollPane implements Initializable {
     private void updateInfoByDate() {
         vertData.clear();
         vertData.addAll(0, solariumService.getSunData(date, SolariumEnum.Vertical));
-        vertSize = vertData.size();
 
         greenData.clear();
         greenData.addAll(0, solariumService.getSunData(date, SolariumEnum.Green));
-        greenSize = greenData.size();
 
         blueData.clear();
         blueData.addAll(0, solariumService.getSunData(date, SolariumEnum.Blue));
-        blueSize = blueData.size();
 
         cosmeticsData.clear();
         cosmeticsData.addAll(0, solariumService.getCosmByDate(date));
-        cosmSize = cosmeticsData.size();
 
         abonementsData.clear();
         abonementsData.addAll(0, solariumService.getAbonByDate(date));
-        abonSize = blueData.size();
 
         addBlankItems();
     }
