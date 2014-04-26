@@ -49,7 +49,7 @@ END $$
 DROP PROCEDURE IF EXISTS `getL2ById` $$
 CREATE PROCEDURE `getL2ById`(
         IN SOL_ID INTEGER(11),
-        OUT L_2 DOUBLE()
+        OUT L_2 DOUBLE
         )
 BEGIN
 CASE
