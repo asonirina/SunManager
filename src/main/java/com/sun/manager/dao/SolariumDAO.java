@@ -144,7 +144,7 @@ public class SolariumDAO {
         return abonementData;
     }
 
-    public void saveSolariumData(List<BaseSolariumData> baseSolariumDataList, Long solariumId, Long solariumL2) throws SQLException {
+    public void saveSolariumData(List<BaseSolariumData> baseSolariumDataList, Long solariumId, Double solariumL2) throws SQLException {
         String solarium = null;
         String solarium_sun = null;
         Map<String, Long> totals = new HashMap<String, Long>();
