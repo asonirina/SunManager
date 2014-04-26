@@ -50,3 +50,17 @@ Insert into comments_data (comment_id, start_date, comment) VALUES(1,  '2013-12-
 Insert into comments_data (comment_id, start_date, comment) VALUES(2,  '2013-12-11', 'v vvvvv');
 Insert into comments_data (comment_id, start_date, comment) VALUES(3,  '2013-12-11', 'efergfgdgfdg');
 
+
+--Без ограничений по времени
+Insert into available_abonements (letter, price, minutes) VALUES('B', 135000, 40);
+Insert into available_abonements (letter, price, minutes) VALUES('C', 198000, 60);
+Insert into available_abonements (letter, price, minutes) VALUES('D', 315000, 100);
+Insert into available_abonements (letter, price, minutes) VALUES('K', 367500, 120);
+Insert into available_abonements (letter, price, minutes) VALUES('M', 450000, 150);
+
+-- С ограничениями по времени, действительно только до 13:00
+Insert into available_abonements (letter, price, minutes) VALUES('O', 120000, 40);
+Insert into available_abonements (letter, price, minutes) VALUES('G', 175000, 60);
+Insert into available_abonements (letter, price, minutes) VALUES('R', 270000, 100);
+Insert into available_abonements (letter, price, minutes) VALUES('H', 305000, 120);
+

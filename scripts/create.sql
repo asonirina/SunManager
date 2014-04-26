@@ -120,3 +120,9 @@ CREATE TABLE IF NOT EXISTS statistic_data (
       accumulation         int,
       user_login           VARCHAR(15)
 ) ENGINE=INNODB;
+
+CREATE TABLE IF NOT EXISTS available_abonements (
+      letter               VARCHAR(15) NOT NULL PRIMARY KEY,
+      price                int,
+      minutes              int
+) ENGINE=INNODB;

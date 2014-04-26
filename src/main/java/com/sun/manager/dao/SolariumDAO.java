@@ -123,8 +123,8 @@ public class SolariumDAO {
         return cosmetics;
     }
 
-    public Map<String,Long> getCodeBySymbol(String symbol) throws SQLException {
-        Map<String,Long> abonementData = new HashMap<String, Long>();
+    public Map<String, Long> getCodeBySymbol(String symbol) throws SQLException {
+        Map<String, Long> abonementData = new HashMap<String, Long>();
 
         callableStatement = dbConnection.prepareCall(GET_CODE_BY_SYMBOL);
         callableStatement.setString(1, symbol);
@@ -144,13 +144,14 @@ public class SolariumDAO {
         return abonementData;
     }
 
-    public void saveSolariumData(List<BaseSolariumData> baseSolariumDataList, Long solariumId) throws SQLException {
+    public void saveSolariumData(List<BaseSolariumData> baseSolariumDataList, Long solariumId, Double solariumL2) throws SQLException {
         String solarium = null;
         String solarium_sun = null;
         Map<String, Long> totals = new HashMap<String, Long>();
         Long totalSum = 0L;
         Long totalMinutes = 0L;
-        Long l2 = 0L;
+        Double l2 = 0D;
+        Long oneMinutePrice = 0L;
 
         if (solariumId == 1L) {
             solarium = VERTICAL_SOLARIUM;
@@ -182,6 +183,33 @@ public class SolariumDAO {
             } else {
                 totalSum += baseData.getTotalPrice();
             }
+
+            //Update l2
+            PreparedStatement ps5 = dbConnection.prepareStatement("delete from " + solarium_sun + " where start_date = ?");
+            PreparedStatement ps3 = dbConnection.prepareStatement("insert into " + solarium_sun + " (start_date, total_minute, l2, one_minute_price) values(?,?,?,?)");
+            PreparedStatement ps4 = dbConnection.prepareStatement("select l2,one_minute_price from " + solarium_sun + " where start_date = (select MAX(start_date) from "+ solarium_sun +")");
+            ResultSet rs = ps4.executeQuery();
+
+            while (rs.next()) {
+                l2 = rs.getDouble("l2");
+                oneMinutePrice = rs.getLong("one_minute_price");
+            }
+
+            if(l2 + solariumL2 >= 999.59) {
+               l2 += (l2 + solariumL2 - 999.59);
+            } else {
+                l2 += solariumL2;
+           }
+
+            ps5.setDate(1, (Date) baseData.getStartDate());
+            ps5.executeUpdate();
+
+            ps3.setDate(1, (Date) baseData.getStartDate());
+            ps3.setLong(2, totalMinutes);
+            ps3.setDouble(3, l2);
+            ps3.setLong(4, oneMinutePrice);
+            ps3.executeUpdate();
+
             //Insert abonementsData
             PreparedStatement ps = dbConnection.prepareStatement("insert into " + solarium + " (start_date, minutes, total_price, abonement_number) values(?,?,?,?)");
             ps.setDate(1, (Date) baseData.getStartDate());
@@ -281,7 +309,7 @@ public class SolariumDAO {
             String phone = rs.getString("ad.phone");
             Long price = (long) rs.getInt("a.price");
 
-            AbonementsRequest abonementsRequest = new AbonementsRequest(letter, code, clientName, phone,price, startDate);
+            AbonementsRequest abonementsRequest = new AbonementsRequest(letter, code, clientName, phone, price, startDate);
             abonementsRequestList.add(abonementsRequest);
         }
 
@@ -330,7 +358,7 @@ public class SolariumDAO {
         try {
             ps.executeUpdate();
         } catch (MySQLIntegrityConstraintViolationException ex) {
-               return abonementCode+" уже существует!";
+            return abonementCode + " уже существует!";
         }
         return null;
 
@@ -430,5 +458,29 @@ public class SolariumDAO {
             comments.add(commentData);
         }
         return comments;
+    }
+
+
+    public AvailableAbonements getPriceAndMinutesByLetter(String letter) throws SQLException {
+        AvailableAbonements availableAbonements = null;
+        PreparedStatement ps = dbConnection.prepareStatement("select price, minutes from available_abonements where letter = ?");
+        ps.setString(1, letter);
+        ResultSet rs = ps.executeQuery();
+
+        while (rs.next()) {
+            Integer price = rs.getInt("price");
+            Integer minutes = rs.getInt("minutes");
+
+            availableAbonements = new AvailableAbonements(letter, price, minutes);
+        }
+        return availableAbonements;
+    }
+
+    public void updatePriceAndMinutes(AvailableAbonements availableAbonements) throws SQLException {
+        PreparedStatement update = dbConnection.prepareStatement("update available_abonements set price = ?, minutes = ? where letter = ?");
+        update.setInt(1, availableAbonements.getPrice());
+        update.setInt(2, availableAbonements.getMinutes());
+        update.setString(3, availableAbonements.getLetter());
+        update.executeUpdate();
     }
 }

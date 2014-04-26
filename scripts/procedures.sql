@@ -19,7 +19,6 @@ WHEN SOL_ID = 3 THEN
 END CASE;
 END $$
 
-//----------------------------------------------------------------------------------------
 DROP PROCEDURE IF EXISTS `checkUser` $$
 CREATE PROCEDURE `checkUser`(
         IN LOGIN_U VARCHAR(15),
@@ -36,7 +35,6 @@ IF user_name IS NOT NULL THEN
 END IF;
 END $$
 
-//----------------------------------------------------------------------------------------
 DROP PROCEDURE IF EXISTS `getCodeBySymbol` $$
 CREATE PROCEDURE `getCodeBySymbol`(
         IN SYMBOL VARCHAR(12),
@@ -48,7 +46,6 @@ where abonement_code like CONCAT(SYMBOL,'%') and is_free = 1
 LIMIT 1;
 END $$
 
-//----------------------------------------------------------------------------------------
 DROP PROCEDURE IF EXISTS `getL2ById` $$
 CREATE PROCEDURE `getL2ById`(
         IN SOL_ID INTEGER(11),
