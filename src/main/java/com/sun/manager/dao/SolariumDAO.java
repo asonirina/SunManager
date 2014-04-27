@@ -199,7 +199,7 @@ public class SolariumDAO {
         }
     }
 
-    public void saveL2(Long solariumId, Double solariumL2,Date currentDate, Long totalMinutes, Long totalSum) throws SQLException {
+    public void saveL2(Long solariumId, Double solariumL2,Date currentDate, Long totalMinutes) throws SQLException {
         String solarium_sun = null;
         Double l2 = 0D;
         Long oneMinutePrice = 0L;
@@ -208,10 +208,10 @@ public class SolariumDAO {
         if (solariumId == 1L) {
             solarium_sun = VERTICAL_SOLARIUM_SUN;
             solarium = "вертикальный";
-        } else if (solariumId == 2L) {
+        } else if (solariumId == 3L) {
             solarium_sun = GORIZONTAL_BLUE_SOLARIUM_SUN;
             solarium = "горизонтальный голубой";
-        } else if (solariumId == 3L) {
+        } else if (solariumId == 2L) {
             solarium_sun = GORIZONTAL_GREEN_SOLARIUM_SUN;
             solarium = "горизонтальный зеленый";
         }
