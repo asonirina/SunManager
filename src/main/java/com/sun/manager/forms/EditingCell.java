@@ -87,6 +87,7 @@ public class EditingCell<T1, T2> extends TableCell<T1, T2> {
                     if (t.getCode() == KeyCode.ENTER) {
                         String value = textField.getText();
                         if (value.replaceAll(" ", "").matches("[\\d]+:S?[BCDKM]{1}(\\d)+")) {
+                            textBeforeEdit = value;
                             commitEdit((T2) value);
                         } else if (value.replaceAll(" ", "").matches("[\\d]+:S?[ORGH]{1}(\\d)+")) {
                             Calendar calendar = Calendar.getInstance();
@@ -98,6 +99,7 @@ public class EditingCell<T1, T2> extends TableCell<T1, T2> {
                                 new AlertDialog((Stage) textField.getScene().getWindow(), "Этот абонемент действителен до 13:00", 1).showAndWait();
                                 return;
                             } else {
+                                textBeforeEdit = value;
                                 commitEdit((T2) value);
                             }
                         } else {
