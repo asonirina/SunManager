@@ -1,13 +1,13 @@
-.table-cell{
-    -fx-background-color: #74d877;
-    -fx-border-color: ForestGreen;
-    -fx-text-fill: black;
-    -fx-font-size: 12px;
-}
+/*.table-cell{*/
+    /*-fx-background-color: #74d877;*/
+    /*-fx-border-color: ForestGreen;*/
+    /*-fx-text-fill: black;*/
+    /*-fx-font-size: 12px;*/
+/*}*/
 
-.table-cell:hover{
-    -fx-background-color: LightSlateGray;
-}
+/*.table-cell:hover{*/
+    /*-fx-background-color: LightSlateGray;*/
+/*}*/
 
 .label {
     -fx-font-size: 12px;

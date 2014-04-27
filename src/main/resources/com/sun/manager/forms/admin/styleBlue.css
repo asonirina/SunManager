@@ -1,12 +1,12 @@
-.table-cell:hover {
-    -fx-background-color: LightSlateGray 	    ;
-}
-.table-cell{
-    -fx-background-color:LightBlue;
-    -fx-border-color: DarkBlue;
-    -fx-text-fill: black;
-    -fx-font-size: 12px;
-}
+/*.table-cell:hover {*/
+    /*-fx-background-color: LightSlateGray 	    ;*/
+/*}*/
+/*.table-cell{*/
+    /*-fx-background-color:LightBlue;*/
+    /*-fx-border-color: DarkBlue;*/
+    /*-fx-text-fill: black;*/
+    /*-fx-font-size: 12px;*/
+/*}*/
 
 .label {
     -fx-font-size: 12px;

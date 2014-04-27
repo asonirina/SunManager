@@ -1,12 +1,12 @@
-.table-cell:hover {
-    -fx-background-color: Lavender;
-}
-.table-cell{
-    -fx-background-color:HoneyDew;
-    -fx-border-color: DimGray;
-    -fx-text-fill: black;
-    -fx-font-size: 12px;
-}
+/*.table-cell:hover {*/
+    /*-fx-background-color: Lavender;*/
+/*}*/
+/*.table-cell{*/
+    /*-fx-background-color:HoneyDew;*/
+    /*-fx-border-color: DimGray;*/
+    /*-fx-text-fill: black;*/
+    /*-fx-font-size: 12px;*/
+/*}*/
 
 .label {
     -fx-font-size: 12px;
