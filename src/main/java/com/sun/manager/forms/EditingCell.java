@@ -116,7 +116,7 @@ public class EditingCell<T1, T2> extends TableCell<T1, T2> {
                             SolariumDAO dao = new SolariumDAO();
                             Long sum = new Scanner(textField.getText()).useDelimiter("\\D+").nextInt() * dao.getOneMinutePriceById(solarium.getSolariumNo());
                             String value = textField.getText() + " " + sum;
-                            if (textField.getText().replace(" ", "").matches("[\\d]+:$")) {
+                            if (textField.getText().replace(" ", "").matches("[\\d]+:\\$")) {
                                 textField.setText(value);
                                 commitEdit((T2) value);
                                 textBeforeEdit = value;

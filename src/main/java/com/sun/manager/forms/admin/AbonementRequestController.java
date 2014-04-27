@@ -106,7 +106,7 @@ public class AbonementRequestController extends AnchorPane implements Initializa
             return false;
         }
 
-        if (!letterField.getText().matches("S?[BCDKMOGRH]{1}]")){
+        if (!letterField.getText().matches("S?[BCDKMOGRH]{1}")){
             new AlertDialog((Stage) nameField.getScene().getWindow(), "Введите одну из следующих букв: B, C, D, K, M, O, G, R, H", 1).showAndWait();
             return false;
         }
