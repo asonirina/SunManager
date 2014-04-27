@@ -72,9 +72,9 @@ public class SolariumService {
         }
     }
 
-    public void saveL2(Long id, Double l2, Date date, Long tm, Long ts) {
+    public void saveL2(Long id, Double l2, Date date, Long tm) {
         try {
-            dao.saveL2(id, l2, date, tm, ts);
+            dao.saveL2(id, l2, date, tm);
         } catch (SQLException ex) {
             ex.printStackTrace();
             throw new RuntimeException(ex.getMessage());
