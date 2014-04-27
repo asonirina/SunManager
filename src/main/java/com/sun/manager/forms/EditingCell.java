@@ -97,6 +97,7 @@ public class EditingCell<T1, T2> extends TableCell<T1, T2> {
 
                             if (App.getInstance().getSelectedDate().getTime() > time) {
                                 new AlertDialog((Stage) textField.getScene().getWindow(), "Этот абонемент действителен до 13:00", 1).showAndWait();
+                                textField.setText(textBeforeEdit);
                                 return;
                             } else {
                                 textBeforeEdit = value;
