@@ -307,19 +307,19 @@ public class MainAdminController extends ScrollPane implements Initializable {
     }
 
     private void setStyles() {
-        tableGreen.getStylesheets().add(this.getClass().getResource("styleGreen.css").toExternalForm());
-        tableBlue.getStylesheets().add(this.getClass().getResource("styleBlue.css").toExternalForm());
-        tableVert.getStylesheets().add(this.getClass().getResource("styleNormal.css").toExternalForm());
-        tableCosm.getStylesheets().add(this.getClass().getResource("styleNormal.css").toExternalForm());
-        tableAbon.getStylesheets().add(this.getClass().getResource("styleNormal.css").toExternalForm());
-        tableNumber.getStylesheets().add(this.getClass().getResource("styleNormal.css").toExternalForm());
-
-        tableNumRes.getStylesheets().add(this.getClass().getResource("styleNormal.css").toExternalForm());
-        tableVertRes.getStylesheets().add(this.getClass().getResource("styleNormal.css").toExternalForm());
-        tableGreenRes.getStylesheets().add(this.getClass().getResource("styleGreen.css").toExternalForm());
-        tableBlueRes.getStylesheets().add(this.getClass().getResource("styleBlue.css").toExternalForm());
-        tableCosmRes.getStylesheets().add(this.getClass().getResource("styleNormal.css").toExternalForm());
-        tableAbonRes.getStylesheets().add(this.getClass().getResource("styleNormal.css").toExternalForm());
+//        tableGreen.getStylesheets().add(this.getClass().getResource("styleGreen.css").toExternalForm());
+//        tableBlue.getStylesheets().add(this.getClass().getResource("styleBlue.css").toExternalForm());
+//        tableVert.getStylesheets().add(this.getClass().getResource("styleNormal.css").toExternalForm());
+//        tableCosm.getStylesheets().add(this.getClass().getResource("styleNormal.css").toExternalForm());
+//        tableAbon.getStylesheets().add(this.getClass().getResource("styleNormal.css").toExternalForm());
+//        tableNumber.getStylesheets().add(this.getClass().getResource("styleNormal.css").toExternalForm());
+//
+//        tableNumRes.getStylesheets().add(this.getClass().getResource("styleNormal.css").toExternalForm());
+//        tableVertRes.getStylesheets().add(this.getClass().getResource("styleNormal.css").toExternalForm());
+//        tableGreenRes.getStylesheets().add(this.getClass().getResource("styleGreen.css").toExternalForm());
+//        tableBlueRes.getStylesheets().add(this.getClass().getResource("styleBlue.css").toExternalForm());
+//        tableCosmRes.getStylesheets().add(this.getClass().getResource("styleNormal.css").toExternalForm());
+//        tableAbonRes.getStylesheets().add(this.getClass().getResource("styleNormal.css").toExternalForm());
 
     }
 

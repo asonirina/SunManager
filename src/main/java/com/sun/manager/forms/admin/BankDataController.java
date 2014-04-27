@@ -81,14 +81,14 @@ public class BankDataController extends AnchorPane implements Initializable {
 
         bankMorning.setText(residue.toString());
 
-        quenchingField.setText(String.valueOf(data.get("quenching") + 1));
+        quenchingField.setText(String.valueOf(getValue(data.get("quenching")) + 1));
         okButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 int bookingPerDay = getValue(bookPerDayField.getText());
                 int bank = getValue(bankField.getText());
                 int quenching = getValue(quenchingField.getText());
-                int newAccumulation = data.get("accumulation") + bookingPerDay;
+                int newAccumulation = getValue(data.get("accumulation")) + bookingPerDay;
                 int ozp = getValue(officialSalaryField.getText());
 
                 int newResidue = residue+bookingPerDay-bank-ozp;

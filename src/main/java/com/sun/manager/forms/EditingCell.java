@@ -114,11 +114,19 @@ public class EditingCell<T1, T2> extends TableCell<T1, T2> {
                     } else if (t.getText().equals("$")) {
                         try {
                             SolariumDAO dao = new SolariumDAO();
-
                             Long sum = new Scanner(textField.getText()).useDelimiter("\\D+").nextInt() * dao.getOneMinutePriceById(solarium.getSolariumNo());
                             String value = textField.getText() + " " + sum;
-                            textField.setText(value);
-                            commitEdit((T2) value);
+                            if (textField.getText().replace(" ", "").matches("[\\d]+:$")) {
+                                textField.setText(value);
+                                commitEdit((T2) value);
+                                textBeforeEdit = value;
+                            } else {
+                                new AlertDialog((Stage) textField.getScene().getWindow(), "Заполните ячейку в формате: \n" +
+                                        "Количество: ($)? Номер абонемента", 1).showAndWait();
+                                cancelEdit();
+                                textField.setText(textBeforeEdit);
+
+                            }
                         } catch (SQLException ex) {
                             throw new RuntimeException(ex);
                         }
