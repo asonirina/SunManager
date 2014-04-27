@@ -662,7 +662,7 @@ public class MainAdminController extends ScrollPane implements Initializable {
             for (BaseSolariumData d : vertData) {
                 if (d.getMinutes() != null && !d.isSaved()) {
                     minutes += d.getMinutes();
-                    sum+=d.getTotalPrice();
+//                    sum+=d.getTotalPrice();
                     data.add(d);
                     d.setSaved(true);
                 }
@@ -670,14 +670,14 @@ public class MainAdminController extends ScrollPane implements Initializable {
             solariumService.saveSolariumData(data, 1L);
             solariumService.saveL2(1L, Double.valueOf(minutes / 60 + "." + ((minutes >= 10) ? "" : "0") + minutes % 60), App.getInstance().getSelectedDate(), minutes, sum);
             minutes = 0;
-            sum = 0;
+//            sum = 0;
             data = FXCollections.observableArrayList();
             for (BaseSolariumData d : greenData) {
                 if (d.getMinutes() != null && !d.isSaved()) {
                     minutes += d.getMinutes();
                     data.add(d);
                     d.setSaved(true);
-                    sum+=d.getTotalPrice();
+//                    sum+=d.getTotalPrice();
                 }
             }
             solariumService.saveSolariumData(data, 2L);
@@ -685,14 +685,14 @@ public class MainAdminController extends ScrollPane implements Initializable {
 
 
             minutes = 0;
-            sum = 0;
+//            sum = 0;
             data = FXCollections.observableArrayList();
             for (BaseSolariumData d : blueData) {
                 if (d.getMinutes() != null && !d.isSaved()) {
                     minutes += d.getMinutes();
                     data.add(d);
                     d.setSaved(true);
-                    sum+=d.getTotalPrice();
+//                    sum+=d.getTotalPrice();
                 }
             }
             solariumService.saveSolariumData(data, 3L);
