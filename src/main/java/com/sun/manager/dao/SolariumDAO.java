@@ -539,4 +539,20 @@ public class SolariumDAO {
         }
         return false;
     }
+
+    public Map<String, Integer> getQuenchingAndAccumulation(Date date) throws SQLException {
+        Map<String, Integer> res = new HashMap<String, Integer>();
+        PreparedStatement ps = dbConnection.prepareStatement("select quenching, accumulation from statistic_data where start_date = ?");
+        ps.setDate(1, date);
+        ResultSet rs = ps.executeQuery();
+
+        while (rs.next()) {
+            Integer quenching = rs.getInt("quenching");
+            Integer accumulation = rs.getInt("accumulation");
+
+            res.put("quenching", quenching);
+            res.put("accumulation", accumulation);
+        }
+        return res;
+    }
 }
