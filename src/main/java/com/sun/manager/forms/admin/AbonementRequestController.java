@@ -65,23 +65,7 @@ public class AbonementRequestController extends AnchorPane implements Initializa
                     return;
                 }
 
-                if (Arrays.asList(KeyCode.O, KeyCode.G, KeyCode.R, KeyCode.H).contains(keyEvent.getCode())) {
-                    try {
-                        Calendar calendar = Calendar.getInstance();
-                        calendar.set(Calendar.HOUR, 1);
-                        calendar.set(Calendar.MINUTE, 0);
-                        long time = calendar.getTime().getTime();
-
-                        if (App.getInstance().getSelectedDate().getTime() > time) {
-                            new AlertDialog((Stage) letterField.getScene().getWindow(), "Этот абонемент действителен до 13:00", 1).showAndWait();
-                            return;
-                        }
-                    } catch (Exception ex) {
-                        new AlertDialog((Stage) letterField.getScene().getWindow(), "Произошла ошибка!", 1).showAndWait();
-                    }
-                }
                 if (Arrays.asList(KeyCode.B, KeyCode.C, KeyCode.D, KeyCode.K, KeyCode.M, KeyCode.O, KeyCode.G, KeyCode.R, KeyCode.H).contains(keyEvent.getCode())) {
-
 
                     abonInfo = service.getCodeAndPriceBySymbol(keyEvent.getCode().toString());
                     codeField.setText(String.valueOf(abonInfo.get("code")));
@@ -122,7 +106,7 @@ public class AbonementRequestController extends AnchorPane implements Initializa
             return false;
         }
 
-        if (!Arrays.asList("B", "C", "D", "K", "M", "O", "G", "R", "H", "SB", "SC", "SD", "SK", "SM", "SO", "SG", "SR", "SH").contains(letterField.getText())) {
+        if (!letterField.getText().matches("S?[BCDKMOGRH]{1}]")){
             new AlertDialog((Stage) nameField.getScene().getWindow(), "Введите одну из следующих букв: B, C, D, K, M, O, G, R, H", 1).showAndWait();
             return false;
         }
