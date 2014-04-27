@@ -22,6 +22,7 @@ import org.apache.commons.lang.StringUtils;
 import java.net.URL;
 import java.sql.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 /**
@@ -29,6 +30,9 @@ import java.util.ResourceBundle;
  * Date: 13.02.14
  */
 public class BankDataController extends AnchorPane implements Initializable {
+
+    @FXML
+    TextField bankMorning;
 
     @FXML
     TextField residueField;
@@ -54,7 +58,7 @@ public class BankDataController extends AnchorPane implements Initializable {
     @FXML
     Button cancelButton;
 
-    Date date = App.getInstance().getUser().getRole().equals("derictor")?App.getInstance().getSelectedDate():
+    Date date = App.getInstance().getUser().getRole().equals("derictor") ? App.getInstance().getSelectedDate() :
             new Date(App.getInstance().getSelectedDate().getTime() - SunConstants.MILLIS_IN_DAY);
     StatisticsService service = new StatisticsService();
     SolariumService solariumService = new SolariumService();
@@ -68,30 +72,36 @@ public class BankDataController extends AnchorPane implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        if(App.getInstance().getUser().getRole().equals("derictor")) {
+        final Map<String, Integer> data = service.getQuenchingAndAccumulation(date);
+        if (App.getInstance().getUser().getRole().equals("derictor")) {
             residueField.setEditable(true);
             bookPerDayField.setEditable(true);
         }
         final Integer residue = getValue(service.getResidue(date));
-        final Integer bookingPerDay = getBookPerDay();
 
+        bankMorning.setText(residue.toString());
 
-        residueField.setText(residue.toString());
-        bookPerDayField.setText(bookingPerDay.toString());
+        quenchingField.setText(String.valueOf(data.get("quenching") + 1));
         okButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                final StatisticData statisticData = new StatisticData();
-                statisticData.setResidue(residue);
-                statisticData.setBookingPerDay(bookingPerDay);
+                int bookingPerDay = getValue(bookPerDayField.getText());
+                int bank = getValue(bankField.getText());
+                int quenching = getValue(quenchingField.getText());
+                int newAccumulation = data.get("accumulation") + bookingPerDay;
+                int ozp = getValue(officialSalaryField.getText());
 
-                statisticData.setBank(getValue(bankField.getText()));
+                int newResidue = residue+bookingPerDay-bank-ozp;
+
+                final StatisticData statisticData = new StatisticData();
+                statisticData.setResidue(newResidue);
+                statisticData.setBookingPerDay(bookingPerDay);
+                statisticData.setBank(bank);
                 statisticData.setOfficialSalary(getValue(officialSalaryField.getText()));
-                statisticData.setQuenching(getValue(quenchingField.getText()));
+                statisticData.setQuenching(quenching);
                 statisticData.setStartDate(date);
-                statisticData.setAccumulation(getValue(accumulationField.getText()));
+                statisticData.setAccumulation(newAccumulation);
                 service.saveStatisticData(statisticData);
-                ((Stage) okButton.getScene().getWindow()).close();
             }
         });
         cancelButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -132,6 +142,13 @@ public class BankDataController extends AnchorPane implements Initializable {
                 res += price;
             }
         }
+
+        for (AbonementsRequest data : abonementsData) {
+            Long price = data.getPrice();
+            if (price != null) {
+                res += price;
+            }
+        }
         return res.intValue();
     }
 
@@ -145,10 +162,10 @@ public class BankDataController extends AnchorPane implements Initializable {
     }
 
     private Integer getValue(String value) {
-       if(StringUtils.isBlank(value)) {
-           return 0;
-       }
-         return Integer.valueOf(value);
+        if (StringUtils.isBlank(value)) {
+            return 0;
+        }
+        return Integer.valueOf(value);
     }
 
 }

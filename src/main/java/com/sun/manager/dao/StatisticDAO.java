@@ -5,7 +5,9 @@ import com.sun.manager.dto.StatisticData;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class StatisticDAO {
 
@@ -70,5 +72,22 @@ public class StatisticDAO {
         }
         return residueLastDay;
 
+    }
+
+
+    public Map<String, Integer> getQuenchingAndAccumulation(Date date) throws SQLException {
+        Map<String, Integer> res = new HashMap<String, Integer>();
+        PreparedStatement ps = dbConnection.prepareStatement("select quenching, accumulation from statistic_data where start_date = ?");
+        ps.setDate(1, date);
+        ResultSet rs = ps.executeQuery();
+
+        while (rs.next()) {
+            Integer quenching = rs.getInt("quenching");
+            Integer accumulation = rs.getInt("accumulation");
+
+            res.put("quenching", quenching);
+            res.put("accumulation", accumulation);
+        }
+        return res;
     }
 }

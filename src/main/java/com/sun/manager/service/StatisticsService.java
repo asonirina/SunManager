@@ -6,6 +6,7 @@ import com.sun.manager.dto.StatisticData;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 /**
  * User: iason
@@ -36,6 +37,15 @@ public class StatisticsService {
     public Integer getResidue(Date lastDate) {
         try {
             return dao.getResidue(lastDate);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            throw new RuntimeException(ex.getMessage());
+        }
+    }
+
+    public Map<String, Integer> getQuenchingAndAccumulation(Date date) {
+        try {
+             return dao.getQuenchingAndAccumulation(date);
         } catch (SQLException ex) {
             ex.printStackTrace();
             throw new RuntimeException(ex.getMessage());
