@@ -658,45 +658,39 @@ public class MainAdminController extends ScrollPane implements Initializable {
         if (App.getInstance().getUser().getRole().equals("admin")) {
             ObservableList<BaseSolariumData> data = FXCollections.observableArrayList();
             long minutes = 0;
-            long sum  = 0;
             for (BaseSolariumData d : vertData) {
                 if (d.getMinutes() != null && !d.isSaved()) {
                     minutes += d.getMinutes();
-                    sum+=d.getTotalPrice();
                     data.add(d);
                     d.setSaved(true);
                 }
             }
             solariumService.saveSolariumData(data, 1L);
-            solariumService.saveL2(1L, Double.valueOf(minutes / 60 + "." + ((minutes >= 10) ? "" : "0") + minutes % 60), App.getInstance().getSelectedDate(), minutes, sum);
+            solariumService.saveL2(1L, Double.valueOf(minutes / 60 + "." + ((minutes >= 10) ? "" : "0") + minutes % 60), App.getInstance().getSelectedDate(), minutes);
             minutes = 0;
-            sum = 0;
             data = FXCollections.observableArrayList();
             for (BaseSolariumData d : greenData) {
                 if (d.getMinutes() != null && !d.isSaved()) {
                     minutes += d.getMinutes();
                     data.add(d);
                     d.setSaved(true);
-                    sum+=d.getTotalPrice();
                 }
             }
             solariumService.saveSolariumData(data, 2L);
-            solariumService.saveL2(2L, Double.valueOf(minutes / 60 + "." + ((minutes >= 10) ? "" : "0") + minutes % 60), App.getInstance().getSelectedDate(), minutes, sum);
+            solariumService.saveL2(2L, Double.valueOf(minutes / 60 + "." + ((minutes >= 10) ? "" : "0") + minutes % 60), App.getInstance().getSelectedDate(), minutes);
 
 
             minutes = 0;
-            sum = 0;
             data = FXCollections.observableArrayList();
             for (BaseSolariumData d : blueData) {
                 if (d.getMinutes() != null && !d.isSaved()) {
                     minutes += d.getMinutes();
                     data.add(d);
                     d.setSaved(true);
-                    sum+=d.getTotalPrice();
                 }
             }
             solariumService.saveSolariumData(data, 3L);
-            solariumService.saveL2(3L, Double.valueOf(minutes / 60 + "." + ((minutes >= 10) ? "" : "0") + minutes % 60), App.getInstance().getSelectedDate(), minutes, sum);
+            solariumService.saveL2(3L, Double.valueOf(minutes / 60 + "." + ((minutes >= 10) ? "" : "0") + minutes % 60), App.getInstance().getSelectedDate(), minutes);
 
 
             ObservableList<CosmeticsRequest> cosmeticsRequests = FXCollections.observableArrayList();
