@@ -165,7 +165,7 @@ public class SolariumDAO {
             if (baseData.getTotalPrice() == null) {
                 PreparedStatement ps1 = dbConnection.prepareStatement("update abonements_data set minutes = ? where code=? and letter=?");
                 PreparedStatement ps2 = dbConnection.prepareStatement("select  minutes from abonements_data where code=? and letter=?");
-                ps2.setString(1, baseData.getAbonementNumber().replaceAll("a-zA-Z+",""));
+                ps2.setString(1, baseData.getAbonementNumber().replaceAll("a-zA-Z+", ""));
                 ps2.setString(2, baseData.getAbonementNumber().replaceAll("\\D+", ""));
 
                 ResultSet rs = ps2.executeQuery();
@@ -197,7 +197,7 @@ public class SolariumDAO {
         }
     }
 
-    public void saveL2(Long solariumId, Double solariumL2,Date currentDate, Long totalMinutes) throws SQLException {
+    public void saveL2(Long solariumId, Double solariumL2, Date currentDate, Long totalMinutes) throws SQLException {
         String solarium_sun = null;
         Double l2 = 0D;
         Long oneMinutePrice = 0L;
@@ -218,35 +218,35 @@ public class SolariumDAO {
         PreparedStatement psComment = dbConnection.prepareStatement("insert into comments_data (start_date, comment) values(?,?)");
 
         //Update l2
-            PreparedStatement ps5 = dbConnection.prepareStatement("delete from " + solarium_sun + " where start_date = ?");
-            PreparedStatement ps3 = dbConnection.prepareStatement("insert into " + solarium_sun + " (start_date, total_minute, l2, one_minute_price) values(?,?,?,?)");
-            PreparedStatement ps4 = dbConnection.prepareStatement("select l2,one_minute_price from " + solarium_sun + " where start_date = (select MAX(start_date) from " + solarium_sun + ")");
-            ResultSet rs = ps4.executeQuery();
+        PreparedStatement ps5 = dbConnection.prepareStatement("delete from " + solarium_sun + " where start_date = ?");
+        PreparedStatement ps3 = dbConnection.prepareStatement("insert into " + solarium_sun + " (start_date, total_minute, l2, one_minute_price) values(?,?,?,?)");
+        PreparedStatement ps4 = dbConnection.prepareStatement("select l2,one_minute_price from " + solarium_sun + " where start_date = (select MAX(start_date) from " + solarium_sun + ")");
+        ResultSet rs = ps4.executeQuery();
 
 
-            while (rs.next()) {
-                l2 = rs.getDouble("l2");
-                oneMinutePrice = rs.getLong("one_minute_price");
-            }
-
-            if (l2 + solariumL2 >= 999.59) {
-                l2 += (l2 + solariumL2 - 999.59);
-                psComment.setDate(1, currentDate);
-                psComment.setString(2, "Счетчик для ламп был обнулен для солярия " + solarium + ". Пожалуйста, замените лампы");
-            } else {
-                l2 += solariumL2;
-            }
-
-            ps5.setDate(1, currentDate);
-            ps5.executeUpdate();
-
-            ps3.setDate(1, currentDate);
-            ps3.setLong(2, totalMinutes);
-            ps3.setDouble(3, l2);
-            ps3.setLong(4, oneMinutePrice);
-            ps3.executeUpdate();
-
+        while (rs.next()) {
+            l2 = rs.getDouble("l2");
+            oneMinutePrice = rs.getLong("one_minute_price");
         }
+
+        if (l2 + solariumL2 >= 999.59) {
+            l2 += (l2 + solariumL2 - 999.59);
+            psComment.setDate(1, currentDate);
+            psComment.setString(2, "Счетчик для ламп был обнулен для солярия " + solarium + ". Пожалуйста, замените лампы");
+        } else {
+            l2 += solariumL2;
+        }
+
+        ps5.setDate(1, currentDate);
+        ps5.executeUpdate();
+
+        ps3.setDate(1, currentDate);
+        ps3.setLong(2, totalMinutes);
+        ps3.setDouble(3, l2);
+        ps3.setLong(4, oneMinutePrice);
+        ps3.executeUpdate();
+
+    }
 
     public List<CosmeticsRequest> saveCosmeticsData(HashMap<Cosmetics, Long> cosmetics, boolean isMinus) throws SQLException {
         List<CosmeticsRequest> resultData = new ArrayList<CosmeticsRequest>();
@@ -498,12 +498,14 @@ public class SolariumDAO {
         return availableAbonements;
     }
 
-    public void updatePriceAndMinutes(AvailableAbonements availableAbonements) throws SQLException {
+    public void updatePriceAndMinutes(List<AvailableAbonements> availableAbonements) throws SQLException {
         PreparedStatement update = dbConnection.prepareStatement("update available_abonements set price = ?, minutes = ? where letter = ?");
-        update.setInt(1, availableAbonements.getPrice());
-        update.setInt(2, availableAbonements.getMinutes());
-        update.setString(3, availableAbonements.getLetter());
-        update.executeUpdate();
+        for (AvailableAbonements aa : availableAbonements) {
+            update.setInt(1, aa.getPrice());
+            update.setInt(2, aa.getMinutes());
+            update.setString(3, aa.getLetter());
+            update.executeUpdate();
+        }
     }
 
     public boolean deleteRowFromSolarium(Long dataId, Long solariumId) throws SQLException {
@@ -548,7 +550,7 @@ public class SolariumDAO {
             Integer minutes = rs.getInt("minutes");
             Integer duration = rs.getInt("duration");
 
-            AvailableAbonements abonement =  new AvailableAbonements(letter, price, minutes, duration);
+            AvailableAbonements abonement = new AvailableAbonements(letter, price, minutes, duration);
             aList.add(abonement);
         }
         return aList;
@@ -576,11 +578,11 @@ public class SolariumDAO {
             Integer duration = rs1.getInt("duration");
 
 
-            if(startDate.before(new java.util.Date(startDate.getYear(), startDate.getMonth() + duration, startDate.getDate() +1)))  {
+            if (startDate.before(new java.util.Date(startDate.getYear(), startDate.getMonth() + duration, startDate.getDate() + 1))) {
                 aMap.put("minutes", minutes);
                 return aMap;
             } else
-               return Collections.EMPTY_MAP;
+                return Collections.EMPTY_MAP;
         }
 
         return Collections.EMPTY_MAP;

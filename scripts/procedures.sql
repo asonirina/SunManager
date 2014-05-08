@@ -45,10 +45,10 @@ CASE
 WHEN SOL_ID = 1 THEN
     Select l2 into L_2 from vertical_sun
     where start_date = (select MAX(start_date) from vertical_sun);
-WHEN SOL_ID = 2 THEN
+WHEN SOL_ID = 3 THEN
     Select l2 into L_2 from gorizontal_blue_sun
     where start_date = (select MAX(start_date) from gorizontal_blue_sun);
-WHEN SOL_ID = 3 THEN
+WHEN SOL_ID = 2 THEN
     Select l2 into L_2 from gorizontal_green_sun
     where start_date = (select MAX(start_date) from gorizontal_green_sun);
 END CASE;
