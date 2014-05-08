@@ -1,4 +1,4 @@
-delete from abonements;
+delete from abonements_data;
 delete from customers;
 delete from users;
 delete from cosmetics;
@@ -8,407 +8,495 @@ delete from gorizontal_green_sun;
 delete from vertical_sun_data;
 delete from gorizontal_blue_sun_data;
 delete from gorizontal_green_sun_data;
-delete from abonements_data;
 delete from cosmetics_data;
 delete from comments_data;
 delete from statistic_data;
 delete from available_abonements;
 
-Insert into customers (customer_id, mobile, name) VALUES(1, NULL, 'Julia');
-Insert into customers (customer_id, mobile, name) VALUES(2, NULL, 'Lena');
-Insert into customers (customer_id, mobile, name) VALUES(3, NULL, 'Nina');
-Insert into customers (customer_id, mobile, name) VALUES(4, NULL, 'Irina');
-Insert into customers (customer_id, mobile, name) VALUES(5, NULL, 'Kate');
-Insert into customers (customer_id, mobile, name) VALUES(6, NULL, 'Daria');
-Insert into customers (customer_id, mobile, name) VALUES(7, NULL, 'Snezana');
-Insert into customers (customer_id, mobile, name) VALUES(8, NULL, 'luda');
-Insert into customers (customer_id, mobile, name) VALUES(9, NULL, 'Sveta');
-Insert into customers (customer_id, mobile, name) VALUES(10, NULL, 'olga');
-Insert into customers (customer_id, mobile, name) VALUES(11, NULL, 'kate');
-Insert into customers (customer_id, mobile, name) VALUES(12, NULL, 'Tania');
-Insert into customers (customer_id, mobile, name) VALUES(13, NULL, 'natasha');
-Insert into customers (customer_id, mobile, name) VALUES(33, '80296632772', 'natasha');
-Insert into customers (customer_id, mobile, name) VALUES(14, NULL, 'oksana');
-Insert into customers (customer_id, mobile, name) VALUES(15, NULL, 'masha');
-Insert into customers (customer_id, mobile, name) VALUES(16, NULL, 'marina');
-Insert into customers (customer_id, mobile, name) VALUES(17, NULL, 'vitalik');
-Insert into customers (customer_id, mobile, name) VALUES(18, NULL, 'olesia');
-Insert into customers (customer_id, mobile, name) VALUES(19, NULL, 'jilia');
-Insert into customers (customer_id, mobile, name) VALUES(20, NULL, 'anna');
-Insert into customers (customer_id, mobile, name) VALUES(21, NULL, 'tania');
-Insert into customers (customer_id, mobile, name) VALUES(22, NULL, 'vika');
-Insert into customers (customer_id, mobile, name) VALUES(23, NULL, 'elena');
-Insert into customers (customer_id, mobile, name) VALUES(32, '80297626182', 'elena');
-Insert into customers (customer_id, mobile, name) VALUES(24, NULL, 'maria');
-Insert into customers (customer_id, mobile, name) VALUES(25, '80447735243', 'sasha');
-Insert into customers (customer_id, mobile, name) VALUES(26, '80297651819', 'jiriy');
-Insert into customers (customer_id, mobile, name) VALUES(27, NULL, 'julia');
-Insert into customers (customer_id, mobile, name) VALUES(28, '80297678004', 'maia');
-Insert into customers (customer_id, mobile, name) VALUES(29, '80447426241', 'natalia');
-Insert into customers (customer_id, mobile, name) VALUES(30, '8029118601', 'vita');
-Insert into customers (customer_id, mobile, name) VALUES(31, '80336120065', 'kate');
-Insert into customers (customer_id, mobile, name) VALUES(37, '80297986355', 'kate');
-Insert into customers (customer_id, mobile, name) VALUES(34, '80296737063', 'Genia');
-Insert into customers (customer_id, mobile, name) VALUES(35, '80293191363', 'Valeria');
-Insert into customers (customer_id, mobile, name) VALUES(36, '80295179804', 'zarina');
-Insert into customers (customer_id, mobile, name) VALUES(38, '80336004453', 'olga');
-Insert into customers (customer_id, mobile, name) VALUES(39, '80293685794', 'julia');
-Insert into customers (customer_id, mobile, name) VALUES(40, NULL, 'natalia');
-Insert into customers (customer_id, mobile, name) VALUES(41, NULL, 'irina');
-Insert into customers (customer_id, mobile, name) VALUES(42, '80291243855', 'snazana');
-Insert into customers (customer_id, mobile, name) VALUES(43, '80257890327', 'olga');
-Insert into customers (customer_id, mobile, name) VALUES(44, NULL, 'polina');
-Insert into customers (customer_id, mobile, name) VALUES(45, NULL, 'marta');
-Insert into customers (customer_id, mobile, name) VALUES(46, '80447507705', 'Ira');
-Insert into customers (customer_id, mobile, name) VALUES(47, '80296882275', 'Elena');
-Insert into customers (customer_id, mobile, name) VALUES(48, NULL, 'alina');
-Insert into customers (customer_id, mobile, name) VALUES(49, NULL, 'Natalia');
-Insert into customers (customer_id, mobile, name) VALUES(50, NULL, 'Marina');
-Insert into customers (customer_id, mobile, name) VALUES(51, NULL, 'sveta');
-Insert into customers (customer_id, mobile, name) VALUES(52, NULL, 'vova');
-Insert into customers (customer_id, mobile, name) VALUES(53, NULL, 'nastia');
-Insert into customers (customer_id, mobile, name) VALUES(54, NULL, 'Maria');
-Insert into customers (customer_id, mobile, name) VALUES(55, NULL, 'dima');
-Insert into customers (customer_id, mobile, name) VALUES(56, NULL, 'Nastia');
-Insert into customers (customer_id, mobile, name) VALUES(57, NULL, 'marina');
-Insert into customers (customer_id, mobile, name) VALUES(58, NULL, 'karina');
-Insert into customers (customer_id, mobile, name) VALUES(59, NULL, 'dasha');
-Insert into customers (customer_id, mobile, name) VALUES(60, NULL, 'Janna');
-Insert into customers (customer_id, mobile, name) VALUES(61, NULL, 'ksenia');
-Insert into customers (customer_id, mobile, name) VALUES(62, NULL, 'valia');
-Insert into customers (customer_id, mobile, name) VALUES(63, NULL, 'emma');
-Insert into customers (customer_id, mobile, name) VALUES(64, NULL, 'taisa');
-Insert into customers (customer_id, mobile, name) VALUES(65, NULL, 'sofia');
-Insert into customers (customer_id, mobile, name) VALUES(66, NULL, 'lena');
-Insert into customers (customer_id, mobile, name) VALUES(67, NULL, 'aleksandr');
-Insert into customers (customer_id, mobile, name) VALUES(68, '80259703558', 'veronika');
-Insert into customers (customer_id, mobile, name) VALUES(69, '80296225208', 'oksana');
-Insert into customers (customer_id, mobile, name) VALUES(70, '80293593017', 'elena');
-Insert into customers (customer_id, mobile, name) VALUES(71, '80293593017', 'sasha');
-Insert into customers (customer_id, mobile, name) VALUES(72, NULL, 'liza');
-Insert into customers (customer_id, mobile, name) VALUES(73, '80297739725', 'nastia');
-Insert into customers (customer_id, mobile, name) VALUES(74, '80296067064', 'natasha');
-Insert into customers (customer_id, mobile, name) VALUES(75, '80296859298', 'olga');
-Insert into customers (customer_id, mobile, name) VALUES(76, '80297781180', 'natasha');
-Insert into customers (customer_id, mobile, name) VALUES(77, '80336614887', 'olga');
-Insert into customers (customer_id, mobile, name) VALUES(78, '80293923607', 'anna');
-Insert into customers (customer_id, mobile, name) VALUES(79, NULL, 'valeria');
-Insert into customers (customer_id, mobile, name) VALUES(80, '80296257893', 'aliona');
-Insert into customers (customer_id, mobile, name) VALUES(81, '80291216098', 'olga');
-Insert into customers (customer_id, mobile, name) VALUES(82, NULL, 'aleksey');
-Insert into customers (customer_id, mobile, name) VALUES(83, '80333415778', 'anzela');
-Insert into customers (customer_id, mobile, name) VALUES(89, NULL, 'aliona');
-Insert into customers (customer_id, mobile, name) VALUES(84, NULL, 'tamara');
-Insert into customers (customer_id, mobile, name) VALUES(85, NULL, 'renata');
-Insert into customers (customer_id, mobile, name) VALUES(86, NULL, 'daria');
-Insert into customers (customer_id, mobile, name) VALUES(87, NULL, 'sasha');
-Insert into customers (customer_id, mobile, name) VALUES(88, NULL, 'diana');
-Insert into customers (customer_id, mobile, name) VALUES(90, NULL, 'galina');
-Insert into customers (customer_id, mobile, name) VALUES(91, NULL, 'veronika');
-Insert into customers (customer_id, mobile, name) VALUES(92, '80336366902', 'kate');
-Insert into customers (customer_id, mobile, name) VALUES(93, '80447100836', 'natalia');
-Insert into customers (customer_id, mobile, name) VALUES(94, '80333358938', 'anna');
-Insert into customers (customer_id, mobile, name) VALUES(95, '80291871645', 'anna');
-Insert into customers (customer_id, mobile, name) VALUES(96, '80292748165', 'olga');
-Insert into customers (customer_id, mobile, name) VALUES(97, '80296250934', 'marina');
-Insert into customers (customer_id, mobile, name) VALUES(98, NULL, 'lera');
-Insert into customers (customer_id, mobile, name) VALUES(99, '80445391148', 'kate');
-Insert into customers (customer_id, mobile, name) VALUES(100, '80336671019', 'irina');
-Insert into customers (customer_id, mobile, name) VALUES(101, NULL, 'andrey');
-Insert into customers (customer_id, mobile, name) VALUES(102, NULL, 'boris');
-Insert into customers (customer_id, mobile, name) VALUES(103, '80295784653', 'kristina');
-Insert into customers (customer_id, mobile, name) VALUES(104, '80296486908', 'vasilisa');
-Insert into customers (customer_id, mobile, name) VALUES(105, '80447656706', 'daria');
-Insert into customers (customer_id, mobile, name) VALUES(106, NULL, 'azi');
-Insert into customers (customer_id, mobile, name) VALUES(107, NULL, 'nalogovaia!');
-Insert into customers (customer_id, mobile, name) VALUES(0, NULL, 'UNKNOWN');
-Insert into customers (customer_id, mobile, name) VALUES(108, '80298347466', 'anna');
-Insert into customers (customer_id, mobile, name) VALUES(109, '80333606366', 'tania');
-Insert into customers (customer_id, mobile, name) VALUES(110, '80297300732', 'polina');
-Insert into customers (customer_id, mobile, name) VALUES(111, '80297634571', 'oksana');
-Insert into customers (customer_id, mobile, name) VALUES(112, '80336120065', 'kate');
-Insert into customers (customer_id, mobile, name) VALUES(113, '80295126056', 'kate');
-Insert into customers (customer_id, mobile, name) VALUES(114, '80298791295', 'kate');
-Insert into customers (customer_id, mobile, name) VALUES(115, '80447573557', 'irina');
-Insert into customers (customer_id, mobile, name) VALUES(116, '80297036490', 'daria');
-Insert into customers (customer_id, mobile, name) VALUES(117, '80447507705', 'Ira');
-Insert into customers (customer_id, mobile, name) VALUES(118, '80293175755', 'Svetlana');
-Insert into customers (customer_id, mobile, name) VALUES(119, '80296257893', 'aliona');
-Insert into customers (customer_id, mobile, name) VALUES(120, '80298225735', 'tania');
-Insert into customers (customer_id, mobile, name) VALUES(121, '80296050252', 'annA');
-Insert into customers (customer_id, mobile, name) VALUES(122, '80296704756', 'alina');
-Insert into customers (customer_id, mobile, name) VALUES(123, '80445138453', 'kate');
-Insert into customers (customer_id, mobile, name) VALUES(124, '80293204565', 'alesia');
-Insert into customers (customer_id, mobile, name) VALUES(125, '80296291270', 'nastia');
-Insert into customers (customer_id, mobile, name) VALUES(126, '80295986045', 'nastia');
-Insert into customers (customer_id, mobile, name) VALUES(127, '80445138453', 'kate');
-Insert into customers (customer_id, mobile, name) VALUES(128, '80296460920', 'Kristina');
-Insert into customers (customer_id, mobile, name) VALUES(129, '80292758640', 'larisa');
-Insert into customers (customer_id, mobile, name) VALUES(130, '80293563887', 'Kristina');
-Insert into customers (customer_id, mobile, name) VALUES(131, '80295072120', 'Kristina');
-Insert into customers (customer_id, mobile, name) VALUES(132, '80256518453', 'masha');
-Insert into customers (customer_id, mobile, name) VALUES(133, '80291419664', 'julia');
-Insert into customers (customer_id, mobile, name) VALUES(134, '80298138422', 'Diana');
-Insert into customers (customer_id, mobile, name) VALUES(135, '80291182043', 'olga');
-Insert into customers (customer_id, mobile, name) VALUES(136, '80295603475', 'sveta');
-Insert into customers (customer_id, mobile, name) VALUES(137, '80291719320', 'vera');
-Insert into customers (customer_id, mobile, name) VALUES(138, '80336114148', 'kate');
-Insert into customers (customer_id, mobile, name) VALUES(139, '80292083046', 'veronica');
-Insert into customers (customer_id, mobile, name) VALUES(140, '80291140353', 'olga');
-
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('B56', 180000, 1, '2014-01-17', '2014-04-17', 30, 3, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('B57', 180000, 2, '2014-01-18', '2014-04-18', 19, 3, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('B62', 180000, 3, '2014-02-08', '2014-05-08', 5, 3, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('B63', 180000, 4, '2014-02-10', '2014-05-10', 14, 3, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('B64', 180000, 5, '2014-02-11', '2014-05-11', 19, 3, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('B65', 180000, 6, '2014-02-13', '2014-05-13', 3, 3, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('B66', 180000, 7, '2014-02-13', '2014-05-13', 21, 3, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('B67', 180000, 8, '2014-02-16', '2014-05-16', 8, 3, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('B68', 180000, 9, '2014-02-17', '2014-05-17', 5, 3, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('B70', 180000, 10, '2014-02-18', '2014-05-18', 4, 3, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('B71', 180000, 11, '2014-02-18', '2014-05-18', 28, 3, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('B72', 180000, 12, '2014-02-19', '2014-05-19', 10, 3, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('B73', 180000, 13, '2014-02-26', '2014-05-26', 25, 3, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('B74', 180000, 14, '2014-02-27', '2014-05-27', 2, 3, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('B75', 180000, 11, '2014-03-04', '2014-06-04', 19, 3, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('B76', 180000, 15, '2014-03-04', '2014-06-04', 10, 3, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('B77', 180000, 16, '2014-03-04', '2014-06-04', 3, 3, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('B78', 180000, 17, '2014-03-05', '2014-06-05', 6, 3, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('B79', 180000, 18, '2014-03-05', '2014-06-05', 19, 3, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('B84', 180000, 19, '2014-03-12', '2014-06-12', 15, 3, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('B85', 180000, 10, '2014-03-14', '2014-06-14', 24, 3, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('B86', 180000, 21, '2014-03-17', '2014-06-17', 26, 3, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('B87', 180000, 13, '2014-03-18', '2014-06-18', 23, 3, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('B88', 180000, 20, '2014-03-27', '2014-06-27', 6, 3, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('B89', 180000, 22, '2014-04-02', '2014-07-02', 13, 3, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('B90', 180000, 13, '2014-04-04', '2014-07-04', 25, 3, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('SB92', 81000, 23, '2014-04-09', '2014-07-09', 14, 3, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('SB93', 81000, 24, '2014-07-09', '2014-07-09', 22, 3, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('B94', 180000, 10, '2014-04-09', '2014-07-09', 36, 3, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('B97', 180000, 10, '2014-04-10', '2014-07-10', 12, 3, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('B99', 180000, 23, '2014-04-11', '2014-07-11', 26, 3, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('SB106', 81000, 31, '2014-04-14', '2014-07-14', 35, 3, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('SB110', 81000, 24, '2014-04-16', '2014-07-16', 14, 3, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('B111', 180000, 10, '2014-04-16', '2014-07-16', 14, 3, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('B112', 180000, 32, '2014-04-16', '2014-07-16', 19, 3, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('B116', 180000, 32, '2014-04-14', '2014-07-14', 33, 3, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('SB119', 81000, 33, '2014-04-19', '2014-07-19', 29, 3, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('B120', 180000, 11, '2014-04-21', '2014-07-21', 10, 3, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('SB122', 81000, 25, '2014-04-21', '2014-07-21', 19, 3, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('SB123', 81000, 26, '2014-04-21', '2014-07-21', 19, 3, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('B124', 180000, 27, '2014-04-02', '2014-07-02', 18, 3, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('B127', 180000, 28, '2014-04-22', '2014-07-22', 20, 3, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('SB128', 81000, 29, '2014-04-22', '2014-07-22', 19, 3, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('SB129', 81000, 30, '2014-04-23', '2014-07-23', 34, 3, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('B130', 180000, 34, '2014-04-23', '2014-07-23', 35, 3, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('B131', 180000, 35, '2014-04-28', '2014-07-28', 11, 3, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('B133', 180000, 38, '2014-04-24', '2014-07-24', 36, 3, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('B136', 180000, 10, '2014-04-25', '2014-07-25', 35, 3, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('SB137', 81000, 39, '2014-04-25', '2014-07-25', 35, 3, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('B138', 180000, 40, '2014-04-25', '2014-07-25', 21, 3, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('B139', 180000, 36, '2014-04-25', '2014-07-25', 32, 3, 1);
-
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('B140', 180000, 108, '2014-04-28', '2014-07-28', 32, 3, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('B141', 180000, 0, '2014-05-01', '2014-08-01', 35, 3, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('B142', 180000, 109, '2014-04-28', '2014-07-28', 33, 3, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('B145', 180000, 16, '2014-04-14', '2014-07-01', 29, 3, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('B147', 180000, 23, '2014-05-01', '2014-08-01', 22, 3, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('B150', 180000, 0, '2014-04-14', '2014-07-01', 35, 3, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('SB152', 81000, 21, '2014-05-05', '2014-08-05', 40, 3, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('SB153', 81000, 40, '2014-05-05', '2014-08-05', 33, 3, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('SB156', 81000, 110, '2014-05-05', '2014-08-05', 35, 3, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('B157', 180000, 111, '2014-05-05', '2014-08-05', 40, 3, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('B158', 180000, 112, '2014-05-06', '2014-08-06', 36, 3, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('B159', 180000, 113, '2014-05-06', '2014-08-06', 31, 3, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('B160', 180000, 114, '2014-05-06', '2014-08-06', 40, 3, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('B161', 180000, 115, '2014-05-06', '2014-08-06', 33, 3, 1);
-
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('SO95', 63000, 41, '2014-05-10', '2014-07-10', 14, 2, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('O96', 140000, 1, '2014-05-10', '2014-07-10', 4, 2, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('O107', 140000, 42, '2014-04-15', '2014-06-15', 34, 2, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('O108', 140000, 43, '2014-05-15', '2014-07-15', 35, 2, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('SO117', 63000, 44, '2014-04-18', '2014-06-18', 12, 2, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('O105', 140000, 24, '2014-05-14', '2014-07-14', 35, 2, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('O121', 140000, 45, '2014-04-21', '2014-06-21', 30, 2, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('SO126', 63000, 46, '2014-04-22', '2014-06-22', 36, 2, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('O132', 63000, 47, '2014-04-24', '2014-06-24', 36, 2, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('O134', 63000, 48, '2014-04-25', '2014-06-25', 30, 2, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('O135', 140000, 49, '2014-04-25', '2014-06-25', 37, 2, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('O118', 140000, 24, '2014-04-18', '2014-06-18', 28, 2, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('O125', 140000, 116, '2014-04-21', '2014-06-21', 22, 2, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('SO126', 63000, 117, '2014-04-22', '2014-06-22', 21, 2, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('O134', 140000, 48, '2014-04-25', '2014-06-25', 24, 2, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('SO146', 63000, 14, '2014-05-01', '2014-07-01', 29, 2, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('O148', 140000, 10, '2014-05-01', '2014-07-01', 24, 2, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('O151', 140000, 0, '2014-05-01', '2014-07-01', 35, 2, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('O154', 140000, 118, '2014-05-01', '2014-07-01', 36, 2, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('O155', 140000, 0, '2014-05-05', '2014-07-05', 24, 2, 1);
-
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('C37', 264000, 50, '2014-02-04', '2014-05-04', 8, 3, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('C39', 264000, 11, '2014-02-10', '2014-05-10', 2, 3, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('C40', 264000, 23, '2014-02-17', '2014-05-17', 2, 3, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('C43', 264000, 51, '2014-02-23', '2014-05-23', 20, 3, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('C44', 264000, 52, '2014-02-27', '2014-05-27', 8, 3, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('C46', 264000, 53, '2014-03-03', '2014-06-03', 10, 3, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('C47', 264000, 54, '2014-03-04', '2014-06-04', 19, 3, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('C48', 264000, 54, '2014-03-06', '2014-06-06', 10, 3, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('C49', 264000, 11, '2014-03-06', '2014-06-06', 9, 3, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('C50', 264000, 55, '2014-03-07', '2014-06-07', 8, 3, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('C51', 264000, 56, '2014-03-07', '2014-06-07', 60, 3, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('C55', 264000, 20, '2014-03-19', '2014-06-19', 3, 3, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('C57', 264000, 58, '2014-03-30', '2014-06-30', 19, 3, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('C58', 264000, 18, '2014-04-01', '2014-07-01', 22, 3, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('C59', 264000, 59, '2014-04-01', '2014-07-01', 27, 3, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('C60', 264000, 44, '2014-04-02', '2014-07-02', 10, 3, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('C61', 264000, 11, '2014-04-05', '2014-07-05', 26, 3, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('C62', 264000, 11, '2014-04-05', '2014-07-05', 36, 3, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('C64', 264000, 10, '2014-04-07', '2014-07-07', 59, 3, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('C65', 264000, 11, '2014-04-07', '2014-07-07', 10, 3, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('C66', 264000, 61, '2014-04-08', '2014-07-08', 27, 3, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('C67', 264000, 53, '2014-04-08', '2014-07-08', 23, 3, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('C68', 264000, 62, '2014-04-09', '2014-07-09', 44, 3, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('C69', 264000, 16, '2014-04-09', '2014-07-09', 26, 3, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('SC71', 119000, 63, '2014-04-10', '2014-07-10', 3, 3, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('C73', 264000, 21, '2014-04-10', '2014-07-10', 30, 3, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('SC74', 119000, 23, '2014-04-10', '2014-07-10', 39, 3, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('C75', 264000, 53, '2014-04-11', '2014-07-11', 4, 3, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('C76', 264000, 15, '2014-04-12', '2014-07-12', 44, 3, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('SC77', 119000, 64, '2014-04-12', '2014-07-12', 23, 3, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('SC78', 119000, 20, '2014-04-12', '2014-07-12', 2, 3, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('C81', 264000, 64,  '2014-04-12', '2014-07-12', 10, 3, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('C83', 264000, 65, '2014-04-16', '2014-07-16', 32, 3, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('C85', 264000, 66, '2014-04-16', '2014-07-16', 41, 3, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('C89', 264000, 67, '2014-04-19', '2014-07-19', 37, 3, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('C90', 264000, 20, '2014-04-19', '2014-07-19', 40, 3, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('C91', 264000, 10, '2014-04-19', '2014-07-19', 3, 3, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('C92', 264000, 11, '2014-04-25', '2014-07-25', 48, 3, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('C96', 264000, 68, '2014-04-22', '2014-07-22', 9, 3, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('C97', 264000, 69 , '2014-04-22', '2014-07-22', 45, 3, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('SC98', 119000, 70, '2014-04-22', '2014-07-22', 33, 3, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('SC99', 119000, 71 , '2014-04-22', '2014-07-22', 48, 3, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('SC100', 119000, 72 , '2014-04-22', '2014-07-22', 28, 3, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('C102', 264000, 20 , '2014-04-23', '2014-07-23', 41, 3, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('C104', 264000, 73 , '2014-04-23', '2014-07-23', 44, 3, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('C105', 264000, 73 , '2014-04-23', '2014-07-23', 40, 3, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('SC106', 119000, 75 , '2014-04-23', '2014-07-23', 43, 3, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('C107', 264000, 76 , '2014-04-23', '2014-07-23', 31, 3, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('C108', 264000, 77  , '2014-04-23', '2014-07-23', 39, 3, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('SC114', 119000, 78 , '2014-04-25', '2014-07-25', 37, 3, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('C115', 264000, 79  , '2014-04-25', '2014-07-25', 55, 3, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('SC116', 119000, 80  , '2014-04-26', '2014-07-26', 41, 3, 1);
-
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('C117', 264000, 0, '2014-04-26', '2014-07-26', 33, 3, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('C118', 264000, 120, '2014-05-05', '2014-08-05', 55, 3, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('SC119', 119000, 0, '2014-04-28', '2014-07-28', 47, 3, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('SC120', 119000, 0, '2014-04-30', '2014-07-30', 48, 3, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('C121', 264000, 0, '2014-04-30', '2014-07-30', 52, 3, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('C122', 264000, 121 , '2014-05-05', '2014-08-05', 56, 3, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('SC127', 119000, 122, '2014-05-05', '2014-08-05', 60, 3, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('C128', 264000, 123 , '2014-05-03', '2014-08-03', 57, 3, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('C129', 264000, 124 , '2014-05-02', '2014-08-02', 47, 3, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('SC130', 119000, 125 , '2014-05-02', '2014-08-02', 60, 3, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('C131', 264000, 126 , '2014-05-02', '2014-08-02', 55, 3, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('C132', 264000, 127 , '2014-05-02', '2014-08-02', 60, 3, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('SC133', 119000, 128 , '2014-05-06', '2014-08-06', 55, 3, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('C134', 264000, 129  , '2014-05-06', '2014-08-06', 53, 3, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('SC135', 119000, 130 , '2014-05-06', '2014-08-06', 60, 3, 1);
-
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('G70', 204000, 53  , '2014-04-10', '2014-06-10', 40, 2, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('G87', 204000, 13  , '2014-05-17', '2014-07-17', 35, 2, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('G88', 204000, 22  , '2014-04-18', '2014-06-18', 40, 2, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('G95', 204000, 81  , '2014-04-22', '2014-06-22', 35, 2, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('SG103', 92000, 13  , '2014-04-23', '2014-06-23', 60, 2, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('G109', 204000, 66  , '2014-04-25', '2014-06-25', 37, 2, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('G110', 204000, 82   , '2014-04-25', '2014-06-25', 46, 2, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('G111', 204000, 53, '2014-04-25', '2014-06-25', 56, 2, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('G112', 204000, 23, '2014-04-25', '2014-06-25', 60, 2, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('G113', 204000, 83, '2014-04-25', '2014-06-25', 55, 2, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('SG124', 92000, 131, '2014-06-06', '2014-08-06', 60, 2, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('SG125', 92000, 132, '2014-06-06', '2014-08-06', 55, 2, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('G123', 204000, 40, '2014-06-30', '2014-08-30', 48, 2, 1);
-
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('D2', 420000, 84, '2013-11-28', '2014-05-28', 17, 6, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('D6', 420000, 85, '2013-11-08', '2014-05-08', 33, 6, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('D8', 420000, 53, '2013-11-15', '2014-05-15', 31, 6, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('D11', 420000, 20, '2013-12-09', '2014-06-09', 86, 6, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('D12', 420000, 10, '2013-12-12', '2014-06-12', 70, 6, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('D13', 420000, 21, '2014-01-10', '2014-07-10', 20, 6, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('D14', 420000, 22 , '2014-01-21', '2014-07-21', 48, 6, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('D15', 420000, 86 , '2014-01-27', '2014-07-27', 49, 6, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('D16', 420000, 87 , '2014-01-27', '2014-07-27', 65, 6, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('D17', 420000, 20 , '2014-01-31', '2014-07-31', 56, 6, 1);
-
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('D18', 420000, 16 , '2014-02-05', '2014-08-05', 15, 6, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('D19', 420000, 13 , '2014-02-17', '2014-08-17', 32, 6, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('D20', 420000, 13 , '2014-02-19', '2014-08-19', 71, 6, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('D21', 420000, 16 , '2014-04-01', '2014-10-01', 68, 6, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('D22', 420000, 41 , '2014-04-09', '2014-10-09', 20, 6, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('D26', 420000, 88 , '2014-04-11', '2014-10-11', 35, 6, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('D28', 420000, 11  , '2014-01-15', '2014-07-15', 42, 6, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('D29', 420000, 89  , '2014-03-20', '2014-09-20', 100, 6, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('D30', 420000, 41  , '2014-01-20', '2014-07-20', 66, 6, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('D31', 420000, 21  , '2014-01-22', '2014-07-22', 77, 6, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('D32', 420000, 27  , '2014-04-23', '2014-10-23', 78, 6, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('D33', 420000, 90   , '2014-01-23', '2014-07-23', 90, 6, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('D34', 420000, 88  , '2014-04-24', '2014-10-24', 90, 6, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('D35', 420000, 53  , '2014-04-25', '2014-10-25', 85, 6, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('D36', 420000, 27  , '2014-06-23', '2014-12-23', 84, 6, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('SD38', 180000, 133  , '2014-05-05', '2014-11-05', 95, 6, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('SD39', 180000, 134  , '2014-05-06', '2014-11-06', 85, 6, 1);
-
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('R23', 320000, 13   , '2014-04-11', '2014-07-11', 34, 3, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('R24', 320000, 91  , '2014-04-11', '2014-07-11', 51, 3, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('R25', 320000, 59  , '2014-04-11', '2014-07-11', 51, 3, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('R27', 320000, 59  , '2014-04-23', '2014-07-12', 76, 3, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('SR33', 144000, 0  , '2014-05-05', '2014-08-05', 96, 3, 1);
-
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('K3', 490000, 23    , '2013-11-11', '2014-05-11', 4, 6, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('K4', 490000, 92   , '2013-11-15', '2014-05-15', 61, 6, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('K5', 490000, 11   , '2014-04-03', '2014-10-03', 82, 6, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('K7', 490000, 93   , '2014-01-15', '2014-07-15', 114, 6, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('K9', 490000, 53    , '2014-01-15', '2014-07-15', 120, 6, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('K10', 490000, 14   , '2014-04-12', '2014-10-12', 37, 6, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('K11', 490000, 94     , '2014-04-15', '2014-10-15', 96, 6, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('K13', 490000, 10    , '2014-03-18', '2014-09-18', 88, 6, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('K15', 490000, 95    , '2014-04-22', '2014-10-22', 103, 6, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('K17', 490000, 53   , '2014-04-24', '2014-10-24', 120, 6, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('K18', 490000, 96   , '2014-04-24', '2014-10-24', 101, 6, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('K20', 490000, 41   , '2014-04-24', '2014-10-24', 120, 6, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('K21', 490000, 97     , '2014-04-25', '2014-10-25', 108, 6, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('K22', 490000, 98    , '2014-04-25', '2014-10-25', 120, 6, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('K23', 490000, 16    , '2014-04-28', '2014-10-28', 120, 6, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('K24', 490000, 11    , '2014-04-28', '2014-10-28', 103, 6, 1);
-
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('K25', 490000, 135     , '2014-05-03', '2014-11-03', 116, 6, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('K26', 490000, 136    , '2014-05-05', '2014-11-05', 115, 6, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('SK27', 220500, 137    , '2014-05-05', '2014-11-05', 115, 6, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('K28', 490000, 138    , '2014-05-05', '2014-11-05', 115, 6, 1);
-
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('H1', 360000, 139 , '2014-05-06', '2014-08-06', 115, 3, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('H6', 360000, 20 , '2014-04-10', '2014-07-10', 30, 3, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('H8', 360000, 99 , '2014-04-15', '2014-07-15', 48, 3, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('H12', 360000, 23 , '2014-04-17', '2014-07-17', 103, 3, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('H14', 360000, 22 , '2014-04-21', '2014-07-21', 80, 3, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('H16', 360000, 100 , '2014-04-23', '2014-07-23', 115, 3, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('H19', 360000, 20 , '2014-07-24', '2014-10-24', 101, 3, 1);
-
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('M2', 600000, 21  , '2013-11-28', '2014-05-28', 44, 6, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('M3', 600000, 101  , '2014-06-28', '2014-12-28', 121, 6, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('M4', 600000, 102  , '2014-06-28', '2014-12-28', 130, 6, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('M6', 600000, 103  , '2014-04-21', '2014-10-21', 75, 6, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('M7', 600000, 104  , '2014-04-24', '2014-10-24', 127, 6, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('M8', 600000, 105  , '2014-04-23', '2014-10-23', 120, 6, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('M9', 600000, 106  , '2014-04-23', '2014-10-23', 133, 6, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('M10', 600000, 27  , '2014-04-23', '2014-10-23', 140, 6, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('M15', 600000, 107  , '2014-06-28', '2014-12-28', 150, 6, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('M14', 600000, 0  , '2014-06-28', '2100-12-28', 110, 6, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('M11', 600000, 107  , '2014-05-06', '2014-11-06', 145, 6, 1);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-01-17', '56', 'B', 'Julia', NULL, 30);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-01-18', '57', 'B', 'Lena', NULL, 19);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-02-08', '62', 'B', 'Nina', NULL, 5);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-02-10', '63', 'B', 'Irina', NULL, 14);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-02-11', '64', 'B', 'Kate', NULL, 19);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-02-13', '65', 'B', 'Daria', NULL, 3);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-02-13', '66', 'B', 'Snezana', NULL, 21);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-02-16', '67', 'B', 'luda', NULL, 8);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-02-17', '68', 'B', 'Sveta', NULL, 5);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-02-18', '70', 'B', 'olga', NULL, 4);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-02-18', '71', 'B', 'kate', NULL, 24);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-02-19', '72', 'B', 'Tania', NULL, 10);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-02-26', '73', 'B', 'natasha', NULL, 25);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-02-27', '74', 'B', 'oksana', NULL, 2);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-03-04', '75', 'B', 'kate', NULL, 19);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-03-04', '76', 'B', 'masha', NULL, 10);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-03-04', '77', 'B', 'marina', NULL, 3);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-03-05', '78', 'B', 'vitalik', NULL, 6);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-03-06', '79', 'B', 'olesia', NULL, 19);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-03-12', '84', 'B', 'jilia', NULL, 15);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-03-14', '85', 'B', 'olga', NULL, 24);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-03-17', '86', 'B', 'tania', NULL, 20);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-03-18', '87', 'B', 'natasha', NULL, 23);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-03-27', '88', 'B', 'anna', NULL, 6);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-04-02', '89', 'B', 'vika', NULL, 13);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-04-04', '90', 'B', 'natasha', NULL, 25);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-04-09', '92', 'SB', 'elena', NULL, 23);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-04-09', '93', 'SB', 'maria', NULL, 22);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-04-09', '94', 'B', 'olga', NULL, 36);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-04-09', '92', 'SB', 'elena', NULL, 14);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-04-10', '97', 'B', 'olga', NULL, 12);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-04-11', '99', 'B', 'elena', NULL, 26);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-04-14', '106', 'SB', NULL, NULL, 35);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-04-16', '110', 'B', 'maria', NULL, 7);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-04-16', '111', 'B', 'olga', NULL, 14);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-04-16', '112', 'B', 'elena', '80297626182', 19);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-04-14', '116', 'B', NULL, NULL, 33);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-03-19', '119', 'SB', 'natasha', '80296632772', 29);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-04-21', '120', 'B', 'kate', '80297986355', 10);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-04-21', '122', 'SB', 'sasha', '80447735243', 19);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-04-21', '123', 'SB', 'jiriy', '80297651819', 19);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-04-14', '124', 'B', 'julia', NULL, 18);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-04-22', '127', 'B', 'maia', '80297678004', 20);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-04-22', '128', 'SB', 'natalia', '80447426241', 19);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-04-23', '129', 'SB', 'vita', '8029118601', 34);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-04-23', '130', 'B', 'Genia', '80296737063', 30);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-04-24', '133', 'B', 'olga', '80336004453', 36);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-04-25', '136', 'B', 'olga', NULL, 35);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-04-25', '137', 'SB', 'julia', '80293685794', 35);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-04-25', '138', 'B', 'natalia', NULL, 21);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-03-21', '121', 'O', 'marta', NULL, 30);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-04-28', '108', 'B', 'anna', '80298347466', 32);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-04-01', '141', 'B', NULL, NULL, 35);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-04-28', '142', 'B', 'tania', '80333606366', 33);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-04-01', '145', 'B', 'marina', NULL, 29);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-05-01', '147', 'B', 'elena', NULL, 15);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-04-01', '150', 'B', NULL, NULL, 35);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-05-05', '152', 'SB', 'tania', NULL, 26);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-05-05', '153', 'SB', 'natalia', NULL, 35);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-05-05', '156', 'SB', 'polina', '80297300732', 33);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-05-05', '157', 'B', 'oksana', '80297634571', 40);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-05-08', '158', 'B', 'kate', 'mts6120065', 36);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-05-06', '159', 'B', 'kate', '80295126056', 31);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-05-06', '160', 'B', 'kate', '80298791295', 40);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-05-06', '161', 'B', 'irina', '80447573557', 33);
 
 
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-04-10', '95', 'SO', 'irina', NULL, 14);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-04-10', '96', 'O', 'Julia', NULL, 4);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-04-15', '107', 'O', 'snezana', '80291243855', 5);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-04-15', '108', 'O', 'olga', '80257890327', 28);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-04-18', '117', 'SO', 'polina', NULL, 12);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-04-18', '118', 'O', 'maria', NULL, 28);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-04-14', '105', 'O', 'maria', NULL, 35);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-04-21', '121', 'O', 'marta', NULL, 30);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-04-21', '125', 'O', 'daria', '80297036490', 22);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-04-22', '126', 'SO', 'Ira', '80447507705', 21);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-04-24', '132', 'O', 'Elena', '80296882275', 36);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-04-25', '134', 'O', 'alina', NULL, 24);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-04-25', '135', 'O', 'Natalia', NULL, 37);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-05-01', '146', 'SO', 'kate', NULL, 29);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-05-01', '148', 'O', 'olga', NULL, 24);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-07-01', '151', 'O', NULL, NULL, 35);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-05-01', '154', 'O', 'Svetlana', '80293175755', 36);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-05-05', '155', 'O', 'anna', NULL, 35);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-05-08', '105', 'SO', 'Alesya', '80291525680', 36);
+
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-02-10', '39', 'C', 'kate', NULL, 2);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-02-17', '40', 'C', 'elena', NULL, 2);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-02-23', '43', 'C', 'sveta', NULL, 20);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-02-27', '44', 'C', 'vova', NULL, 8);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-03-03', '46', 'C', 'nastia', NULL, 10);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-03-04', '47', 'C', 'Maria', NULL, 8);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-03-06', '48', 'C', 'Maria', NULL, 10);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-03-06', '49', 'C', 'kate', NULL, 9);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-03-07', '50', 'C', 'dima', NULL, 8);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-03-19', '51', 'C', 'Nastia', NULL, 60);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-03-22', '55', 'C', 'anna', NULL, 3);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-03-06', '57', 'C', 'karina', NULL, 19);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-04-01', '58', 'C', 'olesia', NULL, 22);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-04-01', '59', 'C', 'dasha', NULL, 27);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-04-02', '60', 'C', 'polina', NULL, 10);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-04-05', '61', 'C', 'kate', NULL, 26);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-04-05', '62', 'C', 'kate', NULL, 36);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-04-07', '64', 'C', 'olga', NULL, 59);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-04-07', '65', 'C', 'kate', NULL, 10);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-04-08', '66', 'C', 'ksenia', NULL, 27);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-04-08', '67', 'C', 'nastia', NULL, 23);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-04-09', '68', 'C', 'valia', NULL, 44);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-04-09', '69', 'C', 'marina', NULL, 26);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-04-10', '73', 'C', 'tania', NULL, 30);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-04-10', '74', 'SC', 'elena', NULL, 39);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-04-11', '75', 'C', 'nastia', NULL, 4);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-04-12', '76', 'C', 'masha', NULL, 37);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-04-12', '77', 'SC', 'taisa', NULL, 23);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-04-12', '78', 'SC', 'anna', NULL, 2);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-04-12', '81', 'C', 'taisa', NULL, 10);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-04-16', '83', 'C', 'sofia', NULL, 32);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-04-16', '85', 'C', 'lena', NULL, 41);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-04-19', '89', 'C', 'aleksandr', NULL, 37);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-04-19', '90', 'C', 'anna', NULL, 40);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-04-19', '91', 'C', 'olga', NULL, 3);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-04-25', '92', 'SC', 'kate', NULL, 48);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-04-22', '93', 'C', 'veronika', '80259703558', 9);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-04-22', '97', 'C', 'oksana', '80296225208', 45);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-04-22', '98', 'SC', 'elena', '80336560113', 33);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-04-22', '99', 'SC', 'sasha', '80293593017', 48);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-04-22', '100', 'SC', 'liza', '80336343222', 28);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-04-23', '102', 'C', 'anna', NULL, 41);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-04-23', '104', 'C', 'nastia', '80297739725', 44);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-04-23', '105', 'C', 'natasha', '80296067064', 40);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-04-23', '106', 'SC', 'olga', '80296859298', 43);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-04-23', '107', 'C', 'natasha', '80297781180', 31);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-04-23', '108', 'C', 'olga', '80336614887', 39);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-04-25', '114', 'SC', 'anna', '80293923607', 37);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-04-25', '15', 'C', 'valeria', NULL, 55);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-04-26', '119', 'SC', 'aliona', '80296257893', 41);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-04-26', '117', 'C', 'anastasia ', NULL, 24);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-05-05', '118', 'C', 'tania', '80298225735', 55);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-04-28', '119', 'SC', 'sasha', NULL, 47);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-04-30', '120', 'SC', 'anastasia', NULL, 48);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-04-30', '121', 'C', 'alexandra', NULL, 52);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-08-05', '122', 'C', 'annA', '80296050252', 56);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-05-02', '127', 'SC', 'alina', '80296704756', 60);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-05-03', '128', 'C', 'kate', '80445138453', 57);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-05-02', '129', 'C', 'alesia', '80296050252', 47);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-05-02', '130', 'SC', 'nastia', '80296291270', 60);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-05-02', '131', 'C', 'nastia', '80295986045', 55);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-05-02', '132', 'C', 'kate', '80445138453', 60);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-05-06', '133', 'SC', 'Kristina', '80296460920', 55);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-05-06', '134', 'C', 'larisa', '80292758640', 53);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-05-06', '135', 'SC', 'Kristina', '80293563887', 60);
+
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-04-10', '70', 'G', 'nastia', NULL, 40);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-05-17', '87', 'G', 'natasha', NULL, 35);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-04-18', '88', 'G', 'vika', NULL, 40);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-04-22', '95', 'G', 'olga', '80291216098', 35);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-04-23', '103', 'SG', 'natasha', NULL, 60);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-04-25', '109', 'G', 'lena', NULL, 37);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-04-25', '110', 'G', 'aleksey', NULL, 46);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-04-25', '111', 'G', 'nastia', NULL, 56);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-04-25', '112', 'G', 'elena', NULL, 60);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-04-25', '113', 'G', 'anzela', '80333415778', 55);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-05-06', '124', 'SG', 'Kristina', '80295072120', 60);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-05-06', '125', 'SG', 'masha', '80256518453', 48);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-04-30', '123', 'G', 'natalia', NULL, 48);
+
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2013-11-28', '2', 'D', 'tamara', NULL, 17);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2013-11-08', '6', 'D', 'renata', NULL, 33);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2013-11-15', '8', 'D', 'nastia', NULL, 31);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2013-12-09', '11', 'D', 'anna', NULL, 86);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2013-12-12', '12', 'D', 'olga', NULL, 70);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-01-10', '13', 'D', 'tania', NULL, 30);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-01-21', '14', 'D', 'vika', NULL, 48);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-01-27', '15', 'D', 'daria', NULL, 49);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-01-28', '16', 'D', 'sasha', NULL, 65);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-01-31', '17', 'D', 'anna', NULL, 56);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-02-05', '18', 'D', 'marina', NULL, 15);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-02-17', '19', 'D', 'natasha', NULL, 23);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-02-08', '20', 'D', 'natasha', NULL, 71);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-04-01', '21', 'D', 'marina', NULL, 68);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-04-09', '22', 'D', 'irina', NULL, 20);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-04-11', '26', 'D', 'diana', NULL, 35);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-01-15', '28', 'D', 'kate', '80296873351', 42);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-01-20', '29', 'D', 'aliona', NULL, 100);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-01-20', '30', 'D', 'aliona', NULL, 66);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-01-22', '31', 'D', 'tania', '80296385569', 77);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-04-23', '32', 'D', 'julia', NULL, 78);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-01-23', '33', 'D', 'galina', NULL, 90);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-04-24', '34', 'D', 'daria', NULL, 90);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-04-25', '35', 'D', 'nastia', '80293606375', 85);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-04-23', '36', 'D', 'julia', NULL, 84);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-05-05', '38', 'SD', 'julia', '80291419664', 95);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-05-06', '39', 'SD', 'Diana', '80298138422', 71);
 
 
-Insert into users (login, name, password, role) VALUES('cofee',  'Nastya', 'root', 'derictor');
-Insert into users (login, name, password, role) VALUES('admin1', 'Lena', '2', 'admin');
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-04-11', '23', 'R', 'natasha', NULL, 34);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-04-11', '24', 'R', 'veronika', NULL, 51);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-04-11', '25', 'R', 'dasha', NULL, 10);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-04-12', '27', 'R', 'dasha', NULL, 76);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-04-05', '37', 'SR', 'anna', NULL, 96);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-05-08', '41', 'SR', 'Katya', '80293620014', 100);
+
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2013-11-15', '4', 'K', 'kate', '80336366902', 61);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-04-03', '5', 'K', 'kate', NULL, 74);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-01-15', '7', 'K', 'natalia', '80447100836', 114);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-01-15', '9', 'K', 'nastia', NULL, 120);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-04-12', '10', 'K', 'oksana', NULL, 37);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-04-15', '11', 'K', 'anna', '80291871645', 96);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-03-18', '13', 'K', 'olga', NULL, 88);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-04-22', '15', 'K', 'anna', '80292748165', 103);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-04-24', '17', 'K', 'nastia', NULL, 120);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-04-24', '18', 'K', 'olga', '80292748165', 101);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-04-24', '20', 'K', 'irina', NULL, 120);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-04-25', '21', 'K', 'marina', '80296250934', 108);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-04-26', '22', 'K', 'lera', NULL, 120);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-04-28', '23', 'K', 'marina', NULL, 120);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-04-28', '24', 'K', 'kate', NULL, 103);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-05-03', '25', 'K', 'olga', '80291182043', 116);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-05-05', '26', 'K', 'sveta', '80295603475', 115);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-05-05', '27', 'SK', 'vera', '80291719320', 115);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-05-05', '28', 'K', 'kate', '80336114148', 115);
+
+
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-05-06', '1', 'H', 'veronica', '80292083046', 115);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-04-10', '6', 'H', 'veronica', NULL, 30);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-04-15', '8', 'H', 'kate', '80445391148', 46);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-04-17', '12', 'H', 'elena', NULL, 96);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-04-21', '14', 'H', 'vika', NULL, 80);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-04-23', '16', 'H', 'irina', '80336671019', 115);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-04-24', '19', 'H', 'anna', NULL, 101);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-05-08', '13', 'SH', 'Aleksandr', '80296157424', 111);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-05-08', '14', 'SH', 'Diana', '80291608427', 120);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-05-08', '15', 'SH', 'Nanya', '80298669187', 120);
+
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2013-11-28', '2', 'M', 'tania', NULL, 44);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2013-06-28', '3', 'M', 'andrey', NULL, 121);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2013-06-28', '4', 'M', 'boris', NULL, 130);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-04-21', '6', 'M', 'kristina', '80295784653', 54);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-04-24', '7', 'M', 'vasilisa', '80296486908', 127);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-04-23', '8', 'M', 'daria', '80447656706', 120);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-04-23', '9', 'M', 'azi', NULL, 90);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-04-23', '10', 'M', 'julia', NULL, 140);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2114-12-28', '15', 'M', 'nalogovaia', NULL, 150);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2114-12-28', '14', 'M', 'boris', NULL, 110);
+Insert into abonements_data (start_date, code, letter, client_name, phone,minutes) 
+VALUES('2014-05-06', '11', 'M', 'olga', NULL, 145);
+
+Insert into users (login, name, password, role) VALUES('cofee',  'Настя', 'root', 'derictor');
+Insert into users (login, name, password, role) VALUES('kristina', 'Кристина', '24', 'admin');
 Insert into users (login, name, password, role) VALUES('admin2', 'Liza', '3', 'admin');
 
 Insert into cosmetics (cosmetics_id, name, price, cosmetics_count) VALUES(1, 'Perfect Legs', 43000, 6);
@@ -419,7 +507,7 @@ Insert into cosmetics (cosmetics_id, name, price, cosmetics_count) VALUES(5, 'Co
 Insert into cosmetics (cosmetics_id, name, price, cosmetics_count) VALUES(6, 'Hot coffee', 44000, 6);
 Insert into cosmetics (cosmetics_id, name, price, cosmetics_count) VALUES(10,'Hot hunter ', 35000, 4);
 Insert into cosmetics (cosmetics_id, name, price, cosmetics_count) VALUES(7, 'Extreme bronze', 43000, 6);
-Insert into cosmetics (cosmetics_id, name, price, cosmetics_count) VALUES(8, 'Extreme black', 43000, 10);
+Insert into cosmetics (cosmetics_id, name, price, cosmetics_count) VALUES(8, 'Extreme black', 44000, 9);
 Insert into cosmetics (cosmetics_id, name, price, cosmetics_count) VALUES(9, 'Солнечный бальзам', 25000, 5);
 Insert into cosmetics (cosmetics_id, name, price, cosmetics_count) VALUES(11, 'stikini', 1000, 1000000);
 
@@ -429,16 +517,23 @@ Insert into gorizontal_blue_sun (gorizontal_blue_sun_id, start_date, total_minut
 
 Insert into statistic_data (statistic_id, start_date, residue, booking_per_day, bank, official_salary, quenching, accumulation, user_login) VALUES(1, '2014-04-27', 1072500, 461200, NULL, NULL, 2797, 366787540, 'cofee');
 
---Без ограничений по времени
-Insert into available_abonements (letter, price, minutes) VALUES('B', 180000, 40);
-Insert into available_abonements (letter, price, minutes) VALUES('C', 264000, 60);
-Insert into available_abonements (letter, price, minutes) VALUES('D', 420000, 100);
-Insert into available_abonements (letter, price, minutes) VALUES('K', 490000, 120);
-Insert into available_abonements (letter, price, minutes) VALUES('M', 600000, 150);
+Insert into available_abonements (letter, price, minutes, duration) VALUES('B', 180000, 40, 1);
+Insert into available_abonements (letter, price, minutes, duration) VALUES('C', 264000, 60, 1);
+Insert into available_abonements (letter, price, minutes, duration) VALUES('D', 420000, 100, 1);
+Insert into available_abonements (letter, price, minutes, duration) VALUES('K', 490000, 120, 1);
+Insert into available_abonements (letter, price, minutes, duration) VALUES('M', 600000, 150, 1);
+Insert into available_abonements (letter, price, minutes, duration) VALUES('O', 140000, 40, 1);
+Insert into available_abonements (letter, price, minutes, duration) VALUES('G', 204000, 60, 1);
+Insert into available_abonements (letter, price, minutes, duration) VALUES('R', 320000, 100, 1);
+Insert into available_abonements (letter, price, minutes, duration) VALUES('H', 360000, 120, 1);
 
--- С ограничениями по времени, действительно только до 13:00
-Insert into available_abonements (letter, price, minutes) VALUES('O', 140000, 40);
-Insert into available_abonements (letter, price, minutes) VALUES('G', 204000, 60);
-Insert into available_abonements (letter, price, minutes) VALUES('R', 320000, 100);
-Insert into available_abonements (letter, price, minutes) VALUES('H', 360000, 120);
+Insert into available_abonements (letter, price, minutes, duration) VALUES('SB', 81000, 40, 1);
+Insert into available_abonements (letter, price, minutes, duration) VALUES('SC', 119000, 60, 1);
+Insert into available_abonements (letter, price, minutes, duration) VALUES('SD', 189000, 100, 1);
+Insert into available_abonements (letter, price, minutes, duration) VALUES('SK', 220500, 120, 1);
+Insert into available_abonements (letter, price, minutes, duration) VALUES('SM', 270000, 150, 1);
+Insert into available_abonements (letter, price, minutes, duration) VALUES('SO', 63000, 40, 1);
+Insert into available_abonements (letter, price, minutes, duration) VALUES('SG', 92000, 60, 1);
+Insert into available_abonements (letter, price, minutes, duration) VALUES('SR', 144000, 100, 1);
+Insert into available_abonements (letter, price, minutes, duration) VALUES('SH', 162000, 120, 1);
 
