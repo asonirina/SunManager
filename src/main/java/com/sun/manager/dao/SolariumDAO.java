@@ -255,6 +255,7 @@ public class SolariumDAO {
             l2 = (l2 + solariumL2 - 999.59);
             psComment.setDate(1, currentDate);
             psComment.setString(2, "Счетчик для ламп был обнулен для солярия " + solarium + ". Пожалуйста, замените лампы");
+            psComment.executeUpdate();
         } else {
             l2 += solariumL2;
         }
