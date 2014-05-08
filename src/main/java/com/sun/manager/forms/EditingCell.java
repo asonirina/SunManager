@@ -1,26 +1,21 @@
 package com.sun.manager.forms;
 
-import com.sun.manager.App;
 import com.sun.manager.constants.DataColumnEnum;
 import com.sun.manager.dao.SolariumDAO;
 import com.sun.manager.forms.alert.AlertDialog;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
-import javafx.geometry.Pos;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Scanner;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class EditingCell<T1, T2> extends TableCell<T1, T2> {
 
@@ -106,12 +101,11 @@ public class EditingCell<T1, T2> extends TableCell<T1, T2> {
                         textBeforeEdit = value;
                         commitEdit((T2) value);
                     } else if (value.replaceAll(" ", "").matches("[\\d]+:S?[ORGH]{1}(\\d)+")) {
-                        Calendar calendar = Calendar.getInstance();
-                        calendar.set(Calendar.HOUR, 13);
-                        calendar.set(Calendar.MINUTE, 0);
-                        long time = calendar.getTime().getTime();
+                        DateFormat dateFormat = new SimpleDateFormat("HH");
+                        Calendar cal = Calendar.getInstance();
+                        String hours = dateFormat.format(cal.getTime());
 
-                        if (App.getInstance().getSelectedDate().getTime() > time) {
+                        if (Integer.parseInt(hours) >= 13) {
                             new AlertDialog((Stage) textField.getScene().getWindow(), "Этот абонемент действителен до 13:00", 1).showAndWait();
                             textField.setText(textBeforeEdit);
                             return;
