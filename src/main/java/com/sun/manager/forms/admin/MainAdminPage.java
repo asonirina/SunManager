@@ -1,7 +1,6 @@
 package com.sun.manager.forms.admin;
 
 import com.sun.manager.App;
-import com.sun.manager.events.ClosePageEvent;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -29,17 +28,17 @@ public class MainAdminPage extends Application {
         stage.setTitle("Главная страница");
         stage.show();
 
-        stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-            @Override
-            public void handle(WindowEvent event) {
-                try {
-                    App.getInstance().getEventBus().post(new ClosePageEvent());
-                    stop();
-                } catch (Exception ex) {
-                    throw new RuntimeException(ex);
-                }
-            }
-        });
+//        stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+//            @Override
+//            public void handle(WindowEvent event) {
+//                try {
+//                    App.getInstance().getEventBus().post(new ClosePageEvent());
+//                    stop();
+//                } catch (Exception ex) {
+//                    throw new RuntimeException(ex);
+//                }
+//            }
+//        });
     }
 
 }

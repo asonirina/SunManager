@@ -7,7 +7,6 @@ import com.sun.manager.constants.BlankItem;
 import com.sun.manager.constants.DataColumnEnum;
 import com.sun.manager.constants.SolariumEnum;
 import com.sun.manager.dto.*;
-import com.sun.manager.events.ClosePageEvent;
 import com.sun.manager.events.EventHandlers;
 import com.sun.manager.events.NewAbonementAddedEvent;
 import com.sun.manager.events.NewCosmeticsAddedEvent;
@@ -455,13 +454,12 @@ public class MainAdminController extends ScrollPane implements Initializable {
         bankButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                App.getInstance().getEventBus().post(new ClosePageEvent());
+                save();
                 BankDataPage page = new BankDataPage();
                 try {
                     page.start(new Stage());
                 } catch (IOException ex) {
                     new AlertDialog((Stage) logout.getScene().getWindow(), "Произошла ошибка!", 1).showAndWait();
-                    //throw new RuntimeException(ex);
                 }
             }
         });
@@ -525,8 +523,7 @@ public class MainAdminController extends ScrollPane implements Initializable {
             saveChanges.setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent mouseEvent) {
-                    destroy(new ClosePageEvent());
-
+                    save();
                     new AlertDialog((Stage) logout.getScene().getWindow(), "Изменения успешно сохранены!", 0).showAndWait();
 
                 }
@@ -604,20 +601,25 @@ public class MainAdminController extends ScrollPane implements Initializable {
 
 
     private void countSolariumData(ObservableList<BaseSolariumData> data, ObservableList<ResData> resData, long num) {
+
         Long count = 0L;
         Long sum = 0L;
         for (BaseSolariumData d : data) {
-            if (d.getMinutes() != null) {
-                count += d.getMinutes();
-            }
+            if (!d.isSaved()) {
+                if (d.getMinutes() != null) {
+                    count += d.getMinutes();
+                }
 
-            if (d.getTotalPrice() != null) {
-                sum += d.getTotalPrice();
+                if (d.getTotalPrice() != null) {
+                    sum += d.getTotalPrice();
+                }
             }
         }
+        save();
         resData.set(0, new ResData("Итого мин: " + count));
         resData.set(1, new ResData("Итого руб: " + sum));
-        Double l2 = Double.valueOf(count / 60 + "." + ((count >= 10) ? "" : "0") + count % 60)+solariumService.getL2ById(num);
+
+        Double l2 = solariumService.getL2ById(num);
         resData.set(2, new ResData("L2= " + l2));
     }
 
@@ -636,8 +638,7 @@ public class MainAdminController extends ScrollPane implements Initializable {
         abonementsData.set(abonementsDataSize++, request);
     }
 
-    @Subscribe
-    public void destroy(ClosePageEvent e) {
+    public void save() {
         if (App.getInstance().getUser().getRole().equals("admin")) {
             ObservableList<BaseSolariumData> data = FXCollections.observableArrayList();
             long minutes = 0;
