@@ -47,14 +47,14 @@ public class SolariumDAO {
         return callableStatement.getLong(3);
     }
 
-    public Long getL2ById(Long solariumId) throws SQLException {
+    public Double getL2ById(Long solariumId) throws SQLException {
         callableStatement = dbConnection.prepareCall(GET_L2_BY_ID);
         callableStatement.setInt(1, solariumId.intValue());
-        callableStatement.registerOutParameter(2, Types.INTEGER);
+        callableStatement.registerOutParameter(2, Types.DOUBLE);
 
         callableStatement.executeUpdate();
 
-        return callableStatement.getLong(2);
+        return callableStatement.getDouble(2);
     }
 
     public List<BaseSolariumData> getSolariumData(Long solariumId, Date startDate) throws SQLException {
@@ -127,7 +127,7 @@ public class SolariumDAO {
     public Map<String, Long> getCodeBySymbol(String symbol) throws SQLException {
         Map<String, Long> abonementData = new HashMap<String, Long>();
 
-        PreparedStatement preStatement1 = dbConnection.prepareStatement("SELECT MAX(code) as code INTO CODE from abonements_data where letter = ?");
+        PreparedStatement preStatement1 = dbConnection.prepareStatement("SELECT MAX(code) as code from abonements_data where letter = ?");
         preStatement1.setString(1, symbol);
         ResultSet rs1 = preStatement1.executeQuery();
         while (rs1.next()) {

@@ -3,11 +3,9 @@ package com.sun.manager.service;
 import com.sun.manager.constants.SolariumEnum;
 import com.sun.manager.dao.SolariumDAO;
 import com.sun.manager.dto.*;
-import javafx.collections.ObservableList;
 
 import java.sql.Date;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -54,7 +52,7 @@ public class SolariumService {
         }
     }
 
-    public Long getL2ById(Long id) {
+    public Double getL2ById(Long id) {
         try {
             return dao.getL2ById(id);
         } catch (SQLException ex) {

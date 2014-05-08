@@ -7,7 +7,6 @@ import com.sun.manager.constants.BlankItem;
 import com.sun.manager.constants.DataColumnEnum;
 import com.sun.manager.constants.SolariumEnum;
 import com.sun.manager.dto.*;
-import com.sun.manager.dto.BaseSolariumData;
 import com.sun.manager.events.ClosePageEvent;
 import com.sun.manager.events.EventHandlers;
 import com.sun.manager.events.NewAbonementAddedEvent;
@@ -23,13 +22,10 @@ import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
-
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -639,7 +635,7 @@ public class MainAdminController extends ScrollPane implements Initializable {
         }
         resData.set(0, new ResData("Итого мин: " + count));
         resData.set(1, new ResData("Итого руб: " + sum));
-        long c = solariumService.getL2ById(1L) + count;
+        Double c = solariumService.getL2ById(1L) + count;
         String l2 = c / 60 + "." + ((c >= 10) ? "" : "0") + c % 60;
         resData.set(2, new ResData("L2= " + l2));
     }
