@@ -122,6 +122,28 @@ public class SolariumDAO {
         return cosmetics;
     }
 
+    public Integer getStikiniCountByDate(Date currentDate) throws SQLException {
+        Integer count = 0;
+        PreparedStatement preStatement = dbConnection.prepareStatement("select count(id) as stikCount from cosmetics_data where start_date = ?");
+        preStatement.setDate(1, currentDate);
+        ResultSet rs = preStatement.executeQuery();
+        while (rs.next()) {
+            return rs.getInt("stikCount");
+
+        }
+
+        return 0;
+    }
+
+    public void saveStikiniByDate(Date currentDate,Integer count) throws SQLException {
+        PreparedStatement preStatement = dbConnection.prepareStatement("insert into cosmetics_data (start_date, cosm_count, cosm_name, price) values(?,?,?,?)");
+        preStatement.setDate(1, currentDate);
+        preStatement.setInt(2, count);
+        preStatement.setString(3, "stikini");
+        preStatement.setInt(4, 1000);
+        preStatement.executeQuery();
+    }
+
     public Map<String, Long> getCodeBySymbol(String symbol) throws SQLException {
         Map<String, Long> abonementData = new HashMap<String, Long>();
 
@@ -224,13 +246,13 @@ public class SolariumDAO {
         ResultSet rs = ps4.executeQuery();
 
 
-        while (rs.next()) {
+        if (rs.next()) {
             l2 = rs.getDouble("l2");
             oneMinutePrice = rs.getLong("one_minute_price");
         }
 
         if (l2 + solariumL2 >= 999.59) {
-            l2 += (l2 + solariumL2 - 999.59);
+            l2 = (l2 + solariumL2 - 999.59);
             psComment.setDate(1, currentDate);
             psComment.setString(2, "Счетчик для ламп был обнулен для солярия " + solarium + ". Пожалуйста, замените лампы");
         } else {
@@ -245,7 +267,6 @@ public class SolariumDAO {
         ps3.setDouble(3, l2);
         ps3.setLong(4, oneMinutePrice);
         ps3.executeUpdate();
-
     }
 
     public List<CosmeticsRequest> saveCosmeticsData(HashMap<Cosmetics, Long> cosmetics, boolean isMinus) throws SQLException {
