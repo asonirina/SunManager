@@ -224,4 +224,24 @@ public class SolariumService {
             throw new RuntimeException(ex.getMessage());
         }
     }
+
+    public Integer getStikiniByDate(Date date) {
+        try {
+           return dao.getStikiniCountByDate(date);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            throw new RuntimeException(ex.getMessage());
+        }
+    }
+
+    public void saveStikiniByDate(Date date, Integer count) {
+        try {
+            dao.saveStikiniByDate(date, count);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            throw new RuntimeException(ex.getMessage());
+        }
+    }
+
+
 }

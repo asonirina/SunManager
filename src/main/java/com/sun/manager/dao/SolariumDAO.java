@@ -141,7 +141,7 @@ public class SolariumDAO {
         preStatement.setInt(2, count);
         preStatement.setString(3, "stikini");
         preStatement.setInt(4, 1000);
-        preStatement.executeQuery();
+        preStatement.executeUpdate();
     }
 
     public Map<String, Long> getCodeBySymbol(String symbol) throws SQLException {

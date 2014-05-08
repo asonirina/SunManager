@@ -202,7 +202,8 @@ public class MainAdminController extends ScrollPane implements Initializable {
             new ResData("Итого мин: "), new ResData("Итого руб: "), new ResData("L2= "));
 
     final ObservableList<ResData> cosmResData = FXCollections.observableArrayList(
-            new ResData("стикини: 0 шт"), new ResData("к-ка итого:"), new ResData("к-ка+стикини:"));
+            new ResData(String.format("стикини: %d шт", solariumService.getStikiniByDate(App.getInstance().getSelectedDate()))),
+            new ResData("к-ка итого:"), new ResData("к-ка+стикини:"));
 
     final ObservableList<ResData> abonResData = FXCollections.observableArrayList(null, new ResData("итого:"), null);
 
@@ -684,9 +685,8 @@ public class MainAdminController extends ScrollPane implements Initializable {
                     cr.setSaved(true);
                 }
             }
-            CosmeticsRequest cr = new CosmeticsRequest(cosmResData.get(0).getCount(), solariumService.getStikini());
-            cosmeticsRequests.add(cr);
             solariumService.saveCosmetics(cosmeticsRequests);
+            solariumService.saveStikiniByDate(App.getInstance().getSelectedDate(), Long.valueOf(cosmResData.get(0).getCount()).intValue());
 
         }
     }
