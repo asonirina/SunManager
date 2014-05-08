@@ -35,16 +35,6 @@ IF user_name IS NOT NULL THEN
 END IF;
 END $$
 
-DROP PROCEDURE IF EXISTS `getCodeBySymbol` $$
-CREATE PROCEDURE `getCodeBySymbol`(
-        IN SYMBOL VARCHAR(12),
-        OUT CODE VARCHAR(12)
-        )
-BEGIN
-SELECT MAX(code) INTO CODE from abonements_data
-where letter = SYMBOL;
-END $$
-
 DROP PROCEDURE IF EXISTS `getL2ById` $$
 CREATE PROCEDURE `getL2ById`(
         IN SOL_ID INTEGER(11),

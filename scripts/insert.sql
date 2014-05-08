@@ -511,11 +511,11 @@ Insert into cosmetics (cosmetics_id, name, price, cosmetics_count) VALUES(8, 'Ex
 Insert into cosmetics (cosmetics_id, name, price, cosmetics_count) VALUES(9, 'Солнечный бальзам', 25000, 5);
 Insert into cosmetics (cosmetics_id, name, price, cosmetics_count) VALUES(11, 'stikini', 1000, 1000000);
 
-Insert into vertical_sun (vertical_sun_id, start_date, total_minute, l2, one_minute_price) VALUES(1,  '2013-12-10', 36, 0, 5000);
-Insert into gorizontal_green_sun (gorizontal_green_sun_id, start_date, total_minute, l2, one_minute_price) VALUES(1,  '2013-12-10', 21, 0, 5000);
-Insert into gorizontal_blue_sun (gorizontal_blue_sun_id, start_date, total_minute, l2, one_minute_price) VALUES(1,  '2013-12-10', 32, 0, 5000);
+Insert into vertical_sun (vertical_sun_id, start_date, total_minute, l2, one_minute_price) VALUES(1,  '2014-05-08', 0, 69.05, 5000);
+Insert into gorizontal_green_sun (gorizontal_green_sun_id, start_date, total_minute, l2, one_minute_price) VALUES(1,  '2014-05-08', 0, 773, 5000);
+Insert into gorizontal_blue_sun (gorizontal_blue_sun_id, start_date, total_minute, l2, one_minute_price) VALUES(1,  '2014-05-08', 0, 938.41, 5000);
 
-Insert into statistic_data (statistic_id, start_date, residue, booking_per_day, bank, official_salary, quenching, accumulation, user_login) VALUES(1, '2014-04-27', 1072500, 461200, NULL, NULL, 2797, 366787540, 'cofee');
+Insert into statistic_data (statistic_id, start_date, residue, booking_per_day, bank, official_salary, quenching, accumulation, user_login) VALUES(1, '2014-05-07', 1072500, 461200, NULL, NULL, 2797, 366787540, 'cofee');
 
 Insert into available_abonements (letter, price, minutes, duration) VALUES('B', 180000, 40, 1);
 Insert into available_abonements (letter, price, minutes, duration) VALUES('C', 264000, 60, 1);

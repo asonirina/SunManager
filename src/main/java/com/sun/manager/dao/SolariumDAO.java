@@ -127,14 +127,12 @@ public class SolariumDAO {
     public Map<String, Long> getCodeBySymbol(String symbol) throws SQLException {
         Map<String, Long> abonementData = new HashMap<String, Long>();
 
-        callableStatement = dbConnection.prepareCall(GET_CODE_BY_SYMBOL);
-        callableStatement.setString(1, symbol);
-        callableStatement.registerOutParameter(2, Types.INTEGER);
-
-        callableStatement.executeUpdate();
-        Long code = callableStatement.getLong(2) + 1;
-        abonementData.put("code", code);
-
+        PreparedStatement preStatement1 = dbConnection.prepareStatement("SELECT MAX(code) as code INTO CODE from abonements_data where letter = ?");
+        preStatement1.setString(1, symbol);
+        ResultSet rs1 = preStatement1.executeQuery();
+        while (rs1.next()) {
+            abonementData.put("code", rs1.getLong("code") + 1);
+        }
         PreparedStatement preStatement = dbConnection.prepareStatement("select price from available_abonements where letter = ?");
         preStatement.setString(1, symbol);
         ResultSet rs = preStatement.executeQuery();
