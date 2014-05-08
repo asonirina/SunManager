@@ -1,33 +1,15 @@
 package com.sun.manager.forms;
 
 import com.sun.manager.constants.DataColumnEnum;
-import com.sun.manager.dao.SolariumDAO;
-import com.sun.manager.forms.alert.AlertDialog;
-import javafx.event.EventHandler;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TextField;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
-import javafx.stage.Stage;
 
-import java.sql.SQLException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.Scanner;
 
-public class EditingCell<T1, T2> extends TableCell<T1, T2> {
+public abstract class EditingCell<T1, T2> extends TableCell<T1, T2> {
 
-    private TextField textField;
-
-    private DataColumnEnum solarium;
-    private String textBeforeEdit = "";
-
-    public EditingCell(DataColumnEnum solarium) {
-        this.setPrefHeight(27);
-        this.solarium = solarium;
-    }
+    protected TextField textField;
+    protected DataColumnEnum solarium;
+    protected String textBeforeEdit = "";
 
     public EditingCell() {
         this.setPrefHeight(27);
@@ -76,101 +58,13 @@ public class EditingCell<T1, T2> extends TableCell<T1, T2> {
         textField = new TextField(getString());
         textField.setPrefHeight(25);
         textField.setMinWidth(this.getWidth() - this.getGraphicTextGap() * 2);
-        if (solarium != null) {
-            if ((Arrays.asList(DataColumnEnum.VerticalSolarium, DataColumnEnum.GreenSolarium, DataColumnEnum.BlueSolarium).contains(solarium))) {
-                setFieldForSolariumSolariums();
-            } else if (solarium.equals(DataColumnEnum.Cosmetics)) {
-                setFieldForCosmeticsStikini();
-            }
-        } else {
-            setFieldForAddCosmetics();
-        }
+        setOnKey();
     }
 
     private String getString() {
         return getItem() == null ? "" : getItem().toString();
     }
 
-    private void setFieldForSolariumSolariums() {
-        textField.setOnKeyReleased(new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent t) {
-                if (t.getCode() == KeyCode.ENTER) {
-                    String value = textField.getText();
-                    if (value.replaceAll(" ", "").matches("[\\d]+:S?[BCDKM]{1}(\\d)+")) {
-                        textBeforeEdit = value;
-                        commitEdit((T2) value);
-                    } else if (value.replaceAll(" ", "").matches("[\\d]+:S?[ORGH]{1}(\\d)+")) {
-                        DateFormat dateFormat = new SimpleDateFormat("HH");
-                        Calendar cal = Calendar.getInstance();
-                        String hours = dateFormat.format(cal.getTime());
 
-                        if (Integer.parseInt(hours) >= 13) {
-                            new AlertDialog((Stage) textField.getScene().getWindow(), "Этот абонемент действителен до 13:00", 1).showAndWait();
-                            textField.setText(textBeforeEdit);
-                            return;
-                        } else {
-                            textBeforeEdit = value;
-                            commitEdit((T2) value);
-                        }
-                    } else {
-                        new AlertDialog((Stage) textField.getScene().getWindow(), "Заполните ячейку в формате: \n" +
-                                "Количество: ($)? Номер абонемента", 1).showAndWait();
-                        cancelEdit();
-                        textField.setText(textBeforeEdit);
-                    }
-                } else if (t.getCode() == KeyCode.ESCAPE) {
-                    cancelEdit();
-                } else if (t.getText().equals("$")) {
-                    try {
-                        SolariumDAO dao = new SolariumDAO();
-                        Long sum = new Scanner(textField.getText()).useDelimiter("\\D+").nextInt() * dao.getOneMinutePriceById(solarium.getSolariumNo());
-                        String value = textField.getText() + " " + sum;
-                        if (textField.getText().replace(" ", "").matches("[\\d]+:\\$")) {
-                            textField.setText(value);
-                            commitEdit((T2) value);
-                            textBeforeEdit = value;
-                        } else {
-                            new AlertDialog((Stage) textField.getScene().getWindow(), "Заполните ячейку в формате: \n" +
-                                    "Количество: ($)? Номер абонемента", 1).showAndWait();
-                            cancelEdit();
-                            textField.setText(textBeforeEdit);
-
-                        }
-                    } catch (SQLException ex) {
-                        throw new RuntimeException(ex);
-                    }
-                }
-            }
-        });
-    }
-
-
-    private void setFieldForAddCosmetics() {
-        textField.setOnKeyReleased(new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent t) {
-                if (t.getCode() == KeyCode.ENTER) {
-                    try {
-                        Long value = Long.valueOf(textField.getText());
-                        commitEdit((T2) value);
-                    } catch (NumberFormatException ex) {
-                        new AlertDialog((Stage) textField.getScene().getWindow(), "Введите число!", 1).showAndWait();
-                        cancelEdit();
-                    }
-                }
-            }
-        });
-    }
-
-    private void setFieldForCosmeticsStikini() {
-        textField.setOnKeyReleased(new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent t) {
-                if (t.getCode() == KeyCode.ENTER) {
-                    commitEdit((T2) textField.getText());
-                }
-            }
-        });
-    }
+    protected abstract void setOnKey();
 }

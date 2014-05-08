@@ -542,7 +542,7 @@ public class SolariumDAO {
         PreparedStatement ps = dbConnection.prepareStatement(getDataFromDB);
         ResultSet rs = ps.executeQuery();
 
-        if (rs.next()) {
+        while (rs.next()) {
             String letter = rs.getString("letter");
             Integer price = rs.getInt("price");
             Integer minutes = rs.getInt("minutes");

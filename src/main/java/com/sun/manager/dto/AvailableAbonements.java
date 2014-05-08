@@ -28,4 +28,16 @@ public class AvailableAbonements {
     public Integer getDuration() {
         return duration;
     }
+
+    public void setPrice(Integer price) {
+        this.price = price;
+    }
+
+    public void setMinutes(Integer minutes) {
+        this.minutes = minutes;
+    }
+
+    public void setDuration(Integer duration) {
+        this.duration = duration;
+    }
 }

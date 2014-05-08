@@ -206,4 +206,13 @@ public class SolariumService {
             throw new RuntimeException(ex.getMessage());
         }
     }
+
+    public List<AvailableAbonements> getAvailableAbonements() {
+        try {
+            return dao.getAllAvailableAbonements();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            throw new RuntimeException(ex.getMessage());
+        }
+    }
 }

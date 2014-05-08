@@ -247,7 +247,6 @@ public class MainAdminController extends ScrollPane implements Initializable {
 
             setColumnFactory();
             setCellFactory();
-            setStyles();
 
             setOnEdit();
 
@@ -292,31 +291,14 @@ public class MainAdminController extends ScrollPane implements Initializable {
         colCosm.setCellFactory(EventHandlers.cellFactoryForCosmetics());
         colAbon.setCellFactory(EventHandlers.cellFactoryForAbonements());
 
-        colNumber.setCellFactory(EventHandlers.cellFactoryNum(DataColumnEnum.Number));
+        colNumber.setCellFactory(EventHandlers.cellFactoryNum());
 
-        colNumRes.setCellFactory(EventHandlers.cellFactoryBaseRes(DataColumnEnum.Number));
-        colVertRes.setCellFactory(EventHandlers.cellFactoryBaseRes(DataColumnEnum.VerticalSolarium));
-        colGreenRes.setCellFactory(EventHandlers.cellFactoryBaseRes(DataColumnEnum.GreenSolarium));
-        colBlueRes.setCellFactory(EventHandlers.cellFactoryBaseRes(DataColumnEnum.BlueSolarium));
-        colCosmRes.setCellFactory(EventHandlers.cellFactoryBaseRes(DataColumnEnum.Cosmetics));
-        colAbonRes.setCellFactory(EventHandlers.cellFactoryBaseRes(DataColumnEnum.Abonements));
-    }
-
-    private void setStyles() {
-//        tableGreen.getStylesheets().add(this.getClass().getResource("styleGreen.css").toExternalForm());
-//        tableBlue.getStylesheets().add(this.getClass().getResource("styleBlue.css").toExternalForm());
-//        tableVert.getStylesheets().add(this.getClass().getResource("styleNormal.css").toExternalForm());
-//        tableCosm.getStylesheets().add(this.getClass().getResource("styleNormal.css").toExternalForm());
-//        tableAbon.getStylesheets().add(this.getClass().getResource("styleNormal.css").toExternalForm());
-//        tableNumber.getStylesheets().add(this.getClass().getResource("styleNormal.css").toExternalForm());
-//
-//        tableNumRes.getStylesheets().add(this.getClass().getResource("styleNormal.css").toExternalForm());
-//        tableVertRes.getStylesheets().add(this.getClass().getResource("styleNormal.css").toExternalForm());
-//        tableGreenRes.getStylesheets().add(this.getClass().getResource("styleGreen.css").toExternalForm());
-//        tableBlueRes.getStylesheets().add(this.getClass().getResource("styleBlue.css").toExternalForm());
-//        tableCosmRes.getStylesheets().add(this.getClass().getResource("styleNormal.css").toExternalForm());
-//        tableAbonRes.getStylesheets().add(this.getClass().getResource("styleNormal.css").toExternalForm());
-
+        colNumRes.setCellFactory(EventHandlers.cellFactoryRes());
+        colVertRes.setCellFactory(EventHandlers.cellFactoryRes());
+        colGreenRes.setCellFactory(EventHandlers.cellFactoryRes());
+        colBlueRes.setCellFactory(EventHandlers.cellFactoryRes());
+        colCosmRes.setCellFactory(EventHandlers.cellFactoryForStikini());
+        colAbonRes.setCellFactory(EventHandlers.cellFactoryRes());
     }
 
     private void setOnEdit() {

@@ -3,8 +3,7 @@ package com.sun.manager.events;
 import com.sun.manager.constants.BlankItem;
 import com.sun.manager.constants.DataColumnEnum;
 import com.sun.manager.dto.*;
-import com.sun.manager.forms.ButtonCell;
-import com.sun.manager.forms.EditingCell;
+import com.sun.manager.forms.*;
 import com.sun.manager.forms.alert.AlertDialog;
 import com.sun.manager.service.SolariumService;
 import javafx.event.EventHandler;
@@ -69,6 +68,39 @@ public class EventHandlers {
         };
     }
 
+    public static EventHandler eventHandlerAbonementsPrice() {
+        return new EventHandler<TableColumn.CellEditEvent<AvailableAbonements, Integer>>() {
+            @Override
+            public void handle(TableColumn.CellEditEvent<AvailableAbonements, Integer> t) {
+                AvailableAbonements data = t.getTableView().getItems().get(t.getTablePosition().getRow());
+                Integer price = t.getNewValue();
+                data.setPrice(price);
+            }
+        };
+    }
+
+    public static EventHandler eventHandlerAbonementsMinutes() {
+        return new EventHandler<TableColumn.CellEditEvent<AvailableAbonements, Integer>>() {
+            @Override
+            public void handle(TableColumn.CellEditEvent<AvailableAbonements, Integer> t) {
+                AvailableAbonements data = t.getTableView().getItems().get(t.getTablePosition().getRow());
+                Integer minutes = t.getNewValue();
+                data.setMinutes(minutes);
+            }
+        };
+    }
+
+    public static EventHandler eventHandlerAbonementsDuration() {
+        return new EventHandler<TableColumn.CellEditEvent<AvailableAbonements, Integer>>() {
+            @Override
+            public void handle(TableColumn.CellEditEvent<AvailableAbonements, Integer> t) {
+                AvailableAbonements data = t.getTableView().getItems().get(t.getTablePosition().getRow());
+                Integer duration = t.getNewValue();
+                data.setDuration(duration);
+            }
+        };
+    }
+
     public static EventHandler eventHandlerCosmeticsEditCommit() {
         return new EventHandler<TableColumn.CellEditEvent<ResData, String>>() {
             @Override
@@ -86,33 +118,39 @@ public class EventHandlers {
         return new Callback<TableColumn<BaseSolariumData, String>, TableCell<BaseSolariumData, String>>() {
             @Override
             public TableCell<BaseSolariumData, String> call(TableColumn<BaseSolariumData, String> p) {
-                return new EditingCell<BaseSolariumData, String>(e);
+                return new EditingCellSolariumData<BaseSolariumData, String>(e);
             }
         };
     }
 
-    public static Callback cellFactoryNum(final DataColumnEnum e) {
+    public static Callback cellFactoryNum() {
         return new Callback<TableColumn<NumericData, String>, TableCell<NumericData, String>>() {
             @Override
             public TableCell<NumericData, String> call(TableColumn<NumericData, String> p) {
-
-                return new EditingCell<NumericData, String>(e);
+                return new EditingCellSimple<NumericData, String>();
             }
 
         };
     }
 
-    public static Callback cellFactoryBaseRes(final DataColumnEnum e) {
+    public static Callback cellFactoryRes() {
         return new Callback<TableColumn<ResData, String>, TableCell<ResData, String>>() {
             @Override
             public TableCell<ResData, String> call(TableColumn<ResData, String> p) {
-
-                return new EditingCell<ResData, String>(e);
+                return new EditingCellSimple<ResData, String>();
             }
 
         };
     }
 
+    public static Callback cellFactoryForStikini() {
+        return new Callback<TableColumn<CosmeticsRequest, String>, TableCell<CosmeticsRequest, String>>() {
+            @Override
+            public TableCell<CosmeticsRequest, String> call(TableColumn<CosmeticsRequest, String> p) {
+                return new EditingCellStikini<CosmeticsRequest, String>();
+            }
+        };
+    }
 
     public static Callback cellFactoryForCosmetics() {
         return new Callback<TableColumn<CosmeticsRequest, String>, TableCell<CosmeticsRequest, String>>() {
@@ -136,8 +174,30 @@ public class EventHandlers {
         return new Callback<TableColumn<Cosmetics, Long>, TableCell<Cosmetics, Long>>() {
             @Override
             public TableCell<Cosmetics, Long> call(TableColumn<Cosmetics, Long> p) {
-                return new EditingCell<Cosmetics, Long>();
+                return new EditingCellAddCosmetics<Cosmetics, Long>();
             }
+        };
+    }
+
+    public static Callback cellFactoryAvailableAbonements() {
+        return new Callback<TableColumn<AvailableAbonements, Integer>, TableCell<AvailableAbonements, Integer>>() {
+            @Override
+            public TableCell<AvailableAbonements, Integer> call(TableColumn<AvailableAbonements, Integer> p) {
+                return new EditingCellAbonements<AvailableAbonements, Integer>();
+            }
+        };
+    }
+
+
+    public static Callback cellFactoryLetter() {
+        return new Callback<TableColumn<AvailableAbonements, String>, TableCell<AvailableAbonements, String>>() {
+            @Override
+            public TableCell<AvailableAbonements, String> call(TableColumn<AvailableAbonements, String> p) {
+                TableCell<AvailableAbonements, String> cell = new TableCell<AvailableAbonements, String>();
+                cell.setPrefHeight(27);
+                return cell;
+            }
+
         };
     }
 }

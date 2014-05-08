@@ -1,13 +1,16 @@
 package com.sun.manager.forms.admin;
 
+import com.sun.manager.dto.AvailableAbonements;
+import com.sun.manager.events.EventHandlers;
 import com.sun.manager.forms.alert.AlertDialog;
 import com.sun.manager.service.SolariumService;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -26,20 +29,22 @@ import java.util.ResourceBundle;
  * Date: 13.02.14
  */
 public class AddAbonementController extends AnchorPane implements Initializable {
-    @FXML
-    TextField letterField;
 
     @FXML
-    TextField codeField;
+    TableView<AvailableAbonements> abonTable;
 
     @FXML
-    TextField minutesField;
+    TableColumn<AvailableAbonements, String> letterCol;
 
     @FXML
-    TextField durationField;
+    TableColumn<AvailableAbonements, Integer> priceCol;
 
     @FXML
-    TextField priceField;
+    TableColumn<AvailableAbonements, Integer> minutesCol;
+
+    @FXML
+    TableColumn<AvailableAbonements, Integer> durationCol;
+
 
     @FXML
     Button okButton;
@@ -50,26 +55,31 @@ public class AddAbonementController extends AnchorPane implements Initializable 
 
     SolariumService service = new SolariumService();
 
+    ObservableList<AvailableAbonements> data = FXCollections.observableArrayList(service.getAvailableAbonements());
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        abonTable.setEditable(true);
+        letterCol.setCellValueFactory(new PropertyValueFactory<AvailableAbonements, String>("letter"));
+        priceCol.setCellValueFactory(new PropertyValueFactory<AvailableAbonements, Integer>("price"));
+        minutesCol.setCellValueFactory(new PropertyValueFactory<AvailableAbonements, Integer>("minutes"));
+        durationCol.setCellValueFactory(new PropertyValueFactory<AvailableAbonements, Integer>("duration"));
+
+        priceCol.setCellFactory(EventHandlers.cellFactoryAvailableAbonements());
+        minutesCol.setCellFactory(EventHandlers.cellFactoryAvailableAbonements());
+        durationCol.setCellFactory(EventHandlers.cellFactoryAvailableAbonements());
+
+        priceCol.setOnEditCommit(EventHandlers.eventHandlerAbonementsPrice());
+        minutesCol.setOnEditCommit(EventHandlers.eventHandlerAbonementsMinutes());
+        durationCol.setOnEditCommit(EventHandlers.eventHandlerAbonementsDuration());
+
+        abonTable.setItems(data);
 
         okButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                if (validate()) {
-                    String letter = letterField.getText();
-                    String code = codeField.getText();
-                    int minutes = Integer.parseInt(minutesField.getText());
-                    int duration = Integer.parseInt(durationField.getText());
-                    int price = Integer.parseInt(priceField.getText());
-                    String error = service.createAbonement(letter, code, minutes, duration, price);
-                    if (error == null) {
-                        Stage stage = (Stage) okButton.getScene().getWindow();
-                        stage.close();
-                    } else {
-                        new AlertDialog((Stage) letterField.getScene().getWindow(), error, 1).showAndWait();
-                    }
-                }
+            //   save
             }
         });
 
@@ -82,34 +92,5 @@ public class AddAbonementController extends AnchorPane implements Initializable 
         });
     }
 
-    private boolean validate() {
-        if (StringUtils.isBlank(letterField.getText()) || StringUtils.isBlank(letterField.getText())
-                || StringUtils.isBlank(minutesField.getText()) || StringUtils.isBlank(durationField.getText())
-                || StringUtils.isBlank(priceField.getText())) {
-            new AlertDialog((Stage) letterField.getScene().getWindow(), "Заполните все поля!", 1).showAndWait();
-            return false;
-        }
 
-        if (!Arrays.asList("B", "C", "D", "K", "M", "O", "G", "R", "H","SB", "SC", "SD", "SK", "SM", "SO", "SG", "SR", "SH").contains(letterField.getText())) {
-            new AlertDialog((Stage) letterField.getScene().getWindow(), "Введите одну из следующих букв: B, C, D, K, M, O, G, R, H", 1).showAndWait();
-            return false;
-        }
-
-        if (!minutesField.getText().matches("\\d+")) {
-            new AlertDialog((Stage) letterField.getScene().getWindow(), "Введите число в поле 'Минуты'!", 1).showAndWait();
-            return false;
-        }
-
-        if (!priceField.getText().matches("\\d+")) {
-            new AlertDialog((Stage) letterField.getScene().getWindow(), "Введите число в поле 'Цена'!", 1).showAndWait();
-            return false;
-        }
-
-        if (!durationField.getText().matches("\\d+")) {
-
-            new AlertDialog((Stage) letterField.getScene().getWindow(), "Введите количество дней в поле 'Срок действия'!", 1).showAndWait();
-            return false;
-        }
-        return true;
-    }
 }
