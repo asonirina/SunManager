@@ -1,6 +1,7 @@
 package com.sun.manager.forms.admin;
 
 import com.sun.manager.App;
+import com.sun.manager.constants.KeyConstants;
 import com.sun.manager.dto.AbonementsRequest;
 import com.sun.manager.events.NewAbonementAddedEvent;
 import com.sun.manager.forms.alert.AlertDialog;
@@ -59,10 +60,10 @@ public class AbonementRequestController extends AnchorPane implements Initializa
         letterField.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent keyEvent) {
-//                if (!Arrays.asList(KeyCode.ESCAPE, KeyCode.BACK_SPACE, KeyCode.DELETE, KeyCode.SHIFT, KeyCode.ALT, KeyCode.B, KeyCode.C, KeyCode.D, KeyCode.K, KeyCode.M, KeyCode.O, KeyCode.G, KeyCode.R, KeyCode.H, KeyCode.S).contains(keyEvent.getCode())) {
-//                    new AlertDialog((Stage) letterField.getScene().getWindow(), "Введите одну из следующих букв: B, C, D, K, M, O, G, R, H, S", 1).showAndWait();
-//                    return;
-//                }
+                if (KeyConstants.getInvalidCodes().contains(keyEvent.getCode())) {
+                    new AlertDialog((Stage) letterField.getScene().getWindow(), "Введите одну из следующих букв: B, C, D, K, M, O, G, R, H, S", 1).showAndWait();
+                    return;
+                }
 
                 if (Arrays.asList(KeyCode.B, KeyCode.C, KeyCode.D, KeyCode.K, KeyCode.M, KeyCode.O, KeyCode.G, KeyCode.R, KeyCode.H).contains(keyEvent.getCode())) {
 
