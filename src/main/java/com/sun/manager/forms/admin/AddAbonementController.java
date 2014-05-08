@@ -68,7 +68,6 @@ public class AddAbonementController extends AnchorPane implements Initializable 
                         stage.close();
                     } else {
                         new AlertDialog((Stage) letterField.getScene().getWindow(), error, 1).showAndWait();
-                        ;
                     }
                 }
             }

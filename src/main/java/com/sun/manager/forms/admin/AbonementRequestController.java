@@ -69,9 +69,6 @@ public class AbonementRequestController extends AnchorPane implements Initializa
 
                     abonInfo = service.getCodeAndPriceBySymbol(keyEvent.getCode().toString());
                     codeField.setText(String.valueOf(abonInfo.get("code")));
-                    if (letterField.getText().startsWith("S") && abonInfo.get("price") != null) {
-                        abonInfo.put("price", (long) (0.45 * abonInfo.get("price")));
-                    }
                     if(abonInfo.get("price")!=null) {
                     priceLabel.setText("Цена: " + abonInfo.get("price"));
                     }else {
