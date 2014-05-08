@@ -32,7 +32,7 @@ public class StatisticsController extends AnchorPane implements Initializable {
     TableView<CustomerStatistic> statTable;
 
     @FXML
-    TableColumn<CustomerStatistic, String> nameColumn;
+    TableColumn<CustomerStatistic, String> phoneColumn;
 
     @FXML
     TableColumn<CustomerStatistic, Long> countColumn;
@@ -44,7 +44,7 @@ public class StatisticsController extends AnchorPane implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        nameColumn.setCellValueFactory(new PropertyValueFactory<CustomerStatistic, String>("name"));
+        phoneColumn.setCellValueFactory(new PropertyValueFactory<CustomerStatistic, String>("phone"));
         countColumn.setCellValueFactory(new PropertyValueFactory<CustomerStatistic, Long>("abonementsCount"));
 
         statTable.setItems(items);
