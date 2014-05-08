@@ -67,7 +67,7 @@ public class AbonementRequestController extends AnchorPane implements Initializa
 
                 if (Arrays.asList(KeyCode.B, KeyCode.C, KeyCode.D, KeyCode.K, KeyCode.M, KeyCode.O, KeyCode.G, KeyCode.R, KeyCode.H).contains(keyEvent.getCode())) {
 
-                    abonInfo = service.getCodeAndPriceBySymbol(letterField.getText());
+                    abonInfo = service.getCodeAndPriceBySymbol(letterField.getText()+keyEvent.getCode());
                     codeField.setText(String.valueOf(abonInfo.get("code")));
                     if(abonInfo.get("price")!=null) {
                     priceLabel.setText("Цена: " + abonInfo.get("price"));
