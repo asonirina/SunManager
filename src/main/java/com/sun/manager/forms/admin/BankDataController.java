@@ -102,6 +102,7 @@ public class BankDataController extends AnchorPane implements Initializable {
                 statisticData.setStartDate(date);
                 statisticData.setAccumulation(newAccumulation);
                 service.saveStatisticData(statisticData);
+                ((Stage) cancelButton.getScene().getWindow()).close();
             }
         });
         cancelButton.setOnMouseClicked(new EventHandler<MouseEvent>() {

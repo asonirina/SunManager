@@ -1,20 +1,20 @@
 package com.sun.manager.dto;
 
 public class CustomerStatistic {
-    private String name;
+    private String phone;
     private Long abonementsCount;
 
-    public CustomerStatistic(String name, Long abonementsCount) {
-        this.name = name;
+    public CustomerStatistic(String phone, Long abonementsCount) {
+        this.phone = phone;
         this.abonementsCount = abonementsCount;
     }
 
-    public String getName() {
-        return name;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public Long getAbonementsCount() {

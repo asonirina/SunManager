@@ -132,7 +132,7 @@ public class SolariumDAO {
         callableStatement.registerOutParameter(2, Types.INTEGER);
 
         callableStatement.executeUpdate();
-        Long code = callableStatement.getLong(2);
+        Long code = callableStatement.getLong(2) + 1;
         abonementData.put("code", code);
 
         PreparedStatement preStatement = dbConnection.prepareStatement("select price from available_abonements where letter = ?");
@@ -167,16 +167,18 @@ public class SolariumDAO {
         for (BaseSolariumData baseData : baseSolariumDataList) {
             //Update minutes by abonements
             if (baseData.getTotalPrice() == null) {
-                PreparedStatement ps1 = dbConnection.prepareStatement("update abonements set minutes = ? where abonement_code = ?");
-                PreparedStatement ps2 = dbConnection.prepareStatement("select  minutes from abonements where abonement_code = ?");
-                ps2.setString(1, baseData.getAbonementNumber());
+                PreparedStatement ps1 = dbConnection.prepareStatement("update abonements_data set minutes = ? where code=? and letter=?");
+                PreparedStatement ps2 = dbConnection.prepareStatement("select  minutes from abonements_data where code=? and letter=?");
+                ps2.setString(1, baseData.getAbonementNumber().replaceAll("a-zA-Z+",""));
+                ps2.setString(2, baseData.getAbonementNumber().replaceAll("\\D+",""));
 
                 ResultSet rs = ps2.executeQuery();
 
                 while (rs.next()) {
                     Long minutes = rs.getLong("minutes");
                     ps1.setLong(1, minutes - baseData.getMinutes());
-                    ps1.setString(2, baseData.getAbonementNumber());
+                    ps2.setString(2, baseData.getAbonementNumber().replaceAll("a-zA-Z+",""));
+                    ps2.setString(3, baseData.getAbonementNumber().replaceAll("\\D+",""));
                     ps1.executeUpdate();
 
                     totalMinutes += baseData.getMinutes();
@@ -325,7 +327,7 @@ public class SolariumDAO {
 
     public List<AbonementsRequest> getAbonByDate(Date startDate) throws SQLException {
         List<AbonementsRequest> abonementsRequestList = new ArrayList<AbonementsRequest>();
-        PreparedStatement ps2 = dbConnection.prepareStatement("select ad.code, ad.letter, ad.client_name, ad.phone, a.price from abonements_data ad JOIN abonements a on a.abonement_code = concat(ad.letter,'',ad.code) where start_date = ?");
+        PreparedStatement ps2 = dbConnection.prepareStatement("select ad.code, ad.letter, ad.client_name, ad.phone, a.price from abonements_data ad JOIN available_abonements a on a.letter = ad.letter where ad.start_date = ?");
         ps2.setDate(1, startDate);
         ResultSet rs = ps2.executeQuery();
 
@@ -358,10 +360,10 @@ public class SolariumDAO {
     public void saveAbonement(List<AbonementsRequest> abonementsRequestList) throws SQLException {
         for (AbonementsRequest abonementsRequest : abonementsRequestList) {
             PreparedStatement ps2 = dbConnection.prepareStatement("insert into abonements_data (start_date, code, letter, client_name, phone) values(?,?,?,?,?)");
-            PreparedStatement ps1 = dbConnection.prepareStatement("update abonements set is_free = ? where abonement_code = ?");
-            ps1.setBoolean(1, Boolean.FALSE);
-            ps1.setString(2, abonementsRequest.getLetter() + abonementsRequest.getCode());
-            ps1.executeUpdate();
+//            PreparedStatement ps1 = dbConnection.prepareStatement("update abonements set is_free = ? where abonement_code = ?");
+//            ps1.setBoolean(1, Boolean.FALSE);
+//            ps1.setString(2, abonementsRequest.getLetter() + abonementsRequest.getCode());
+//            ps1.executeUpdate();
 
             ps2.setDate(1, (Date) abonementsRequest.getStartDate());
             ps2.setLong(2, abonementsRequest.getCode());
@@ -460,13 +462,13 @@ public class SolariumDAO {
 
     public List<CustomerStatistic> getBuyersStatistic() throws SQLException {
         List<CustomerStatistic> customerStatisticList = new ArrayList<CustomerStatistic>();
-        PreparedStatement ps = dbConnection.prepareStatement("select c.name, count(a.customer_id) as count from abonements as a JOIN customers as c on a.customer_id = c.customer_id group by a.customer_id");
+        PreparedStatement ps = dbConnection.prepareStatement("select a.phone, count(a.phone) as count from abonements_data as a group by a.phone");
         ResultSet rs = ps.executeQuery();
 
         while (rs.next()) {
-            String name = rs.getString("name");
+            String phone = rs.getString("phone");
             Long count = rs.getLong("count");
-            CustomerStatistic customerStatistic = new CustomerStatistic(name, count);
+            CustomerStatistic customerStatistic = new CustomerStatistic(phone, count);
             customerStatisticList.add(customerStatistic);
         }
         return customerStatisticList;
