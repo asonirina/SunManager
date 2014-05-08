@@ -5,10 +5,8 @@ import com.sun.manager.connection.SqlServer;
 import com.sun.manager.dto.*;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.sql.Date;
+import java.util.*;
 
 public class SolariumDAO {
 
@@ -168,15 +166,15 @@ public class SolariumDAO {
                 PreparedStatement ps1 = dbConnection.prepareStatement("update abonements_data set minutes = ? where code=? and letter=?");
                 PreparedStatement ps2 = dbConnection.prepareStatement("select  minutes from abonements_data where code=? and letter=?");
                 ps2.setString(1, baseData.getAbonementNumber().replaceAll("a-zA-Z+",""));
-                ps2.setString(2, baseData.getAbonementNumber().replaceAll("\\D+",""));
+                ps2.setString(2, baseData.getAbonementNumber().replaceAll("\\D+", ""));
 
                 ResultSet rs = ps2.executeQuery();
 
                 while (rs.next()) {
                     Long minutes = rs.getLong("minutes");
                     ps1.setLong(1, minutes - baseData.getMinutes());
-                    ps2.setString(2, baseData.getAbonementNumber().replaceAll("a-zA-Z+",""));
-                    ps2.setString(3, baseData.getAbonementNumber().replaceAll("\\D+",""));
+                    ps2.setString(2, baseData.getAbonementNumber().replaceAll("a-zA-Z+", ""));
+                    ps2.setString(3, baseData.getAbonementNumber().replaceAll("\\D+", ""));
                     ps1.executeUpdate();
 
                     totalMinutes += baseData.getMinutes();
@@ -358,10 +356,6 @@ public class SolariumDAO {
     public void saveAbonement(List<AbonementsRequest> abonementsRequestList) throws SQLException {
         for (AbonementsRequest abonementsRequest : abonementsRequestList) {
             PreparedStatement ps2 = dbConnection.prepareStatement("insert into abonements_data (start_date, code, letter, client_name, phone) values(?,?,?,?,?)");
-//            PreparedStatement ps1 = dbConnection.prepareStatement("update abonements set is_free = ? where abonement_code = ?");
-//            ps1.setBoolean(1, Boolean.FALSE);
-//            ps1.setString(2, abonementsRequest.getLetter() + abonementsRequest.getCode());
-//            ps1.executeUpdate();
 
             ps2.setDate(1, (Date) abonementsRequest.getStartDate());
             ps2.setLong(2, abonementsRequest.getCode());
@@ -490,15 +484,16 @@ public class SolariumDAO {
 
     public AvailableAbonements getPriceAndMinutesByLetter(String letter) throws SQLException {
         AvailableAbonements availableAbonements = null;
-        PreparedStatement ps = dbConnection.prepareStatement("select price, minutes from available_abonements where letter = ?");
+        PreparedStatement ps = dbConnection.prepareStatement("select price, minutes, duration from available_abonements where letter = ?");
         ps.setString(1, letter);
         ResultSet rs = ps.executeQuery();
 
         while (rs.next()) {
             Integer price = rs.getInt("price");
             Integer minutes = rs.getInt("minutes");
+            Integer duration = rs.getInt("duration");
 
-            availableAbonements = new AvailableAbonements(letter, price, minutes);
+            availableAbonements = new AvailableAbonements(letter, price, minutes, duration);
         }
         return availableAbonements;
     }
@@ -538,6 +533,57 @@ public class SolariumDAO {
             return true;
         }
         return false;
+    }
+
+    public List<AvailableAbonements> getAllAvailableAbonements() throws SQLException {
+        String getDataFromDB = "select letter, price, minutes, duration from available_abonements";
+        List<AvailableAbonements> aList = new ArrayList<AvailableAbonements>();
+
+        PreparedStatement ps = dbConnection.prepareStatement(getDataFromDB);
+        ResultSet rs = ps.executeQuery();
+
+        if (rs.next()) {
+            String letter = rs.getString("letter");
+            Integer price = rs.getInt("price");
+            Integer minutes = rs.getInt("minutes");
+            Integer duration = rs.getInt("duration");
+
+            AvailableAbonements abonement =  new AvailableAbonements(letter, price, minutes, duration);
+            aList.add(abonement);
+        }
+        return aList;
+    }
+
+    public Map<String, Integer> checkCurrentAbonement(String abonement) throws SQLException {
+        String getDataFromDB = "select start_date, minutes from abonements_data where code=? and letter=?";
+        String getDurationFromDB = "select duration from available_abonements where letter = ?";
+        Map<String, Integer> aMap = new HashMap<String, Integer>();
+        Date currentDate = new Date(Calendar.getInstance().getTime().getTime());
+
+        PreparedStatement ps = dbConnection.prepareStatement(getDataFromDB);
+        ps.setString(1, abonement.replaceAll("a-zA-Z+", ""));
+        ps.setString(2, abonement.replaceAll("\\D+", ""));
+        ResultSet rs = ps.executeQuery();
+
+        if (rs.next()) {
+            Date startDate = rs.getDate("start_date");
+            Integer minutes = rs.getInt("minutes");
+
+            ps = dbConnection.prepareStatement(getDurationFromDB);
+            ps.setString(1, abonement.replaceAll("\\D+", ""));
+            ResultSet rs1 = ps.executeQuery();
+
+            Integer duration = rs1.getInt("duration");
+
+
+            if(startDate.before(new java.util.Date(startDate.getYear(), startDate.getMonth() + duration, startDate.getDate() +1)))  {
+                aMap.put("minutes", minutes);
+                return aMap;
+            } else
+               return Collections.EMPTY_MAP;
+        }
+
+        return Collections.EMPTY_MAP;
     }
 
 }
