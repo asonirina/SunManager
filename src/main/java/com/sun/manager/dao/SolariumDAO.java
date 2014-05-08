@@ -135,8 +135,8 @@ public class SolariumDAO {
         Long code = callableStatement.getLong(2);
         abonementData.put("code", code);
 
-        PreparedStatement preStatement = dbConnection.prepareStatement("select price from abonements where abonement_code = ?");
-        preStatement.setString(1, symbol + code);
+        PreparedStatement preStatement = dbConnection.prepareStatement("select price from available_abonements where letter = ?");
+        preStatement.setString(1, symbol);
         ResultSet rs = preStatement.executeQuery();
         while (rs.next()) {
             abonementData.put("price", rs.getLong("price"));
