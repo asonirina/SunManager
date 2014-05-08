@@ -91,7 +91,7 @@ public class AddAbonementController extends AnchorPane implements Initializable 
             return false;
         }
 
-        if (!Arrays.asList("B", "C", "D", "K", "M", "O", "G", "R", "H").contains(letterField.getText())) {
+        if (!Arrays.asList("B", "C", "D", "K", "M", "O", "G", "R", "H","SB", "SC", "SD", "SK", "SM", "SO", "SG", "SR", "SH").contains(letterField.getText())) {
             new AlertDialog((Stage) letterField.getScene().getWindow(), "Введите одну из следующих букв: B, C, D, K, M, O, G, R, H", 1).showAndWait();
             return false;
         }
