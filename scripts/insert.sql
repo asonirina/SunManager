@@ -2,14 +2,6 @@ Insert into customers (customer_id, mobile, name) VALUES(1, '80291111111', 'Alin
 Insert into customers (customer_id, mobile, name) VALUES(2, '80291316547', 'Ira');
 Insert into customers (customer_id, mobile, name) VALUES(3, '80174569871', 'Test');
 
-
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('B999', 20160, 1, '2013-07-04', '2013-10-04', 36, 3, 0);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('C1090', 80160, 2, '2013-01-10', '2013-04-10', 53, 3, 0);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('K901', 120160, 1, '2013-06-04', '2013-12-04', 109, 6, 0);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('B901', 20160, 3, '2013-06-04', '2013-09-04', 40, 3, 1);
-Insert into abonements (abonement_code, price, customer_id, buy_date, end_date, minutes, duration, is_free) VALUES('M704', 220160, 3, '2013-02-15', '2013-08-15', 150, 6, 1);
-
-
 Insert into users (login, name, password, role) VALUES('cofee',  'Nastya', 'root', 'derictor');
 Insert into users (login, name, password, role) VALUES('admin1', 'Lena', '2', 'admin');
 Insert into users (login, name, password, role) VALUES('admin2', 'Liza', '3', 'admin');
@@ -17,7 +9,7 @@ Insert into users (login, name, password, role) VALUES('admin2', 'Liza', '3', 'a
 Insert into cosmetics (cosmetics_id, name, price, cosmetics_count) VALUES(1,  'Крем Dun', 20150, 20);
 Insert into cosmetics (cosmetics_id, name, price, cosmetics_count) VALUES(2, 'Лосьен Dove', 10600, 3);
 Insert into cosmetics (cosmetics_id, name, price, cosmetics_count) VALUES(3, 'Крем Pola', 15000, 5);
-
+Insert into cosmetics (cosmetics_id, name, price, cosmetics_count) VALUES(4, 'stikini', 1000, 1000000);
 
 Insert into vertical_sun (vertical_sun_id, start_date, total_minute, l2, one_minute_price) VALUES(1,  '2013-12-10', 36, 0, 7800);
 Insert into vertical_sun (vertical_sun_id, start_date, total_minute, l2, one_minute_price) VALUES(2, '2013-12-11', 40, 0, 7600);
@@ -52,28 +44,23 @@ Insert into comments_data (comment_id, start_date, comment) VALUES(3,  '2013-12-
 
 
 
-Insert into available_abonements (letter, price, minutes) VALUES('B', 180000, 40);
-Insert into available_abonements (letter, price, minutes) VALUES('C', 264000, 60);
-Insert into available_abonements (letter, price, minutes) VALUES('D', 420000, 100);
-Insert into available_abonements (letter, price, minutes) VALUES('K', 490000, 120);
-Insert into available_abonements (letter, price, minutes) VALUES('M', 600000, 150);
+Insert into available_abonements (letter, price, minutes) VALUES('B', 180000, 40, 1);
+Insert into available_abonements (letter, price, minutes) VALUES('C', 264000, 60, 1);
+Insert into available_abonements (letter, price, minutes) VALUES('D', 420000, 100, 1);
+Insert into available_abonements (letter, price, minutes) VALUES('K', 490000, 120, 1);
+Insert into available_abonements (letter, price, minutes) VALUES('M', 600000, 150, 1);
+Insert into available_abonements (letter, price, minutes) VALUES('O', 140000, 40, 1);
+Insert into available_abonements (letter, price, minutes) VALUES('G', 204000, 60, 1);
+Insert into available_abonements (letter, price, minutes) VALUES('R', 320000, 100, 1);
+Insert into available_abonements (letter, price, minutes) VALUES('H', 360000, 120, 1);
 
 
-Insert into available_abonements (letter, price, minutes) VALUES('O', 140000, 40);
-Insert into available_abonements (letter, price, minutes) VALUES('G', 204000, 60);
-Insert into available_abonements (letter, price, minutes) VALUES('R', 320000, 100);
-Insert into available_abonements (letter, price, minutes) VALUES('H', 360000, 120);
-
-
-
-Insert into available_abonements (letter, price, minutes) VALUES('SB', 81000, 40);
-Insert into available_abonements (letter, price, minutes) VALUES('SC', 119000, 60);
-Insert into available_abonements (letter, price, minutes) VALUES('SD', 189000, 100);
-Insert into available_abonements (letter, price, minutes) VALUES('SK', 220500, 120);
-Insert into available_abonements (letter, price, minutes) VALUES('SM', 270000, 150);
-
-
-Insert into available_abonements (letter, price, minutes) VALUES('SO', 63000, 40);
-Insert into available_abonements (letter, price, minutes) VALUES('SG', 92000, 60);
-Insert into available_abonements (letter, price, minutes) VALUES('SR', 144000, 100);
-Insert into available_abonements (letter, price, minutes) VALUES('SH', 162000, 120);
+Insert into available_abonements (letter, price, minutes) VALUES('SB', 81000, 40, 1);
+Insert into available_abonements (letter, price, minutes) VALUES('SC', 119000, 60, 1);
+Insert into available_abonements (letter, price, minutes) VALUES('SD', 189000, 100, 1);
+Insert into available_abonements (letter, price, minutes) VALUES('SK', 220500, 120, 1);
+Insert into available_abonements (letter, price, minutes) VALUES('SM', 270000, 150, 1);
+Insert into available_abonements (letter, price, minutes) VALUES('SO', 63000, 40, 1);
+Insert into available_abonements (letter, price, minutes) VALUES('SG', 92000, 60, 1);
+Insert into available_abonements (letter, price, minutes) VALUES('SR', 144000, 100, 1);
+Insert into available_abonements (letter, price, minutes) VALUES('SH', 162000, 120, 1);

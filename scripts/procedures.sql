@@ -41,8 +41,8 @@ CREATE PROCEDURE `getCodeBySymbol`(
         OUT CODE VARCHAR(12)
         )
 BEGIN
-SELECT MAX(SUBSTRING(abonement_code, 2)) INTO CODE from abonements
-where abonement_code like CONCAT(SYMBOL,'%'); 
+SELECT MAX(code) INTO CODE from abonements_data
+where letter = SYMBOL;
 END $$
 
 DROP PROCEDURE IF EXISTS `getL2ById` $$

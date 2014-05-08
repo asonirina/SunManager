@@ -6,19 +6,6 @@ CREATE TABLE IF NOT EXISTS customers (
       name           VARCHAR(150)
 ) ENGINE=INNODB;
 
-CREATE TABLE IF NOT EXISTS abonements (
-      abonement_code VARCHAR(10) NOT NULL PRIMARY KEY,
-      price          INT,
-      customer_id    INT,
-      buy_date       date,
-      end_date       date,
-      minutes        int,
-      duration       int,
-      is_free        boolean,
-
-      FOREIGN KEY (customer_id) REFERENCES customers(customer_id)
-) ENGINE=INNODB;
-
 CREATE  TABLE IF NOT EXISTS users (
       login          VARCHAR(15) NOT NULL UNIQUE PRIMARY KEY,
       name           VARCHAR(150),
@@ -91,7 +78,8 @@ CREATE TABLE IF NOT EXISTS abonements_data (
       code               int,
       letter             VARCHAR(100),
       client_name        VARCHAR(100),
-      phone              VARCHAR(100)
+      phone              VARCHAR(100),
+      minutes            int
 ) ENGINE=INNODB;
 
 CREATE TABLE IF NOT EXISTS cosmetics_data (
@@ -124,5 +112,6 @@ CREATE TABLE IF NOT EXISTS statistic_data (
 CREATE TABLE IF NOT EXISTS available_abonements (
       letter               VARCHAR(15) NOT NULL PRIMARY KEY,
       price                int,
-      minutes              int
+      minutes              int,
+      duration             int
 ) ENGINE=INNODB;
