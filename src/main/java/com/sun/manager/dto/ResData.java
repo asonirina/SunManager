@@ -15,11 +15,7 @@ public class ResData {
 
     public ResData(String res) {
         this.res = res;
-        try {
-            count = new Scanner(res).useDelimiter("[^\\d]+").nextInt();
-        } catch (NoSuchElementException ex) {
-
-        }
+        generateCount();
     }
 
     public String getRes() {
@@ -28,10 +24,19 @@ public class ResData {
 
     public void setRes(String res) {
         this.res = res;
+        generateCount();
     }
 
     public long getCount() {
         return count;
+    }
+
+    private void generateCount() {
+        try {
+            count = new Scanner(res).useDelimiter("[^\\d]+").nextInt();
+        } catch (NoSuchElementException ex) {
+
+        }
     }
 
 }

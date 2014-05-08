@@ -78,7 +78,6 @@ public class EventHandlers {
                 String input = t.getNewValue();
                 data.setRes(input);
 
-                data.setRes(input);
             }
         };
     }
