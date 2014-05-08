@@ -51,16 +51,29 @@ Insert into comments_data (comment_id, start_date, comment) VALUES(2,  '2013-12-
 Insert into comments_data (comment_id, start_date, comment) VALUES(3,  '2013-12-11', 'efergfgdgfdg');
 
 
---Без ограничений по времени
-Insert into available_abonements (letter, price, minutes) VALUES('B', 135000, 40);
-Insert into available_abonements (letter, price, minutes) VALUES('C', 198000, 60);
-Insert into available_abonements (letter, price, minutes) VALUES('D', 315000, 100);
-Insert into available_abonements (letter, price, minutes) VALUES('K', 367500, 120);
-Insert into available_abonements (letter, price, minutes) VALUES('M', 450000, 150);
 
--- С ограничениями по времени, действительно только до 13:00
-Insert into available_abonements (letter, price, minutes) VALUES('O', 120000, 40);
-Insert into available_abonements (letter, price, minutes) VALUES('G', 175000, 60);
-Insert into available_abonements (letter, price, minutes) VALUES('R', 270000, 100);
-Insert into available_abonements (letter, price, minutes) VALUES('H', 305000, 120);
+Insert into available_abonements (letter, price, minutes) VALUES('B', 180000, 40);
+Insert into available_abonements (letter, price, minutes) VALUES('C', 264000, 60);
+Insert into available_abonements (letter, price, minutes) VALUES('D', 420000, 100);
+Insert into available_abonements (letter, price, minutes) VALUES('K', 490000, 120);
+Insert into available_abonements (letter, price, minutes) VALUES('M', 600000, 150);
 
+
+Insert into available_abonements (letter, price, minutes) VALUES('O', 140000, 40);
+Insert into available_abonements (letter, price, minutes) VALUES('G', 204000, 60);
+Insert into available_abonements (letter, price, minutes) VALUES('R', 320000, 100);
+Insert into available_abonements (letter, price, minutes) VALUES('H', 360000, 120);
+
+
+
+Insert into available_abonements (letter, price, minutes) VALUES('SB', 81000, 40);
+Insert into available_abonements (letter, price, minutes) VALUES('SC', 119000, 60);
+Insert into available_abonements (letter, price, minutes) VALUES('SD', 189000, 100);
+Insert into available_abonements (letter, price, minutes) VALUES('SK', 220500, 120);
+Insert into available_abonements (letter, price, minutes) VALUES('SM', 270000, 150);
+
+
+Insert into available_abonements (letter, price, minutes) VALUES('SO', 63000, 40);
+Insert into available_abonements (letter, price, minutes) VALUES('SG', 92000, 60);
+Insert into available_abonements (letter, price, minutes) VALUES('SR', 144000, 100);
+Insert into available_abonements (letter, price, minutes) VALUES('SH', 162000, 120);

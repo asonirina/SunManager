@@ -132,7 +132,7 @@ public class SolariumDAO {
         callableStatement.registerOutParameter(2, Types.INTEGER);
 
         callableStatement.executeUpdate();
-        Long code = callableStatement.getLong(2);
+        Long code = callableStatement.getLong(2) + 1;
         abonementData.put("code", code);
 
         PreparedStatement preStatement = dbConnection.prepareStatement("select price from available_abonements where letter = ?");
@@ -325,7 +325,7 @@ public class SolariumDAO {
 
     public List<AbonementsRequest> getAbonByDate(Date startDate) throws SQLException {
         List<AbonementsRequest> abonementsRequestList = new ArrayList<AbonementsRequest>();
-        PreparedStatement ps2 = dbConnection.prepareStatement("select ad.code, ad.letter, ad.client_name, ad.phone, a.price from abonements_data ad JOIN abonements a on a.abonement_code = concat(ad.letter,'',ad.code) where start_date = ?");
+        PreparedStatement ps2 = dbConnection.prepareStatement("select ad.code, ad.letter, ad.client_name, ad.phone, a.price from abonements_data ad JOIN available_abonements a on a.letter = ad.letter where ad.start_date = ?");
         ps2.setDate(1, startDate);
         ResultSet rs = ps2.executeQuery();
 
