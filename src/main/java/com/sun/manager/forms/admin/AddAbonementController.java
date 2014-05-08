@@ -79,7 +79,7 @@ public class AddAbonementController extends AnchorPane implements Initializable 
         okButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-            //   save
+                service.updateAbonements(data);
             }
         });
 
