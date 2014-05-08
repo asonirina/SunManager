@@ -202,7 +202,7 @@ public class MainAdminController extends ScrollPane implements Initializable {
             new ResData("Итого мин: "), new ResData("Итого руб: "), new ResData("L2= "));
 
     final ObservableList<ResData> cosmResData = FXCollections.observableArrayList(
-            new ResData(String.format("стикини: %d шт", solariumService.getStikiniByDate(App.getInstance().getSelectedDate()))),
+            new ResData(String.format("стикини: %d шт", solariumService.getStikiniByDate(date))),
             new ResData("к-ка итого:"), new ResData("к-ка+стикини:"));
 
     final ObservableList<ResData> abonResData = FXCollections.observableArrayList(null, new ResData("итого:"), null);
@@ -235,7 +235,6 @@ public class MainAdminController extends ScrollPane implements Initializable {
 
                 dateLabel.setVisible(false);
             }
-            App.getInstance().setSelectedDate(date);
             App.getInstance().getEventBus().register(this);
 
             dateLabel.setText((new Date(Calendar.getInstance().getTime().getTime()).toString()));
@@ -427,7 +426,7 @@ public class MainAdminController extends ScrollPane implements Initializable {
                 Long count = 0L;
                 for (CosmeticsRequest cr : cosmeticsData) {
                     if (cr.getCount() != null) {
-                        count += cr.getCosmetics().getPrice();
+                        count += cr.getCosmetics().getPrice() * cr.getCount();
                     }
                 }
 
@@ -435,7 +434,8 @@ public class MainAdminController extends ScrollPane implements Initializable {
 
                 int stikini = new Scanner(cosmResData.get(0).getRes()).useDelimiter("\\D+").nextInt();
 
-                cosmResData.set(2, new ResData("к-ка+стикини: " + (stikini + count)));
+
+                cosmResData.set(2, new ResData("к-ка+стикини: " + (stikini * solariumService.getStikini().getPrice() + count)));
             }
         });
 
