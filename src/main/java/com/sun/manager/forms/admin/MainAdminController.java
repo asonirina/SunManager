@@ -421,21 +421,21 @@ public class MainAdminController extends ScrollPane implements Initializable {
         countVert.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                countSolariumData(vertData, vertResData);
+                countSolariumData(vertData, vertResData, 1L);
             }
         });
 
         countGreen.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                countSolariumData(greenData, greenResData);
+                countSolariumData(greenData, greenResData, 2L);
             }
         });
 
         countBlue.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                countSolariumData(blueData, blueResData);
+                countSolariumData(blueData, blueResData, 3L);
             }
         });
 
@@ -621,7 +621,7 @@ public class MainAdminController extends ScrollPane implements Initializable {
     }
 
 
-    private void countSolariumData(ObservableList<BaseSolariumData> data, ObservableList<ResData> resData) {
+    private void countSolariumData(ObservableList<BaseSolariumData> data, ObservableList<ResData> resData, long num) {
         Long count = 0L;
         Long sum = 0L;
         for (BaseSolariumData d : data) {
@@ -635,8 +635,7 @@ public class MainAdminController extends ScrollPane implements Initializable {
         }
         resData.set(0, new ResData("Итого мин: " + count));
         resData.set(1, new ResData("Итого руб: " + sum));
-        Double c = solariumService.getL2ById(1L) + count;
-        String l2 = c / 60 + "." + ((c >= 10) ? "" : "0") + c % 60;
+        Double l2 = Double.valueOf(count / 60 + "." + ((count >= 10) ? "" : "0") + count % 60)+solariumService.getL2ById(num);
         resData.set(2, new ResData("L2= " + l2));
     }
 
