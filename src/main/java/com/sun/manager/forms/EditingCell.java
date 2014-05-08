@@ -91,7 +91,7 @@ public class EditingCell<T1, T2> extends TableCell<T1, T2> {
                             commitEdit((T2) value);
                         } else if (value.replaceAll(" ", "").matches("[\\d]+:S?[ORGH]{1}(\\d)+")) {
                             Calendar calendar = Calendar.getInstance();
-                            calendar.set(Calendar.HOUR, 1);
+                            calendar.set(Calendar.HOUR, 13);
                             calendar.set(Calendar.MINUTE, 0);
                             long time = calendar.getTime().getTime();
 
