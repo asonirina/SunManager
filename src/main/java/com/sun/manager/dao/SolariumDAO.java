@@ -499,11 +499,12 @@ public class SolariumDAO {
     }
 
     public void updatePriceAndMinutes(List<AvailableAbonements> availableAbonements) throws SQLException {
-        PreparedStatement update = dbConnection.prepareStatement("update available_abonements set price = ?, minutes = ? where letter = ?");
+        PreparedStatement update = dbConnection.prepareStatement("update available_abonements set price = ?, minutes = ?, duration = ? where letter = ?");
         for (AvailableAbonements aa : availableAbonements) {
             update.setInt(1, aa.getPrice());
             update.setInt(2, aa.getMinutes());
-            update.setString(3, aa.getLetter());
+            update.setInt(3, aa.getDuration());
+            update.setString(4, aa.getLetter());
             update.executeUpdate();
         }
     }
