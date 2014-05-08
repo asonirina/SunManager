@@ -123,8 +123,7 @@ public class SolariumDAO {
     }
 
     public Integer getStikiniCountByDate(Date currentDate) throws SQLException {
-        Integer count = 0;
-        PreparedStatement preStatement = dbConnection.prepareStatement("select count(id) as stikCount from cosmetics_data where start_date = ?");
+        PreparedStatement preStatement = dbConnection.prepareStatement("select cosm_count as stikCount from cosmetics_data where start_date = ? and cosm_name = 'stikini'");
         preStatement.setDate(1, currentDate);
         ResultSet rs = preStatement.executeQuery();
         while (rs.next()) {
@@ -136,6 +135,11 @@ public class SolariumDAO {
     }
 
     public void saveStikiniByDate(Date currentDate,Integer count) throws SQLException {
+
+        PreparedStatement ps5 = dbConnection.prepareStatement("delete from cosmetics_data  where start_date = ? and cosm_name = 'stikini'");
+        ps5.setDate(1, currentDate);
+        ps5.executeUpdate();
+
         PreparedStatement preStatement = dbConnection.prepareStatement("insert into cosmetics_data (start_date, cosm_count, cosm_name, price) values(?,?,?,?)");
         preStatement.setDate(1, currentDate);
         preStatement.setInt(2, count);
