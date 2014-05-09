@@ -236,7 +236,7 @@ public class MainAdminController extends ScrollPane implements Initializable {
                 dateLabel.setVisible(false);
             }
             App.getInstance().getEventBus().register(this);
-
+            App.getInstance().setSelectedDate(date);
             dateLabel.setText((new Date(Calendar.getInstance().getTime().getTime()).toString()));
             usernameLabel.setText("Добро пожаловать, " + App.getInstance().getUser().toString() + "!");
             setOnButtonsClicked();

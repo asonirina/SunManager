@@ -73,15 +73,12 @@ public class BankDataController extends AnchorPane implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         final Map<String, Integer> data = service.getQuenchingAndAccumulation(date);
-        if (App.getInstance().getUser().getRole().equals("derictor")) {
-            residueField.setEditable(true);
-            bookPerDayField.setEditable(true);
-        }
         final Integer residue = getValue(service.getResidue(date));
 
         bankMorning.setText(residue.toString());
 
         quenchingField.setText(String.valueOf(getValue(data.get("quenching")) + 1));
+        bookPerDayField.setText(getBookPerDay().toString());
         okButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
