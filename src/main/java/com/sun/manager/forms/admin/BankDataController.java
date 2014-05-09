@@ -66,11 +66,12 @@ public class BankDataController extends AnchorPane implements Initializable {
     StatisticsService service = new StatisticsService();
     SolariumService solariumService = new SolariumService();
 
-    List<BaseSolariumData> vertData = solariumService.getSunData(date, SolariumEnum.Vertical);
-    List<BaseSolariumData> greenData = solariumService.getSunData(date, SolariumEnum.Green);
-    List<BaseSolariumData> blueData = solariumService.getSunData(date, SolariumEnum.Blue);
-    List<CosmeticsRequest> cosmeticsData = solariumService.getCosmByDate(date);
-    List<AbonementsRequest> abonementsData = solariumService.getAbonByDate(date);
+    Date currentDate = new Date (cal.getTime().getTime());
+    List<BaseSolariumData> vertData = solariumService.getSunData(currentDate, SolariumEnum.Vertical);
+    List<BaseSolariumData> greenData = solariumService.getSunData(currentDate, SolariumEnum.Green);
+    List<BaseSolariumData> blueData = solariumService.getSunData(currentDate, SolariumEnum.Blue);
+    List<CosmeticsRequest> cosmeticsData = solariumService.getCosmByDate(currentDate);
+    List<AbonementsRequest> abonementsData = solariumService.getAbonByDate(currentDate);
 
 
     @Override
