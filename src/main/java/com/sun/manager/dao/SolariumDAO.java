@@ -134,7 +134,7 @@ public class SolariumDAO {
         return 0;
     }
 
-    public void saveStikiniByDate(Date currentDate,Integer count) throws SQLException {
+    public void saveStikiniByDate(Date currentDate, Integer count) throws SQLException {
 
         PreparedStatement ps5 = dbConnection.prepareStatement("delete from cosmetics_data  where start_date = ? and cosm_name = 'stikini'");
         ps5.setDate(1, currentDate);
@@ -152,6 +152,9 @@ public class SolariumDAO {
         Map<String, Long> abonementData = new HashMap<String, Long>();
 
         PreparedStatement preStatement1 = dbConnection.prepareStatement("SELECT MAX(code) as code from abonements_data where letter = ?");
+        if (symbol.length() == 2) {
+            symbol = symbol.substring(1);
+        }
         preStatement1.setString(1, symbol);
         ResultSet rs1 = preStatement1.executeQuery();
         while (rs1.next()) {
