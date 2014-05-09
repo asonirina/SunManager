@@ -67,11 +67,9 @@ public class StatisticDAO {
             // Остаток предыдущего дня  + касса за тот день = остаток на текущий день - банк - офф зп
             residueLastDay = residue + bookingPerDay - bank- officialSalary;
         } else {
-            //Остаток предыдущего дня  + касса за тот день = остаток на текущий день
-            residueLastDay = residue + bookingPerDay;
+            residueLastDay = residue;
         }
         return residueLastDay;
-
     }
 
 

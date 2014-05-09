@@ -21,6 +21,7 @@ import org.apache.commons.lang.StringUtils;
 
 import java.net.URL;
 import java.sql.Date;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
@@ -58,8 +59,10 @@ public class BankDataController extends AnchorPane implements Initializable {
     @FXML
     Button cancelButton;
 
-    Date date = App.getInstance().getUser().getRole().equals("derictor") ? App.getInstance().getSelectedDate() :
-            new Date(App.getInstance().getSelectedDate().getTime() - SunConstants.MILLIS_IN_DAY);
+    Calendar cal = Calendar.getInstance();
+
+    Date date = App.getInstance().getUser().getRole().equals("derictor") ? (Date) cal.getTime() :
+            new Date(cal.getTime().getTime() - SunConstants.MILLIS_IN_DAY);
     StatisticsService service = new StatisticsService();
     SolariumService solariumService = new SolariumService();
 
