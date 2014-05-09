@@ -606,7 +606,6 @@ public class MainAdminController extends ScrollPane implements Initializable {
         Long count = 0L;
         Long sum = 0L;
         for (BaseSolariumData d : data) {
-            if (!d.isSaved()) {
                 if (d.getMinutes() != null) {
                     count += d.getMinutes();
                 }
@@ -614,7 +613,6 @@ public class MainAdminController extends ScrollPane implements Initializable {
                 if (d.getTotalPrice() != null) {
                     sum += d.getTotalPrice();
                 }
-            }
         }
         save();
         resData.set(0, new ResData("Итого мин: " + count));
