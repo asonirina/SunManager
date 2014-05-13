@@ -21,6 +21,7 @@ import org.apache.commons.lang.StringUtils;
 
 import java.net.URL;
 import java.sql.Date;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
@@ -58,30 +59,30 @@ public class BankDataController extends AnchorPane implements Initializable {
     @FXML
     Button cancelButton;
 
-    Date date = App.getInstance().getUser().getRole().equals("derictor") ? App.getInstance().getSelectedDate() :
-            new Date(App.getInstance().getSelectedDate().getTime() - SunConstants.MILLIS_IN_DAY);
+    Calendar cal = Calendar.getInstance();
+
+    Date date = App.getInstance().getUser().getRole().equals("derictor") ? (Date) cal.getTime() :
+            new Date(cal.getTime().getTime() - SunConstants.MILLIS_IN_DAY);
     StatisticsService service = new StatisticsService();
     SolariumService solariumService = new SolariumService();
 
-    List<BaseSolariumData> vertData = solariumService.getSunData(date, SolariumEnum.Vertical);
-    List<BaseSolariumData> greenData = solariumService.getSunData(date, SolariumEnum.Green);
-    List<BaseSolariumData> blueData = solariumService.getSunData(date, SolariumEnum.Blue);
-    List<CosmeticsRequest> cosmeticsData = solariumService.getCosmByDate(date);
-    List<AbonementsRequest> abonementsData = solariumService.getAbonByDate(date);
+    Date currentDate = new Date (cal.getTime().getTime());
+    List<BaseSolariumData> vertData = solariumService.getSunData(currentDate, SolariumEnum.Vertical);
+    List<BaseSolariumData> greenData = solariumService.getSunData(currentDate, SolariumEnum.Green);
+    List<BaseSolariumData> blueData = solariumService.getSunData(currentDate, SolariumEnum.Blue);
+    List<CosmeticsRequest> cosmeticsData = solariumService.getCosmByDate(currentDate);
+    List<AbonementsRequest> abonementsData = solariumService.getAbonByDate(currentDate);
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         final Map<String, Integer> data = service.getQuenchingAndAccumulation(date);
-        if (App.getInstance().getUser().getRole().equals("derictor")) {
-            residueField.setEditable(true);
-            bookPerDayField.setEditable(true);
-        }
         final Integer residue = getValue(service.getResidue(date));
 
         bankMorning.setText(residue.toString());
 
         quenchingField.setText(String.valueOf(getValue(data.get("quenching")) + 1));
+        bookPerDayField.setText(getBookPerDay().toString());
         okButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {

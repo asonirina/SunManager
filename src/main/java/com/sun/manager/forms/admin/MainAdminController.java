@@ -212,6 +212,7 @@ public class MainAdminController extends ScrollPane implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        App.getInstance().setSelectedDate(date);
         try {
             if (App.getInstance().getUser().getRole().equals("derictor")) {
                 datePicker.setLayoutX(49);
@@ -606,17 +607,17 @@ public class MainAdminController extends ScrollPane implements Initializable {
         Long count = 0L;
         Long sum = 0L;
         for (BaseSolariumData d : data) {
-            if (!d.isSaved()) {
-                if (d.getMinutes() != null) {
-                    count += d.getMinutes();
-                }
+            if (d.getMinutes() != null) {
+                count += d.getMinutes();
+            }
 
-                if (d.getTotalPrice() != null) {
-                    sum += d.getTotalPrice();
-                }
+            if (d.getTotalPrice() != null) {
+                sum += d.getTotalPrice();
             }
         }
-        save();
+        if (App.getInstance().getUser().getRole().equals("admin")) {
+            save();
+        }
         resData.set(0, new ResData("Итого мин: " + count));
         resData.set(1, new ResData("Итого руб: " + sum));
 
@@ -651,7 +652,7 @@ public class MainAdminController extends ScrollPane implements Initializable {
                 }
             }
             solariumService.saveSolariumData(data, 1L);
-            solariumService.saveL2(1L, Double.valueOf(minutes / 60 + "." + ((minutes >= 10) ? "" : "0") + minutes % 60), App.getInstance().getSelectedDate(), minutes);
+            solariumService.saveL2(1L, Double.valueOf(minutes / 60 + "." + ((minutes >= 10) ? "" : "0") + minutes % 60), new Date(Calendar.getInstance().getTime().getTime()), minutes);
             minutes = 0;
             data = FXCollections.observableArrayList();
             for (BaseSolariumData d : greenData) {
@@ -662,7 +663,7 @@ public class MainAdminController extends ScrollPane implements Initializable {
                 }
             }
             solariumService.saveSolariumData(data, 2L);
-            solariumService.saveL2(2L, Double.valueOf(minutes / 60 + "." + ((minutes >= 10) ? "" : "0") + minutes % 60), App.getInstance().getSelectedDate(), minutes);
+            solariumService.saveL2(2L, Double.valueOf(minutes / 60 + "." + ((minutes >= 10) ? "" : "0") + minutes % 60), new Date(Calendar.getInstance().getTime().getTime()), minutes);
 
 
             minutes = 0;
@@ -675,7 +676,7 @@ public class MainAdminController extends ScrollPane implements Initializable {
                 }
             }
             solariumService.saveSolariumData(data, 3L);
-            solariumService.saveL2(3L, Double.valueOf(minutes / 60 + "." + ((minutes >= 10) ? "" : "0") + minutes % 60), App.getInstance().getSelectedDate(), minutes);
+            solariumService.saveL2(3L, Double.valueOf(minutes / 60 + "." + ((minutes >= 10) ? "" : "0") + minutes % 60), new Date(Calendar.getInstance().getTime().getTime()), minutes);
 
 
             ObservableList<CosmeticsRequest> cosmeticsRequests = FXCollections.observableArrayList();
