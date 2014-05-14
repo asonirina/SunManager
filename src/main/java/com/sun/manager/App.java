@@ -5,9 +5,6 @@ import com.sun.manager.dto.Users;
 
 import java.sql.Date;
 
-/**
- * Hello world!
- */
 public class App {
     private static App ourInstance = new App();
     private EventBus eventBus = new EventBus();

@@ -61,12 +61,12 @@ public class BankDataController extends AnchorPane implements Initializable {
 
     Calendar cal = Calendar.getInstance();
 
-    Date date = App.getInstance().getUser().getRole().equals("derictor") ? (Date) cal.getTime() :
-            new Date(cal.getTime().getTime() - SunConstants.MILLIS_IN_DAY);
+    Date date = App.getInstance().getUser().getRole().equals("derictor") ? new java.sql.Date(cal.getTime().getTime()) :
+            new java.sql.Date(cal.getTime().getTime() - SunConstants.MILLIS_IN_DAY);
     StatisticsService service = new StatisticsService();
     SolariumService solariumService = new SolariumService();
 
-    Date currentDate = new Date (cal.getTime().getTime());
+    Date currentDate = App.getInstance().getUser().getRole().equals("derictor") ? App.getInstance().getSelectedDate() : new java.sql.Date (cal.getTime().getTime());
     List<BaseSolariumData> vertData = solariumService.getSunData(currentDate, SolariumEnum.Vertical);
     List<BaseSolariumData> greenData = solariumService.getSunData(currentDate, SolariumEnum.Green);
     List<BaseSolariumData> blueData = solariumService.getSunData(currentDate, SolariumEnum.Blue);
@@ -76,13 +76,15 @@ public class BankDataController extends AnchorPane implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        final Map<String, Integer> data = service.getQuenchingAndAccumulation(date);
-        final Integer residue = getValue(service.getResidue(date));
+        final Map<String, Integer> data = service.getQuenchingAndAccumulation(currentDate);
+        final Integer residue = getValue(service.getResidue(currentDate));
 
         bankMorning.setText(residue.toString());
 
         quenchingField.setText(String.valueOf(getValue(data.get("quenching")) + 1));
-        bookPerDayField.setText(getBookPerDay().toString());
+
+        // новое поле Итого
+//        bookPerDayField.setText(getBookPerDay().toString());
         okButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
@@ -100,7 +102,7 @@ public class BankDataController extends AnchorPane implements Initializable {
                 statisticData.setBank(bank);
                 statisticData.setOfficialSalary(getValue(officialSalaryField.getText()));
                 statisticData.setQuenching(quenching);
-                statisticData.setStartDate(date);
+                statisticData.setStartDate(currentDate);
                 statisticData.setAccumulation(newAccumulation);
                 service.saveStatisticData(statisticData);
                 ((Stage) cancelButton.getScene().getWindow()).close();

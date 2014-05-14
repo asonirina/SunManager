@@ -1,6 +1,7 @@
 package com.sun.manager.dao;
 
 import com.sun.manager.connection.SqlServer;
+import com.sun.manager.constants.SunConstants;
 import com.sun.manager.dto.StatisticData;
 
 import java.sql.*;
@@ -34,7 +35,12 @@ public class StatisticDAO {
     }
 
     public void saveStatisticData(StatisticData statisticData) throws SQLException {
-        PreparedStatement ps = dbConnection.prepareStatement("insert into statistic_data (start_date, residue, booking_per_day, bank, official_salary, quenching, accumulation, user_login) values(?,?,?,?,?,?,?,?)");
+        String deleteRow = "delete from statistic_data where start_date = ?";
+        PreparedStatement ps = dbConnection.prepareStatement(deleteRow);
+        ps.setDate(1, (Date) statisticData.getStartDate());
+        ps.executeUpdate();
+
+        ps = dbConnection.prepareStatement("insert into statistic_data (start_date, residue, booking_per_day, bank, official_salary, quenching, accumulation, user_login) values(?,?,?,?,?,?,?,?)");
         ps.setDate(1, (Date) statisticData.getStartDate());
         ps.setInt(2, statisticData.getResidue());
         ps.setInt(3, statisticData.getBookingPerDay());
@@ -49,7 +55,7 @@ public class StatisticDAO {
     //Взять остаток предыдущего дня, чтобы восстановить его в форме
     public Integer getResidue(Date lastDate) throws SQLException {
         PreparedStatement ps = dbConnection.prepareStatement("select residue, booking_per_day, bank, official_salary from statistic_data where start_date=?");
-        ps.setDate(1, lastDate);
+        ps.setDate(1, new java.sql.Date(lastDate.getTime() - SunConstants.MILLIS_IN_DAY));
         ResultSet rs = ps.executeQuery();
 
         if(!rs.next()) {
@@ -60,23 +66,23 @@ public class StatisticDAO {
         Integer bank = rs.getInt("bank");
         Integer officialSalary = rs.getInt("official_salary");
 
-        Integer residueLastDay = 0;
-
-        if(bank != 0 && officialSalary != 0) {
-            //РАЗ В МЕСЯЦ!!!!
-            // Остаток предыдущего дня  + касса за тот день = остаток на текущий день - банк - офф зп
-            residueLastDay = residue + bookingPerDay - bank- officialSalary;
-        } else {
-            residueLastDay = residue;
-        }
-        return residueLastDay;
+//        Integer residueLastDay = 0;
+//
+//        if(bank != 0 && officialSalary != 0) {
+//            //РАЗ В МЕСЯЦ!!!!
+//            // Остаток предыдущего дня  + касса за тот день = остаток на текущий день - банк - офф зп
+//            residueLastDay = residue + bookingPerDay - bank- officialSalary;
+//        } else {
+//            residueLastDay = residue;
+//        }
+        return residue;
     }
 
 
     public Map<String, Integer> getQuenchingAndAccumulation(Date date) throws SQLException {
         Map<String, Integer> res = new HashMap<String, Integer>();
         PreparedStatement ps = dbConnection.prepareStatement("select quenching, accumulation from statistic_data where start_date = ?");
-        ps.setDate(1, date);
+        ps.setDate(1, new java.sql.Date(date.getTime() - SunConstants.MILLIS_IN_DAY));
         ResultSet rs = ps.executeQuery();
 
         while (rs.next()) {
