@@ -94,7 +94,7 @@ public class BankDataController extends AnchorPane implements Initializable {
                 int newAccumulation = getValue(data.get("accumulation")) + bookingPerDay;
                 int ozp = getValue(officialSalaryField.getText());
 
-                int newResidue = residue+bookingPerDay-bank-ozp;
+                int newResidue = Integer.parseInt(bankMorning.getText())+bookingPerDay-bank-ozp;
 
                 final StatisticData statisticData = new StatisticData();
                 statisticData.setResidue(newResidue);
