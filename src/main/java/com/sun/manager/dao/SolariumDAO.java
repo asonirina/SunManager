@@ -609,4 +609,19 @@ public class SolariumDAO {
         return Collections.EMPTY_MAP;
     }
 
+    //просмотр остатка минут в абонементах по номеру абонемента и номеру телефона
+    public Integer getResidueMinutesFromAbonement(String abonement, String phoneNumber) throws SQLException {
+        String getDataFromDB = "select minutes from abonements_data where code=? and letter=? and phone=?";
+        PreparedStatement ps = dbConnection.prepareStatement(getDataFromDB);
+        ps.setString(1, abonement.replaceAll("a-zA-Z+", ""));
+        ps.setString(2, abonement.replaceAll("\\D+", ""));
+        ps.setString(3, phoneNumber);
+        ResultSet rs = ps.executeQuery();
+
+        if (rs.next()) {
+            return rs.getInt("minutes");
+        } else
+            return null;
+    }
+
 }
