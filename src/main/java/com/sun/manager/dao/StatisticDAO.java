@@ -61,21 +61,8 @@ public class StatisticDAO {
         if(!rs.next()) {
             return 0;
         }
-        Integer residue = rs.getInt("residue");
-        Integer bookingPerDay = rs.getInt("booking_per_day");
-        Integer bank = rs.getInt("bank");
-        Integer officialSalary = rs.getInt("official_salary");
 
-//        Integer residueLastDay = 0;
-//
-//        if(bank != 0 && officialSalary != 0) {
-//            //РАЗ В МЕСЯЦ!!!!
-//            // Остаток предыдущего дня  + касса за тот день = остаток на текущий день - банк - офф зп
-//            residueLastDay = residue + bookingPerDay - bank- officialSalary;
-//        } else {
-//            residueLastDay = residue;
-//        }
-        return residue;
+        return rs.getInt("residue");
     }
 
 

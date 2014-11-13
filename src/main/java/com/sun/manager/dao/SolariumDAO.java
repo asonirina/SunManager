@@ -12,7 +12,6 @@ public class SolariumDAO {
 
     private static final String GET_ONE_MINUTE_PRICE_BY_ID = "{call getOneMinutePriceById(?,?)}";
     private static final String GET_L2_BY_ID = "{call getL2ById(?,?)}";
-    private static final String GET_CODE_BY_SYMBOL = "{call getCodeBySymbol(?,?)}";
     private static final String CHECK_USER = "{call checkUser(?,?,?)}";
     private static final String VERTICAL_SOLARIUM = "vertical_sun_data";
     private static final String GORIZONTAL_BLUE_SOLARIUM = "gorizontal_blue_sun_data";
@@ -172,22 +171,16 @@ public class SolariumDAO {
 
     public void saveSolariumData(List<BaseSolariumData> baseSolariumDataList, Long solariumId) throws SQLException {
         String solarium = null;
-        String solarium_sun = null;
         Map<String, Long> totals = new HashMap<String, Long>();
         Long totalSum = 0L;
         Long totalMinutes = 0L;
-        Double l2 = 0D;
-        Long oneMinutePrice = 0L;
 
         if (solariumId == 1L) {
             solarium = VERTICAL_SOLARIUM;
-            solarium_sun = VERTICAL_SOLARIUM_SUN;
         } else if (solariumId == 2L) {
             solarium = GORIZONTAL_BLUE_SOLARIUM;
-            solarium_sun = GORIZONTAL_BLUE_SOLARIUM_SUN;
         } else if (solariumId == 3L) {
             solarium = GORIZONTAL_GREEN_SOLARIUM;
-            solarium_sun = GORIZONTAL_GREEN_SOLARIUM_SUN;
         }
         for (BaseSolariumData baseData : baseSolariumDataList) {
             //Update minutes by abonements
@@ -540,7 +533,6 @@ public class SolariumDAO {
 
     public boolean deleteRowFromSolarium(Long dataId, Long solariumId) throws SQLException {
         String solarium = null;
-        String solarium_sun = null;
 
         if (solariumId == 1L) {
             solarium = VERTICAL_SOLARIUM;
@@ -590,7 +582,6 @@ public class SolariumDAO {
         String getDataFromDB = "select start_date, minutes from abonements_data where code=? and letter=?";
         String getDurationFromDB = "select duration from available_abonements where letter = ?";
         Map<String, Integer> aMap = new HashMap<String, Integer>();
-        Date currentDate = new Date(Calendar.getInstance().getTime().getTime());
 
         PreparedStatement ps = dbConnection.prepareStatement(getDataFromDB);
         ps.setString(1, abonement.replaceAll("a-zA-Z+", ""));
