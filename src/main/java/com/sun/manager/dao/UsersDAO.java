@@ -25,7 +25,7 @@ public class UsersDAO {
         return callableStatement.getBoolean(2);
     }
 
-    //просмотр действующих абонементов по номеру телeajye
+    //просмотр действующих абонементов по номеру телeфона
     public List<AbonementsData> getAvailableAbonementsByPhoneNumber(String phoneNumber, int pageNumber) throws SQLException {
         List<AbonementsData> aDataList = new ArrayList<AbonementsData>();
         String getDataFromDB = "select letter, code, buyDate, clientName, minutes from abonements_data where phone =? LIMIT ?, 30";
@@ -41,6 +41,25 @@ public class UsersDAO {
             String clientName = rs.getString("clientName");
             Long minutes = rs.getLong("minutes");
             AbonementsData aData = new AbonementsData(clientName, letter, code, phoneNumber, minutes, buyDate);
+
+            aDataList.add(aData);
+        }
+
+        return aDataList;
+    }
+
+    //телефонная база клиентов
+    public List<AbonementsData> getPhoneBaseForAllCustomers(int pageNumber) throws SQLException {
+        List<AbonementsData> aDataList = new ArrayList<AbonementsData>();
+        String getDataFromDB = "select clientName, phone from abonements_data group by(phone) LIMIT ?, 30";
+        PreparedStatement ps = dbConnection.prepareStatement(getDataFromDB);
+        ps.setInt(1, pageNumber*30);
+        ResultSet rs = ps.executeQuery();
+
+        while (rs.next()) {
+            String clientName = rs.getString("clientName");
+            String phone = rs.getString("phone");
+            AbonementsData aData = new AbonementsData(clientName, phone);
 
             aDataList.add(aData);
         }

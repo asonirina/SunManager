@@ -22,6 +22,11 @@ public class AbonementsData {
         this.endDate = null;
     }
 
+    public AbonementsData(String clientName, String phone) {
+        this.clientName = clientName;
+        this.phone = phone;
+    }
+
     public String getLetter() {
         return letter;
     }
