@@ -1,6 +1,8 @@
 package com.sun.manager.service;
 
 import com.sun.manager.dao.SolariumDAO;
+import com.sun.manager.dao.UsersDAO;
+import com.sun.manager.dto.AbonementsData;
 import com.sun.manager.dto.Users;
 
 import java.sql.SQLException;
@@ -13,6 +15,7 @@ import java.util.List;
 public class UsersService {
 
     private SolariumDAO dao = new SolariumDAO();
+    UsersDAO userDao = new UsersDAO();
 
     public boolean login(String login, String password) {
         try {
@@ -53,6 +56,15 @@ public class UsersService {
     public void deleteUser(Users user) {
         try {
             dao.deleteUser(user.getLogin());
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            throw new RuntimeException(ex.getMessage());
+        }
+    }
+
+    public List<AbonementsData> getPhoneBaseForAllCustomers(int page) {
+        try {
+           return userDao.getPhoneBaseForAllCustomers(page);
         } catch (SQLException ex) {
             ex.printStackTrace();
             throw new RuntimeException(ex.getMessage());

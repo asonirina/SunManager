@@ -11,11 +11,10 @@ public class UsersDAO {
 
     private static final String CHECK_USER = "{call checkUser(?,?)}";
 
-    private Connection dbConnection = null;
+    private Connection dbConnection = SqlServer.getConnection();;
     private CallableStatement callableStatement = null;
 
     public Boolean checkUser(String login) throws SQLException {
-        dbConnection = SqlServer.getConnection();
         callableStatement = dbConnection.prepareCall(CHECK_USER);
         callableStatement.setString(1, login);
         callableStatement.registerOutParameter(2, Types.BOOLEAN);
@@ -51,13 +50,13 @@ public class UsersDAO {
     //телефонная база клиентов
     public List<AbonementsData> getPhoneBaseForAllCustomers(int pageNumber) throws SQLException {
         List<AbonementsData> aDataList = new ArrayList<AbonementsData>();
-        String getDataFromDB = "select clientName, phone from abonements_data group by(phone) LIMIT ?, 30";
+        String getDataFromDB = "select client_name, phone from abonements_data group by(phone) LIMIT ?, 30";
         PreparedStatement ps = dbConnection.prepareStatement(getDataFromDB);
         ps.setInt(1, pageNumber*30);
         ResultSet rs = ps.executeQuery();
 
         while (rs.next()) {
-            String clientName = rs.getString("clientName");
+            String clientName = rs.getString("client_name");
             String phone = rs.getString("phone");
             AbonementsData aData = new AbonementsData(clientName, phone);
 

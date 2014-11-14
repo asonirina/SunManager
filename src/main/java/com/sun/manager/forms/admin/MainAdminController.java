@@ -180,6 +180,9 @@ public class MainAdminController extends ScrollPane implements Initializable {
     @FXML
     Button del3;
 
+    @FXML
+    Button phoneBase;
+
 
     SolariumService solariumService = new SolariumService();
     final ObservableList<BaseSolariumData> vertData = FXCollections.observableArrayList(
@@ -514,6 +517,7 @@ public class MainAdminController extends ScrollPane implements Initializable {
             usersButton.setVisible(false);
             showComments.setVisible(false);
             statButton.setVisible(false);
+            phoneBase.setVisible(false);
             addComment.setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent mouseEvent) {
@@ -592,6 +596,18 @@ public class MainAdminController extends ScrollPane implements Initializable {
                 public void handle(MouseEvent mouseEvent) {
                     try {
                         StatisticsPage page = new StatisticsPage();
+                        page.start(new Stage());
+                    } catch (IOException ex) {
+                        new AlertDialog((Stage) logout.getScene().getWindow(), "Произошла ошибка!", 1).showAndWait();
+                        throw new RuntimeException(ex);
+                    }
+                }
+            });
+            phoneBase.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    try {
+                        PhoneBasePage page = new PhoneBasePage();
                         page.start(new Stage());
                     } catch (IOException ex) {
                         new AlertDialog((Stage) logout.getScene().getWindow(), "Произошла ошибка!", 1).showAndWait();

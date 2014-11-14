@@ -90,14 +90,15 @@
     <Button fx:id="addCosm" layoutX="638.0" layoutY="86.0" mnemonicParsing="false" text="Добавить косметику" />
     <Button fx:id="addAbon" layoutX="788.0" layoutY="86.0" mnemonicParsing="false" text="Добавить абонемент" />
     <Button fx:id="usersButton" layoutX="506.0" layoutY="86.0" mnemonicParsing="false" text="Администраторы" />
-    <Button fx:id="addComment" layoutX="319.0" layoutY="86.0" mnemonicParsing="false" text="Добавить комментарий" />
-    <Button fx:id="showComments" layoutX="309.0" layoutY="86.0" mnemonicParsing="false" prefWidth="173.0" text="Посмотреть комментарии" />
+    <Button fx:id="addComment" layoutX="296.0" layoutY="86.0" mnemonicParsing="false" prefWidth="193.0" text="Добавить комментарий" />
+    <Button fx:id="showComments" layoutX="296.0" layoutY="86.0" mnemonicParsing="false" prefWidth="192.99990000000253" text="Посмотреть комментарии" />
     <Button fx:id="statButton" layoutX="939.0" layoutY="86.0" mnemonicParsing="false" prefWidth="133.0" text="Статистика" />
-    <Button fx:id="bankButton" layoutX="307.0" layoutY="52.0" mnemonicParsing="false" text="Дополнительная информация" />
+    <Button fx:id="bankButton" layoutX="296.0" layoutY="57.0" mnemonicParsing="false" prefWidth="193.0" text="Дополнительная информация" />
     <Button fx:id="saveChanges" layoutX="1020.0" layoutY="42.0" mnemonicParsing="false" text="Сохранить данные" />
     <Button fx:id="logout" layoutX="1150.0" layoutY="42.0" mnemonicParsing="false" text="Выйти" />
     <Button fx:id="del1" layoutX="84.0" layoutY="115.0" mnemonicParsing="false" prefWidth="200.0" text="Удалить" />
-    <Button fx:id="del2" layoutX="296.0" layoutY="114.0" mnemonicParsing="false" prefWidth="193.0" text="Удалить" />
+    <Button fx:id="del2" layoutX="296.0" layoutY="114.0" mnemonicParsing="false" prefWidth="193.00009999999747" text="Удалить" />
     <Button fx:id="del3" layoutX="503.0" layoutY="115.0" mnemonicParsing="false" prefWidth="173.00009999999747" text="Удалить" />
+    <Button fx:id="phoneBase" layoutX="506.0" layoutY="57.0" mnemonicParsing="false" prefWidth="115.0" text="Телефонная база" />
   </children>
 </AnchorPane>

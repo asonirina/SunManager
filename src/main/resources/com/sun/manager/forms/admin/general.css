@@ -5,7 +5,7 @@
 #saveButton, #okButton, #cancelButton, #addButton, #addNewCosm,
 #countVert, #countGreen, #countBlue, #countCosm, #countAbon, #addCosm,
 #addCosm, #addAbon, #usersButton, #addComment, #showComments, #statButton, #bankButton,
-#addCosmButton, #deleteButton, #saveChanges, #logout, #del1, #del2, #del3 {
+#addCosmButton, #deleteButton, #saveChanges, #logout, #del1, #del2, #del3,#phoneBase {
     -fx-background-color:
         rgba(0,0,0,0.08),
         linear-gradient(#9a9a9a, #909090),
@@ -20,7 +20,7 @@
 #saveButton:hover, #okButton:hover, #cancelButton:hover, #addButton:hover, #addNewCosm:hover,
 #countVert:hover, #countGreen:hover, #countBlue:hover, #countCosm:hover, #countAbon:hover, #addCosm:hover,
 #addCosm:hover, #addAbon:hover, #usersButton:hover, #addComment:hover, #showComments:hover, #statButton:hover, #bankButton:hover,
-#addCosmButton:hover, #deleteButton:hover, #saveChanges:hover, #logout:hover {
+#addCosmButton:hover, #deleteButton:hover, #saveChanges:hover, #logout:hover, #phoneBase:hover {
     -fx-background-color: linear-gradient(#f3f3f3, #f2f2f2);
 }
 
