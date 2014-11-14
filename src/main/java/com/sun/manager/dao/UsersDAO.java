@@ -50,7 +50,7 @@ public class UsersDAO {
     //телефонная база клиентов
     public List<AbonementsData> getPhoneBaseForAllCustomers(int pageNumber) throws SQLException {
         List<AbonementsData> aDataList = new ArrayList<AbonementsData>();
-        String getDataFromDB = "select client_name, phone from abonements_data group by(phone) LIMIT ?, 30";
+        String getDataFromDB = "select client_name, phone from abonements_data where phone is not null group by(phone) LIMIT ?, 30";
         PreparedStatement ps = dbConnection.prepareStatement(getDataFromDB);
         ps.setInt(1, pageNumber*30);
         ResultSet rs = ps.executeQuery();
@@ -64,5 +64,14 @@ public class UsersDAO {
         }
 
         return aDataList;
+    }
+
+    public int getPhoneBaseSize() throws SQLException {
+        List<AbonementsData> aDataList = new ArrayList<AbonementsData>();
+        String getDataFromDB = "select count(distinct (phone)) as c from  abonements_data where phone is not null";
+        PreparedStatement ps = dbConnection.prepareStatement(getDataFromDB);
+        ResultSet rs = ps.executeQuery();
+        rs.next();
+        return rs.getInt("c");
     }
 }

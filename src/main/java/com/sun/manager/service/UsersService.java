@@ -70,4 +70,13 @@ public class UsersService {
             throw new RuntimeException(ex.getMessage());
         }
     }
+
+    public int getPhoneBaseSize() {
+        try {
+            return userDao.getPhoneBaseSize();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            throw new RuntimeException(ex.getMessage());
+        }
+    }
 }
