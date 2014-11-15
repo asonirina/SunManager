@@ -24,9 +24,14 @@ public class EditingCellStikini<T1, T2> extends EditingCell<T1, T2> {
             @Override
             public void handle(KeyEvent t) {
                 if (t.getCode() == KeyCode.ENTER) {
-                    commitEdit((T2) textField.getText());
+                    commitEdit((T2)String.format("стикини: %d шт", Integer.parseInt(textField.getText())));
                 }
             }
         });
+    }
+
+    @Override
+    protected void setOnEditStart() {
+       textField.clear();
     }
 }

@@ -16,16 +16,20 @@ import com.sun.manager.service.SolariumService;
 import eu.schudt.javafx.controls.calendar.DatePicker;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
+import javafx.beans.property.ObjectProperty;
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.DataFormat;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -39,7 +43,7 @@ import java.util.Scanner;
 /**
  * User: iason
  */
-public class MainAdminController extends ScrollPane implements Initializable {
+public class MainAdminController extends AnchorPane implements Initializable {
     private static int count = 50;
     private Date date = new Date(Calendar.getInstance().getTime().getTime());
 
@@ -50,6 +54,9 @@ public class MainAdminController extends ScrollPane implements Initializable {
     Button logout;
     @FXML
     AnchorPane anchorPane;
+
+    @FXML
+    ScrollPane scrollPane;
 
     @FXML
     Label dateLabel;
@@ -70,22 +77,28 @@ public class MainAdminController extends ScrollPane implements Initializable {
     DatePicker datePicker = new DatePicker();
     //main tables
     @FXML
-    TableView<NumericData> tableNumber;
+    TableView//<NumericData>
+            tableNumber;
 
     @FXML
-    TableView<BaseSolariumData> tableVert;
+    TableView//<BaseSolariumData>
+            tableVert;
 
     @FXML
-    TableView<BaseSolariumData> tableGreen;
+    TableView//<BaseSolariumData>
+            tableGreen;
 
     @FXML
-    TableView<BaseSolariumData> tableBlue;
+    TableView//<BaseSolariumData>
+            tableBlue;
 
     @FXML
-    TableView<CosmeticsRequest> tableCosm;
+    TableView//<CosmeticsRequest>
+            tableCosm;
 
     @FXML
-    TableView<AbonementsRequest> tableAbon;
+    TableView//<AbonementsRequest>
+            tableAbon;
 
 
     // main columns
@@ -221,8 +234,8 @@ public class MainAdminController extends ScrollPane implements Initializable {
         App.getInstance().setSelectedDate(date);
         try {
             if (App.getInstance().getUser().getRole().equals("derictor")) {
-                datePicker.setLayoutX(49);
-                datePicker.setLayoutY(46);
+                datePicker.setLayoutX(84);
+                datePicker.setLayoutY(57);
 
                 datePicker.getStylesheets().add(this.getClass().getResource("datePicker.css").toExternalForm());
                 datePicker.getCalendarView().setShowWeeks(false);
@@ -262,6 +275,9 @@ public class MainAdminController extends ScrollPane implements Initializable {
             setSolariumResData();
             setCosmResData();
             setAbonResData();
+
+            setOnSelect();
+            StackPane.setAlignment(scrollPane, Pos.CENTER);
 
         } catch (Exception ex) {
             new AlertDialog((Stage) logout.getScene().getWindow(), "Произошла ошибка!", 1).showAndWait();
@@ -476,8 +492,9 @@ public class MainAdminController extends ScrollPane implements Initializable {
             del1.setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent mouseEvent) {
-                    BaseSolariumData data = tableVert.getSelectionModel().getSelectedItem();
-                    if (data != null) {
+                    int index = tableVert.getSelectionModel().getSelectedIndex();
+                    BaseSolariumData data = vertData.get(index);
+                    if (data != null && data.getDataId() != null) {
                         if (data.isSaved()) {
                             solariumService.deleteSolariumData(data, 1L);
                         }
@@ -489,8 +506,9 @@ public class MainAdminController extends ScrollPane implements Initializable {
             del2.setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent mouseEvent) {
-                    BaseSolariumData data = tableGreen.getSelectionModel().getSelectedItem();
-                    if (data != null) {
+                    int index = tableGreen.getSelectionModel().getSelectedIndex();
+                    BaseSolariumData data = greenData.get(index);
+                    if (data != null && data.getDataId() != null) {
                         if (data.isSaved()) {
                             solariumService.deleteSolariumData(data, 2L);
                         }
@@ -502,8 +520,9 @@ public class MainAdminController extends ScrollPane implements Initializable {
             del3.setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent mouseEvent) {
-                    BaseSolariumData data = tableBlue.getSelectionModel().getSelectedItem();
-                    if (data != null) {
+                    int index = tableBlue.getSelectionModel().getSelectedIndex();
+                    BaseSolariumData data = blueData.get(index);
+                    if (data != null && data.getDataId() != null) {
                         if (data.isSaved()) {
                             solariumService.deleteSolariumData(data, 3L);
                         }
@@ -731,4 +750,18 @@ public class MainAdminController extends ScrollPane implements Initializable {
         addBlankItems();
     }
 
+    private void setOnSelect() {
+        tableNumber.selectionModelProperty().bind(tableVert.selectionModelProperty());
+        tableVert.selectionModelProperty().bind(tableGreen.selectionModelProperty());
+        tableGreen.selectionModelProperty().bind(tableBlue.selectionModelProperty());
+        tableBlue.selectionModelProperty().bind(tableCosm.selectionModelProperty());
+        tableCosm.selectionModelProperty().bind(tableAbon.selectionModelProperty());
+
+        tableNumRes.selectionModelProperty().bind(tableVertRes.selectionModelProperty());
+        tableVertRes.selectionModelProperty().bind(tableGreenRes.selectionModelProperty());
+        tableGreenRes.selectionModelProperty().bind(tableBlueRes.selectionModelProperty());
+        tableBlueRes.selectionModelProperty().bind(tableCosmRes.selectionModelProperty());
+        tableAbonRes.selectionModelProperty().bind(tableNumRes.selectionModelProperty());
+
+    }
 }

@@ -28,4 +28,5 @@ public class EditingCellAddCosmetics<T1, T2> extends EditingCell<T1, T2> {
             }
         });
     }
+
 }

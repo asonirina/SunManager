@@ -324,7 +324,7 @@ public class SolariumDAO {
 
     public List<CosmeticsRequest> getCosmByDate(Date startDate) throws SQLException {
         List<CosmeticsRequest> cosmeticsRequestList = new ArrayList<CosmeticsRequest>();
-        PreparedStatement ps2 = dbConnection.prepareStatement("select cosm_count, cosm_name, price from cosmetics_data where start_date = ?");
+        PreparedStatement ps2 = dbConnection.prepareStatement("select cosm_count, cosm_name, price from cosmetics_data where start_date = ? and cosm_name<>'stikini'");
         ps2.setDate(1, startDate);
         ResultSet rs = ps2.executeQuery();
 

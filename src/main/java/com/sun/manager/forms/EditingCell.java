@@ -1,8 +1,10 @@
 package com.sun.manager.forms;
 
 import com.sun.manager.constants.DataColumnEnum;
+import javafx.event.EventHandler;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 
 
 public abstract class EditingCell<T1, T2> extends TableCell<T1, T2> {
@@ -59,6 +61,8 @@ public abstract class EditingCell<T1, T2> extends TableCell<T1, T2> {
         textField.setPrefHeight(25);
         textField.setMinWidth(this.getWidth() - this.getGraphicTextGap() * 2);
         setOnKey();
+        setOnEditStart();
+
     }
 
     private String getString() {
@@ -67,4 +71,9 @@ public abstract class EditingCell<T1, T2> extends TableCell<T1, T2> {
 
 
     protected abstract void setOnKey();
+  //  protected abstract void setOnEditStart();
+
+    protected void setOnEditStart() {
+
+    }
 }
