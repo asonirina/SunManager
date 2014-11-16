@@ -31,7 +31,7 @@ import java.util.ResourceBundle;
  * Date: 13.02.14
  */
 public class PhoneBaseController extends VBox implements Initializable {
-    static final int countPerPage = 30;
+    static final int countPerPage = 10;
     final UsersService service = new UsersService();
     ObservableList<AbonementsData> data = FXCollections.observableArrayList(service.getPhoneBaseForAllCustomers(0));
 

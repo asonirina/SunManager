@@ -27,17 +27,17 @@ public class UsersDAO {
     //просмотр действующих абонементов по номеру телeфона
     public List<AbonementsData> getAvailableAbonementsByPhoneNumber(String phoneNumber, int pageNumber) throws SQLException {
         List<AbonementsData> aDataList = new ArrayList<AbonementsData>();
-        String getDataFromDB = "select letter, code, buyDate, clientName, minutes from abonements_data where phone =? LIMIT ?, 30";
+        String getDataFromDB = "select letter, code, start_date, client_name, minutes from abonements_data where phone =? LIMIT ?, 10";
         PreparedStatement ps = dbConnection.prepareStatement(getDataFromDB);
         ps.setString(1, phoneNumber);
-        ps.setInt(2, pageNumber*30);
+        ps.setInt(2, pageNumber*10);
         ResultSet rs = ps.executeQuery();
 
         while (rs.next()) {
             String letter = rs.getString("letter");
             Long code = rs.getLong("code");
-            Date buyDate = rs.getDate("buyDate");
-            String clientName = rs.getString("clientName");
+            Date buyDate = rs.getDate("start_date");
+            String clientName = rs.getString("client_name");
             Long minutes = rs.getLong("minutes");
             AbonementsData aData = new AbonementsData(clientName, letter, code, phoneNumber, minutes, buyDate);
 
@@ -50,9 +50,9 @@ public class UsersDAO {
     //телефонная база клиентов
     public List<AbonementsData> getPhoneBaseForAllCustomers(int pageNumber) throws SQLException {
         List<AbonementsData> aDataList = new ArrayList<AbonementsData>();
-        String getDataFromDB = "select client_name, phone from abonements_data where phone is not null group by(phone) LIMIT ?, 30";
+        String getDataFromDB = "select client_name, phone from abonements_data where phone is not null group by(phone) LIMIT ?, 10";
         PreparedStatement ps = dbConnection.prepareStatement(getDataFromDB);
-        ps.setInt(1, pageNumber*30);
+        ps.setInt(1, pageNumber*10);
         ResultSet rs = ps.executeQuery();
 
         while (rs.next()) {
@@ -70,6 +70,16 @@ public class UsersDAO {
         List<AbonementsData> aDataList = new ArrayList<AbonementsData>();
         String getDataFromDB = "select count(distinct (phone)) as c from  abonements_data where phone is not null";
         PreparedStatement ps = dbConnection.prepareStatement(getDataFromDB);
+        ResultSet rs = ps.executeQuery();
+        rs.next();
+        return rs.getInt("c");
+    }
+
+    public int getAbonsByPhoneSize(String phone) throws SQLException {
+        List<AbonementsData> aDataList = new ArrayList<AbonementsData>();
+        String getDataFromDB = "select count(*) as c from abonements_data where phone =?";
+        PreparedStatement ps = dbConnection.prepareStatement(getDataFromDB);
+        ps.setString(1, phone);
         ResultSet rs = ps.executeQuery();
         rs.next();
         return rs.getInt("c");

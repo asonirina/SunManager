@@ -79,4 +79,22 @@ public class UsersService {
             throw new RuntimeException(ex.getMessage());
         }
     }
+
+    public List<AbonementsData> getAvailableAbonementsByPhoneNumber(String phoneNumber, int pageNumber ) {
+        try {
+            return userDao.getAvailableAbonementsByPhoneNumber(phoneNumber, pageNumber);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            throw new RuntimeException(ex.getMessage());
+        }
+    }
+
+    public int getAbonsByPhoneSize(String phone) {
+        try {
+            return userDao.getAbonsByPhoneSize(phone);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            throw new RuntimeException(ex.getMessage());
+        }
+    }
 }
