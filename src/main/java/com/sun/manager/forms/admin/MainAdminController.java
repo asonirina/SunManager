@@ -199,6 +199,9 @@ public class MainAdminController extends AnchorPane implements Initializable {
     @FXML
     Button findAbonByPhoneButton;
 
+    @FXML
+    Button residueButton;
+
 
     SolariumService solariumService = new SolariumService();
     final ObservableList<BaseSolariumData> vertData = FXCollections.observableArrayList(
@@ -541,6 +544,7 @@ public class MainAdminController extends AnchorPane implements Initializable {
             statButton.setVisible(false);
             phoneBase.setVisible(false);
             findAbonByPhoneButton.setVisible(false);
+            residueButton.setVisible(false);
             addComment.setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent mouseEvent) {
@@ -644,6 +648,19 @@ public class MainAdminController extends AnchorPane implements Initializable {
                 public void handle(MouseEvent mouseEvent) {
                     try {
                         AbonsByPhonePage page = new AbonsByPhonePage();
+                        page.start(new Stage());
+                    } catch (IOException ex) {
+                        new AlertDialog((Stage) logout.getScene().getWindow(), "Произошла ошибка!", 1).showAndWait();
+                        throw new RuntimeException(ex);
+                    }
+                }
+            });
+
+            residueButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    try {
+                        MinutesByPhoneAbonPage page = new MinutesByPhoneAbonPage();
                         page.start(new Stage());
                     } catch (IOException ex) {
                         new AlertDialog((Stage) logout.getScene().getWindow(), "Произошла ошибка!", 1).showAndWait();

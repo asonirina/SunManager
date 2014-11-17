@@ -105,6 +105,7 @@
             <Button fx:id="del3" layoutX="503.0" layoutY="115.0" mnemonicParsing="false" prefWidth="167.00009999999747" text="Удалить" />
             <Button fx:id="phoneBase" layoutX="503.0" layoutY="57.0" mnemonicParsing="false" prefWidth="167.0" text="Телефонная база" />
             <Button fx:id="findAbonByPhoneButton" layoutX="897.0" layoutY="86.0" mnemonicParsing="false" prefWidth="179.0" text="Поиск абонементов" />
+            <Button fx:id="residueButton" layoutX="897.0" layoutY="59.0" mnemonicParsing="false" prefWidth="179.0" text="Остаток минут" />
           </children>
         </AnchorPane>
       </content>

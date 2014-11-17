@@ -243,5 +243,14 @@ public class SolariumService {
         }
     }
 
+    public Integer getResidueMinutesFromAbonement(String abonement, String phone) {
+        try {
+            return dao.getResidueMinutesFromAbonement(abonement, phone);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            throw new RuntimeException(ex.getMessage());
+        }
+    }
+
 
 }
