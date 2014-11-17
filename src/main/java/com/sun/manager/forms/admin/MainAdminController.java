@@ -20,6 +20,7 @@ import javafx.beans.property.ObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -48,8 +49,19 @@ public class MainAdminController extends AnchorPane implements Initializable {
     private Date date = new Date(Calendar.getInstance().getTime().getTime());
 
     @FXML
+    MenuItem addCosmItem;
+    @FXML
+    MenuItem addAbonementItem;
+    @FXML
+    MenuItem residueItem;
+    @FXML
+    MenuItem findAbonByPhoneItem;
+    @FXML
+    MenuItem administratorsItem;
+    @FXML
+    MenuItem customersItem;
+    @FXML
     Button saveChanges;
-
     @FXML
     Button logout;
     @FXML
@@ -172,14 +184,6 @@ public class MainAdminController extends AnchorPane implements Initializable {
     @FXML
     Button countBlue;
 
-    @FXML
-    Button addCosm;
-
-    @FXML
-    Button addAbon;
-
-    @FXML
-    Button usersButton;
 
     @FXML
     Button bankButton;
@@ -192,15 +196,6 @@ public class MainAdminController extends AnchorPane implements Initializable {
 
     @FXML
     Button del3;
-
-    @FXML
-    Button phoneBase;
-
-    @FXML
-    Button findAbonByPhoneButton;
-
-    @FXML
-    Button residueButton;
 
     @FXML
     Button saveL21;
@@ -576,14 +571,8 @@ public class MainAdminController extends AnchorPane implements Initializable {
                     solariumService.saveL2ByAdministrator(3L,blueResData.get(2).getL2());
                 }
             });
-            addCosm.setVisible(false);
-            addAbon.setVisible(false);
-            usersButton.setVisible(false);
             showComments.setVisible(false);
             statButton.setVisible(false);
-            phoneBase.setVisible(false);
-            findAbonByPhoneButton.setVisible(false);
-            residueButton.setVisible(false);
             addComment.setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent mouseEvent) {
@@ -625,9 +614,9 @@ public class MainAdminController extends AnchorPane implements Initializable {
                     }
                 }
             });
-            addCosm.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            addCosmItem.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
-                public void handle(MouseEvent mouseEvent) {
+                public void handle(ActionEvent actionEvent) {
                     AddCosmeticsPage page = new AddCosmeticsPage();
                     try {
                         page.start(new Stage());
@@ -637,22 +626,10 @@ public class MainAdminController extends AnchorPane implements Initializable {
                     }
                 }
             });
-            addAbon.setOnMouseClicked(new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent mouseEvent) {
-                    try {
-                        AddAbonementPage page = new AddAbonementPage();
-                        page.start(new Stage());
-                    } catch (IOException ex) {
-                        new AlertDialog((Stage) logout.getScene().getWindow(), "Произошла ошибка!", 1).showAndWait();
-                        throw new RuntimeException(ex);
-                    }
-                }
-            });
 
-            usersButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            administratorsItem.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
-                public void handle(MouseEvent mouseEvent) {
+                public void handle(ActionEvent actionEvent) {
                     try {
                         UsersPage page = new UsersPage();
                         page.start(new Stage());
@@ -675,9 +652,9 @@ public class MainAdminController extends AnchorPane implements Initializable {
                     }
                 }
             });
-            phoneBase.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            customersItem.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
-                public void handle(MouseEvent mouseEvent) {
+                public void handle(ActionEvent actionEvent) {
                     try {
                         PhoneBasePage page = new PhoneBasePage();
                         page.start(new Stage());
@@ -688,9 +665,9 @@ public class MainAdminController extends AnchorPane implements Initializable {
                 }
             });
 
-            findAbonByPhoneButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            findAbonByPhoneItem.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
-                public void handle(MouseEvent mouseEvent) {
+                public void handle(ActionEvent actionEvent) {
                     try {
                         AbonsByPhonePage page = new AbonsByPhonePage();
                         page.start(new Stage());
@@ -701,11 +678,24 @@ public class MainAdminController extends AnchorPane implements Initializable {
                 }
             });
 
-            residueButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            residueItem.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
-                public void handle(MouseEvent mouseEvent) {
+                public void handle(ActionEvent actionEvent) {
                     try {
                         MinutesByPhoneAbonPage page = new MinutesByPhoneAbonPage();
+                        page.start(new Stage());
+                    } catch (IOException ex) {
+                        new AlertDialog((Stage) logout.getScene().getWindow(), "Произошла ошибка!", 1).showAndWait();
+                        throw new RuntimeException(ex);
+                    }
+                }
+            });
+
+            addAbonementItem.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent actionEvent) {
+                    try {
+                        AddAbonementPage page = new AddAbonementPage();
                         page.start(new Stage());
                     } catch (IOException ex) {
                         new AlertDialog((Stage) logout.getScene().getWindow(), "Произошла ошибка!", 1).showAndWait();

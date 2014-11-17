@@ -91,9 +91,6 @@
             <Button fx:id="countAbon" layoutX="900.0" layoutY="655.0" mnemonicParsing="false" prefWidth="168.0" text="Рассчитать" />
             <Label fx:id="dateLabel" layoutX="84.0" layoutY="71.0" prefWidth="114.0" text="Label" />
             <Label fx:id="usernameLabel" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="795.0" layoutY="15.0" prefWidth="304.0" text="Label" textAlignment="RIGHT" />
-            <Button fx:id="addCosm" layoutX="693.0" layoutY="129.0" mnemonicParsing="false" prefWidth="179.0" text="Добавить косметику" />
-            <Button fx:id="addAbon" layoutX="893.0" layoutY="128.0" mnemonicParsing="false" prefWidth="180.0" text="Добавить абонемент" />
-            <Button fx:id="usersButton" layoutX="503.0" layoutY="100.0" mnemonicParsing="false" prefWidth="166.00009999999747" text="Администраторы" />
             <Button fx:id="addComment" layoutX="296.0" layoutY="100.0" mnemonicParsing="false" prefWidth="193.0" text="Добавить комментарий" />
             <Button fx:id="showComments" layoutX="296.0" layoutY="100.0" mnemonicParsing="false" prefWidth="192.99990000000253" text="Посмотреть комментарии" />
             <Button fx:id="statButton" layoutX="693.0" layoutY="71.0" mnemonicParsing="false" prefWidth="179.0" text="Статистика" />
@@ -103,12 +100,31 @@
             <Button fx:id="del1" layoutX="84.0" layoutY="129.0" mnemonicParsing="false" prefWidth="200.0" text="Удалить" />
             <Button fx:id="del2" layoutX="296.0" layoutY="128.0" mnemonicParsing="false" prefWidth="193.00009999999747" text="Удалить" />
             <Button fx:id="del3" layoutX="503.0" layoutY="129.0" mnemonicParsing="false" prefWidth="167.00009999999747" text="Удалить" />
-            <Button fx:id="phoneBase" layoutX="503.0" layoutY="71.0" mnemonicParsing="false" prefWidth="167.0" text="Телефонная база" />
-            <Button fx:id="findAbonByPhoneButton" layoutX="893.0" layoutY="100.0" mnemonicParsing="false" prefWidth="180.0" text="Поиск абонементов" />
-            <Button fx:id="residueButton" layoutX="893.0" layoutY="71.0" mnemonicParsing="false" prefWidth="179.00009999999747" text="Остаток минут" />
             <Button fx:id="saveL21" layoutX="98.0" layoutY="624.0" mnemonicParsing="false" prefWidth="180.0" text="Сохранить L2" />
             <Button fx:id="saveL22" layoutX="310.0" layoutY="625.0" mnemonicParsing="false" prefWidth="168.0" text="Сохранить L2" />
-            <Button id="saveL23" fx:id="saveL23" layoutX="507.0" layoutY="624.0" mnemonicParsing="false" prefWidth="163.0" text="Сохранить L2" />
+            <Button fx:id="saveL23" layoutX="507.0" layoutY="624.0" mnemonicParsing="false" prefWidth="163.0" text="Сохранить L2" />
+            <MenuBar layoutX="14.0" layoutY="14.0">
+              <menus>
+                <Menu mnemonicParsing="false" text="Косметика">
+                  <items>
+                    <MenuItem mnemonicParsing="false" text="Добавить косметику" fx:id="addCosmItem" />
+                  </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Пользователи">
+                  <items>
+                    <MenuItem mnemonicParsing="false" text="Администраторы" fx:id="administratorsItem" />
+                    <MenuItem mnemonicParsing="false" text="Клиенты" fx:id="customersItem" />
+                  </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Абонементы">
+                  <items>
+                    <MenuItem mnemonicParsing="false" text="Добавить абонемент" fx:id="addAbonementItem" />
+                    <MenuItem mnemonicParsing="false" text="Остаток минут" fx:id="residueItem" />
+                    <MenuItem mnemonicParsing="false" text="Поиск абонементов" fx:id="findAbonByPhoneItem" />
+                  </items>
+                </Menu>
+              </menus>
+            </MenuBar>
           </children>
         </AnchorPane>
       </content>
