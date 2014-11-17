@@ -65,7 +65,7 @@ public abstract class EditingCell<T1, T2> extends TableCell<T1, T2> {
 
     }
 
-    private String getString() {
+    protected String getString() {
         return getItem() == null ? "" : getItem().toString();
     }
 

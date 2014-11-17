@@ -202,6 +202,15 @@ public class MainAdminController extends AnchorPane implements Initializable {
     @FXML
     Button residueButton;
 
+    @FXML
+    Button saveL21;
+
+    @FXML
+    Button saveL22;
+
+    @FXML
+    Button saveL23;
+
 
     SolariumService solariumService = new SolariumService();
     final ObservableList<BaseSolariumData> vertData = FXCollections.observableArrayList(
@@ -322,9 +331,11 @@ public class MainAdminController extends AnchorPane implements Initializable {
         colNumber.setCellFactory(EventHandlers.cellFactoryNum());
 
         colNumRes.setCellFactory(EventHandlers.cellFactoryRes());
-        colVertRes.setCellFactory(EventHandlers.cellFactoryRes());
-        colGreenRes.setCellFactory(EventHandlers.cellFactoryRes());
-        colBlueRes.setCellFactory(EventHandlers.cellFactoryRes());
+
+        colVertRes.setCellFactory(EventHandlers.cellFactoryL2());
+        colGreenRes.setCellFactory(EventHandlers.cellFactoryL2());
+        colBlueRes.setCellFactory(EventHandlers.cellFactoryL2());
+
         colCosmRes.setCellFactory(EventHandlers.cellFactoryForStikini());
         colAbonRes.setCellFactory(EventHandlers.cellFactoryRes());
     }
@@ -334,7 +345,11 @@ public class MainAdminController extends AnchorPane implements Initializable {
         colBlue.setOnEditCommit(EventHandlers.eventHandlerBaseSolariumEditCommit());
         colVert.setOnEditCommit(EventHandlers.eventHandlerBaseSolariumEditCommit());
 
-        colCosmRes.setOnEditCommit(EventHandlers.eventHandlerCosmeticsEditCommit());
+        colVertRes.setOnEditCommit(EventHandlers.eventHandlerResDataEditCommit());
+        colGreenRes.setOnEditCommit(EventHandlers.eventHandlerResDataEditCommit());
+        colBlueRes.setOnEditCommit(EventHandlers.eventHandlerResDataEditCommit());
+
+        colCosmRes.setOnEditCommit(EventHandlers.eventHandlerResDataEditCommit());
     }
 
     private void setNumbers() {
@@ -374,6 +389,9 @@ public class MainAdminController extends AnchorPane implements Initializable {
             tableGreen.setEditable(false);
             tableBlue.setEditable(false);
 
+            tableVertRes.setEditable(false);
+            tableGreenRes.setEditable(false);
+            tableBlueRes.setEditable(false);
             tableCosmRes.setEditable(false);
         }
     }
@@ -537,6 +555,27 @@ public class MainAdminController extends AnchorPane implements Initializable {
                     }
                 }
             });
+
+            saveL21.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    solariumService.saveL2ByAdministrator(1L,vertResData.get(2).getL2());
+                }
+            });
+
+            saveL22.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    solariumService.saveL2ByAdministrator(2L,greenResData.get(2).getL2());
+                }
+            });
+
+            saveL23.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    solariumService.saveL2ByAdministrator(3L,blueResData.get(2).getL2());
+                }
+            });
             addCosm.setVisible(false);
             addAbon.setVisible(false);
             usersButton.setVisible(false);
@@ -565,6 +604,12 @@ public class MainAdminController extends AnchorPane implements Initializable {
                 }
             });
         } else {
+            del1.setVisible(false);
+            del2.setVisible(false);
+            del3.setVisible(false);
+            saveL21.setVisible(false);
+            saveL22.setVisible(false);
+            saveL23.setVisible(false);
             saveChanges.setVisible(false);
             addComment.setVisible(false);
             showComments.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -790,12 +835,5 @@ public class MainAdminController extends AnchorPane implements Initializable {
         tableGreen.selectionModelProperty().bind(tableBlue.selectionModelProperty());
         tableBlue.selectionModelProperty().bind(tableCosm.selectionModelProperty());
         tableCosm.selectionModelProperty().bind(tableAbon.selectionModelProperty());
-
-        tableNumRes.selectionModelProperty().bind(tableVertRes.selectionModelProperty());
-        tableVertRes.selectionModelProperty().bind(tableGreenRes.selectionModelProperty());
-        tableGreenRes.selectionModelProperty().bind(tableBlueRes.selectionModelProperty());
-        tableBlueRes.selectionModelProperty().bind(tableCosmRes.selectionModelProperty());
-        tableAbonRes.selectionModelProperty().bind(tableNumRes.selectionModelProperty());
-
     }
 }

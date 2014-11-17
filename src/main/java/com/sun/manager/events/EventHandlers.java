@@ -101,7 +101,7 @@ public class EventHandlers {
         };
     }
 
-    public static EventHandler eventHandlerCosmeticsEditCommit() {
+    public static EventHandler eventHandlerResDataEditCommit() {
         return new EventHandler<TableColumn.CellEditEvent<ResData, String>>() {
             @Override
             public void handle(TableColumn.CellEditEvent<ResData, String> t) {
@@ -138,6 +138,16 @@ public class EventHandlers {
             @Override
             public TableCell<ResData, String> call(TableColumn<ResData, String> p) {
                 return new EditingCellSimple<ResData, String>();
+            }
+
+        };
+    }
+
+    public static Callback cellFactoryL2() {
+        return new Callback<TableColumn<ResData, String>, TableCell<ResData, String>>() {
+            @Override
+            public TableCell<ResData, String> call(TableColumn<ResData, String> p) {
+                return new EditingCellL2<ResData, String>();
             }
 
         };

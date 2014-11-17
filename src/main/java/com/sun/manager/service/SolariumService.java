@@ -6,6 +6,7 @@ import com.sun.manager.dto.*;
 
 import java.sql.Date;
 import java.sql.SQLException;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -252,5 +253,13 @@ public class SolariumService {
         }
     }
 
-
+    public void saveL2ByAdministrator(Long solariumId, Double l2) {
+        try {
+            Long minutes = Math.round(Math.floor(l2))*60 + Math.round((l2 - Math.floor(l2))*100);
+            dao.saveL2ByAdministrator(solariumId, l2,new Date(Calendar.getInstance().getTime().getTime()), minutes);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            throw new RuntimeException(ex.getMessage());
+        }
+    }
 }

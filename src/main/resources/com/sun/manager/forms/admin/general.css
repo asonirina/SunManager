@@ -6,7 +6,8 @@
 #countVert, #countGreen, #countBlue, #countCosm, #countAbon, #addCosm,
 #addCosm, #addAbon, #usersButton, #addComment, #showComments, #statButton, #bankButton,
 #addCosmButton, #deleteButton, #saveChanges, #logout, #del1, #del2, #del3,#phoneBase,
-#findAbonByPhoneButton, #residueButton, #findButton {
+#findAbonByPhoneButton, #residueButton, #findButton,
+#saveL21,#saveL22, #saveL23{
     -fx-background-color:
         rgba(0,0,0,0.08),
         linear-gradient(#9a9a9a, #909090),
@@ -22,7 +23,8 @@
 #countVert:hover, #countGreen:hover, #countBlue:hover, #countCosm:hover, #countAbon:hover, #addCosm:hover,
 #addCosm:hover, #addAbon:hover, #usersButton:hover, #addComment:hover, #showComments:hover, #statButton:hover, #bankButton:hover,
 #addCosmButton:hover, #deleteButton:hover, #saveChanges:hover, #logout:hover, #phoneBase:hover,
-#findAbonByPhoneButton:hover, #residueButton:hover, #findButton:hover {
+#findAbonByPhoneButton:hover, #residueButton:hover, #findButton:hover,
+#saveL21:hover, #saveL22:hover, #saveL23:hover {
     -fx-background-color: linear-gradient(#f3f3f3, #f2f2f2);
 }
 
