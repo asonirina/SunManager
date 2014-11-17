@@ -16,9 +16,7 @@ import com.sun.manager.service.SolariumService;
 import eu.schudt.javafx.controls.calendar.DatePicker;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
-import javafx.beans.property.ObjectProperty;
 import javafx.collections.FXCollections;
-import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -27,7 +25,6 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.DataFormat;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
@@ -49,163 +46,62 @@ public class MainAdminController extends AnchorPane implements Initializable {
     private Date date = new Date(Calendar.getInstance().getTime().getTime());
 
     @FXML
-    MenuItem addCosmItem;
-    @FXML
-    MenuItem addAbonementItem;
-    @FXML
-    MenuItem residueItem;
-    @FXML
-    MenuItem findAbonByPhoneItem;
-    @FXML
-    MenuItem administratorsItem;
-    @FXML
-    MenuItem customersItem;
-    @FXML
-    Button saveChanges;
-    @FXML
-    Button logout;
+    ScrollPane scrollPane;
     @FXML
     AnchorPane anchorPane;
+    //---------------------------Menu---------------------------------
+    @FXML
+    Menu cosmeticsMenu;
+    @FXML
+    MenuItem addCosmItem;
+    @FXML
+    Menu usersMenu;
+    @FXML
+    MenuItem administratorsItem, customersItem;
+    @FXML
+    Menu abonementsMenu;
+    @FXML
+    MenuItem addAbonementItem, residueItem, findAbonByPhoneItem;
+    @FXML
+    Menu commentsMenu;
+    @FXML
+    MenuItem addCommentItem, showCommentsItem;
+    @FXML
+    Menu statisticsMenu;
+    @FXML
+    MenuItem statisticsItem, bankItem;
+    @FXML
+    Button saveChanges, logout;
+ //------------------------------------------------------------------------------
 
     @FXML
-    ScrollPane scrollPane;
-
-    @FXML
-    Label dateLabel;
-
-    @FXML
-    Button addComment;
-
-    @FXML
-    Button showComments;
-
-    @FXML
-    Button statButton;
-
-    @FXML
-    Label usernameLabel;
-
+    Label dateLabel, usernameLabel;
 
     DatePicker datePicker = new DatePicker();
-    //main tables
-    @FXML
-    TableView//<NumericData>
-            tableNumber;
 
+    //------------------------------main tables--------------------------------------------------
     @FXML
-    TableView//<BaseSolariumData>
-            tableVert;
-
-    @FXML
-    TableView//<BaseSolariumData>
-            tableGreen;
-
-    @FXML
-    TableView//<BaseSolariumData>
-            tableBlue;
-
-    @FXML
-    TableView//<CosmeticsRequest>
-            tableCosm;
-
-    @FXML
-    TableView//<AbonementsRequest>
-            tableAbon;
-
+    TableView tableNumber, tableVert, tableGreen, tableBlue, tableCosm, tableAbon;
 
     // main columns
     @FXML
-    TableColumn colNumber;
-
-    @FXML
-    TableColumn colVert;
-
-    @FXML
-    TableColumn colGreen;
-
-    @FXML
-    TableColumn colBlue;
-
-    @FXML
-    TableColumn colCosm;
-
-    @FXML
-    TableColumn colAbon;
+    TableColumn colNumber, colVert, colGreen, colBlue, colCosm, colAbon;
 
     //// tables with res data
     @FXML
-    TableView<ResData> tableNumRes;
+    TableView<ResData> tableNumRes, tableVertRes, tableGreenRes, tableBlueRes, tableCosmRes, tableAbonRes;
 
     @FXML
-    TableColumn colNumRes;
+    TableColumn colNumRes, colVertRes, colGreenRes, colBlueRes, colCosmRes, colAbonRes;
 
     @FXML
-    TableView<ResData> tableVertRes;
+    Button countVert, countGreen, countBlue, countCosm, countAbon;
 
     @FXML
-    TableColumn colVertRes;
+    Button del1, del2, del3;
 
     @FXML
-    TableView<ResData> tableGreenRes;
-
-    @FXML
-    TableColumn colGreenRes;
-
-    @FXML
-    TableView<ResData> tableBlueRes;
-
-    @FXML
-    TableColumn colBlueRes;
-
-    @FXML
-    TableView<ResData> tableCosmRes;
-
-    @FXML
-    TableColumn colCosmRes;
-
-    @FXML
-    TableView<ResData> tableAbonRes;
-
-    @FXML
-    TableColumn colAbonRes;
-
-    @FXML
-    Button countVert;
-
-    @FXML
-    Button countGreen;
-
-    @FXML
-    Button countCosm;
-
-    @FXML
-    Button countAbon;
-
-    @FXML
-    Button countBlue;
-
-
-    @FXML
-    Button bankButton;
-
-    @FXML
-    Button del1;
-
-    @FXML
-    Button del2;
-
-    @FXML
-    Button del3;
-
-    @FXML
-    Button saveL21;
-
-    @FXML
-    Button saveL22;
-
-    @FXML
-    Button saveL23;
-
+    Button saveL21, saveL22, saveL23 ;
 
     SolariumService solariumService = new SolariumService();
     final ObservableList<BaseSolariumData> vertData = FXCollections.observableArrayList(
@@ -244,7 +140,7 @@ public class MainAdminController extends AnchorPane implements Initializable {
         App.getInstance().setSelectedDate(date);
         try {
             if (App.getInstance().getUser().getRole().equals("derictor")) {
-                datePicker.setLayoutX(84);
+                datePicker.setLayoutX(49);
                 datePicker.setLayoutY(57);
 
                 datePicker.getStylesheets().add(this.getClass().getResource("datePicker.css").toExternalForm());
@@ -437,7 +333,6 @@ public class MainAdminController extends AnchorPane implements Initializable {
                     ((Stage) logout.getScene().getWindow()).close();
                 } catch (IOException ex) {
                     new AlertDialog((Stage) logout.getScene().getWindow(), "Произошла ошибка!", 1).showAndWait();
-                    //throw new RuntimeException(ex);
                 }
             }
         });
@@ -494,9 +389,9 @@ public class MainAdminController extends AnchorPane implements Initializable {
             }
         });
 
-        bankButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+        bankItem.setOnAction(new EventHandler<ActionEvent>() {
             @Override
-            public void handle(MouseEvent mouseEvent) {
+            public void handle(ActionEvent actionEvent) {
                 save();
                 BankDataPage page = new BankDataPage();
                 try {
@@ -571,11 +466,9 @@ public class MainAdminController extends AnchorPane implements Initializable {
                     solariumService.saveL2ByAdministrator(3L,blueResData.get(2).getL2());
                 }
             });
-            showComments.setVisible(false);
-            statButton.setVisible(false);
-            addComment.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            addCommentItem.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
-                public void handle(MouseEvent mouseEvent) {
+                public void handle(ActionEvent actionEvent) {
                     AddCommentPage page = new AddCommentPage();
                     try {
                         page.start(new Stage());
@@ -592,6 +485,11 @@ public class MainAdminController extends AnchorPane implements Initializable {
 
                 }
             });
+            cosmeticsMenu.setVisible(false);
+            usersMenu.setVisible(false);
+            abonementsMenu.setVisible(false);
+            showCommentsItem.setVisible(false);
+            statisticsItem.setVisible(false);
         } else {
             del1.setVisible(false);
             del2.setVisible(false);
@@ -600,17 +498,16 @@ public class MainAdminController extends AnchorPane implements Initializable {
             saveL22.setVisible(false);
             saveL23.setVisible(false);
             saveChanges.setVisible(false);
-            addComment.setVisible(false);
-            showComments.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            addCommentItem.setVisible(false);
+            showCommentsItem.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
-                public void handle(MouseEvent mouseEvent) {
+                public void handle(ActionEvent actionEvent) {
                     ShowCommentPage page = new ShowCommentPage();
                     try {
 
                         page.start(new Stage());
                     } catch (IOException ex) {
                         new AlertDialog((Stage) logout.getScene().getWindow(), "Произошла ошибка!", 1).showAndWait();
-                        //throw new RuntimeException(ex);
                     }
                 }
             });
@@ -640,9 +537,9 @@ public class MainAdminController extends AnchorPane implements Initializable {
                 }
             });
 
-            statButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            statisticsItem.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
-                public void handle(MouseEvent mouseEvent) {
+                public void handle(ActionEvent actionEvent) {
                     try {
                         StatisticsPage page = new StatisticsPage();
                         page.start(new Stage());
