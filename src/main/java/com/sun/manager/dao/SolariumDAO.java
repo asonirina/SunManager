@@ -658,8 +658,8 @@ public class SolariumDAO {
     public Integer getResidueMinutesFromAbonement(String abonement, String phoneNumber) throws SQLException {
         String getDataFromDB = "select minutes from abonements_data where code=? and letter=? and phone=?";
         PreparedStatement ps = dbConnection.prepareStatement(getDataFromDB);
-        ps.setString(1, abonement.replaceAll("a-zA-Z+", ""));
-        ps.setString(2, abonement.replaceAll("\\D+", ""));
+        ps.setString(1, abonement.replaceAll("\\D+", ""));
+        ps.setString(2, abonement.replaceAll("\\d+", ""));
         ps.setString(3, phoneNumber);
         ResultSet rs = ps.executeQuery();
 
