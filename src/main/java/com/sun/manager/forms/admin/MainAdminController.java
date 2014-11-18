@@ -592,7 +592,7 @@ public class MainAdminController extends AnchorPane implements Initializable {
                 @Override
                 public void handle(ActionEvent actionEvent) {
                     try {
-                        AddAbonementPage page = new AddAbonementPage();
+                        AbonementPage page = new AbonementPage();
                         page.start(new Stage());
                     } catch (IOException ex) {
                         new AlertDialog((Stage) logout.getScene().getWindow(), "Произошла ошибка!", 1).showAndWait();

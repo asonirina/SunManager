@@ -6,6 +6,7 @@ import com.sun.manager.dto.*;
 
 import java.sql.Date;
 import java.sql.SQLException;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
@@ -257,6 +258,24 @@ public class SolariumService {
         try {
             Long minutes = Math.round(Math.floor(l2))*60 + Math.round((l2 - Math.floor(l2))*100);
             dao.saveL2ByAdministrator(solariumId, l2,new Date(Calendar.getInstance().getTime().getTime()), minutes);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            throw new RuntimeException(ex.getMessage());
+        }
+    }
+
+    public boolean isAbonementExistsByLetter(String letter) {
+        try {
+            return dao.getPriceAndMinutesByLetter(letter)!=null;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            throw new RuntimeException(ex.getMessage());
+        }
+    }
+
+    public void createNewAbonement(AvailableAbonements abonements) {
+        try {
+            dao.createAbonementLetterParams(abonements);
         } catch (SQLException ex) {
             ex.printStackTrace();
             throw new RuntimeException(ex.getMessage());

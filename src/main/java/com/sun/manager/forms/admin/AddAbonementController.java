@@ -1,27 +1,25 @@
 package com.sun.manager.forms.admin;
 
+import com.sun.manager.App;
 import com.sun.manager.dto.AvailableAbonements;
-import com.sun.manager.events.EventHandlers;
+import com.sun.manager.events.AvailableAbonementsCreatedEvent;
 import com.sun.manager.forms.alert.AlertDialog;
 import com.sun.manager.service.SolariumService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import org.apache.commons.lang.StringUtils;
 
 import java.net.URL;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.ResourceBundle;
 
 /**
@@ -31,65 +29,82 @@ import java.util.ResourceBundle;
 public class AddAbonementController extends AnchorPane implements Initializable {
 
     @FXML
-    TableView<AvailableAbonements> abonTable;
+    TextField letterField, minutesField, priceField, durationField, timeField;
+    @FXML
+    CheckBox limitBox;
+    @FXML
+    Label zeroLabel;
 
     @FXML
-    TableColumn<AvailableAbonements, String> letterCol;
-
-    @FXML
-    TableColumn<AvailableAbonements, Integer> priceCol;
-
-    @FXML
-    TableColumn<AvailableAbonements, Integer> minutesCol;
-
-    @FXML
-    TableColumn<AvailableAbonements, Integer> durationCol;
-
-
-    @FXML
-    Button okButton;
-
-    @FXML
-    Button cancelButton;
-
+    Button saveButton, cancelButton;
 
     SolariumService service = new SolariumService();
-
-    ObservableList<AvailableAbonements> data = FXCollections.observableArrayList(service.getAvailableAbonements());
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        abonTable.setEditable(true);
-        letterCol.setCellValueFactory(new PropertyValueFactory<AvailableAbonements, String>("letter"));
-        priceCol.setCellValueFactory(new PropertyValueFactory<AvailableAbonements, Integer>("price"));
-        minutesCol.setCellValueFactory(new PropertyValueFactory<AvailableAbonements, Integer>("minutes"));
-        durationCol.setCellValueFactory(new PropertyValueFactory<AvailableAbonements, Integer>("duration"));
+        limitBox.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                if(limitBox.isSelected()){
+                    timeField.setVisible(true);
+                    zeroLabel.setVisible(true);
+                } else {
+                    timeField.setVisible(false);
+                    zeroLabel.setVisible(false);
+                }
+            }
+        });
 
-        priceCol.setCellFactory(EventHandlers.cellFactoryAvailableAbonements());
-        minutesCol.setCellFactory(EventHandlers.cellFactoryAvailableAbonements());
-        durationCol.setCellFactory(EventHandlers.cellFactoryAvailableAbonements());
-
-        priceCol.setOnEditCommit(EventHandlers.eventHandlerAbonementsPrice());
-        minutesCol.setOnEditCommit(EventHandlers.eventHandlerAbonementsMinutes());
-        durationCol.setOnEditCommit(EventHandlers.eventHandlerAbonementsDuration());
-
-        abonTable.setItems(data);
-
-        okButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+        saveButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                service.updateAbonements(data);
+
+                String letter = letterField.getText();
+                if (letter.isEmpty()) {
+                    new AlertDialog((Stage) cancelButton.getScene().getWindow(), "Введите букву!", 1).showAndWait();
+                    return;
+                }
+                if (validateFields()) {
+                    if (service.isAbonementExistsByLetter(letter)) {
+                        new AlertDialog((Stage) cancelButton.getScene().getWindow(), "Абонемент с такой буквой уже существует!", 1).showAndWait();
+                        return;
+                    }
+                    Integer time = 24;
+                    if (limitBox.isSelected()) {
+                        time = Integer.valueOf(timeField.getText());
+                    }
+                    AvailableAbonements newAbon = new AvailableAbonements(letter, Integer.valueOf(priceField.getText()),
+                            Integer.valueOf(minutesField.getText()), Integer.valueOf(durationField.getText()), time);
+                    service.createNewAbonement(newAbon);
+                    App.getInstance().getEventBus().post(new AvailableAbonementsCreatedEvent(newAbon));
+                    ((Stage) cancelButton.getScene().getWindow()).close();
+                }
             }
         });
 
         cancelButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                Stage stage = (Stage) okButton.getScene().getWindow();
+                Stage stage = (Stage) cancelButton.getScene().getWindow();
                 stage.close();
             }
         });
+    }
+
+    private boolean validateFields() {
+        try {
+            Integer.parseInt(minutesField.getText());
+            Integer.parseInt(priceField.getText());
+            Integer.parseInt(durationField.getText());
+            if (limitBox.isSelected()) {
+                Integer.parseInt(timeField.getText());
+            }
+        } catch (NumberFormatException ex) {
+            new AlertDialog((Stage) cancelButton.getScene().getWindow(), "Введите число!", 1).showAndWait();
+            return false;
+        }
+        return true;
     }
 
 

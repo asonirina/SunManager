@@ -101,6 +101,17 @@ public class EventHandlers {
         };
     }
 
+    public static EventHandler eventHandlerAbonementsTime() {
+        return new EventHandler<TableColumn.CellEditEvent<AvailableAbonements, Integer>>() {
+            @Override
+            public void handle(TableColumn.CellEditEvent<AvailableAbonements, Integer> t) {
+                AvailableAbonements data = t.getTableView().getItems().get(t.getTablePosition().getRow());
+                Integer time = t.getNewValue();
+                data.setAvailableTime(time);
+            }
+        };
+    }
+
     public static EventHandler eventHandlerResDataEditCommit() {
         return new EventHandler<TableColumn.CellEditEvent<ResData, String>>() {
             @Override

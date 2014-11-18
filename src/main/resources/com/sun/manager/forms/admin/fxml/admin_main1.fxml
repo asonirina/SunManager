@@ -114,7 +114,7 @@
                 </Menu>
                 <Menu mnemonicParsing="false" text="Абонементы" fx:id="abonementsMenu">
                   <items>
-                    <MenuItem mnemonicParsing="false" text="Добавить абонемент" fx:id="addAbonementItem" />
+                    <MenuItem mnemonicParsing="false" text="Доступные абонементы" fx:id="addAbonementItem" />
                     <MenuItem mnemonicParsing="false" text="Остаток минут" fx:id="residueItem" />
                     <MenuItem mnemonicParsing="false" text="Поиск абонементов" fx:id="findAbonByPhoneItem" />
                   </items>
