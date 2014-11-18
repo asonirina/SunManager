@@ -6,10 +6,13 @@ import com.sun.manager.dto.AbonementsRequest;
 import com.sun.manager.events.NewAbonementAddedEvent;
 import com.sun.manager.forms.alert.AlertDialog;
 import com.sun.manager.service.SolariumService;
+import javafx.collections.FXCollections;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
@@ -33,20 +36,13 @@ import java.util.ResourceBundle;
 public class AbonementRequestController extends AnchorPane implements Initializable {
 
     @FXML
-    TextField letterField;
+    ComboBox letterBox;
 
     @FXML
-    TextField codeField;
-
-    @FXML
-    TextField nameField;
-
-    @FXML
-    TextField phoneField;
+    TextField codeField, nameField, phoneField;
 
     @FXML
     Button saveButton;
-
 
     @FXML
     Label priceLabel;
@@ -56,25 +52,16 @@ public class AbonementRequestController extends AnchorPane implements Initializa
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
-        letterField.setOnKeyPressed(new EventHandler<KeyEvent>() {
+        letterBox.setItems(FXCollections.observableArrayList(service.getAvailableAbonementsByHour(0)));
+        letterBox.setOnAction(new EventHandler<ActionEvent>() {
             @Override
-            public void handle(KeyEvent keyEvent) {
-                if (KeyConstants.getInvalidCodes().contains(keyEvent.getCode())) {
-                    new AlertDialog((Stage) letterField.getScene().getWindow(), "Введите одну из следующих букв: B, C, D, K, M, O, G, R, H, S", 1).showAndWait();
-                    return;
-                }
-
-                if (Arrays.asList(KeyCode.B, KeyCode.C, KeyCode.D, KeyCode.K, KeyCode.M, KeyCode.O, KeyCode.G, KeyCode.R, KeyCode.H).contains(keyEvent.getCode())) {
-
-                    abonInfo = service.getCodeAndPriceBySymbol(letterField.getText()+keyEvent.getCode());
-                    codeField.setText(String.valueOf(abonInfo.get("code")));
-                    if(abonInfo.get("price")!=null) {
+            public void handle(ActionEvent actionEvent) {
+                abonInfo = service.getCodeAndPriceBySymbol((String)letterBox.getSelectionModel().getSelectedItem());
+                codeField.setText(String.valueOf(abonInfo.get("code")));
+                if(abonInfo.get("price")!=null) {
                     priceLabel.setText("Цена: " + abonInfo.get("price"));
-                    }else {
-                        priceLabel.setText("Абонемент не найден!");
-                    }
-
+                }else {
+                    priceLabel.setText("Абонемент не найден!");
                 }
             }
         });
@@ -83,7 +70,7 @@ public class AbonementRequestController extends AnchorPane implements Initializa
             @Override
             public void handle(MouseEvent mouseEvent) {
                 if (validate()) {
-                    AbonementsRequest request = new AbonementsRequest(letterField.getText(),
+                    AbonementsRequest request = new AbonementsRequest((String)letterBox.getSelectionModel().getSelectedItem(),
                             Long.parseLong(codeField.getText()), nameField.getText(), phoneField.getText(), abonInfo.get("price"));
                     request.setStartDate(new Date(Calendar.getInstance().getTime().getTime()));
                     service.saveAbonement(Arrays.asList(request));
@@ -98,13 +85,8 @@ public class AbonementRequestController extends AnchorPane implements Initializa
 
     private boolean validate() {
         if (StringUtils.isBlank(nameField.getText()) || StringUtils.isBlank(phoneField.getText())
-                || StringUtils.isBlank(letterField.getText()) || StringUtils.isBlank(codeField.getText())) {
+                || letterBox.getSelectionModel().getSelectedItem()==null || StringUtils.isBlank(codeField.getText())) {
             new AlertDialog((Stage) nameField.getScene().getWindow(), "Заполните все поля!", 1).showAndWait();
-            return false;
-        }
-
-        if (!letterField.getText().matches("S?[BCDKMOGRH]{1}")){
-            new AlertDialog((Stage) nameField.getScene().getWindow(), "Введите одну из следующих букв: B, C, D, K, M, O, G, R, H", 1).showAndWait();
             return false;
         }
 
@@ -114,7 +96,7 @@ public class AbonementRequestController extends AnchorPane implements Initializa
         }
 
         if (abonInfo.get("price") == null) {
-            new AlertDialog((Stage) nameField.getScene().getWindow(), "Введите другую букву для абонемента!", 1).showAndWait();
+            new AlertDialog((Stage) nameField.getScene().getWindow(), "Выберите другую букву для абонемента!", 1).showAndWait();
             return false;
         }
         return true;

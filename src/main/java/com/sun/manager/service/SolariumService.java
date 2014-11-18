@@ -281,4 +281,13 @@ public class SolariumService {
             throw new RuntimeException(ex.getMessage());
         }
     }
+
+    public List<String> getAvailableAbonementsByHour(int hour) {
+        try {
+           return dao.getAllAvailableAbonementsLessThanHour(hour);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            throw new RuntimeException(ex.getMessage());
+        }
+    }
 }

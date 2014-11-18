@@ -118,7 +118,7 @@ public class AbonementController extends AnchorPane implements Initializable {
 
     @Subscribe
     public void newAbonementAdded(AvailableAbonementsCreatedEvent e) {
-        data.add(e.getAbon());
+        data.add(0, e.getAbon());
         abonTable.setItems(data);
     }
 

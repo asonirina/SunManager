@@ -129,7 +129,7 @@ public class EventHandlers {
         return new Callback<TableColumn<BaseSolariumData, String>, TableCell<BaseSolariumData, String>>() {
             @Override
             public TableCell<BaseSolariumData, String> call(TableColumn<BaseSolariumData, String> p) {
-                return new EditingCellSolariumData<BaseSolariumData, String>(e);
+               return new EditingCellSolariumData<BaseSolariumData, String>(e);
             }
         };
     }

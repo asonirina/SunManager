@@ -81,7 +81,13 @@ public class MainAdminController extends AnchorPane implements Initializable {
 
     //------------------------------main tables--------------------------------------------------
     @FXML
-    TableView tableNumber, tableVert, tableGreen, tableBlue, tableCosm, tableAbon;
+    TableView<NumericData> tableNumber;
+    @FXML
+    TableView<BaseSolariumData> tableVert, tableGreen, tableBlue;
+    @FXML
+    TableView<CosmeticsRequest> tableCosm;
+    @FXML
+    TableView<AbonementsRequest> tableAbon;
 
     // main columns
     @FXML
@@ -182,7 +188,6 @@ public class MainAdminController extends AnchorPane implements Initializable {
             setCosmResData();
             setAbonResData();
 
-            setOnSelect();
             StackPane.setAlignment(scrollPane, Pos.CENTER);
 
         } catch (Exception ex) {
@@ -714,13 +719,5 @@ public class MainAdminController extends AnchorPane implements Initializable {
         abonementsData.addAll(0, solariumService.getAbonByDate(date));
 
         addBlankItems();
-    }
-
-    private void setOnSelect() {
-        tableNumber.selectionModelProperty().bind(tableVert.selectionModelProperty());
-        tableVert.selectionModelProperty().bind(tableGreen.selectionModelProperty());
-        tableGreen.selectionModelProperty().bind(tableBlue.selectionModelProperty());
-        tableBlue.selectionModelProperty().bind(tableCosm.selectionModelProperty());
-        tableCosm.selectionModelProperty().bind(tableAbon.selectionModelProperty());
     }
 }
