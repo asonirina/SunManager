@@ -642,6 +642,21 @@ public class SolariumDAO {
         return aList;
     }
 
+    public List<String> getAllAvailableAbonementsLessThanHour(Integer timeInHours) throws SQLException {
+        String getDataFromDB = "select letter from available_abonements where available_time > ?";
+        List<String> aList = new ArrayList<String>();
+
+        PreparedStatement ps = dbConnection.prepareStatement(getDataFromDB);
+        ps.setInt(1, timeInHours);
+        ResultSet rs = ps.executeQuery();
+
+        while (rs.next()) {
+            String letter = rs.getString("letter");
+            aList.add(letter);
+        }
+        return aList;
+    }
+
     public Map<String, Integer> checkCurrentAbonement(String abonement) throws SQLException {
         String getDataFromDB = "select start_date, minutes from abonements_data where code=? and letter=?";
         String getDurationFromDB = "select duration from available_abonements where letter = ?";

@@ -517,23 +517,23 @@ Insert into gorizontal_blue_sun (gorizontal_blue_sun_id, start_date, total_minut
 
 Insert into statistic_data (statistic_id, start_date, residue, booking_per_day, bank, official_salary, quenching, accumulation, user_login) VALUES(1, '2014-05-08', 1072500, 461200, NULL, NULL, 2797, 366787540, 'cofee');
 
-Insert into available_abonements (letter, price, minutes, duration, available_time) VALUES('B', 180000, 40, 3, 0);
-Insert into available_abonements (letter, price, minutes, duration, available_time) VALUES('C', 264000, 60, 3, 0);
-Insert into available_abonements (letter, price, minutes, duration, available_time) VALUES('D', 420000, 100, 6, 0);
-Insert into available_abonements (letter, price, minutes, duration, available_time) VALUES('K', 490000, 120, 6, 0);
-Insert into available_abonements (letter, price, minutes, duration, available_time) VALUES('M', 600000, 150, 6, 0);
-Insert into available_abonements (letter, price, minutes, duration, available_time) VALUES('O', 140000, 40, 2, 0);
-Insert into available_abonements (letter, price, minutes, duration, available_time) VALUES('G', 204000, 60, 2, 0);
-Insert into available_abonements (letter, price, minutes, duration, available_time) VALUES('R', 320000, 100, 3, 0);
-Insert into available_abonements (letter, price, minutes, duration, available_time) VALUES('H', 360000, 120, 3, 0);
+Insert into available_abonements (letter, price, minutes, duration, available_time) VALUES('B', 180000, 40, 3, 24);
+Insert into available_abonements (letter, price, minutes, duration, available_time) VALUES('C', 264000, 60, 3, 24);
+Insert into available_abonements (letter, price, minutes, duration, available_time) VALUES('D', 420000, 100, 6, 24);
+Insert into available_abonements (letter, price, minutes, duration, available_time) VALUES('K', 490000, 120, 6, 24);
+Insert into available_abonements (letter, price, minutes, duration, available_time) VALUES('M', 600000, 150, 6, 24);
+Insert into available_abonements (letter, price, minutes, duration, available_time) VALUES('O', 140000, 40, 2, 24);
+Insert into available_abonements (letter, price, minutes, duration, available_time) VALUES('G', 204000, 60, 2, 24);
+Insert into available_abonements (letter, price, minutes, duration, available_time) VALUES('R', 320000, 100, 3, 24);
+Insert into available_abonements (letter, price, minutes, duration, available_time) VALUES('H', 360000, 120, 3, 24);
 
-Insert into available_abonements (letter, price, minutes, duration, available_time) VALUES('SB', 81000, 40, 3, 0);
-Insert into available_abonements (letter, price, minutes, duration, available_time) VALUES('SC', 119000, 60, 3, 0);
-Insert into available_abonements (letter, price, minutes, duration, available_time) VALUES('SD', 189000, 100, 6, 0);
-Insert into available_abonements (letter, price, minutes, duration, available_time) VALUES('SK', 220500, 120, 6, 0);
-Insert into available_abonements (letter, price, minutes, duration, available_time) VALUES('SM', 270000, 150, 6, 0);
-Insert into available_abonements (letter, price, minutes, duration, available_time) VALUES('SO', 63000, 40, 2, 0);
-Insert into available_abonements (letter, price, minutes, duration, available_time) VALUES('SG', 92000, 60, 2, 0);
-Insert into available_abonements (letter, price, minutes, duration, available_time) VALUES('SR', 144000, 100, 3, 0);
-Insert into available_abonements (letter, price, minutes, duration, available_time) VALUES('SH', 162000, 120, 3, 0);
+Insert into available_abonements (letter, price, minutes, duration, available_time) VALUES('SB', 81000, 40, 3, 24);
+Insert into available_abonements (letter, price, minutes, duration, available_time) VALUES('SC', 119000, 60, 3, 24);
+Insert into available_abonements (letter, price, minutes, duration, available_time) VALUES('SD', 189000, 100, 6, 24);
+Insert into available_abonements (letter, price, minutes, duration, available_time) VALUES('SK', 220500, 120, 6, 24);
+Insert into available_abonements (letter, price, minutes, duration, available_time) VALUES('SM', 270000, 150, 6, 24);
+Insert into available_abonements (letter, price, minutes, duration, available_time) VALUES('SO', 63000, 40, 2, 24);
+Insert into available_abonements (letter, price, minutes, duration, available_time) VALUES('SG', 92000, 60, 2, 24);
+Insert into available_abonements (letter, price, minutes, duration, available_time) VALUES('SR', 144000, 100, 3, 24);
+Insert into available_abonements (letter, price, minutes, duration, available_time) VALUES('SH', 162000, 120, 3, 24);
 
