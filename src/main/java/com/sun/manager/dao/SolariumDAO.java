@@ -557,7 +557,7 @@ public class SolariumDAO {
 
     public AvailableAbonements getPriceAndMinutesByLetter(String letter) throws SQLException {
         AvailableAbonements availableAbonements = null;
-        PreparedStatement ps = dbConnection.prepareStatement("select price, minutes, duration from available_abonements where letter = ?");
+        PreparedStatement ps = dbConnection.prepareStatement("select price, minutes, duration, available_time from available_abonements where letter = ?");
         ps.setString(1, letter);
         ResultSet rs = ps.executeQuery();
 
@@ -565,21 +565,33 @@ public class SolariumDAO {
             Integer price = rs.getInt("price");
             Integer minutes = rs.getInt("minutes");
             Integer duration = rs.getInt("duration");
+            Integer availableTime = rs.getInt("available_time");
 
-            availableAbonements = new AvailableAbonements(letter, price, minutes, duration);
+            availableAbonements = new AvailableAbonements(letter, price, minutes, duration, availableTime);
         }
         return availableAbonements;
     }
 
     public void updatePriceAndMinutes(List<AvailableAbonements> availableAbonements) throws SQLException {
-        PreparedStatement update = dbConnection.prepareStatement("update available_abonements set price = ?, minutes = ?, duration = ? where letter = ?");
+        PreparedStatement update = dbConnection.prepareStatement("update available_abonements set price = ?, minutes = ?, duration = ?, available_time = ? where letter = ?");
         for (AvailableAbonements aa : availableAbonements) {
             update.setInt(1, aa.getPrice());
             update.setInt(2, aa.getMinutes());
             update.setInt(3, aa.getDuration());
-            update.setString(4, aa.getLetter());
+            update.setInt(4, aa.getAvailableTime());
+            update.setString(5, aa.getLetter());
             update.executeUpdate();
         }
+    }
+
+    public void createAbonementLetterParams(AvailableAbonements availableAbonements) throws SQLException {
+        PreparedStatement ps = dbConnection.prepareStatement("insert into available_abonements (letter, minutes, price, duration, available_time) values(?,?,?,?,?)");
+        ps.setString(1, availableAbonements.getLetter());
+        ps.setInt(2, availableAbonements.getMinutes());
+        ps.setInt(3, availableAbonements.getPrice());
+        ps.setInt(4, availableAbonements.getDuration());
+        ps.setInt(5, availableAbonements.getAvailableTime());
+        ps.executeUpdate();
     }
 
     public boolean deleteRowFromSolarium(Long dataId, Long solariumId) throws SQLException {
@@ -611,7 +623,7 @@ public class SolariumDAO {
     }
 
     public List<AvailableAbonements> getAllAvailableAbonements() throws SQLException {
-        String getDataFromDB = "select letter, price, minutes, duration from available_abonements";
+        String getDataFromDB = "select letter, price, minutes, duration, available_time from available_abonements";
         List<AvailableAbonements> aList = new ArrayList<AvailableAbonements>();
 
         PreparedStatement ps = dbConnection.prepareStatement(getDataFromDB);
@@ -622,8 +634,9 @@ public class SolariumDAO {
             Integer price = rs.getInt("price");
             Integer minutes = rs.getInt("minutes");
             Integer duration = rs.getInt("duration");
+            Integer availableTime = rs.getInt("available_time");
 
-            AvailableAbonements abonement = new AvailableAbonements(letter, price, minutes, duration);
+            AvailableAbonements abonement = new AvailableAbonements(letter, price, minutes, duration, availableTime);
             aList.add(abonement);
         }
         return aList;

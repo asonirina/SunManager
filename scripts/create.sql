@@ -113,5 +113,6 @@ CREATE TABLE IF NOT EXISTS available_abonements (
       letter               VARCHAR(15) NOT NULL PRIMARY KEY,
       price                int,
       minutes              int,
-      duration             int
+      duration             int,
+      available_time       int
 ) ENGINE=INNODB;
