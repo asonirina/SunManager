@@ -23,7 +23,7 @@ public class MainAdminPage extends Application {
     public void start(Stage stage) throws IOException {
         Pane pane = FXMLLoader.load(MainAdminPage.class.getResource("fxml/admin_main1.fxml"));
         Scene scene = new Scene(pane);
-        scene.getStylesheets().add(getClass().getResource("general.css").toExternalForm());
+        scene.getStylesheets().add(getClass().getResource("../css/general.css").toExternalForm());
         stage.setScene(scene);
         stage.setTitle("Главная страница");
         stage.show();

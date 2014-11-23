@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="407.0" prefWidth="454.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.sun.manager.forms.stat.BankDataController">
+  <children>
+    <Label layoutX="47.0" layoutY="80.0" text="Остаток:" />
+    <Label layoutX="47.0" layoutY="125.0" text="Касса за день:" />
+    <Label layoutX="47.0" layoutY="165.0" text="Банк" />
+    <Label layoutX="47.0" layoutY="206.0" text="Официальная ЗП:" />
+    <Label layoutX="47.0" layoutY="247.0" text="Гашение:" />
+    <Label layoutX="47.0" layoutY="285.0" text="Накопление:" />
+    <TextField fx:id="residueField" editable="true" focusTraversable="false" layoutX="162.0" layoutY="77.0" prefHeight="22.0" prefWidth="200.0" />
+    <TextField fx:id="bookPerDayField" editable="true" focusTraversable="false" layoutX="162.0" layoutY="122.0" prefHeight="22.0" prefWidth="200.0" />
+    <TextField fx:id="bankField" layoutX="162.0" layoutY="162.0" prefHeight="22.0" prefWidth="200.0" />
+    <TextField fx:id="officialSalaryField" layoutX="162.0" layoutY="203.0" prefHeight="22.0" prefWidth="200.0" />
+    <TextField fx:id="quenchingField" layoutX="162.0" layoutY="244.0" prefHeight="22.0" prefWidth="200.0" />
+    <TextField fx:id="accumulationField" layoutX="162.0" layoutY="282.0" prefHeight="22.0" prefWidth="200.0" />
+    <Button fx:id="okButton" layoutX="266.0" layoutY="346.0" mnemonicParsing="false" prefWidth="70.0" text="ОК" />
+    <Button fx:id="cancelButton" layoutX="348.0" layoutY="346.0" mnemonicParsing="false" prefWidth="70.0" text="Отмена" />
+    <Label layoutX="47.0" layoutY="35.0" text="Касса на утро:" />
+    <TextField fx:id="bankMorning" layoutX="162.0" layoutY="32.0" prefWidth="200.0" />
+  </children>
+</AnchorPane>

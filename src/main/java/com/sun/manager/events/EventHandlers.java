@@ -1,16 +1,14 @@
 package com.sun.manager.events;
 
-import com.sun.manager.constants.BlankItem;
 import com.sun.manager.constants.DataColumnEnum;
 import com.sun.manager.dto.*;
-import com.sun.manager.forms.*;
 import com.sun.manager.forms.alert.AlertDialog;
+import com.sun.manager.forms.general.*;
 import com.sun.manager.service.SolariumService;
 import javafx.event.EventHandler;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import javafx.util.Callback;
 import org.apache.commons.lang3.StringUtils;
 

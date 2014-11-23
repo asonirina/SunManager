@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+            prefHeight="400.0" prefWidth="493.0" xmlns:fx="http://javafx.com/fxml/1"
+            xmlns="http://javafx.com/javafx/2.2"
+            fx:controller="com.sun.manager.forms.abons.AddAbonementController">
+    <children>
+        <TextField fx:id="letterField" layoutX="185.0" layoutY="45.0" prefWidth="236.0"/>
+        <TextField fx:id="minutesField" layoutX="185.0" layoutY="107.0" prefWidth="236.0"/>
+        <TextField fx:id="priceField" layoutX="185.0" layoutY="167.0" prefWidth="236.0"/>
+        <TextField fx:id="durationField" layoutX="185.0" layoutY="229.0" prefWidth="236.0"/>
+        <CheckBox fx:id="limitBox" layoutX="185.0" layoutY="279.0" mnemonicParsing="false"
+                  text="Ограничение по времени"/>
+        <TextField fx:id="timeField" focusTraversable="false" layoutX="359.0" layoutY="276.0" prefWidth="42.0"
+                   visible="false"/>
+        <Label fx:id="zeroLabel" layoutX="408.0" layoutY="279.0" text="00" visible="false"/>
+        <Label layoutX="55.0" layoutY="48.0" text="Буква"/>
+        <Label layoutX="55.0" layoutY="110.0" text="Минуты"/>
+        <Label layoutX="55.0" layoutY="170.0" text="Цена"/>
+        <Label layoutX="55.0" layoutY="232.0" text="Продолжительность"/>
+        <Button fx:id="saveButton" layoutX="291.0" layoutY="339.0" mnemonicParsing="false" text="Сохранить"/>
+        <Button fx:id="cancelButton" layoutX="380.0" layoutY="339.0" mnemonicParsing="false" text="Отмена"/>
+    </children>
+</AnchorPane>

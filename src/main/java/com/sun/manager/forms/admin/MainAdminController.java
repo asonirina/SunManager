@@ -10,8 +10,20 @@ import com.sun.manager.dto.*;
 import com.sun.manager.events.EventHandlers;
 import com.sun.manager.events.NewAbonementAddedEvent;
 import com.sun.manager.events.NewCosmeticsAddedEvent;
+import com.sun.manager.forms.abons.AbonementPage;
+import com.sun.manager.forms.abons.AbonsByPhonePage;
+import com.sun.manager.forms.abons.MinutesByPhoneAbonPage;
 import com.sun.manager.forms.alert.AlertDialog;
+import com.sun.manager.forms.comment.ShowCommentPage;
+import com.sun.manager.forms.comment.AddCommentPage;
+import com.sun.manager.forms.cosmetics.AddCosmeticsPage;
 import com.sun.manager.forms.login.LoginPage;
+import com.sun.manager.forms.stat.BankDataPage;
+import com.sun.manager.forms.stat.BankPerDayPage;
+import com.sun.manager.forms.stat.PeriodDataPage;
+import com.sun.manager.forms.stat.StatisticsPage;
+import com.sun.manager.forms.users.PhoneBasePage;
+import com.sun.manager.forms.users.UsersPage;
 import com.sun.manager.service.SolariumService;
 import eu.schudt.javafx.controls.calendar.DatePicker;
 import javafx.beans.InvalidationListener;
@@ -69,7 +81,7 @@ public class MainAdminController extends AnchorPane implements Initializable {
     @FXML
     Menu statisticsMenu;
     @FXML
-    MenuItem statisticsItem, bankItem;
+    MenuItem statisticsItem, bankItem, periodDataItem, setBankPerDayItem;
     @FXML
     Button saveChanges, logout;
  //------------------------------------------------------------------------------
@@ -149,7 +161,7 @@ public class MainAdminController extends AnchorPane implements Initializable {
                 datePicker.setLayoutX(49);
                 datePicker.setLayoutY(57);
 
-                datePicker.getStylesheets().add(this.getClass().getResource("datePicker.css").toExternalForm());
+                datePicker.getStylesheets().add(this.getClass().getResource("../css/datePicker.css").toExternalForm());
                 datePicker.getCalendarView().setShowWeeks(false);
                 datePicker.setSelectedDate(new java.util.Date());
                 datePicker.getCalendarView().todayButtonTextProperty().set("Сегодня");
@@ -482,6 +494,19 @@ public class MainAdminController extends AnchorPane implements Initializable {
                     }
                 }
             });
+
+            setBankPerDayItem.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent actionEvent) {
+                    save();
+                    BankPerDayPage page = new BankPerDayPage();
+                    try {
+                        page.start(new Stage());
+                    } catch (IOException ex) {
+                        new AlertDialog((Stage) logout.getScene().getWindow(), "Произошла ошибка!", 1).showAndWait();
+                    }
+                }
+            });
             saveChanges.setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent mouseEvent) {
@@ -495,6 +520,7 @@ public class MainAdminController extends AnchorPane implements Initializable {
             abonementsMenu.setVisible(false);
             showCommentsItem.setVisible(false);
             statisticsItem.setVisible(false);
+            periodDataItem.setVisible(false);
         } else {
             del1.setVisible(false);
             del2.setVisible(false);
@@ -504,6 +530,7 @@ public class MainAdminController extends AnchorPane implements Initializable {
             saveL23.setVisible(false);
             saveChanges.setVisible(false);
             addCommentItem.setVisible(false);
+            setBankPerDayItem.setVisible(false);
             showCommentsItem.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent actionEvent) {
@@ -602,6 +629,19 @@ public class MainAdminController extends AnchorPane implements Initializable {
                     } catch (IOException ex) {
                         new AlertDialog((Stage) logout.getScene().getWindow(), "Произошла ошибка!", 1).showAndWait();
                         throw new RuntimeException(ex);
+                    }
+                }
+            });
+
+            periodDataItem.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent actionEvent) {
+                    save();
+                    PeriodDataPage page = new PeriodDataPage();
+                    try {
+                        page.start(new Stage());
+                    } catch (IOException ex) {
+                        new AlertDialog((Stage) logout.getScene().getWindow(), "Произошла ошибка!", 1).showAndWait();
                     }
                 }
             });

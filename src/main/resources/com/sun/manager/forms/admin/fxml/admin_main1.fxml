@@ -129,6 +129,8 @@
                   <items>
                     <MenuItem mnemonicParsing="false" text="Дополнительная информация" fx:id="bankItem" />
                     <MenuItem mnemonicParsing="false" text="Статистика" fx:id="statisticsItem" />
+                    <MenuItem mnemonicParsing="false" text="Данные за период" fx:id="periodDataItem" />
+                    <MenuItem mnemonicParsing="false" text="Внести кассу" fx:id="setBankPerDayItem" />
                   </items>
                 </Menu>
               </menus>

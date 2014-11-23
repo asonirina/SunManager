@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="462.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.sun.manager.forms.abons.AbonsByPhoneController">
+  <children>
+    <VBox fx:id="box" layoutX="56.0" layoutY="31.0" prefHeight="417.0" prefWidth="490.0">
+      <children>
+        <AnchorPane prefHeight="74.0" prefWidth="490.0">
+          <children>
+            <Label layoutX="59.0" layoutY="34.0" text="№ телефона:" />
+            <TextField fx:id="phoneField" layoutX="145.0" layoutY="31.0" prefWidth="200.0" />
+            <Button fx:id="findButton" layoutX="371.0" layoutY="32.0" mnemonicParsing="false" text="Найти" />
+          </children>
+        </AnchorPane>
+        <TableView fx:id="abonTable" prefHeight="270.0" prefWidth="490.0">
+          <columns>
+            <TableColumn editable="false" maxWidth="5000.0" minWidth="10.0" prefWidth="87.0" resizable="false" sortable="false" text="Имя" fx:id="nameColumn" />
+            <TableColumn editable="false" maxWidth="5000.0" minWidth="10.0" prefWidth="90.0" resizable="false" sortable="false" text="Буква" fx:id="letterColumn" />
+            <TableColumn editable="false" maxWidth="5000.0" minWidth="10.0" prefWidth="88.0" resizable="false" sortable="false" text="Код" fx:id="codeColumn" />
+            <TableColumn editable="false" maxWidth="5000.0" minWidth="10.0" prefWidth="124.0" resizable="false" sortable="false" text="Дата покупки" fx:id="dateColumn" />
+            <TableColumn editable="false" maxWidth="5000.0" minWidth="10.0" prefWidth="98.0" resizable="false" sortable="false" text="Минуты" fx:id="minutesColumn" />
+          </columns>
+        </TableView>
+      </children>
+    </VBox>
+  </children>
+</AnchorPane>
