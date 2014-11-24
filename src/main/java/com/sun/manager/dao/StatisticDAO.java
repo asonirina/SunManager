@@ -88,13 +88,14 @@ public class StatisticDAO {
         ResultSet rs = ps.executeQuery();
 
         if (!rs.next()) {
-            PreparedStatement ps2 = dbConnection.prepareStatement("insert into statistic_data_admin (bankByAdmin) values(?)");
+            PreparedStatement ps2 = dbConnection.prepareStatement("insert into statistic_data_admin (bankByAdmin, start_date) values(?, ?)");
             ps2.setInt(1, bankByAdmin);
+            ps2.setDate(2, date);
             ps2.executeUpdate();
         } else {
             PreparedStatement ps2 = dbConnection.prepareStatement("update statistic_data_admin set bankByAdmin = ? where start_date = ?");
             ps2.setInt(1, bankByAdmin);
-            ps.setDate(2, new java.sql.Date(date.getTime()));
+            ps2.setDate(2, new java.sql.Date(date.getTime()));
             ps2.executeUpdate();
         }
     }

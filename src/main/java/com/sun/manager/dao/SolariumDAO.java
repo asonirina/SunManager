@@ -718,12 +718,12 @@ public class SolariumDAO {
         }
 
         PreparedStatement ps2 = dbConnection.prepareStatement("select bank from statistic_data where start_date BETWEEN ? AND ?");
-        ps.setDate(1, new java.sql.Date(from.getTime()));
-        ps.setDate(2, new java.sql.Date(to.getTime()));
+        ps2.setDate(1, new java.sql.Date(from.getTime()));
+        ps2.setDate(2, new java.sql.Date(to.getTime()));
         ResultSet rs2 = ps2.executeQuery();
 
         while (rs2.next()) {
-            bank += rs.getInt("bank");
+            bank += rs2.getInt("bank");
         }
 
         bankData.put("bankByAdmin", bankByAdmin);
