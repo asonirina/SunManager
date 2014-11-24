@@ -58,7 +58,7 @@ public class StatisticDAO {
         ps.setDate(1, new java.sql.Date(lastDate.getTime() - SunConstants.MILLIS_IN_DAY));
         ResultSet rs = ps.executeQuery();
 
-        if(!rs.next()) {
+        if (!rs.next()) {
             return 0;
         }
 
@@ -80,5 +80,22 @@ public class StatisticDAO {
             res.put("accumulation", accumulation);
         }
         return res;
+    }
+
+    public void saveBankByAdmin(Date date, Integer bankByAdmin) throws SQLException {
+        PreparedStatement ps = dbConnection.prepareStatement("select bankByAdmin from statistic_data_admin where start_date=?");
+        ps.setDate(1, new java.sql.Date(date.getTime()));
+        ResultSet rs = ps.executeQuery();
+
+        if (!rs.next()) {
+            PreparedStatement ps2 = dbConnection.prepareStatement("insert into statistic_data_admin (bankByAdmin) values(?)");
+            ps2.setInt(1, bankByAdmin);
+            ps2.executeUpdate();
+        } else {
+            PreparedStatement ps2 = dbConnection.prepareStatement("update statistic_data_admin set bankByAdmin = ? where start_date = ?");
+            ps2.setInt(1, bankByAdmin);
+            ps.setDate(2, new java.sql.Date(date.getTime()));
+            ps2.executeUpdate();
+        }
     }
 }

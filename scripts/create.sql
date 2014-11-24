@@ -106,7 +106,14 @@ CREATE TABLE IF NOT EXISTS statistic_data (
       official_salary      int,
       quenching            int,
       accumulation         int,
-      user_login           VARCHAR(15)
+      user_login           VARCHAR(15),
+      bankByAdmin          int
+) ENGINE=INNODB;
+
+CREATE TABLE IF NOT EXISTS statistic_data_admin (
+      statistic_id         int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+      start_date           date,
+      bankByAdmin          int
 ) ENGINE=INNODB;
 
 CREATE TABLE IF NOT EXISTS available_abonements (
