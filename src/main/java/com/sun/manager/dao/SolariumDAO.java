@@ -704,8 +704,30 @@ public class SolariumDAO {
     }
 
     // возможность просмотра суммы обшей выручки и кассы за заданный период (неделя-месяц-квартал)
-    public Map<String, Integer> getMoneyForPeriod(Date from, Date to) {
+    public Map<String, Integer> getMoneyForPeriod(Date from, Date to) throws SQLException {
+        Integer bankByAdmin = 0;
+        Integer bank = 0;
+        Map<String, Integer> bankData = new HashMap<String, Integer>();
+        PreparedStatement ps = dbConnection.prepareStatement("select bankByAdmin from statistic_data_admin where start_date BETWEEN ? AND ?");
+        ps.setDate(1, new java.sql.Date(from.getTime()));
+        ps.setDate(2, new java.sql.Date(to.getTime()));
+        ResultSet rs = ps.executeQuery();
 
-        return Collections.EMPTY_MAP;
+        while (rs.next()) {
+            bankByAdmin += rs.getInt("bankByAdmin");
+        }
+
+        PreparedStatement ps2 = dbConnection.prepareStatement("select bank from statistic_data where start_date BETWEEN ? AND ?");
+        ps.setDate(1, new java.sql.Date(from.getTime()));
+        ps.setDate(2, new java.sql.Date(to.getTime()));
+        ResultSet rs2 = ps2.executeQuery();
+
+        while (rs2.next()) {
+            bank += rs.getInt("bank");
+        }
+
+        bankData.put("bankByAdmin", bankByAdmin);
+        bankData.put("bank", bank);
+        return bankData;
     }
 }
