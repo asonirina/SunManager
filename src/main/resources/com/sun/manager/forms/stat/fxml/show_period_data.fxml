@@ -11,5 +11,9 @@
     <Label layoutX="79.0" layoutY="67.0" text="С" />
     <Label layoutX="286.0" layoutY="67.0" text="По" />
     <Button fx:id="showButton" layoutX="490.0" layoutY="65.0" mnemonicParsing="false" text="Показать" />
+    <Label layoutX="83.0" layoutY="147.0" text="Общая касса:" />
+    <Label layoutX="83.0" layoutY="245.0" text="Касса, введенная администратором:" />
+    <Label fx:id="generalBank" layoutX="372.0" layoutY="147.0" text="Label" visible="false" />
+    <Label fx:id="adminBank" layoutX="372.0" layoutY="245.0" text="Label" visible="false" />
   </children>
 </AnchorPane>

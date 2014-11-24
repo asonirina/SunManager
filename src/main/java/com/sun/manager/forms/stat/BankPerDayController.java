@@ -7,6 +7,7 @@ import com.sun.manager.dto.AbonementsRequest;
 import com.sun.manager.dto.BaseSolariumData;
 import com.sun.manager.dto.CosmeticsRequest;
 import com.sun.manager.dto.StatisticData;
+import com.sun.manager.forms.alert.AlertDialog;
 import com.sun.manager.service.SolariumService;
 import com.sun.manager.service.StatisticsService;
 import javafx.event.EventHandler;
@@ -38,12 +39,20 @@ public class BankPerDayController extends AnchorPane implements Initializable {
     @FXML
     Button saveButton;
 
+    StatisticsService service = new StatisticsService();
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         saveButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-
+                try{
+                    Integer.parseInt(bankField.getText());
+                } catch (NumberFormatException ex) {
+                    new AlertDialog((Stage) saveButton.getScene().getWindow(), "Введите число!!", 1).showAndWait();
+                    return;
+                }
+                service.saveBank(Integer.valueOf(bankField.getText()));
                 ((Stage) saveButton.getScene().getWindow()).close();
             }
         });

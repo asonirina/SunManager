@@ -5,6 +5,7 @@ import com.sun.manager.dto.StatisticData;
 
 import java.sql.Date;
 import java.sql.SQLException;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 
@@ -46,6 +47,15 @@ public class StatisticsService {
     public Map<String, Integer> getQuenchingAndAccumulation(Date date) {
         try {
              return dao.getQuenchingAndAccumulation(date);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            throw new RuntimeException(ex.getMessage());
+        }
+    }
+
+    public void saveBank(Integer bank) {
+        try {
+             dao.saveBankByAdmin(new Date(Calendar.getInstance().getTime().getTime()), bank);
         } catch (SQLException ex) {
             ex.printStackTrace();
             throw new RuntimeException(ex.getMessage());

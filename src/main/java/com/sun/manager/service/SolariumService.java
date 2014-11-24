@@ -290,4 +290,13 @@ public class SolariumService {
             throw new RuntimeException(ex.getMessage());
         }
     }
+
+    public Map<String, Integer> getMoneyForPeriod(java.util.Date from, java.util.Date to) {
+        try {
+            return dao.getMoneyForPeriod(new Date(from.getTime()), new Date(to.getTime()));
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            throw new RuntimeException(ex.getMessage());
+        }
+    }
 }

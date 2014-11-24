@@ -17,9 +17,11 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import org.apache.commons.lang.StringUtils;
 
@@ -41,12 +43,19 @@ public class PeriodDataController extends AnchorPane implements Initializable {
     @FXML
     Button showButton;
 
+    @FXML
+    Label generalBank, adminBank;
+
     DatePicker picker1 = new DatePicker();
     DatePicker picker2 = new DatePicker();
+
+    SolariumService service = new SolariumService();
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        generalBank.setFont(new Font("Segoe UI Semibold", 40));
+        adminBank.setFont(new Font("Segoe UI Semibold", 40));
 
         picker1.setLayoutX(100);
         picker1.setLayoutY(64);
@@ -71,10 +80,15 @@ public class PeriodDataController extends AnchorPane implements Initializable {
         showButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                if(picker1.getSelectedDate().getTime() > picker2.getSelectedDate().getTime()){
+                if (picker1.getSelectedDate().getTime() > picker2.getSelectedDate().getTime()) {
                     new AlertDialog((Stage) showButton.getScene().getWindow(), "Первая дата должна быть меньше второй!!", 1).showAndWait();
                     return;
                 }
+                Map<String, Integer> map = service.getMoneyForPeriod(picker1.getSelectedDate(), picker2.getSelectedDate());
+                generalBank.setText(String.valueOf(map.get("bank")));
+                adminBank.setText(String.valueOf(map.get("bankByAdmin")));
+                generalBank.setVisible(true);
+                adminBank.setVisible(true);
             }
         });
 
