@@ -419,6 +419,45 @@ public class MainAdminController extends AnchorPane implements Initializable {
             }
         });
 
+        addAbonementItem.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                try {
+                    AbonementPage page = new AbonementPage();
+                    page.start(new Stage());
+                } catch (IOException ex) {
+                    new AlertDialog((Stage) logout.getScene().getWindow(), "Произошла ошибка!", 1).showAndWait();
+                    throw new RuntimeException(ex);
+                }
+            }
+        });
+
+        findAbonByPhoneItem.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                try {
+                    AbonsByPhonePage page = new AbonsByPhonePage();
+                    page.start(new Stage());
+                } catch (IOException ex) {
+                    new AlertDialog((Stage) logout.getScene().getWindow(), "Произошла ошибка!", 1).showAndWait();
+                    throw new RuntimeException(ex);
+                }
+            }
+        });
+
+        residueItem.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                try {
+                    MinutesByPhoneAbonPage page = new MinutesByPhoneAbonPage();
+                    page.start(new Stage());
+                } catch (IOException ex) {
+                    new AlertDialog((Stage) logout.getScene().getWindow(), "Произошла ошибка!", 1).showAndWait();
+                    throw new RuntimeException(ex);
+                }
+            }
+        });
+
         if (App.getInstance().getUser().getRole().equals("admin")) {
             del1.setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
@@ -517,7 +556,6 @@ public class MainAdminController extends AnchorPane implements Initializable {
             });
             cosmeticsMenu.setVisible(false);
             usersMenu.setVisible(false);
-            abonementsMenu.setVisible(false);
             showCommentsItem.setVisible(false);
             statisticsItem.setVisible(false);
             periodDataItem.setVisible(false);
@@ -594,44 +632,9 @@ public class MainAdminController extends AnchorPane implements Initializable {
                 }
             });
 
-            findAbonByPhoneItem.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent actionEvent) {
-                    try {
-                        AbonsByPhonePage page = new AbonsByPhonePage();
-                        page.start(new Stage());
-                    } catch (IOException ex) {
-                        new AlertDialog((Stage) logout.getScene().getWindow(), "Произошла ошибка!", 1).showAndWait();
-                        throw new RuntimeException(ex);
-                    }
-                }
-            });
 
-            residueItem.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent actionEvent) {
-                    try {
-                        MinutesByPhoneAbonPage page = new MinutesByPhoneAbonPage();
-                        page.start(new Stage());
-                    } catch (IOException ex) {
-                        new AlertDialog((Stage) logout.getScene().getWindow(), "Произошла ошибка!", 1).showAndWait();
-                        throw new RuntimeException(ex);
-                    }
-                }
-            });
 
-            addAbonementItem.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent actionEvent) {
-                    try {
-                        AbonementPage page = new AbonementPage();
-                        page.start(new Stage());
-                    } catch (IOException ex) {
-                        new AlertDialog((Stage) logout.getScene().getWindow(), "Произошла ошибка!", 1).showAndWait();
-                        throw new RuntimeException(ex);
-                    }
-                }
-            });
+
 
             periodDataItem.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
