@@ -293,7 +293,7 @@ public class SolariumDAO {
         //Update l2
         PreparedStatement ps5 = dbConnection.prepareStatement("delete from " + solarium_sun + " where start_date = ?");
         PreparedStatement ps3 = dbConnection.prepareStatement("insert into " + solarium_sun + " (start_date, total_minute, l2, one_minute_price) values(?,?,?,?)");
-        PreparedStatement ps4 = dbConnection.prepareStatement("select l2 from " + solarium_sun + " where start_date = (select MAX(start_date) from " + solarium_sun + ")");
+        PreparedStatement ps4 = dbConnection.prepareStatement("select l2,one_minute_price from " + solarium_sun + " where start_date = (select MAX(start_date) from " + solarium_sun + ")");
         ResultSet rs = ps4.executeQuery();
 
 
