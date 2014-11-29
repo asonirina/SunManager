@@ -20,7 +20,7 @@ public class CosmeticsRequestPage extends Application{
     public void start(Stage stage) throws IOException {
         Pane pane = FXMLLoader.load(CosmeticsRequestPage.class.getResource("fxml/cosmetics_request.fxml"));
         Scene scene = new Scene(pane);
-        scene.getStylesheets().add(getClass().getResource("../css/general.css").toExternalForm());
+        scene.getStylesheets().add(getClass().getResource("general.css").toExternalForm());
         stage.setScene(scene);
         stage.setTitle("Косметика");
         stage.show();

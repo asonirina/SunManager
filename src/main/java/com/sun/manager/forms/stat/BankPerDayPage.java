@@ -17,7 +17,7 @@ public class BankPerDayPage extends Application {
     public void start(Stage stage) throws IOException {
         Pane pane = FXMLLoader.load(BankPerDayPage.class.getResource("fxml/bank_per_day.fxml"));
         Scene scene = new Scene(pane);
-        scene.getStylesheets().add(getClass().getResource("../css/general.css").toExternalForm());
+        scene.getStylesheets().add(getClass().getResource("general.css").toExternalForm());
         stage.setScene(scene);
         stage.setTitle("Касса за день");
         stage.show();

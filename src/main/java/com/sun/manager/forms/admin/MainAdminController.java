@@ -161,7 +161,7 @@ public class MainAdminController extends AnchorPane implements Initializable {
                 datePicker.setLayoutX(49);
                 datePicker.setLayoutY(57);
 
-                datePicker.getStylesheets().add(this.getClass().getResource("../css/datePicker.css").toExternalForm());
+                datePicker.getStylesheets().add(this.getClass().getResource("datePicker.css").toExternalForm());
                 datePicker.getCalendarView().setShowWeeks(false);
                 datePicker.setSelectedDate(new java.util.Date());
                 datePicker.getCalendarView().todayButtonTextProperty().set("Сегодня");

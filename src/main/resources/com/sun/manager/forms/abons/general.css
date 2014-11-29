@@ -1,0 +1,39 @@
+.label {
+    -fx-font-size: 12px;
+}
+
+#saveButton, #okButton, #cancelButton, #addButton, #addNewCosm,
+#countVert, #countGreen, #countBlue, #countCosm, #countAbon, #addCosm,
+#addCosm, #addAbon, #usersButton, #addComment, #showComments, #statButton, #bankButton,
+#addCosmButton, #deleteButton, #saveChanges, #logout, #del1, #del2, #del3,#phoneBase,
+#findAbonByPhoneButton, #residueButton, #findButton, #showButton,
+#saveL21,#saveL22, #saveL23{
+    -fx-background-color:
+        rgba(0,0,0,0.08),
+        linear-gradient(#9a9a9a, #909090),
+        linear-gradient(white 0%, #f3f3f3 50%, #ececec 51%, #f2f2f2 100%);
+    -fx-background-insets: 0 0 -1 0,0,1;
+    -fx-background-radius: 5,5,4;
+    -fx-padding: 3 5 3 5;
+    -fx-text-fill: #242d35;
+    -fx-font-size: 12px;
+}
+
+#saveButton:hover, #okButton:hover, #cancelButton:hover, #addButton:hover, #addNewCosm:hover,
+#countVert:hover, #countGreen:hover, #countBlue:hover, #countCosm:hover, #countAbon:hover, #addCosm:hover,
+#addCosm:hover, #addAbon:hover, #usersButton:hover, #addComment:hover, #showComments:hover, #statButton:hover, #bankButton:hover,
+#addCosmButton:hover, #deleteButton:hover, #saveChanges:hover, #logout:hover, #phoneBase:hover,
+#findAbonByPhoneButton:hover, #residueButton:hover, #findButton:hover, #showButton:hover,
+#saveL21:hover, #saveL22:hover, #saveL23:hover {
+    -fx-background-color: linear-gradient(#f3f3f3, #f2f2f2);
+}
+
+.text-field
+{
+    -fx-font-size: 12px;
+
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-text-fill: black;
+    -fx-opacity: 0.6;
+
+}

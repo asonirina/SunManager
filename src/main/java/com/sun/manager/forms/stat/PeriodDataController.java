@@ -60,7 +60,7 @@ public class PeriodDataController extends AnchorPane implements Initializable {
         picker1.setLayoutX(100);
         picker1.setLayoutY(64);
 
-        picker1.getStylesheets().add(this.getClass().getResource("../css/datePicker.css").toExternalForm());
+        picker1.getStylesheets().add(this.getClass().getResource("datePicker.css").toExternalForm());
         picker1.getCalendarView().setShowWeeks(false);
         picker1.setSelectedDate(new java.util.Date());
         picker1.getCalendarView().todayButtonTextProperty().set("Сегодня");
@@ -70,7 +70,7 @@ public class PeriodDataController extends AnchorPane implements Initializable {
         picker2.setLayoutX(314);
         picker2.setLayoutY(64);
 
-        picker2.getStylesheets().add(this.getClass().getResource("../css/datePicker.css").toExternalForm());
+        picker2.getStylesheets().add(this.getClass().getResource("datePicker.css").toExternalForm());
         picker2.getCalendarView().setShowWeeks(false);
         picker2.setSelectedDate(new java.util.Date());
         picker2.getCalendarView().todayButtonTextProperty().set("Сегодня");

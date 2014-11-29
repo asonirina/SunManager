@@ -17,7 +17,7 @@ public class PhoneBasePage extends Application {
     public void start(Stage stage) throws IOException {
         Pane pane = FXMLLoader.load(PhoneBasePage.class.getResource("fxml/phone_base.fxml"));
         Scene scene = new Scene(pane);
-        scene.getStylesheets().add(getClass().getResource("../css/general.css").toExternalForm());
+        scene.getStylesheets().add(getClass().getResource("general.css").toExternalForm());
         stage.setScene(scene);
         stage.setTitle("Телефонная база");
         stage.show();

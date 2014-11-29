@@ -21,7 +21,7 @@ public class AbonementsRequestPage extends Application{
     public void start(Stage stage) throws IOException {
         Pane pane = FXMLLoader.load(AbonementsRequestPage.class.getResource("fxml/abonement_page.fxml"));
         Scene scene = new Scene(pane);
-        scene.getStylesheets().add(getClass().getResource("../css/general.css").toExternalForm());
+        scene.getStylesheets().add(getClass().getResource("general.css").toExternalForm());
         stage.setScene(scene);
         stage.setTitle("Покупка абонемента");
         stage.show();

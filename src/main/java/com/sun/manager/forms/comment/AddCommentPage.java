@@ -22,7 +22,7 @@ public class AddCommentPage extends Application{
     public void start(Stage stage) throws IOException {
         Pane pane = FXMLLoader.load(AddCommentPage.class.getResource("fxml/add_comment.fxml"));
         Scene scene = new Scene(pane);
-        scene.getStylesheets().add(getClass().getResource("../css/general.css").toExternalForm());
+        scene.getStylesheets().add(getClass().getResource("general.css").toExternalForm());
         stage.setScene(scene);
         stage.setTitle("Комментарии за день");
         stage.show();

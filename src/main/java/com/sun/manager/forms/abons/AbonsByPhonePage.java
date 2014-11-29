@@ -17,7 +17,7 @@ public class AbonsByPhonePage extends Application {
     public void start(Stage stage) throws IOException {
         Pane pane = FXMLLoader.load(AbonsByPhonePage.class.getResource("fxml/abon_by_phone.fxml"));
         Scene scene = new Scene(pane);
-        scene.getStylesheets().add(getClass().getResource("../css/general.css").toExternalForm());
+        scene.getStylesheets().add(getClass().getResource("general.css").toExternalForm());
         stage.setScene(scene);
         stage.setTitle("Поиск абонементов");
         stage.show();
