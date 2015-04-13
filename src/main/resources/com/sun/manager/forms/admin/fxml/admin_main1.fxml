@@ -6,11 +6,11 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.paint.*?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="670.0" prefWidth="1160.0" style="" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.sun.manager.forms.admin.MainAdminController">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="732.0" prefWidth="1160.0" style="" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.sun.manager.forms.admin.MainAdminController">
   <children>
-    <ScrollPane fx:id="scrollPane" maxHeight="705.0000999999975" maxWidth="1160.0" prefHeight="684.0" prefWidth="1160.0" style="-fx-background-color:white;" StackPane.alignment="CENTER">
+    <ScrollPane fx:id="scrollPane" maxHeight="738.0" maxWidth="1175.0" prefHeight="731.0" prefWidth="1175.0" style="-fx-background-color:white;" StackPane.alignment="CENTER">
       <content>
-        <AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="661.0" prefWidth="1143.0">
+        <AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="732.0" prefWidth="1143.0">
           <children>
             <TableView id="numResTable" fx:id="tableNumRes" focusTraversable="false" layoutX="49.0" layoutY="465.0" prefHeight="108.0" prefWidth="34.999900000002526">
               <columns>
@@ -99,7 +99,7 @@
             <Button fx:id="saveL21" layoutX="98.0" layoutY="583.0" mnemonicParsing="false" prefWidth="180.0" text="Сохранить L2" />
             <Button fx:id="saveL22" layoutX="310.0" layoutY="584.0" mnemonicParsing="false" prefWidth="168.0" text="Сохранить L2" />
             <Button fx:id="saveL23" layoutX="507.0" layoutY="583.0" mnemonicParsing="false" prefWidth="163.0" text="Сохранить L2" />
-            <MenuBar layoutX="49.0" layoutY="16.0">
+            <MenuBar layoutX="35.0" layoutY="16.0" prefWidth="462.0">
               <menus>
                 <Menu mnemonicParsing="false" text="Косметика" fx:id="cosmeticsMenu">
                   <items>
@@ -135,6 +135,7 @@
                 </Menu>
               </menus>
             </MenuBar>
+            <MenuBar fx:id="menuBar1" layoutX="35.0" layoutY="672.0" prefWidth="589.0" />
           </children>
         </AnchorPane>
       </content>

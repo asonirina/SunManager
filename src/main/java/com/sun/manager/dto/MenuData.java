@@ -1,6 +1,7 @@
 package com.sun.manager.dto;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 public class MenuData implements Serializable {
@@ -10,7 +11,7 @@ public class MenuData implements Serializable {
     private List<MenuData> childrenMenuList;
 
     public MenuData(String description) {
-
+        this.childrenMenuList = new ArrayList<MenuData>();
         this.description = description;
     }
 

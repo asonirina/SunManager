@@ -24,6 +24,7 @@ import com.sun.manager.forms.stat.PeriodDataPage;
 import com.sun.manager.forms.stat.StatisticsPage;
 import com.sun.manager.forms.users.PhoneBasePage;
 import com.sun.manager.forms.users.UsersPage;
+import com.sun.manager.service.MenuService;
 import com.sun.manager.service.SolariumService;
 import eu.schudt.javafx.controls.calendar.DatePicker;
 import javafx.beans.InvalidationListener;
@@ -47,6 +48,7 @@ import java.net.URL;
 import java.sql.Date;
 import java.text.DecimalFormat;
 import java.util.Calendar;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.Scanner;
 
@@ -55,6 +57,12 @@ import java.util.Scanner;
  */
 public class MainAdminController extends AnchorPane implements Initializable {
     private static int count = 50;
+
+    @FXML
+    MenuBar menuBar1;
+
+    MenuService menuService = new MenuService();
+
     private Date date = new Date(Calendar.getInstance().getTime().getTime());
 
     @FXML
@@ -157,6 +165,7 @@ public class MainAdminController extends AnchorPane implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         App.getInstance().setSelectedDate(date);
         try {
+            loadMenu();
             if (App.getInstance().getUser().getRole().equals("derictor")) {
                 datePicker.setLayoutX(49);
                 datePicker.setLayoutY(57);
@@ -762,5 +771,16 @@ public class MainAdminController extends AnchorPane implements Initializable {
         abonementsData.addAll(0, solariumService.getAbonByDate(date));
 
         addBlankItems();
+    }
+
+    private void loadMenu() {
+         List<MenuData> list = menuService.getDefaultMenuByRole(App.getInstance().getUser().getRole());
+        for (MenuData menu: list) {
+            Menu parentMenu = new Menu(menu.getDescription());
+            for(MenuData child: menu.getChildrenMenuList()) {
+                parentMenu.getItems().add(new MenuItem(child.getDescription()));
+            }
+           menuBar1.getMenus().add(parentMenu);
+        }
     }
 }

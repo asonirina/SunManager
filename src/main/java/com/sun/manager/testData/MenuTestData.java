@@ -113,7 +113,7 @@ public class MenuTestData {
         directorMenu.add(md6);
 
         menusByRole.put("admin", adminMenu);
-        menusByRole.put("director", directorMenu);
+        menusByRole.put("derictor", directorMenu);
 
         return menusByRole;
     }
@@ -208,7 +208,7 @@ public class MenuTestData {
         directorMenu.add(md63);
 
         menusByRole.put("admin", adminMenu);
-        menusByRole.put("director", directorMenu);
+        menusByRole.put("derictor", directorMenu);
 
         return menusByRole;
     }
