@@ -1,17 +1,17 @@
 package com.sun.manager.service;
 
-import com.sun.manager.dto.Menu;
-import com.sun.manager.testData.MenuData;
+import com.sun.manager.dto.MenuData;
+import com.sun.manager.testData.MenuTestData;
 
 import java.util.List;
 
 public class MenuService {
 
-    public List<Menu> getDefaultMenuByRole(String role) {
-        return MenuData.getDefaultMenuByRole(role);
+    public List<MenuData> getDefaultMenuByRole(String role) {
+        return MenuTestData.getDefaultMenuByRole(role);
     }
 
-    public List<Menu> getAdaptMenuByRole(String role) {
-        return MenuData.getAdaptMenuByRole(role);
+    public List<MenuData> getAdaptMenuByRole(String role) {
+        return MenuTestData.getAdaptMenuByRole(role);
     }
 }
