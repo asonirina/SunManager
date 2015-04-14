@@ -428,14 +428,14 @@ public class SolariumDAO {
 
     public void saveAbonement(List<AbonementsRequest> abonementsRequestList) throws SQLException {
         for (AbonementsRequest abonementsRequest : abonementsRequestList) {
-            PreparedStatement ps2 = dbConnection.prepareStatement("insert into abonements_data (start_date, code, letter, client_name, phone) values(?,?,?,?,?)");
-
+            PreparedStatement ps2 = dbConnection.prepareStatement("insert into abonements_data (start_date, code, letter, client_name, phone, minutes) values(?,?,?,?,?, ?)");
+            Integer minutes = getPriceAndMinutesByLetter(abonementsRequest.getLetter()).getMinutes();
             ps2.setDate(1, (Date) abonementsRequest.getStartDate());
             ps2.setLong(2, abonementsRequest.getCode());
             ps2.setString(3, abonementsRequest.getLetter());
             ps2.setString(4, abonementsRequest.getName());
             ps2.setString(5, abonementsRequest.getPhone());
-
+            ps2.setInt(6, minutes);
             ps2.executeUpdate();
         }
     }
