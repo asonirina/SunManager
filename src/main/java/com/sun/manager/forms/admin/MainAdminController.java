@@ -61,6 +61,9 @@ public class MainAdminController extends AnchorPane implements Initializable {
     @FXML
     Menu mainMenu;
 
+    @FXML
+    Button defaultMenuButton;
+
     MenuService menuService = new MenuService();
 
     private Date date = new Date(Calendar.getInstance().getTime().getTime());
@@ -146,6 +149,12 @@ public class MainAdminController extends AnchorPane implements Initializable {
         App.getInstance().setSelectedDate(date);
         try {
             loadAdaptedMenu();
+            defaultMenuButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    loadDefaultMenu();
+                }
+            });
             if (App.getInstance().getUser().getRole().equals("derictor")) {
                 datePicker.setLayoutX(49);
                 datePicker.setLayoutY(57);
@@ -593,6 +602,14 @@ public class MainAdminController extends AnchorPane implements Initializable {
         List<MenuData> list = menuService.getAdaptMenuByRole(App.getInstance().getUser().getRole());
         for (MenuData menuData : list) {
          walkTroughMenu(menuData, mainMenu);
+        }
+    }
+
+    private void loadDefaultMenu() {
+        List<MenuData> list = menuService.getDefaultMenuByRole(App.getInstance().getUser().getRole());
+        mainMenu.getItems().clear();
+        for (MenuData menuData : list) {
+            walkTroughMenu(menuData, mainMenu);
         }
     }
 
