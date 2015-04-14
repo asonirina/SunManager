@@ -104,7 +104,7 @@
                 <Menu mnemonicParsing="false" text="Главное Меню" fx:id="mainMenu" />
               </menus>
             </MenuBar>
-            <Button fx:id="defaultMenuButton" layoutX="195.0" layoutY="23.0" mnemonicParsing="false" prefWidth="146.0" text="Меню по умолчанию" />
+            <Button fx:id="defaultMenuButton" layoutX="750.0" layoutY="40.0" mnemonicParsing="false" prefWidth="146.0" text="Меню по умолчанию" />
           </children>
         </AnchorPane>
       </content>

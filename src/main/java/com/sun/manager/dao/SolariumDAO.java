@@ -187,16 +187,16 @@ public class SolariumDAO {
             if (baseData.getTotalPrice() == null) {
                 PreparedStatement ps1 = dbConnection.prepareStatement("update abonements_data set minutes = ? where code=? and letter=?");
                 PreparedStatement ps2 = dbConnection.prepareStatement("select  minutes from abonements_data where code=? and letter=?");
-                ps2.setString(1, baseData.getAbonementNumber().replaceAll("a-zA-Z+", ""));
-                ps2.setString(2, baseData.getAbonementNumber().replaceAll("\\D+", ""));
+                ps2.setString(1, baseData.getAbonementNumber().replaceAll("\\D+", ""));
+                ps2.setString(2, baseData.getAbonementNumber().replaceAll("[1-9]+", ""));
 
                 ResultSet rs = ps2.executeQuery();
 
                 while (rs.next()) {
                     Long minutes = rs.getLong("minutes");
                     ps1.setLong(1, minutes - baseData.getMinutes());
-                    ps2.setString(2, baseData.getAbonementNumber().replaceAll("a-zA-Z+", ""));
-                    ps2.setString(3, baseData.getAbonementNumber().replaceAll("\\D+", ""));
+                    ps1.setString(2, baseData.getAbonementNumber().replaceAll("\\D+", ""));
+                    ps1.setString(3, baseData.getAbonementNumber().replaceAll("[1-9]+", ""));
                     ps1.executeUpdate();
 
                     totalMinutes += baseData.getMinutes();
@@ -428,14 +428,14 @@ public class SolariumDAO {
 
     public void saveAbonement(List<AbonementsRequest> abonementsRequestList) throws SQLException {
         for (AbonementsRequest abonementsRequest : abonementsRequestList) {
-            PreparedStatement ps2 = dbConnection.prepareStatement("insert into abonements_data (start_date, code, letter, client_name, phone) values(?,?,?,?,?)");
-
+            PreparedStatement ps2 = dbConnection.prepareStatement("insert into abonements_data (start_date, code, letter, client_name, phone, minutes) values(?,?,?,?,?, ?)");
+            Integer minutes = getPriceAndMinutesByLetter(abonementsRequest.getLetter()).getMinutes();
             ps2.setDate(1, (Date) abonementsRequest.getStartDate());
             ps2.setLong(2, abonementsRequest.getCode());
             ps2.setString(3, abonementsRequest.getLetter());
             ps2.setString(4, abonementsRequest.getName());
             ps2.setString(5, abonementsRequest.getPhone());
-
+            ps2.setInt(6, minutes);
             ps2.executeUpdate();
         }
     }
