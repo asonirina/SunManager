@@ -177,9 +177,9 @@ public class SolariumDAO {
 
         if (solariumId == 1L) {
             solarium = VERTICAL_SOLARIUM;
-        } else if (solariumId == 2L) {
-            solarium = GORIZONTAL_BLUE_SOLARIUM;
         } else if (solariumId == 3L) {
+            solarium = GORIZONTAL_BLUE_SOLARIUM;
+        } else if (solariumId == 2L) {
             solarium = GORIZONTAL_GREEN_SOLARIUM;
         }
         for (BaseSolariumData baseData : baseSolariumDataList) {
