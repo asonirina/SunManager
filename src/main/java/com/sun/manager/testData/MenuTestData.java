@@ -27,11 +27,11 @@ public class MenuTestData {
         List<MenuData> directorMenu = new ArrayList<MenuData>();
         // ADMIN
         // Абнементы
-        MenuData m1 = new MenuData("Абнементы");
+        MenuData m1 = new MenuData("abonementsMenu", "Абнементы");
 
-        MenuData m11 = new MenuData("Доступные абонементы");
-        MenuData m12 = new MenuData("Остаток минут");
-        MenuData m13 = new MenuData("Поиск абонементов");
+        MenuData m11 = new MenuData("addAbonementItem", "Доступные абонементы");
+        MenuData m12 = new MenuData("residueItem", "Остаток минут");
+        MenuData m13 = new MenuData("findAbonByPhoneItem", "Поиск абонементов");
 
         m1.addMenu(m11);
         m1.addMenu(m12);
@@ -40,18 +40,18 @@ public class MenuTestData {
         adminMenu.add(m1);
 
         // Комментарии
-        MenuData m2 = new MenuData("Комментарии");
+        MenuData m2 = new MenuData("commentsMenu", "Комментарии");
 
-        MenuData m21 = new MenuData("Добавить комментарии");
+        MenuData m21 = new MenuData("addCommentItem", "Добавить комментарии");
 
         m2.addMenu(m21);
         adminMenu.add(m2);
 
         // Дополнительно
-        MenuData m3 = new MenuData("Дополнительно");
+        MenuData m3 = new MenuData("statisticsMenu", "Дополнительно");
 
-        MenuData m31 = new MenuData("Дополнительная информация");
-        MenuData m32 = new MenuData("Внести кассу");
+        MenuData m31 = new MenuData("bankItem", "Дополнительная информация");
+        MenuData m32 = new MenuData("setBankPerDayItem", "Внести кассу");
 
         m3.addMenu(m31);
         m3.addMenu(m32);
@@ -59,11 +59,11 @@ public class MenuTestData {
         adminMenu.add(m3);
 
         //DIRECTOR
-        MenuData md1 = new MenuData("Абнементы");
+        MenuData md1 = new MenuData("abonementsMenu", "Абнементы");
 
-        MenuData md11 = new MenuData("Доступные абонементы");
-        MenuData md12 = new MenuData("Остаток минут");
-        MenuData md13 = new MenuData("Поиск абонементов");
+        MenuData md11 = new MenuData("addAbonementItem", "Доступные абонементы");
+        MenuData md12 = new MenuData("residueItem", "Остаток минут");
+        MenuData md13 = new MenuData("findAbonByPhoneItem", "Поиск абонементов");
 
         md1.addMenu(md11);
         md1.addMenu(md12);
@@ -72,18 +72,18 @@ public class MenuTestData {
         directorMenu.add(md1);
 
         //Косметика
-        MenuData md3 = new MenuData("Косметика");
+        MenuData md3 = new MenuData("cosmeticsMenu", "Косметика");
 
-        MenuData md31 = new MenuData("Добавить косметику");
+        MenuData md31 = new MenuData("addCosmItem", "Добавить косметику");
 
         md3.addMenu(md31);
         directorMenu.add(md3);
 
         //Пользователи
-        MenuData md4 = new MenuData("Пользователи");
+        MenuData md4 = new MenuData("usersMenu", "Пользователи");
 
-        MenuData md41 = new MenuData("Администраторы");
-        MenuData md42 = new MenuData("Клиенты");
+        MenuData md41 = new MenuData("administratorsItem", "Администраторы");
+        MenuData md42 = new MenuData("customersItem", "Клиенты");
 
         md4.addMenu(md41);
         md4.addMenu(md42);
@@ -91,20 +91,20 @@ public class MenuTestData {
         directorMenu.add(md4);
 
         // Комментарии
-        MenuData md5 = new MenuData("Комментарии");
+        MenuData md5 = new MenuData("commentsMenu", "Комментарии");
 
-        MenuData md51 = new MenuData("Показать комментарии");
+        MenuData md51 = new MenuData("showCommentsItem", "Показать комментарии");
 
         md5.addMenu(md51);
 
         directorMenu.add(md5);
 
         // Дополнительно
-        MenuData md6 = new MenuData("Дополнительно");
+        MenuData md6 = new MenuData("statisticsMenu", "Дополнительно");
 
-        MenuData md61 = new MenuData("Дополнительная информация");
-        MenuData md62 = new MenuData("Статистика");
-        MenuData md63 = new MenuData("Данные за период");
+        MenuData md61 = new MenuData("bankItem", "Дополнительная информация");
+        MenuData md62 = new MenuData("statisticsItem", "Статистика");
+        MenuData md63 = new MenuData("periodDataItem", "Данные за период");
 
         md6.addMenu(md61);
         md6.addMenu(md62);
@@ -124,11 +124,11 @@ public class MenuTestData {
         List<MenuData> directorMenu = new ArrayList<MenuData>();
         // ADMIN
         // Абнементы
-        MenuData m1 = new MenuData("Абнементы");
+        MenuData m1 = new MenuData("abonementsMenu", "Абнементы");
 
-        MenuData m11 = new MenuData("Доступные абонементы");
-        MenuData m12 = new MenuData("Остаток минут по абонементу");
-        MenuData m13 = new MenuData("Поиск абонементов");
+        MenuData m11 = new MenuData("addAbonementItem", "Доступные абонементы");
+        MenuData m12 = new MenuData("residueItem", "Остаток минут");
+        MenuData m13 = new MenuData("findAbonByPhoneItem", "Поиск абонементов");
 
         m1.addMenu(m11);
         m1.addMenu(m13);
@@ -136,29 +136,29 @@ public class MenuTestData {
         adminMenu.add(m1);
         adminMenu.add(m12);
         // Комментарии
-        MenuData m2 = new MenuData("Комментарии");
+        MenuData m2 = new MenuData("commentsMenu", "Комментарии");
 
-        MenuData m21 = new MenuData("Добавить комментарии");
+        MenuData m21 = new MenuData("addCommentItem", "Добавить комментарии");
 
         m2.addMenu(m21);
         adminMenu.add(m2);
 
         // Дополнительно
-        MenuData m3 = new MenuData("Дополнительно");
+        MenuData m3 = new MenuData("statisticsMenu", "Дополнительно");
 
-        MenuData m31 = new MenuData("Дополнительная информация");
-        MenuData m32 = new MenuData("Внести кассу");
+        MenuData m31 = new MenuData("bankItem", "Дополнительная информация");
+        MenuData m32 = new MenuData("setBankPerDayItem", "Внести кассу");
 
         m3.addMenu(m31);
 
         adminMenu.add(m3);
         adminMenu.add(m32);
         //DIRECTOR
-        MenuData md1 = new MenuData("Абнементы");
+        MenuData md1 = new MenuData("abonementsMenu", "Абнементы");
 
-        MenuData md11 = new MenuData("Доступные абонементы");
-        MenuData md12 = new MenuData("Остаток минут");
-        MenuData md13 = new MenuData("Поиск абонементов");
+        MenuData md11 = new MenuData("addAbonementItem", "Доступные абонементы");
+        MenuData md12 = new MenuData("residueItem", "Остаток минут");
+        MenuData md13 = new MenuData("findAbonByPhoneItem", "Поиск абонементов");
 
         md1.addMenu(md12);
         md1.addMenu(md13);
@@ -167,18 +167,18 @@ public class MenuTestData {
         directorMenu.add(md11);
 
         //Косметика
-        MenuData md3 = new MenuData("Косметика");
+        MenuData md3 = new MenuData("cosmeticsMenu", "Косметика");
 
-        MenuData md31 = new MenuData("Добавить косметику");
+        MenuData md31 = new MenuData("addCosmItem", "Добавить косметику");
 
         md3.addMenu(md31);
         directorMenu.add(md3);
 
         //Пользователи
-        MenuData md4 = new MenuData("Пользователи");
+        MenuData md4 = new MenuData("usersMenu", "Пользователи");
 
-        MenuData md41 = new MenuData("Администраторы");
-        MenuData md42 = new MenuData("Клиенты");
+        MenuData md41 = new MenuData("administratorsItem", "Администраторы");
+        MenuData md42 = new MenuData("customersItem", "Клиенты");
 
         md4.addMenu(md41);
         md4.addMenu(md42);
@@ -186,20 +186,20 @@ public class MenuTestData {
         directorMenu.add(md4);
 
         // Комментарии
-        MenuData md5 = new MenuData("Комментарии");
+        MenuData md5 = new MenuData("commentsMenu", "Комментарии");
 
-        MenuData md51 = new MenuData("Показать комментарии");
+        MenuData md51 = new MenuData("showCommentsItem", "Показать комментарии");
 
         md5.addMenu(md51);
 
         directorMenu.add(md5);
 
         // Дополнительно
-        MenuData md6 = new MenuData("Дополнительно");
+        MenuData md6 = new MenuData("statisticsMenu", "Дополнительно");
 
-        MenuData md61 = new MenuData("Дополнительная информация");
-        MenuData md62 = new MenuData("Статистика");
-        MenuData md63 = new MenuData("Данные за период");
+        MenuData md61 = new MenuData("bankItem", "Дополнительная информация");
+        MenuData md62 = new MenuData("statisticsItem", "Статистика");
+        MenuData md63 = new MenuData("periodDataItem", "Данные за период");
 
         md6.addMenu(md61);
 

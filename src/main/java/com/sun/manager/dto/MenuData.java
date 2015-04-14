@@ -5,22 +5,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MenuData implements Serializable {
-    private Long id;
+    private String menuId;
     private String description;
     private MenuData parentMenu;
     private List<MenuData> childrenMenuList;
 
-    public MenuData(String description) {
+    public MenuData(String menuId, String description) {
         this.childrenMenuList = new ArrayList<MenuData>();
+        this.menuId = menuId;
         this.description = description;
     }
 
-    public Long getId() {
-        return id;
+    public String getMenuId() {
+        return menuId;
     }
 
-    public void setId(Long menuId) {
-        this.id = menuId;
+    public void setMenuId(String menuId) {
+        this.menuId = menuId;
     }
 
     public String getDescription() {
