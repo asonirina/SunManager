@@ -2,6 +2,7 @@ package com.sun.manager.service;
 
 import com.sun.manager.dao.MenuDAO;
 import com.sun.manager.dto.MenuData;
+import com.sun.manager.dto.menu.AdaptMenu;
 import com.sun.manager.dto.menu.StandartMenu;
 import com.sun.manager.testData.MenuTestData;
 
@@ -21,7 +22,7 @@ public class MenuService {
         return menuDataList;
     }
 
-    public List<MenuData> getAdaptMenuByRole(String role) {
+    public List<MenuData> getAdaptMenuByRole(String role) throws SQLException {
         return MenuTestData.getAdaptMenuByRole(role);
     }
 

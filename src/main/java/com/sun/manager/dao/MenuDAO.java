@@ -1,8 +1,8 @@
 package com.sun.manager.dao;
 
 import com.sun.manager.connection.SqlServer;
-import com.sun.manager.dto.Cosmetics;
 import com.sun.manager.dto.MenuData;
+import com.sun.manager.dto.menu.AdaptMenu;
 import com.sun.manager.dto.menu.StandartMenu;
 
 import java.sql.*;
@@ -11,7 +11,10 @@ import java.util.List;
 
 public class MenuDAO {
 
+    private static final String GET_MENU_ITEM_DEPTH = "{call menu_hier(?,?)}";
+
     private Connection dbConnection = SqlServer.getConnection();
+    private CallableStatement callableStatement = null;
 
     public void saveActionInfo(String menuId, String userRole, Date actionDate) throws SQLException {
         PreparedStatement ps = dbConnection.prepareStatement("insert into action_info (menu_id, user_role, action_date) values(?,?,?)");
@@ -21,9 +24,6 @@ public class MenuDAO {
         ps.executeUpdate();
     }
 
-    /**
-     * <code>select o from Menu o</code>
-     */
     public List<StandartMenu> findStandartMenuByRole(String role) throws SQLException {
         List<StandartMenu> menuList = new ArrayList<StandartMenu>();
         PreparedStatement ps = dbConnection.prepareStatement("select * from standart_menu where user_role = ?");
@@ -41,32 +41,81 @@ public class MenuDAO {
         return menuList;
     }
 
-    /**
-     * <code>select o from Menu o where o.id = menuId</code>
-     */
-    //I intend it to return a list instead of just a menu.
-    public List<MenuData> findTargetRootMenu(Long menuId) throws SQLException {
-        List<MenuData> menuList = new ArrayList<MenuData>();
-        PreparedStatement ps = dbConnection.prepareStatement("select o from Menu o where o.id = ?");
-        ps.setLong(1, menuId);
+    public List<AdaptMenu> findUserActivity(String role) throws SQLException {
+        String selectQuery = "select DISTINCT sm.menu_id, sm.parent_menu_id, sm.description from action_info as ai, standart_menu as sm where ai.menu_id = sm.menu_id and ai.user_role = ?";
+        List<AdaptMenu> menuList = new ArrayList<AdaptMenu>();
+        PreparedStatement ps = dbConnection.prepareStatement(selectQuery);
+        ps.setString(1, role);
         ResultSet rs = ps.executeQuery();
-//        while (rs.next()) {
-//
-//        }
+        while (rs.next()) {
+            String menuID = rs.getString("menu_id");
+            String parentMenuID = rs.getString("parent_menu_id");
+            String description = rs.getString("description");
+
+            Integer depth = findMenuItemDepth(role, menuID);
+            Integer usageCount = null;
+
+            PreparedStatement ps2 = dbConnection.prepareStatement("select count(*) from action_info where menu_id = ? and user_role = ?");
+            ps2.setString(1, menuID);
+            ps2.setString(2, role);
+            ResultSet countRS = ps2.executeQuery();
+            if (countRS.next()) {
+                usageCount = countRS.getInt(1);
+            }
+
+            AdaptMenu adaptMenu = new AdaptMenu(menuID, parentMenuID, description, depth, usageCount);
+            menuList.add(adaptMenu);
+        }
+
         return menuList;
     }
 
-    /**
-     * <code>select o from Menu o where o.parentMenu IS NULL</code>
-     */
-    public List<MenuData> findRootMenus() throws SQLException {
-        List<MenuData> menuList = new ArrayList<MenuData>();
-        PreparedStatement ps = dbConnection.prepareStatement("select o from Menu o where o.parentMenu IS NULL");
+    public List<String> findParentNodesInStandartMenu(String role) throws SQLException {
+        String selectQuery = "select DISTINCT menu_id from standart_menu where user_role = ? and parent_menu_id is NULL";
+        List<String> menuIDs = new ArrayList<String>();
+        PreparedStatement ps = dbConnection.prepareStatement(selectQuery);
+        ps.setString(1, role);
         ResultSet rs = ps.executeQuery();
-//        while (rs.next()) {
-//
-//        }
+        while (rs.next()) {
+            String menuID = rs.getString("menu_id");
+            menuIDs.add(menuID);
 
-        return menuList;
+        }
+
+        return menuIDs;
+    }
+
+    public Integer getMenuItemDepth(String parentID, String nodeID, String role) throws SQLException {
+        callableStatement = dbConnection.prepareCall(GET_MENU_ITEM_DEPTH);
+        callableStatement.setString(1, parentID);
+        callableStatement.setString(2, role);
+
+        ResultSet rs = callableStatement.executeQuery();
+
+        while (rs.next()) {
+            String menuID = rs.getString("menu_id");
+            Integer itemDepth = rs.getInt("depth");
+
+            if (menuID.equals(nodeID)) {
+                return itemDepth;
+            }
+        }
+
+        return null;
+    }
+
+    private Integer findMenuItemDepth(String role, String menuID) throws SQLException {
+        Integer depth = null;
+        List<String> rootNodes = findParentNodesInStandartMenu(role);
+
+        for (String rootNodeID : rootNodes) {
+            if (depth == null) {
+                depth = getMenuItemDepth(rootNodeID, menuID, role);
+            } else {
+                break;
+            }
+        }
+
+        return depth;
     }
 }
