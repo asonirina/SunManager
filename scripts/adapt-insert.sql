@@ -24,36 +24,38 @@ VALUES('setBankPerDayItem', 'statisticsMenu', 'Внести кассу', 'admin'
 
 
 Insert into standart_menu (menu_id, parent_menu_id, description, user_role)
-VALUES('abonementsMenu', NULL, 'Абнементы', 'director');
+VALUES('abonementsMenu', NULL, 'Абнементы', 'derictor');
 Insert into standart_menu (menu_id, parent_menu_id, description, user_role)
-VALUES('addAbonementItem', 'abonementsMenu', 'Доступные абонементы', 'director');
+VALUES('addAbonementItem', 'abonementsMenu', 'Доступные абонементы', 'derictor');
 Insert into standart_menu (menu_id, parent_menu_id, description, user_role)
-VALUES('residueItem', 'abonementsMenu', 'Остаток минут', 'director');
+VALUES('residueItem', 'abonementsMenu', 'Остаток минут', 'derictor');
 Insert into standart_menu (menu_id, parent_menu_id, description, user_role)
-VALUES('findAbonByPhoneItem', 'abonementsMenu', 'Поиск абонементов', 'director');
+VALUES('findAbonByPhoneItem', 'abonementsMenu', 'Поиск абонементов', 'derictor');
 
 Insert into standart_menu (menu_id, parent_menu_id, description, user_role)
-VALUES('cosmeticsMenu', NULL, 'Косметика', 'director');
+VALUES('cosmeticsMenu', NULL, 'Косметика', 'derictor');
 Insert into standart_menu (menu_id, parent_menu_id, description, user_role)
-VALUES('addCosmItem', 'cosmeticsMenu', 'Добавить косметику', 'director');
+VALUES('addCosmItem', 'cosmeticsMenu', 'Добавить косметику', 'derictor');
+Insert into standart_menu (menu_id, parent_menu_id, description, user_role)
+VALUES('addCosmItem1', 'addCosmItem', 'Добавить косметику2', 'derictor');
 
 Insert into standart_menu (menu_id, parent_menu_id, description, user_role)
-VALUES('usersMenu', NULL, 'Пользователи', 'director');
+VALUES('usersMenu', NULL, 'Пользователи', 'derictor');
 Insert into standart_menu (menu_id, parent_menu_id, description, user_role)
-VALUES('administratorsItem', 'usersMenu', 'Администраторы', 'director');
+VALUES('administratorsItem', 'usersMenu', 'Администраторы', 'derictor');
 Insert into standart_menu (menu_id, parent_menu_id, description, user_role)
-VALUES('customersItem', 'usersMenu', 'Клиенты', 'director');
+VALUES('customersItem', 'usersMenu', 'Клиенты', 'derictor');
 
 Insert into standart_menu (menu_id, parent_menu_id, description, user_role)
-VALUES('commentsMenu', NULL, 'Комментарии', 'director');
+VALUES('commentsMenu', NULL, 'Комментарии', 'derictor');
 Insert into standart_menu (menu_id, parent_menu_id, description, user_role)
-VALUES('showCommentsItem', 'commentsMenu', 'Показать комментарии', 'director');
+VALUES('showCommentsItem', 'commentsMenu', 'Показать комментарии', 'derictor');
 
 Insert into standart_menu (menu_id, parent_menu_id, description, user_role)
-VALUES('statisticsMenu', NULL, 'Дополнительно', 'director');
+VALUES('statisticsMenu', NULL, 'Дополнительно', 'derictor');
 Insert into standart_menu (menu_id, parent_menu_id, description, user_role)
-VALUES('bankItem', 'statisticsMenu', 'Дополнительная информация', 'director');
+VALUES('bankItem', 'statisticsMenu', 'Дополнительная информация', 'derictor');
 Insert into standart_menu (menu_id, parent_menu_id, description, user_role)
-VALUES('statisticsItem', 'statisticsMenu', 'Статистика', 'director');
+VALUES('statisticsItem', 'statisticsMenu', 'Статистика', 'derictor');
 Insert into standart_menu (menu_id, parent_menu_id, description, user_role)
-VALUES('periodDataItem', 'statisticsMenu', 'Данные за период', 'director');
+VALUES('periodDataItem', 'statisticsMenu', 'Данные за период', 'derictor');

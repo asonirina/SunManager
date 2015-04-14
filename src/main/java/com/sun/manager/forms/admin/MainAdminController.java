@@ -46,6 +46,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
+import java.sql.SQLException;
 import java.text.DecimalFormat;
 import java.util.Calendar;
 import java.util.List;
@@ -606,10 +607,16 @@ public class MainAdminController extends AnchorPane implements Initializable {
     }
 
     private void loadDefaultMenu() {
-        List<MenuData> list = menuService.getDefaultMenuByRole(App.getInstance().getUser().getRole());
-        mainMenu.getItems().clear();
-        for (MenuData menuData : list) {
-            walkTroughMenu(menuData, mainMenu);
+        List<MenuData> list = null;
+        try {
+            list = menuService.getDefaultMenuByRole(App.getInstance().getUser().getRole());
+
+            mainMenu.getItems().clear();
+            for (MenuData menuData : list) {
+                walkTroughMenu(menuData, mainMenu);
+            }
+        } catch (SQLException e) {
+            new AlertDialog((Stage) logout.getScene().getWindow(), "Произошла ошибка!", 1).showAndWait();
         }
     }
 
