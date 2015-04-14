@@ -635,6 +635,7 @@ public class MainAdminController extends AnchorPane implements Initializable {
             @Override
             public void handle(ActionEvent actionEvent) {
                 try {
+                    menuService.saveActionInfo(id, App.getInstance().getUser().getRole(), new Date(Calendar.getInstance().getTime().getTime()));
                     Application page = getPageById(id);
                     page.start(new Stage());
                 } catch (Exception ex) {
