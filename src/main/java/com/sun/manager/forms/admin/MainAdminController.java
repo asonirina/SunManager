@@ -1,6 +1,5 @@
 package com.sun.manager.forms.admin;
 
-
 import com.google.common.eventbus.Subscribe;
 import com.sun.manager.App;
 import com.sun.manager.constants.BlankItem;
@@ -27,6 +26,7 @@ import com.sun.manager.forms.users.UsersPage;
 import com.sun.manager.service.MenuService;
 import com.sun.manager.service.SolariumService;
 import eu.schudt.javafx.controls.calendar.DatePicker;
+import javafx.application.Application;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.collections.FXCollections;
@@ -59,7 +59,7 @@ public class MainAdminController extends AnchorPane implements Initializable {
     private static int count = 50;
 
     @FXML
-    MenuBar menuBar1;
+    Menu mainMenu;
 
     MenuService menuService = new MenuService();
 
@@ -69,27 +69,7 @@ public class MainAdminController extends AnchorPane implements Initializable {
     ScrollPane scrollPane;
     @FXML
     AnchorPane anchorPane;
-    //---------------------------Menu---------------------------------
-    @FXML
-    Menu cosmeticsMenu;
-    @FXML
-    MenuItem addCosmItem;
-    @FXML
-    Menu usersMenu;
-    @FXML
-    MenuItem administratorsItem, customersItem;
-    @FXML
-    Menu abonementsMenu;
-    @FXML
-    MenuItem addAbonementItem, residueItem, findAbonByPhoneItem;
-    @FXML
-    Menu commentsMenu;
-    @FXML
-    MenuItem addCommentItem, showCommentsItem;
-    @FXML
-    Menu statisticsMenu;
-    @FXML
-    MenuItem statisticsItem, bankItem, periodDataItem, setBankPerDayItem;
+
     @FXML
     Button saveChanges, logout;
  //------------------------------------------------------------------------------
@@ -165,7 +145,7 @@ public class MainAdminController extends AnchorPane implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         App.getInstance().setSelectedDate(date);
         try {
-            loadMenu();
+            loadAdaptedMenu();
             if (App.getInstance().getUser().getRole().equals("derictor")) {
                 datePicker.setLayoutX(49);
                 datePicker.setLayoutY(57);
@@ -415,58 +395,6 @@ public class MainAdminController extends AnchorPane implements Initializable {
             }
         });
 
-        bankItem.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-                save();
-                BankDataPage page = new BankDataPage();
-                try {
-                    page.start(new Stage());
-                } catch (IOException ex) {
-                    new AlertDialog((Stage) logout.getScene().getWindow(), "Произошла ошибка!", 1).showAndWait();
-                }
-            }
-        });
-
-        addAbonementItem.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-                try {
-                    AbonementPage page = new AbonementPage();
-                    page.start(new Stage());
-                } catch (IOException ex) {
-                    new AlertDialog((Stage) logout.getScene().getWindow(), "Произошла ошибка!", 1).showAndWait();
-                    throw new RuntimeException(ex);
-                }
-            }
-        });
-
-        findAbonByPhoneItem.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-                try {
-                    AbonsByPhonePage page = new AbonsByPhonePage();
-                    page.start(new Stage());
-                } catch (IOException ex) {
-                    new AlertDialog((Stage) logout.getScene().getWindow(), "Произошла ошибка!", 1).showAndWait();
-                    throw new RuntimeException(ex);
-                }
-            }
-        });
-
-        residueItem.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-                try {
-                    MinutesByPhoneAbonPage page = new MinutesByPhoneAbonPage();
-                    page.start(new Stage());
-                } catch (IOException ex) {
-                    new AlertDialog((Stage) logout.getScene().getWindow(), "Произошла ошибка!", 1).showAndWait();
-                    throw new RuntimeException(ex);
-                }
-            }
-        });
-
         if (App.getInstance().getUser().getRole().equals("admin")) {
             del1.setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
@@ -531,30 +459,7 @@ public class MainAdminController extends AnchorPane implements Initializable {
                     solariumService.saveL2ByAdministrator(3L,blueResData.get(2).getL2());
                 }
             });
-            addCommentItem.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent actionEvent) {
-                    AddCommentPage page = new AddCommentPage();
-                    try {
-                        page.start(new Stage());
-                    } catch (IOException ex) {
-                        new AlertDialog((Stage) logout.getScene().getWindow(), "Произошла ошибка!", 1).showAndWait();
-                    }
-                }
-            });
 
-            setBankPerDayItem.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent actionEvent) {
-                    save();
-                    BankPerDayPage page = new BankPerDayPage();
-                    try {
-                        page.start(new Stage());
-                    } catch (IOException ex) {
-                        new AlertDialog((Stage) logout.getScene().getWindow(), "Произошла ошибка!", 1).showAndWait();
-                    }
-                }
-            });
             saveChanges.setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent mouseEvent) {
@@ -563,11 +468,6 @@ public class MainAdminController extends AnchorPane implements Initializable {
 
                 }
             });
-            cosmeticsMenu.setVisible(false);
-            usersMenu.setVisible(false);
-            showCommentsItem.setVisible(false);
-            statisticsItem.setVisible(false);
-            periodDataItem.setVisible(false);
         } else {
             del1.setVisible(false);
             del2.setVisible(false);
@@ -576,92 +476,8 @@ public class MainAdminController extends AnchorPane implements Initializable {
             saveL22.setVisible(false);
             saveL23.setVisible(false);
             saveChanges.setVisible(false);
-            addCommentItem.setVisible(false);
-            setBankPerDayItem.setVisible(false);
-            showCommentsItem.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent actionEvent) {
-                    ShowCommentPage page = new ShowCommentPage();
-                    try {
-
-                        page.start(new Stage());
-                    } catch (IOException ex) {
-                        new AlertDialog((Stage) logout.getScene().getWindow(), "Произошла ошибка!", 1).showAndWait();
-                    }
-                }
-            });
-            addCosmItem.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent actionEvent) {
-                    AddCosmeticsPage page = new AddCosmeticsPage();
-                    try {
-                        page.start(new Stage());
-                    } catch (IOException ex) {
-                        new AlertDialog((Stage) logout.getScene().getWindow(), "Произошла ошибка!", 1).showAndWait();
-                        //throw new RuntimeException(ex);
-                    }
-                }
-            });
-
-            administratorsItem.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent actionEvent) {
-                    try {
-                        UsersPage page = new UsersPage();
-                        page.start(new Stage());
-                    } catch (IOException ex) {
-                        new AlertDialog((Stage) logout.getScene().getWindow(), "Произошла ошибка!", 1).showAndWait();
-                        //throw new RuntimeException(ex);
-                    }
-                }
-            });
-
-            statisticsItem.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent actionEvent) {
-                    try {
-                        StatisticsPage page = new StatisticsPage();
-                        page.start(new Stage());
-                    } catch (IOException ex) {
-                        new AlertDialog((Stage) logout.getScene().getWindow(), "Произошла ошибка!", 1).showAndWait();
-                        throw new RuntimeException(ex);
-                    }
-                }
-            });
-            customersItem.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent actionEvent) {
-                    try {
-                        PhoneBasePage page = new PhoneBasePage();
-                        page.start(new Stage());
-                    } catch (IOException ex) {
-                        new AlertDialog((Stage) logout.getScene().getWindow(), "Произошла ошибка!", 1).showAndWait();
-                        throw new RuntimeException(ex);
-                    }
-                }
-            });
-
-
-
-
-
-            periodDataItem.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent actionEvent) {
-                    save();
-                    PeriodDataPage page = new PeriodDataPage();
-                    try {
-                        page.start(new Stage());
-                    } catch (IOException ex) {
-                        new AlertDialog((Stage) logout.getScene().getWindow(), "Произошла ошибка!", 1).showAndWait();
-                    }
-                }
-            });
         }
-
-
     }
-
 
     private void countSolariumData(ObservableList<BaseSolariumData> data, ObservableList<ResData> resData, long num) {
 
@@ -773,14 +589,70 @@ public class MainAdminController extends AnchorPane implements Initializable {
         addBlankItems();
     }
 
-    private void loadMenu() {
-         List<MenuData> list = menuService.getDefaultMenuByRole(App.getInstance().getUser().getRole());
-        for (MenuData menu: list) {
-            Menu parentMenu = new Menu(menu.getDescription());
-            for(MenuData child: menu.getChildrenMenuList()) {
-                parentMenu.getItems().add(new MenuItem(child.getDescription()));
-            }
-           menuBar1.getMenus().add(parentMenu);
+    private void loadAdaptedMenu() {
+        List<MenuData> list = menuService.getAdaptMenuByRole(App.getInstance().getUser().getRole());
+        for (MenuData menuData : list) {
+         walkTroughMenu(menuData, mainMenu);
         }
+    }
+
+    private void walkTroughMenu(MenuData data, Menu parentMenu) {
+        if(data.getChildrenMenuList().isEmpty()){
+            MenuItem menuItem = new MenuItem(data.getDescription());
+            menuItem.setId(data.getMenuId());
+            setOnMenuClicked(menuItem);
+            parentMenu.getItems().add(menuItem);
+        } else {
+          Menu menu = new Menu(data.getDescription());
+            for(MenuData child: data.getChildrenMenuList()) {
+                walkTroughMenu(child, menu);
+            }
+          parentMenu.getItems().add(menu);
+        }
+    }
+
+    private void setOnMenuClicked(MenuItem item) {
+        final String id = item.getId();
+
+        item.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                try {
+                    Application page = getPageById(id);
+                    page.start(new Stage());
+                } catch (Exception ex) {
+                    new AlertDialog((Stage) logout.getScene().getWindow(), "Произошла ошибка!", 1).showAndWait();
+                }
+            }
+        });
+    }
+
+    private static Application getPageById(String pageId) {
+        if ("bankItem".equals(pageId)) {
+            return new BankDataPage();
+        } else if ("addAbonementItem".equals(pageId)) {
+            return new AbonementPage();
+        } else if ("findAbonByPhoneItem".equals(pageId)) {
+            return new AbonsByPhonePage();
+        } else if ("residueItem".equals(pageId)) {
+            return new MinutesByPhoneAbonPage();
+        } else if ("addCommentItem".equals(pageId)) {
+            return new AddCommentPage();
+        } else if ("setBankPerDayItem".equals(pageId)) {
+            return new BankPerDayPage();
+        } else if ("showCommentsItem".equals(pageId)) {
+            return new ShowCommentPage();
+        } else if ("addCosmItem".equals(pageId)) {
+            return new AddCosmeticsPage();
+        } else if ("administratorsItem".equals(pageId)) {
+            return new UsersPage();
+        } else if ("statisticsItem".equals(pageId)) {
+            return new StatisticsPage();
+        } else if ("customersItem".equals(pageId)) {
+            return new PhoneBasePage();
+        } else if ("periodDataItem".equals(pageId)) {
+            return new PeriodDataPage();
+        }
+        return null;
     }
 }
