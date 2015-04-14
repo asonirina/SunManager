@@ -76,7 +76,7 @@ public class MainAdminController extends AnchorPane implements Initializable {
 
     @FXML
     Button saveChanges, logout;
- //------------------------------------------------------------------------------
+    //------------------------------------------------------------------------------
 
     @FXML
     Label dateLabel, usernameLabel;
@@ -111,7 +111,7 @@ public class MainAdminController extends AnchorPane implements Initializable {
     Button del1, del2, del3;
 
     @FXML
-    Button saveL21, saveL22, saveL23 ;
+    Button saveL21, saveL22, saveL23;
 
     SolariumService solariumService = new SolariumService();
     final ObservableList<BaseSolariumData> vertData = FXCollections.observableArrayList(
@@ -452,21 +452,21 @@ public class MainAdminController extends AnchorPane implements Initializable {
             saveL21.setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent mouseEvent) {
-                    solariumService.saveL2ByAdministrator(1L,vertResData.get(2).getL2());
+                    solariumService.saveL2ByAdministrator(1L, vertResData.get(2).getL2());
                 }
             });
 
             saveL22.setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent mouseEvent) {
-                    solariumService.saveL2ByAdministrator(2L,greenResData.get(2).getL2());
+                    solariumService.saveL2ByAdministrator(2L, greenResData.get(2).getL2());
                 }
             });
 
             saveL23.setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent mouseEvent) {
-                    solariumService.saveL2ByAdministrator(3L,blueResData.get(2).getL2());
+                    solariumService.saveL2ByAdministrator(3L, blueResData.get(2).getL2());
                 }
             });
 
@@ -600,9 +600,15 @@ public class MainAdminController extends AnchorPane implements Initializable {
     }
 
     private void loadAdaptedMenu() {
-        List<MenuData> list = menuService.getAdaptMenuByRole(App.getInstance().getUser().getRole());
-        for (MenuData menuData : list) {
-         walkTroughMenu(menuData, mainMenu);
+        List<MenuData> list = null;
+        try {
+            list = menuService.getAdaptMenuByRole(App.getInstance().getUser().getRole());
+
+            for (MenuData menuData : list) {
+                walkTroughMenu(menuData, mainMenu);
+            }
+        } catch (SQLException e) {
+            new AlertDialog((Stage) logout.getScene().getWindow(), "Произошла ошибка!", 1).showAndWait();
         }
     }
 
@@ -621,17 +627,17 @@ public class MainAdminController extends AnchorPane implements Initializable {
     }
 
     private void walkTroughMenu(MenuData data, Menu parentMenu) {
-        if(data.getChildrenMenuList().isEmpty()){
+        if (data.getChildrenMenuList().isEmpty()) {
             MenuItem menuItem = new MenuItem(data.getDescription());
             menuItem.setId(data.getMenuId());
             setOnMenuClicked(menuItem);
             parentMenu.getItems().add(menuItem);
         } else {
-          Menu menu = new Menu(data.getDescription());
-            for(MenuData child: data.getChildrenMenuList()) {
+            Menu menu = new Menu(data.getDescription());
+            for (MenuData child : data.getChildrenMenuList()) {
                 walkTroughMenu(child, menu);
             }
-          parentMenu.getItems().add(menu);
+            parentMenu.getItems().add(menu);
         }
     }
 
