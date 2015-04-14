@@ -186,17 +186,17 @@ public class SolariumDAO {
             //Update minutes by abonements
             if (baseData.getTotalPrice() == null) {
                 PreparedStatement ps1 = dbConnection.prepareStatement("update abonements_data set minutes = ? where code=? and letter=?");
-                PreparedStatement ps2 = dbConnection.prepareStatement("select  minutes from abonements_data where code=? and letter=?");
-                ps2.setString(1, baseData.getAbonementNumber().replaceAll("a-zA-Z+", ""));
-                ps2.setString(2, baseData.getAbonementNumber().replaceAll("\\D+", ""));
+                PreparedStatement ps2 = dbConnection.prepareStatement("select minutes from abonements_data where code=? and letter=?");
+                ps2.setString(1, baseData.getAbonementNumber().replaceAll("\\D+", ""));
+                ps2.setString(2, baseData.getAbonementNumber().replaceAll("[1-9]+", ""));
 
                 ResultSet rs = ps2.executeQuery();
 
                 while (rs.next()) {
                     Long minutes = rs.getLong("minutes");
                     ps1.setLong(1, minutes - baseData.getMinutes());
-                    ps2.setString(2, baseData.getAbonementNumber().replaceAll("a-zA-Z+", ""));
-                    ps2.setString(3, baseData.getAbonementNumber().replaceAll("\\D+", ""));
+                    ps1.setString(2, baseData.getAbonementNumber().replaceAll("\\D+", ""));
+                    ps1.setString(3, baseData.getAbonementNumber().replaceAll("[1-9]+", ""));
                     ps1.executeUpdate();
 
                     totalMinutes += baseData.getMinutes();
