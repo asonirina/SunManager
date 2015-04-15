@@ -104,13 +104,13 @@ public class MenuService {
 
     private void setAdaptCoefTree(List<ActivityInfo> activityInfoList, UserActivityMenu userActivityMenuList) {
         if (userActivityMenuList.getChildrenMenuList().isEmpty()) {
-                String menuID = userActivityMenuList.getMenuId();
-                for(ActivityInfo activityInfo : activityInfoList) {
-                    String activityMenuID = activityInfo.getMenuID();
-                    if(menuID.equals(activityMenuID)) {
-                        userActivityMenuList.setAdaptCoefficient(activityInfo.getAdaptCoefficient());
-                    }
+            String menuID = userActivityMenuList.getMenuId();
+            for (ActivityInfo activityInfo : activityInfoList) {
+                String activityMenuID = activityInfo.getMenuID();
+                if (menuID.equals(activityMenuID)) {
+                    userActivityMenuList.setAdaptCoefficient(activityInfo.getAdaptCoefficient());
                 }
+            }
         } else {
             for (UserActivityMenu child : userActivityMenuList.getChildrenMenuList()) {
                 setAdaptCoefTree(activityInfoList, child);
