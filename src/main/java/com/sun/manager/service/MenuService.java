@@ -2,8 +2,9 @@ package com.sun.manager.service;
 
 import com.sun.manager.dao.MenuDAO;
 import com.sun.manager.dto.MenuData;
-import com.sun.manager.dto.menu.AdaptMenu;
+import com.sun.manager.dto.menu.ActivityInfo;
 import com.sun.manager.dto.menu.StandartMenu;
+import com.sun.manager.dto.menu.UserActivityMenu;
 import com.sun.manager.testData.MenuTestData;
 
 import java.sql.Date;
@@ -23,6 +24,13 @@ public class MenuService {
     }
 
     public List<MenuData> getAdaptMenuByRole(String role) throws SQLException {
+        List<ActivityInfo> activityInfoList = dao.findUserActivity(role);
+
+        List<StandartMenu> standartUserMenu = dao.findStandartMenuByRole(role);
+        List<UserActivityMenu> userActivityMenuList = new ArrayList<UserActivityMenu>();
+
+        userActivityMenuList = buildUserActivityMenu(standartUserMenu, activityInfoList, userActivityMenuList);
+
         return MenuTestData.getAdaptMenuByRole(role);
     }
 
@@ -45,7 +53,7 @@ public class MenuService {
                 MenuData parentNode = idToNodeMap.get(parentID);
                 if (parentNode == null) {
                     for (MenuData child : idToNodeMap.values()) {
-                        parentNode = getParent(child, parentID);
+                        parentNode = getMenuDataParent(child, parentID);
                         if (parentNode != null) {
                             break;
                         }
@@ -60,8 +68,39 @@ public class MenuService {
         return menuDataList;
     }
 
+    private List<UserActivityMenu> buildUserActivityMenu(List<StandartMenu> standartUserMenu, List<ActivityInfo> activityInfoList, List<UserActivityMenu> menuDataList) {
+        Map<String, UserActivityMenu> idToNodeMap = new HashMap<String, UserActivityMenu>();
+        for (StandartMenu standartMenu : standartUserMenu) {
+            String menuID = standartMenu.getMenuID();
+            String parentID = standartMenu.getParentMenuID();
+
+            UserActivityMenu previousNode = new UserActivityMenu(menuID, standartMenu.getDescription(), 0D);
+            idToNodeMap.put(menuID, previousNode);
+
+            if (parentID == null) {
+                menuDataList.add(previousNode);
+            } else {
+                UserActivityMenu parentNode = idToNodeMap.get(parentID);
+                if (parentNode == null) {
+                    for (UserActivityMenu child : idToNodeMap.values()) {
+                        parentNode = getUserActivityMenuParent(child, parentID);
+                        if (parentNode != null) {
+                            break;
+                        }
+                    }
+                }
+
+                if (parentNode != null)
+                    parentNode.addMenu(previousNode);
+            }
+        }
+
+        return menuDataList;
+    }
+
+
     // Get parent of node (recursive)
-    private MenuData getParent(MenuData rootNode, String rootID) {
+    private MenuData getMenuDataParent(MenuData rootNode, String rootID) {
         if (rootNode.getMenuId().equals(rootID))
             return rootNode;
 
@@ -70,7 +109,25 @@ public class MenuService {
 
             MenuData childResult = null;
             if (child.getChildrenMenuList().size() > 0) {
-                childResult = getParent(child, rootID);
+                childResult = getMenuDataParent(child, rootID);
+            }
+
+            if (childResult != null) return childResult;
+        }
+        return null;
+    }
+
+    // Get parent of node (recursive)
+    private UserActivityMenu getUserActivityMenuParent(UserActivityMenu rootNode, String rootID) {
+        if (rootNode.getMenuId().equals(rootID))
+            return rootNode;
+
+        for (UserActivityMenu child : rootNode.getChildrenMenuList()) {
+            if (child.getMenuId().equals(rootID)) return child;
+
+            UserActivityMenu childResult = null;
+            if (child.getChildrenMenuList().size() > 0) {
+                childResult = getUserActivityMenuParent(child, rootID);
             }
 
             if (childResult != null) return childResult;

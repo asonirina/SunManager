@@ -1,18 +1,20 @@
 package com.sun.manager.dto.menu;
 
-public class AdaptMenu {
+public class ActivityInfo {
     String menuID;
     String parentMenuID;
     String description;
     Integer depth;
     Integer usageCount;
+    Double adaptCoefficient;
 
-    public AdaptMenu(String menuID, String parentMenuID, String description, Integer depth, Integer usageCount) {
+    public ActivityInfo(String menuID, String parentMenuID, String description, Integer depth, Integer usageCount, Double adaptCoefficient) {
         this.menuID = menuID;
         this.parentMenuID = parentMenuID;
         this.description = description;
         this.depth = depth;
         this.usageCount = usageCount;
+        this.adaptCoefficient = adaptCoefficient;
     }
     public String getMenuID() {
         return menuID;
@@ -52,5 +54,13 @@ public class AdaptMenu {
 
     public void setUsageCount(Integer usageCount) {
         this.usageCount = usageCount;
+    }
+
+    public Double getAdaptCoefficient() {
+        return adaptCoefficient;
+    }
+
+    public void setAdaptCoefficient(Double adaptCoefficient) {
+        this.adaptCoefficient = adaptCoefficient;
     }
 }

@@ -1,8 +1,7 @@
 package com.sun.manager.dao;
 
 import com.sun.manager.connection.SqlServer;
-import com.sun.manager.dto.MenuData;
-import com.sun.manager.dto.menu.AdaptMenu;
+import com.sun.manager.dto.menu.ActivityInfo;
 import com.sun.manager.dto.menu.StandartMenu;
 
 import java.sql.*;
@@ -41,9 +40,9 @@ public class MenuDAO {
         return menuList;
     }
 
-    public List<AdaptMenu> findUserActivity(String role) throws SQLException {
+    public List<ActivityInfo> findUserActivity(String role) throws SQLException {
         String selectQuery = "select DISTINCT sm.menu_id, sm.parent_menu_id, sm.description from action_info as ai, standart_menu as sm where ai.menu_id = sm.menu_id and ai.user_role = ?";
-        List<AdaptMenu> menuList = new ArrayList<AdaptMenu>();
+        List<ActivityInfo> menuList = new ArrayList<ActivityInfo>();
         PreparedStatement ps = dbConnection.prepareStatement(selectQuery);
         ps.setString(1, role);
         ResultSet rs = ps.executeQuery();
@@ -63,8 +62,10 @@ public class MenuDAO {
                 usageCount = countRS.getInt(1);
             }
 
-            AdaptMenu adaptMenu = new AdaptMenu(menuID, parentMenuID, description, depth, usageCount);
-            menuList.add(adaptMenu);
+            Double adaptCoefficient = calculateAdaptCoefficient(depth, usageCount);
+
+            ActivityInfo activityInfo = new ActivityInfo(menuID, parentMenuID, description, depth, usageCount, adaptCoefficient);
+            menuList.add(activityInfo);
         }
 
         return menuList;
@@ -117,5 +118,9 @@ public class MenuDAO {
         }
 
         return depth;
+    }
+
+    private Double calculateAdaptCoefficient(Integer depth, Integer countUsage) {
+        return Math.floor(countUsage/depth);
     }
 }
