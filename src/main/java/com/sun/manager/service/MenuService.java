@@ -29,7 +29,11 @@ public class MenuService {
         List<StandartMenu> standartUserMenu = dao.findStandartMenuByRole(role);
         List<UserActivityMenu> userActivityMenuList = new ArrayList<UserActivityMenu>();
 
-        userActivityMenuList = buildUserActivityMenu(standartUserMenu, activityInfoList, userActivityMenuList);
+        userActivityMenuList = buildUserActivityMenu(standartUserMenu, userActivityMenuList);
+
+        for (UserActivityMenu userActivityMenu : userActivityMenuList) {
+            setAdaptCoefTree(activityInfoList, userActivityMenu);
+        }
 
         return MenuTestData.getAdaptMenuByRole(role);
     }
@@ -68,7 +72,7 @@ public class MenuService {
         return menuDataList;
     }
 
-    private List<UserActivityMenu> buildUserActivityMenu(List<StandartMenu> standartUserMenu, List<ActivityInfo> activityInfoList, List<UserActivityMenu> menuDataList) {
+    private List<UserActivityMenu> buildUserActivityMenu(List<StandartMenu> standartUserMenu, List<UserActivityMenu> menuDataList) {
         Map<String, UserActivityMenu> idToNodeMap = new HashMap<String, UserActivityMenu>();
         for (StandartMenu standartMenu : standartUserMenu) {
             String menuID = standartMenu.getMenuID();
@@ -98,6 +102,21 @@ public class MenuService {
         return menuDataList;
     }
 
+    private void setAdaptCoefTree(List<ActivityInfo> activityInfoList, UserActivityMenu userActivityMenuList) {
+        if (userActivityMenuList.getChildrenMenuList().isEmpty()) {
+                String menuID = userActivityMenuList.getMenuId();
+                for(ActivityInfo activityInfo : activityInfoList) {
+                    String activityMenuID = activityInfo.getMenuID();
+                    if(menuID.equals(activityMenuID)) {
+                        userActivityMenuList.setAdaptCoefficient(activityInfo.getAdaptCoefficient());
+                    }
+                }
+        } else {
+            for (UserActivityMenu child : userActivityMenuList.getChildrenMenuList()) {
+                setAdaptCoefTree(activityInfoList, child);
+            }
+        }
+    }
 
     // Get parent of node (recursive)
     private MenuData getMenuDataParent(MenuData rootNode, String rootID) {
